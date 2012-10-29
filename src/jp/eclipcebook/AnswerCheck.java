@@ -3,8 +3,6 @@ package jp.eclipcebook;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.widget.Toast;
-
 public class AnswerCheck {
 
 	static List<String> Answer1 = new ArrayList<String>();

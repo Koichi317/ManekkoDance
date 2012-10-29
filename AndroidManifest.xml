@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".partnerActivity"
+            android:name=".PartnerActivity"
             android:label="partner">
         </activity>
         <activity 

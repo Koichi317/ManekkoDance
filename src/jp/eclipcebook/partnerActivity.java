@@ -4,11 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -26,13 +22,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class partnerActivity extends Activity {
-	
-	private String path = "mydata2.txt"; //file保存
-	
+public class PartnerActivity extends Activity {
+
+	private String path = "mydata2.txt"; // file保存
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルバー非表示
+		// requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルバー非表示
 		setTitle("お手本画面");
 		setContentView(R.layout.partner);
 		doLoad();
@@ -46,7 +42,7 @@ public class partnerActivity extends Activity {
 			}
 		});
 	}
-	
+
 	private final class CommandExecutor implements Runnable {
 		private final Handler handler;
 
@@ -56,85 +52,28 @@ public class partnerActivity extends Activity {
 
 		public void run() {
 			TextView editText1 = (TextView) findViewById(R.id.editText1);
-			ImageView image1 = (ImageView)findViewById(R.id.imageView1);
+			ImageView image1 = (ImageView) findViewById(R.id.imageView1);
+			String commandsText = editText1.getText().toString();
 
-			String str = editText1.getText().toString();
-			String[] commands = str.split("\n"); // 1行毎に配列に格納
-			List<String> connectCommands = new ArrayList<String>();
-			for(int i=0; i<commands.length; i++) {
-				connectCommands.add(commands[i]);
-			}
-			List<String> expandedCommands = new ArrayList<String>();
-			moveArray(connectCommands, expandedCommands);
-			expandedCommands.add("\n ");
+			List<String> commands = StringCommandParser.parse(commandsText);
 
-			Runnable runnable = new StringParser(image1, expandedCommands, 1);
+			executeCommands(image1, commands);
+		}
 
-			for (int i = 0; i < expandedCommands.size(); i++) { /* 解析&実行 */
-				
+		private void executeCommands(ImageView image1, List<String> commands) {
+			Runnable runnable = new StringCommandExecutor(image1, commands);
+			for (int i = 0; i < commands.size(); i++) { /* 解析&実行 */
 				handler.post(runnable); /* 光らせる */
-				
+
 				try { /* 1秒待機 */
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
 			}
 		}
-
-		private void moveArray(List<String> connectCommands, List<String> expandedCommands) {
-			// TODO Auto-generated method stub
-			Stack<Integer> loopStack = new Stack<Integer>();
-			Stack<Integer> loopCountStack = new Stack<Integer>();
-			for (int i = 0; i < connectCommands.size(); i++) {
-				if(connectCommands.get(i) == null)
-					continue;
-				else if (connectCommands.get(i).contains("loop")) { //loopがある
-					loopStack.push(i);
-					loopCountStack.push(readCount(connectCommands.get(i)));
-				}
-				else if(connectCommands.get(i).contains("ここまで")) { //kokoがある
-					int loopPosition = loopStack.pop();
-					int loopCount = loopCountStack.pop();
-					connectCommands.remove(i);
-					connectCommands.remove(loopPosition);
-					makeLoop(connectCommands, loopPosition, i-2, loopCount);
-					i = loopPosition - 1;
-				}
-				else if(loopStack.empty()){ //スタックが空
-					expandedCommands.add(connectCommands.get(i));
-				}
-			}
-		}
-		
-		private void makeLoop(List<String> connectCommands, int firstIndex, int lastIndex, int count) {
-			String[] str = new String[lastIndex - firstIndex + 1];
-			for(int i = firstIndex; i <= lastIndex; i++) {
-				str[i-firstIndex] = connectCommands.get(i);
-			}
-			for(int i = 0; i < count-1; i++) { //3回繰り返しなら、i < 2 (1回分＋2回分追加)
-				for(int j = str.length-1; j >= 0; j--)  {
-					connectCommands.add(firstIndex, str[j]);
-				}
-			}
-		}
-		
-		private int readCount(String loopCount) {
-			Pattern p = Pattern.compile("[0-9]");
-			Matcher m = p.matcher(loopCount);
-			if(!m.find()) {
-				return 0;   //0回繰り返し
-			}else {
-				int startIndex = m.start();
-				int countNumber = Integer.parseInt(loopCount.substring(startIndex));
-				return countNumber;
-			}
-		}
-		
-		
 	}
-	
+
 	public void doActionLeftHandUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("左腕を上げる");
@@ -154,7 +93,7 @@ public class partnerActivity extends Activity {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("右腕を下げる");
 	}
-	
+
 	public void doActionLeftFootUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("左足を上げる");
@@ -179,35 +118,34 @@ public class partnerActivity extends Activity {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("ジャンプする");
 	}
-	
+
 	public void doActionEnter(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("\n");
 	}
-	
+
 	public void doActionLoop(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("loop");
 	}
-	
+
 	public void doActionKoko(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("ここまで");
 	}
 
-	
-	/******************** ファイル保存 doSave(View view) *************************/	
+	/******************** ファイル保存 doSave(View view) *************************/
 	@SuppressLint("WorldReadableFiles")
 	public void doSave() {
-		EditText editText1 = (EditText)this.findViewById(R.id.editText1);
+		EditText editText1 = (EditText) this.findViewById(R.id.editText1);
 		Editable str = editText1.getText();
 		FileOutputStream output = null;
 		try {
 			output = this.openFileOutput(path, Context.MODE_WORLD_READABLE);
 			output.write(str.toString().getBytes());
-		} catch(FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -218,9 +156,9 @@ public class partnerActivity extends Activity {
 		}
 	}
 
-/******************** ファイルロード doLoad(View view) *************************/	
-	public void doLoad() { 
-		EditText editText1 = (EditText)this.findViewById(R.id.editText1);
+	/******************** ファイルロード doLoad(View view) *************************/
+	public void doLoad() {
+		EditText editText1 = (EditText) this.findViewById(R.id.editText1);
 		FileInputStream input = null;
 		try {
 			input = this.openFileInput(path);
@@ -228,9 +166,9 @@ public class partnerActivity extends Activity {
 			input.read(buffer);
 			String s = new String(buffer).trim();
 			editText1.setText(s);
-		} catch(FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -240,7 +178,7 @@ public class partnerActivity extends Activity {
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -274,9 +212,10 @@ public class partnerActivity extends Activity {
 		});
 		return true;
 	}
-	
+
 	private void changeScreen() {
-		Intent intent = new Intent(getApplication(),jp.eclipcebook.MainActivity.class);
+		Intent intent = new Intent(getApplication(),
+				jp.eclipcebook.MainActivity.class);
 		this.startActivity(intent);
 	}
 }

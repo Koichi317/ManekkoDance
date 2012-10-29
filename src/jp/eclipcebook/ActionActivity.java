@@ -4,11 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -28,7 +24,7 @@ import android.widget.TextView;
 
 public class ActionActivity extends Activity {
 
-	String str;
+	private String playerCommandsText;
 	private String path = "mydata2.txt";
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,10 +35,10 @@ public class ActionActivity extends Activity {
 		Intent intent = this.getIntent();
 		if(intent.getAction().equals(Intent.ACTION_SEND)) {
 			Bundle bundle = intent.getExtras();
-			str = bundle.getCharSequence(Intent.EXTRA_TEXT).toString();
+			playerCommandsText = bundle.getCharSequence(Intent.EXTRA_TEXT).toString();
 		}
 		EditText editText1 = (EditText)this.findViewById(R.id.editText1);
-		editText1.append(str);
+		editText1.append(playerCommandsText);
 		Button btn1 = (Button) this.findViewById(R.id.button1);
 		btn1.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -76,35 +72,20 @@ public class ActionActivity extends Activity {
 		}
 
 		public void run() {
-			ImageView image1 = (ImageView)findViewById(R.id.imageView1);
-			ImageView image2 = (ImageView)findViewById(R.id.imageView2);
-			TextView editText2 = (TextView) findViewById(R.id.editText2);
-			String str2 = editText2.getText().toString();
-			String[] commands = str.split("\n"); // 1çsñàÇ…îzóÒÇ…äiî[
-			String[] commands2 = str2.split("\n");
-			List<String> connectCommands = new ArrayList<String>();
-			List<String> expandedCommands = new ArrayList<String>();
-			List<String> connectCommands2 = new ArrayList<String>();
-			List<String> expandedCommands2 = new ArrayList<String>();
+			ImageView playerImage = (ImageView)findViewById(R.id.imageView1);
+			ImageView partnerImage = (ImageView)findViewById(R.id.imageView2);
+			TextView partnerEditText = (TextView) findViewById(R.id.editText2);
+			String partnerCommandsText = partnerEditText.getText().toString();
 			
-			
-			for(int i=0; i<commands.length; i++) {
-				connectCommands.add(commands[i]);
-			}
-			for(int i=0; i<commands2.length; i++) {
-				connectCommands2.add(commands2[i]);
-			}
-			moveArray(connectCommands, expandedCommands);
-			expandedCommands.add("\n ");
-			moveArray(connectCommands2, expandedCommands2);
-			expandedCommands2.add("\n ");
+			List<String> playerCommands = StringCommandParser.parse(playerCommandsText);
+			List<String> partnerCommands = StringCommandParser.parse(partnerCommandsText);
 
-			Runnable runnable = new StringParser(image1, expandedCommands, 1);
-			Runnable runnable2 = new StringParser(image2, expandedCommands2, 2);
+			Runnable playerRunnable = new StringCommandExecutor(playerImage, playerCommands);
+			Runnable partnerRunnable = new StringCommandExecutor(partnerImage, partnerCommands);
 
-			for (int i = 0; i < expandedCommands.size(); i++) { /* âêÕ&é¿çs */
-				handler.post(runnable); /* åıÇÁÇπÇÈ */
-				handler.post(runnable2);
+			for (int i = 0; i < playerCommands.size(); i++) { /* âêÕ&é¿çs */
+				handler.post(playerRunnable); /* åıÇÁÇπÇÈ */
+				handler.post(partnerRunnable);
 				try { /* 1ïbë“ã@ */
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
@@ -112,56 +93,6 @@ public class ActionActivity extends Activity {
 				}
 			}
 		}
-
-		private void moveArray(List<String> connectCommands, List<String> expandedCommands) {
-			// TODO Auto-generated method stub
-			Stack<Integer> loopStack = new Stack<Integer>();
-			Stack<Integer> loopCountStack = new Stack<Integer>();
-			for (int i = 0; i < connectCommands.size(); i++) {
-				if(connectCommands.get(i) == null)
-					continue;
-				else if (connectCommands.get(i).contains("loop")) { //loopÇ™Ç†ÇÈ
-					loopStack.push(i);
-					loopCountStack.push(readCount(connectCommands.get(i)));
-				}
-				else if(connectCommands.get(i).contains("Ç±Ç±Ç‹Ç≈")) { //kokoÇ™Ç†ÇÈ
-					int loopPosition = loopStack.pop();
-					int loopCount = loopCountStack.pop();
-					connectCommands.remove(i);
-					connectCommands.remove(loopPosition);
-					makeLoop(connectCommands, loopPosition, i-2, loopCount);
-					i = loopPosition - 1;
-				}
-				else if(loopStack.empty()){ //ÉXÉ^ÉbÉNÇ™ãÛ
-					expandedCommands.add(connectCommands.get(i));
-				}
-			}
-		}
-		
-		private void makeLoop(List<String> connectCommands, int firstIndex, int lastIndex, int count) {
-			String[] str = new String[lastIndex - firstIndex + 1];
-			for(int i = firstIndex; i <= lastIndex; i++) {
-				str[i-firstIndex] = connectCommands.get(i);
-			}
-			for(int i = 0; i < count-1; i++) { //3âÒåJÇËï‘ÇµÇ»ÇÁÅAi < 2 (1âÒï™Å{2âÒï™í«â¡)
-				for(int j = str.length-1; j >= 0; j--)  {
-					connectCommands.add(firstIndex, str[j]);
-				}
-			}
-		}
-		
-		private int readCount(String loopCount) {
-			Pattern p = Pattern.compile("[0-9]");
-			Matcher m = p.matcher(loopCount);
-			if(!m.find()) {
-				return 0;   //0âÒåJÇËï‘Çµ
-			}else {
-				int startIndex = m.start();
-				int countNumber = Integer.parseInt(loopCount.substring(startIndex));
-				return countNumber;
-			}
-		}
-		
 	}
 	
 	@SuppressLint("WorldReadableFiles")

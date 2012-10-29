@@ -1,14 +1,9 @@
 package jp.eclipcebook;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -25,25 +20,24 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.util.Log;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
 
-	private String path = "mydata.txt"; //file保存
-	
+	private String path = "mydata.txt"; // file保存
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルバー非表示
+		// requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルバー非表示
 		setTitle("プレイヤー画面");
 		setContentView(R.layout.main);
-		MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //ゲーム音楽
-		bgm1.start(); //BGMスタート
-		doLoad(); //セーブデータをロード
-		
-/******* tabの作成 **********/		
+		MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); // ゲーム音楽
+		bgm1.start(); // BGMスタート
+		doLoad(); // セーブデータをロード
+
+		/******* tabの作成 **********/
 		TabHost tabhost = this.getTabHost();
 		TabHost.TabSpec spec1 = tabhost.newTabSpec("腕");
 		spec1.setIndicator("腕");
@@ -66,7 +60,7 @@ public class MainActivity extends TabActivity {
 		spec5.setContent(R.id.tab5);
 		tabhost.addTab(spec5);
 
-/******** 実行ボタンの動作 ***********/
+		/******** 実行ボタンの動作 ***********/
 		Button btn5 = (Button) this.findViewById(R.id.button5);
 		btn5.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -76,23 +70,24 @@ public class MainActivity extends TabActivity {
 			}
 		});
 	}
-	
+
 	@Override
-	public void onWindowFocusChanged(boolean hasFocus) { //アプリを立ち上げた時からbasicのアニメを開始
-	 super.onWindowFocusChanged(hasFocus);
-	 
-	 ImageView img = (ImageView)findViewById(R.id.imageView1);
-	 // AnimationDrawableのXMLリソースを指定
-	 img.setBackgroundResource(R.drawable.default_position);
-	 
-	 // AnimationDrawableを取得
-	 AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
-	 
-	 // アニメーションの開始
-	 frameAnimation.start();
+	public void onWindowFocusChanged(boolean hasFocus) { // アプリを立ち上げた時からbasicのアニメを開始
+		super.onWindowFocusChanged(hasFocus);
+
+		ImageView img = (ImageView) findViewById(R.id.imageView1);
+		// AnimationDrawableのXMLリソースを指定
+		img.setBackgroundResource(R.drawable.default_position);
+
+		// AnimationDrawableを取得
+		AnimationDrawable frameAnimation = (AnimationDrawable) img
+				.getBackground();
+
+		// アニメーションの開始
+		frameAnimation.start();
 	}
-	
-	public final class CommandExecutor implements Runnable { 
+
+	public final class CommandExecutor implements Runnable {
 		private final Handler handler;
 
 		private CommandExecutor(Handler handler) {
@@ -101,90 +96,34 @@ public class MainActivity extends TabActivity {
 
 		public void run() {
 			TextView editText1 = (TextView) findViewById(R.id.editText1);
-			ImageView image1 = (ImageView)findViewById(R.id.imageView1);
+			ImageView image1 = (ImageView) findViewById(R.id.imageView1);
+			String commandsText = editText1.getText().toString();
 
-			String str = editText1.getText().toString();
-			String[] commands = str.split("\n"); // 1行毎に配列に格納
-			List<String> connectCommands = new ArrayList<String>();
-			for(int i=0; i<commands.length; i++) {
-				connectCommands.add(commands[i]);
-			}
-			List<String> expandedCommands = new ArrayList<String>();
-			moveArray(connectCommands, expandedCommands);
-			expandedCommands.add("\n");
-			
+			List<String> commands = StringCommandParser.parse(commandsText);
+
+			executeCommands(image1, commands);
+
 			AnswerCheck answer = new AnswerCheck();
-			answer.compare(expandedCommands); //答えの配列とプレイヤーの配列を比較
+			answer.compare(commands); // 答えの配列とプレイヤーの配列を比較
+			Log.d("デバッグ", "AnswerCheck:" + answer.show()); // 正解、不正解の表示
+		}
 
-			Runnable runnable = new StringParser(image1, expandedCommands, 1);
-
+		private void executeCommands(ImageView image1, List<String> expandedCommands) {
+			Runnable runnable = new StringCommandExecutor(image1, expandedCommands);
 			for (int i = 0; i < expandedCommands.size(); i++) { /* 解析&実行 */
-				
 				handler.post(runnable); /* 光らせる */
-				
+
 				try { /* 1秒待機 */
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
 			}
-			Log.d("デバッグ", "AnswerCheck:" + answer.show()); //正解、不正解の表示
 		}
 
-		private void moveArray(List<String> connectCommands, List<String> expandedCommands) {
-			// TODO Auto-generated method stub
-			Stack<Integer> loopStack = new Stack<Integer>();
-			Stack<Integer> loopCountStack = new Stack<Integer>();
-			for (int i = 0; i < connectCommands.size(); i++) {
-				if(connectCommands.get(i) == null)
-					continue;
-				else if (connectCommands.get(i).contains("loop")) { //loopがある
-					loopStack.push(i);
-					loopCountStack.push(readCount(connectCommands.get(i)));
-				}
-				else if(connectCommands.get(i).contains("ここまで")) { //kokoがある
-					int loopPosition = loopStack.pop();
-					int loopCount = loopCountStack.pop();
-					connectCommands.remove(i);
-					connectCommands.remove(loopPosition);
-					makeLoop(connectCommands, loopPosition, i-2, loopCount);
-					i = loopPosition - 1;
-				}
-				else if(loopStack.empty()){ //スタックが空
-					expandedCommands.add(connectCommands.get(i));
-				}
-			}
-		}
-		
-		private void makeLoop(List<String> connectCommands, int firstIndex, int lastIndex, int count) {
-			String[] str = new String[lastIndex - firstIndex + 1];
-			for(int i = firstIndex; i <= lastIndex; i++) {
-				str[i-firstIndex] = connectCommands.get(i);
-			}
-			for(int i = 0; i < count-1; i++) { //3回繰り返しなら、i < 2 (1回分＋2回分追加)
-				for(int j = str.length-1; j >= 0; j--)  {
-					connectCommands.add(firstIndex, str[j]);
-				}
-			}
-		}
-		
-		private int readCount(String loopCount) {
-			Pattern p = Pattern.compile("[0-9]");
-			Matcher m = p.matcher(loopCount);
-			if(!m.find()) {
-				return 0;   //0回繰り返し
-			}else {
-				int startIndex = m.start();
-				int countNumber = Integer.parseInt(loopCount.substring(startIndex));
-				return countNumber;
-			}
-		}
-		
-		
 	}
 
-/******************** ボタン(絵文字)の処理 *************************/
+	/******************** ボタン(絵文字)の処理 *************************/
 	public void doActionLeftHandUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("左腕を上げる");
@@ -204,7 +143,7 @@ public class MainActivity extends TabActivity {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("右腕を下げる");
 	}
-	
+
 	public void doActionLeftFootUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("左足を上げる");
@@ -229,34 +168,34 @@ public class MainActivity extends TabActivity {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("ジャンプする");
 	}
-	
+
 	public void doActionEnter(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("\n");
 	}
-	
+
 	public void doActionLoop(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("loop");
 	}
-	
+
 	public void doActionKoko(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("ここまで");
 	}
 
-/******************** ファイル保存 doSave(View view) *************************/	
+	/******************** ファイル保存 doSave(View view) *************************/
 	@SuppressLint("WorldReadableFiles")
 	public void doSave() {
-		EditText editText1 = (EditText)this.findViewById(R.id.editText1);
+		EditText editText1 = (EditText) this.findViewById(R.id.editText1);
 		Editable str = editText1.getText();
 		FileOutputStream output = null;
 		try {
 			output = this.openFileOutput(path, Context.MODE_WORLD_READABLE);
 			output.write(str.toString().getBytes());
-		} catch(FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -267,9 +206,9 @@ public class MainActivity extends TabActivity {
 		}
 	}
 
-/******************** ファイルロード doLoad(View view) *************************/	
-	public void doLoad() { 
-		EditText editText1 = (EditText)this.findViewById(R.id.editText1);
+	/******************** ファイルロード doLoad(View view) *************************/
+	public void doLoad() {
+		EditText editText1 = (EditText) this.findViewById(R.id.editText1);
 		FileInputStream input = null;
 		try {
 			input = this.openFileInput(path);
@@ -277,9 +216,9 @@ public class MainActivity extends TabActivity {
 			input.read(buffer);
 			String s = new String(buffer).trim();
 			editText1.setText(s);
-		} catch(FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -290,7 +229,7 @@ public class MainActivity extends TabActivity {
 		}
 	}
 
-/******************** メニュー作成 *************************/	
+	/******************** メニュー作成 *************************/
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -322,7 +261,7 @@ public class MainActivity extends TabActivity {
 		return true;
 	}
 
-/************************* インテント（画面遷移） *****************************/
+	/************************* インテント（画面遷移） *****************************/
 	private void changeActionScreen() {
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		Editable str = editText1.getEditableText();
@@ -331,10 +270,10 @@ public class MainActivity extends TabActivity {
 		intent.putExtra(Intent.EXTRA_TEXT, str);
 		this.startActivity(intent);
 	}
-	
-	private void changePartnerScreen() { //お手本画面へ遷移
-		Intent intent = new Intent(this,jp.eclipcebook.partnerActivity.class);
+
+	private void changePartnerScreen() { // お手本画面へ遷移
+		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
 		this.startActivity(intent);
 	}
-	
+
 }
