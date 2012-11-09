@@ -18,7 +18,7 @@ public class TitleActivity extends Activity{
 	}
 	
 	public void doActionContinue(View view) {
-		Intent intent = new Intent(this, jp.eclipcebook.MainActivity.class);
+		Intent intent = new Intent(this, jp.eclipcebook.LessonList.class);
 		this.startActivity(intent);
 	}
 }
