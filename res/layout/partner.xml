@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="doActionRightFootUp"
-        android:text="@string/right_foot_up" />
+        android:text="@string/right_foot_up"
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/button3"
@@ -60,7 +61,8 @@
         android:gravity="center_vertical|top"
         android:hint="@string/hint_text"
         android:inputType="textMultiLine"
-        android:textColor="#ffffff" >
+        android:textColor="#ffffff"
+        android:visibility="invisible" >
 
         <requestFocus />
     </EditText>

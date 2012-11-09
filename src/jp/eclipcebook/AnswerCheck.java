@@ -7,8 +7,8 @@ public class AnswerCheck {
 
 	static List<String> Answer1 = new ArrayList<String>();
 	public static boolean judge;
-	
-	public AnswerCheck() { //ダンスの答え（後程訂正すべき）
+
+	public AnswerCheck() { // ダンスの答え（後程訂正すべき）
 		Answer1.clear();
 		Answer1.add("右腕を上げる");
 		Answer1.add("右腕を下げる");
@@ -22,9 +22,9 @@ public class AnswerCheck {
 
 	public void compare(List<String> expandedCommands) {
 		// TODO Auto-generated method stub
-	int minor = Math.max(Answer1.size(), expandedCommands.size());
-		for(int i = 0; i < minor; i++) {
-			if(expandedCommands.get(i).indexOf(Answer1.get(i)) != -1) {  //展開された配列と答え合わせ
+		int minor = Math.max(Answer1.size(), expandedCommands.size());
+		for (int i = 0; i < minor; i++) {
+			if (expandedCommands.get(i).indexOf(Answer1.get(i)) != -1) { // 展開された配列と答え合わせ
 				judge = true;
 			} else {
 				judge = false;
@@ -32,12 +32,12 @@ public class AnswerCheck {
 			}
 		}
 	}
-	
+
 	public String show() {
 		// TODO Auto-generated method stub
-		if(judge == true) {
+		if (judge == true) {
 			return "正解です！";
-		}else {
+		} else {
 			return "不正解です・・・";
 		}
 	}

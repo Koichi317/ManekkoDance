@@ -14,8 +14,8 @@ public class StringCommandParser {
 
 	public static List<String> parse(String commandsText) {
 		String[] commands = commandsText.split("\n"); // 1s–ˆ‚É”z—ñ‚ÉŠi”[
-		List<String> originalCommand = new ArrayList<String>(Arrays.asList(commands));
-		List<String> expandedCommands = new ArrayList<String>();
+		List<String> originalCommand = new ArrayList<String>(Arrays.asList(commands)); //ListŒ^”z—ñ‚É•ÏŠ·
+		List<String> expandedCommands = new ArrayList<String>(); 
 		expandCommands(originalCommand, expandedCommands);
 		expandedCommands.add("\n");
 		return expandedCommands;

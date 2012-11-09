@@ -1,6 +1,9 @@
 package jp.eclipcebook;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -12,6 +15,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +24,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.util.Log;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
@@ -30,7 +33,6 @@ public class MainActivity extends TabActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルバー非表示
 		setTitle("プレイヤー画面");
 		setContentView(R.layout.main);
 		MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); // ゲーム音楽
@@ -60,7 +62,6 @@ public class MainActivity extends TabActivity {
 		spec5.setContent(R.id.tab5);
 		tabhost.addTab(spec5);
 
-		/******** 実行ボタンの動作 ***********/
 		Button btn5 = (Button) this.findViewById(R.id.button5);
 		btn5.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -87,6 +88,7 @@ public class MainActivity extends TabActivity {
 		frameAnimation.start();
 	}
 
+	/******************** 構文解析＆実行 *************************/
 	public final class CommandExecutor implements Runnable {
 		private final Handler handler;
 
@@ -108,8 +110,10 @@ public class MainActivity extends TabActivity {
 			Log.d("デバッグ", "AnswerCheck:" + answer.show()); // 正解、不正解の表示
 		}
 
-		private void executeCommands(ImageView image1, List<String> expandedCommands) {
-			Runnable runnable = new StringCommandExecutor(image1, expandedCommands);
+		private void executeCommands(ImageView image1,
+				List<String> expandedCommands) {
+			Runnable runnable = new StringCommandExecutor(image1,
+					expandedCommands);
 			for (int i = 0; i < expandedCommands.size(); i++) { /* 解析&実行 */
 				handler.post(runnable); /* 光らせる */
 

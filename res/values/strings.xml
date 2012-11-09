@@ -26,5 +26,7 @@
     <string name="jump">jmp</string>
     <string name="left_hand_up">lhu</string>
     <string name="left_hand_down">lhd</string>
+    <string name="Title_Button_1">はじめから</string>
+    <string name="Title_Button_2">つづきから</string>
 
 </resources>

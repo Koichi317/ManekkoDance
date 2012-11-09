@@ -74,6 +74,7 @@ public final class R {
         public static final int main=0x7f030001;
         public static final int main_menu=0x7f030002;
         public static final int partner=0x7f030003;
+        public static final int title_screen=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -87,6 +88,8 @@ public final class R {
         public static final int Enter=0x7f05000a;
         public static final int Left=0x7f050007;
         public static final int Right=0x7f050008;
+        public static final int Title_Button_1=0x7f05001a;
+        public static final int Title_Button_2=0x7f05001b;
         public static final int Up=0x7f050005;
         public static final int app_name=0x7f050000;
         public static final int button_action=0x7f050009;
