@@ -16,6 +16,7 @@ public class LessonList extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle("Lesson‘I‘ğ‰æ–Ê");
 		List<String> lessonList = new ArrayList<String>(); //List‚Ìì¬•’Ç‰Á
 		lessonList.add("Lesson‚P Šî–{“®ì");
 		lessonList.add("Lesson‚Q ‰—p“®ì");

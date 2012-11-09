@@ -12,7 +12,7 @@
         android:layout_above="@android:id/tabhost"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/button5"
         android:background="#ffffff"
         android:ems="10"
         android:gravity="center_vertical|top"
@@ -175,12 +175,6 @@
                         android:layout_height="wrap_content"
                         android:onClick="doActionKoko"
                         android:text="@string/koko" />
-
-                    <Button
-                        android:id="@+id/button5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/button_action" />
                 </LinearLayout>
 
             </FrameLayout>
@@ -201,5 +195,21 @@
         android:layout_height="wrap_content"
         android:layout_above="@android:id/tabhost"
         android:layout_alignParentRight="true" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/button_action" />
+
+    <Button
+        android:id="@+id/button14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/return_action" />
 
 </RelativeLayout>

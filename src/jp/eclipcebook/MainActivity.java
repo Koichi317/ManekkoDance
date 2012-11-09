@@ -1,3 +1,8 @@
+// Todoリスト
+/* キーボードを出した時の画像潰れ解消法　http://d.hatena.ne.jp/Superdry/20110715/1310754502 */
+/* フラグメントによるTabの実装 */
+/* 絵文字の実装 */
+
 package jp.eclipcebook;
 
 import java.io.FileInputStream;
