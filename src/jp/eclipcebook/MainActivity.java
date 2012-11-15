@@ -40,6 +40,7 @@ public class MainActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 		setTitle("プレイヤー画面");
 		setContentView(R.layout.main);
+		
 		MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); // ゲーム音楽
 		bgm1.start(); // BGMスタート
 		doLoad(); // セーブデータをロード
@@ -67,6 +68,11 @@ public class MainActivity extends TabActivity {
 		spec5.setContent(R.id.tab5);
 		tabhost.addTab(spec5);
 
+		TextView editText2 = (TextView)findViewById(R.id.editText2);
+		Intent intent = getIntent();
+		String lesson_data = intent.getStringExtra("lesson0");
+		editText2.setText(lesson_data);
+		
 		Button btn5 = (Button) this.findViewById(R.id.button5);
 		btn5.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -92,6 +98,8 @@ public class MainActivity extends TabActivity {
 		// アニメーションの開始
 		frameAnimation.start();
 	}
+	
+	
 
 	/******************** 構文解析＆実行 *************************/
 	public final class CommandExecutor implements Runnable {
@@ -282,6 +290,8 @@ public class MainActivity extends TabActivity {
 
 	private void changePartnerScreen() { // お手本画面へ遷移
 		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+		TextView editText2 = (TextView)findViewById(R.id.editText2);
+		intent.putExtra("lesson_data", editText2.getText().toString()/*sp.getString("lesson0", null)*/);
 		this.startActivity(intent);
 	}
 

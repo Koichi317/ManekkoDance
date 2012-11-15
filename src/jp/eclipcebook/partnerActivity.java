@@ -32,8 +32,13 @@ public class PartnerActivity extends Activity {
 		// requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルバー非表示
 		setTitle("お手本画面");
 		setContentView(R.layout.partner);
-		doLoad();
+		//doLoad();
 
+		TextView editText1 = (TextView)findViewById(R.id.editText1);
+		Intent intent = getIntent();
+		String data = intent.getStringExtra("lesson_data");
+		editText1.setText(data);
+		
 		Button btn5 = (Button) this.findViewById(R.id.button5);
 		btn5.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
