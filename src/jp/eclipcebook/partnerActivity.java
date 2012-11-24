@@ -35,10 +35,26 @@ public class PartnerActivity extends Activity {
 		//doLoad();
 
 		TextView editText1 = (TextView)findViewById(R.id.editText1);
+		TextView editText2 = (TextView)findViewById(R.id.editText2);
+		ImageView messageImageView1 = (ImageView)findViewById(R.id.imageView2);
 		Intent intent = getIntent();
-		String data = intent.getStringExtra("lesson_data");
+		String data = intent.getStringExtra("lesson");
+		String message = intent.getStringExtra("message");
 		editText1.setText(data);
-		
+		editText2.setText(message);
+		if(message.equals("lesson1")) {
+			messageImageView1.setImageResource(R.drawable.lesson_message1);
+		}
+		else if(message.equals("lesson2")) {
+			messageImageView1.setImageResource(R.drawable.lesson_message2);
+		}
+		else if(message.equals("lesson3")) {
+			messageImageView1.setImageResource(R.drawable.lesson_message3);
+		}
+		else if(message.equals("lesson4")) {
+			messageImageView1.setImageResource(R.drawable.lesson_message4);
+		}
+
 		Button btn5 = (Button) this.findViewById(R.id.button5);
 		btn5.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -232,6 +248,10 @@ public class PartnerActivity extends Activity {
 	private void changeScreen() {
 		Intent intent = new Intent(getApplication(),
 				jp.eclipcebook.MainActivity.class);
+		TextView editText1 = (TextView)findViewById(R.id.editText1);
+		TextView editText2 = (TextView)findViewById(R.id.editText2);
+		intent.putExtra("lesson", editText1.getText().toString());
+		intent.putExtra("message", editText2.getText().toString());
 		this.startActivity(intent);
 	}
 }

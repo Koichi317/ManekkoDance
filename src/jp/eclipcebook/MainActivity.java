@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.TabActivity;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -27,11 +27,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TextView;
 
-@SuppressWarnings("deprecation")
-public class MainActivity extends TabActivity {
+public class MainActivity extends Activity {
 
 	private String path = "mydata.txt"; // file保存
 
@@ -45,33 +43,13 @@ public class MainActivity extends TabActivity {
 		bgm1.start(); // BGMスタート
 		doLoad(); // セーブデータをロード
 
-		/******* tabの作成 **********/
-		TabHost tabhost = this.getTabHost();
-		TabHost.TabSpec spec1 = tabhost.newTabSpec("腕");
-		spec1.setIndicator("腕");
-		spec1.setContent(R.id.tab1);
-		tabhost.addTab(spec1);
-		TabHost.TabSpec spec2 = tabhost.newTabSpec("足");
-		spec2.setIndicator("足");
-		spec2.setContent(R.id.tab2);
-		tabhost.addTab(spec2);
-		TabHost.TabSpec spec3 = tabhost.newTabSpec("飛ぶ");
-		spec3.setIndicator("飛ぶ");
-		spec3.setContent(R.id.tab3);
-		tabhost.addTab(spec3);
-		TabHost.TabSpec spec4 = tabhost.newTabSpec("表情");
-		spec4.setIndicator("表情");
-		spec4.setContent(R.id.tab4);
-		tabhost.addTab(spec4);
-		TabHost.TabSpec spec5 = tabhost.newTabSpec("その他");
-		spec5.setIndicator("その他");
-		spec5.setContent(R.id.tab5);
-		tabhost.addTab(spec5);
-
 		TextView editText2 = (TextView)findViewById(R.id.editText2);
+		TextView editText3 = (TextView)findViewById(R.id.editText3);
 		Intent intent = getIntent();
-		String lesson_data = intent.getStringExtra("lesson0");
-		editText2.setText(lesson_data);
+		String lesson = intent.getStringExtra("lesson");
+		String message = intent.getStringExtra("message");
+		editText2.setText(lesson);
+		editText3.setText(message);
 		
 		Button btn5 = (Button) this.findViewById(R.id.button5);
 		btn5.setOnClickListener(new View.OnClickListener() {
@@ -291,7 +269,9 @@ public class MainActivity extends TabActivity {
 	private void changePartnerScreen() { // お手本画面へ遷移
 		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
 		TextView editText2 = (TextView)findViewById(R.id.editText2);
-		intent.putExtra("lesson_data", editText2.getText().toString()/*sp.getString("lesson0", null)*/);
+		TextView editText3 = (TextView)findViewById(R.id.editText3);
+		intent.putExtra("lesson", editText2.getText().toString());
+		intent.putExtra("message", editText3.getText().toString());
 		this.startActivity(intent);
 	}
 

@@ -14,7 +14,8 @@ public class TitleActivity extends Activity{
 	}
 	
 	public void doActionFromTheBiginning(View view) {
-		
+		Intent intent = new Intent(this, jp.eclipcebook.LessonList.class);
+		this.startActivity(intent);
 	}
 	
 	public void doActionContinue(View view) {

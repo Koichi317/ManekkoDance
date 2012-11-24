@@ -19,7 +19,7 @@
     <string name="right_hand_up">rhu</string>
     <string name="right_hand_down">rhd</string>
     <string name="partner_screen">お手本</string>
-    <string name="player">プレイヤー</string>
+    <string name="player">編集画面</string>
     <string name="return_action">戻る</string>
     <string name="left_foot_up">lfu</string>
     <string name="left_foot_down">lfd</string>
@@ -28,4 +28,6 @@
     <string name="left_hand_down">lhd</string>
     <string name="Title_Button_1">はじめから</string>
     <string name="Title_Button_2">つづきから</string>
+    <string name="look_answer_button">お手本を見る</string>
+    <string name="text_look">まずは、お手本をチェック！</string>
 </resources>
