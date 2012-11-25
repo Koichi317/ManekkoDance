@@ -4,23 +4,48 @@
     android:layout_height="match_parent" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="133dp"
-        android:onClick="doActionFromTheBeginning"
-        android:text="@string/Title_Button_1" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/back_ground1"
+        android:contentDescription="@string/touch_to_start"
+        android:onClick="doActionTitle"
+        android:text="@string/touch_to_start" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:id="@+id/titleButton"
+        android:layout_width="match_parent"
+        android:layout_height="117dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/button1"
-        android:layout_marginBottom="62dp"
-        android:onClick="doActionContinue"
-        android:text="@string/Title_Button_2" />
+        android:layout_alignParentTop="true"
+        android:background="@drawable/back_ground3"
+        android:contentDescription="@string/Enter"
+        android:visibility="invisible" >
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="48dp"
+            android:onClick="doActionContinue"
+            android:text="@string/Title_Button_2" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button2"
+            android:layout_alignLeft="@+id/button2"
+            android:layout_marginBottom="22dp"
+            android:onClick="doActionFromTheBeginning"
+            android:text="@string/Title_Button_1" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

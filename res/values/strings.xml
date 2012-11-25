@@ -36,4 +36,5 @@
     <string name="image_area">image</string>
     <string name="hint_secret">開発者情報</string>
     <string name="hint_player_source_cord">プレイヤーのソースコードが書かれるエリア</string>
+    <string name="touch_to_start">touch to start</string>
 </resources>

@@ -11,30 +11,33 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int back_image=0x7f020000;
-        public static final int basic=0x7f020001;
-        public static final int basic_piyo=0x7f020002;
-        public static final int btn_01=0x7f020003;
-        public static final int ic_action_search=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int jump1=0x7f020006;
-        public static final int jump1_piyo=0x7f020007;
-        public static final int jump2=0x7f020008;
-        public static final int jump2_piyo=0x7f020009;
-        public static final int left_foot_up1_piyo=0x7f02000a;
-        public static final int left_foot_up_piyo1=0x7f02000b;
-        public static final int left_foot_up_piyo2=0x7f02000c;
-        public static final int left_foot_up_piyo3=0x7f02000d;
-        public static final int lesson_message1=0x7f02000e;
-        public static final int lesson_message2=0x7f02000f;
-        public static final int lesson_message3=0x7f020010;
-        public static final int lesson_message4=0x7f020011;
-        public static final int right_hand_up_piyo1=0x7f020012;
-        public static final int right_hand_up_piyo2=0x7f020013;
-        public static final int right_hand_up_piyo3=0x7f020014;
-        public static final int tab_button1=0x7f020015;
-        public static final int tab_button2=0x7f020016;
-        public static final int tab_button3=0x7f020017;
+        public static final int back_ground1=0x7f020000;
+        public static final int back_ground2=0x7f020001;
+        public static final int back_ground3=0x7f020002;
+        public static final int back_image=0x7f020003;
+        public static final int basic=0x7f020004;
+        public static final int basic_piyo=0x7f020005;
+        public static final int btn_01=0x7f020006;
+        public static final int ic_action_search=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int jump1=0x7f020009;
+        public static final int jump1_piyo=0x7f02000a;
+        public static final int jump2=0x7f02000b;
+        public static final int jump2_piyo=0x7f02000c;
+        public static final int left_foot_up1_piyo=0x7f02000d;
+        public static final int left_foot_up_piyo1=0x7f02000e;
+        public static final int left_foot_up_piyo2=0x7f02000f;
+        public static final int left_foot_up_piyo3=0x7f020010;
+        public static final int lesson_message1=0x7f020011;
+        public static final int lesson_message2=0x7f020012;
+        public static final int lesson_message3=0x7f020013;
+        public static final int lesson_message4=0x7f020014;
+        public static final int right_hand_up_piyo1=0x7f020015;
+        public static final int right_hand_up_piyo2=0x7f020016;
+        public static final int right_hand_up_piyo3=0x7f020017;
+        public static final int tab_button1=0x7f020018;
+        public static final int tab_button2=0x7f020019;
+        public static final int tab_button3=0x7f02001a;
     }
     public static final class id {
         public static final int LinearLayout4=0x7f080000;
@@ -58,7 +61,7 @@ public final class R {
         public static final int editTextActionScreen2=0x7f080003;
         public static final int frameLayout1=0x7f08002c;
         public static final int imageView2=0x7f08002e;
-        public static final int menu_settings=0x7f08002f;
+        public static final int menu_settings=0x7f080030;
         public static final int partnerBasic=0x7f080017;
         public static final int partnerLeftFoot1=0x7f080018;
         public static final int partnerLeftFoot2=0x7f080019;
@@ -85,6 +88,7 @@ public final class R {
         public static final int playerRightHand1=0x7f080007;
         public static final int playerRightHand2=0x7f080008;
         public static final int playerRightHand3=0x7f080009;
+        public static final int titleButton=0x7f08002f;
     }
     public static final class layout {
         public static final int action_screen=0x7f030000;
@@ -137,6 +141,7 @@ public final class R {
         public static final int text_look=0x7f05001d;
         public static final int title_activity_main=0x7f050003;
         public static final int title_activity_partner=0x7f050004;
+        public static final int touch_to_start=0x7f050024;
     }
     public static final class style {
         public static final int AppTheme=0x7f060000;

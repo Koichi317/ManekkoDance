@@ -45,34 +45,43 @@ public class StringCommandExecutor implements Runnable {
 			if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1) {
 				leftHand1.setVisibility(View.INVISIBLE);
 				leftHand2.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1) {
 				leftHand3.setVisibility(View.INVISIBLE);
 				leftHand2.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
 				rightHand1.setVisibility(View.INVISIBLE);
 				rightHand2.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1) {
 				rightHand3.setVisibility(View.INVISIBLE);
 				rightHand2.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1) {
 				leftFoot1.setVisibility(View.INVISIBLE);
 				leftFoot2.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1) {
 				leftFoot3.setVisibility(View.INVISIBLE);
 				leftFoot2.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1) {
 				rightFoot1.setVisibility(View.INVISIBLE);
 				rightFoot2.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1) {
 				rightFoot3.setVisibility(View.INVISIBLE);
 				rightFoot2.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1) {
+				leftHand1.setVisibility(View.INVISIBLE);
 				rightHand1.setVisibility(View.INVISIBLE);
 				leftFoot1.setVisibility(View.INVISIBLE);
+				rightFoot1.setVisibility(View.INVISIBLE);
 				basic.setImageResource(R.drawable.jump2_piyo);
-			} else {
-
 			}
+			
 			addLineIndex = false;
 			
 		} else {
@@ -80,31 +89,41 @@ public class StringCommandExecutor implements Runnable {
 			if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1) {
 				leftHand2.setVisibility(View.INVISIBLE);
 				leftHand3.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1) {
 				leftHand2.setVisibility(View.INVISIBLE);
 				leftHand1.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
 				rightHand2.setVisibility(View.INVISIBLE);
 				rightHand3.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1) {
 				rightHand2.setVisibility(View.INVISIBLE);
 				rightHand1.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1) {
 				leftFoot2.setVisibility(View.INVISIBLE);
 				leftFoot3.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1) {
 				leftFoot2.setVisibility(View.INVISIBLE);
 				leftFoot1.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1) {
 				rightFoot2.setVisibility(View.INVISIBLE);
 				rightFoot3.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1) {
 				rightFoot2.setVisibility(View.INVISIBLE);
 				rightFoot1.setVisibility(View.VISIBLE);
-			} else if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1) {
+			}
+			if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1) {
 				basic.setImageResource(R.drawable.basic_piyo);
+				leftHand1.setVisibility(View.VISIBLE);
 				rightHand1.setVisibility(View.VISIBLE);
 				leftFoot1.setVisibility(View.VISIBLE);
+				rightFoot1.setVisibility(View.VISIBLE);
 			} else {
 
 			}
