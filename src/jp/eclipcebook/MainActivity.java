@@ -15,7 +15,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,25 +31,25 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	private String path = "mydata.txt"; // file保存
+	private String lesson;
+	private String message;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle("プレイヤー画面");
 		setContentView(R.layout.main);
-		
+
+		/********** 音楽 **************/
 		MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); // ゲーム音楽
 		bgm1.start(); // BGMスタート
 		doLoad(); // セーブデータをロード
 
-		TextView editText2 = (TextView)findViewById(R.id.editText2);
-		TextView editText3 = (TextView)findViewById(R.id.editText3);
+		/********** Lesson data　の 取得 **************/
 		Intent intent = getIntent();
-		String lesson = intent.getStringExtra("lesson");
-		String message = intent.getStringExtra("message");
-		editText2.setText(lesson);
-		editText3.setText(message);
-		
+		lesson = intent.getStringExtra("lesson");
+		message = intent.getStringExtra("message");
+
 		Button btn5 = (Button) this.findViewById(R.id.button5);
 		btn5.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -61,23 +60,19 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) { // アプリを立ち上げた時からbasicのアニメを開始
-		super.onWindowFocusChanged(hasFocus);
-
-		ImageView img = (ImageView) findViewById(R.id.imageView1);
-		// AnimationDrawableのXMLリソースを指定
-		img.setBackgroundResource(R.drawable.default_position);
-
-		// AnimationDrawableを取得
-		AnimationDrawable frameAnimation = (AnimationDrawable) img
-				.getBackground();
-
-		// アニメーションの開始
-		frameAnimation.start();
-	}
-	
-	
+	/*
+	 * @Override public void onWindowFocusChanged(boolean hasFocus) { //
+	 * アプリを立ち上げた時からbasicのアニメを開始 super.onWindowFocusChanged(hasFocus);
+	 * 
+	 * ImageView img = (ImageView) findViewById(R.id.imageView1); //
+	 * AnimationDrawableのXMLリソースを指定
+	 * img.setBackgroundResource(R.drawable.default_position);
+	 * 
+	 * // AnimationDrawableを取得 AnimationDrawable frameAnimation =
+	 * (AnimationDrawable) img .getBackground();
+	 * 
+	 * // アニメーションの開始 frameAnimation.start(); }
+	 */
 
 	/******************** 構文解析＆実行 *************************/
 	public final class CommandExecutor implements Runnable {
@@ -89,27 +84,54 @@ public class MainActivity extends Activity {
 
 		public void run() {
 			TextView editText1 = (TextView) findViewById(R.id.editText1);
-			ImageView image1 = (ImageView) findViewById(R.id.imageView1);
+			ImageView leftHand1 = (ImageView) findViewById(R.id.playerLeftHand1);
+			ImageView leftHand2 = (ImageView) findViewById(R.id.playerLeftHand2);
+			ImageView leftHand3 = (ImageView) findViewById(R.id.playerLeftHand3);
+			ImageView rightHand1 = (ImageView) findViewById(R.id.playerRightHand1);
+			ImageView rightHand2 = (ImageView) findViewById(R.id.playerRightHand2);
+			ImageView rightHand3 = (ImageView) findViewById(R.id.playerRightHand3);
+			ImageView basic = (ImageView) findViewById(R.id.playerBasic);
+			ImageView leftFoot1 = (ImageView) findViewById(R.id.playerLeftFoot1);
+			ImageView leftFoot2 = (ImageView) findViewById(R.id.playerLeftFoot2);
+			ImageView leftFoot3 = (ImageView) findViewById(R.id.playerLeftFoot3);
+			ImageView rightFoot1 = (ImageView) findViewById(R.id.playerRightFoot1);
+			ImageView rightFoot2 = (ImageView) findViewById(R.id.playerRightFoot2);
+			ImageView rightFoot3 = (ImageView) findViewById(R.id.playerRightFoot3);
+
 			String commandsText = editText1.getText().toString();
 
 			List<String> commands = StringCommandParser.parse(commandsText);
 
-			executeCommands(image1, commands);
+			executeCommands(leftHand1, leftHand2, leftHand3, rightHand1,
+					rightHand2, rightHand3, basic, leftFoot1, leftFoot2,
+					leftFoot3, rightFoot1, rightFoot2, rightFoot3, commands);
 
 			AnswerCheck answer = new AnswerCheck();
 			answer.compare(commands); // 答えの配列とプレイヤーの配列を比較
 			Log.d("デバッグ", "AnswerCheck:" + answer.show()); // 正解、不正解の表示
 		}
 
-		private void executeCommands(ImageView image1,
+		private void executeCommands(ImageView lh1, ImageView lh2,
+				ImageView lh3, ImageView rh1, ImageView rh2, ImageView rh3,
+				ImageView basic, ImageView lf1, ImageView lf2, ImageView lf3,
+				ImageView rf1, ImageView rf2, ImageView rf3,
 				List<String> expandedCommands) {
-			Runnable runnable = new StringCommandExecutor(image1,
+			Runnable runnable = new StringCommandExecutor(lh1, lh2, lh3, rh1,
+					rh2, rh3, basic, lf1, lf2, lf3, rf1, rf2, rf3,
 					expandedCommands);
 			for (int i = 0; i < expandedCommands.size(); i++) { /* 解析&実行 */
 				handler.post(runnable); /* 光らせる */
 
 				try { /* 1秒待機 */
-					Thread.sleep(500);
+					Thread.sleep(250);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				handler.post(runnable);
+
+				try { /* 1秒待機 */
+					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -258,20 +280,17 @@ public class MainActivity extends Activity {
 
 	/************************* インテント（画面遷移） *****************************/
 	private void changeActionScreen() {
+		Intent intent = new Intent(this, jp.eclipcebook.ActionActivity.class);
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
-		Editable str = editText1.getEditableText();
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.setType("text/plain");
-		intent.putExtra(Intent.EXTRA_TEXT, str);
+		intent.putExtra("text_data", editText1.getText().toString());
+		intent.putExtra("lesson", lesson);
 		this.startActivity(intent);
 	}
 
 	private void changePartnerScreen() { // お手本画面へ遷移
 		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
-		TextView editText2 = (TextView)findViewById(R.id.editText2);
-		TextView editText3 = (TextView)findViewById(R.id.editText3);
-		intent.putExtra("lesson", editText2.getText().toString());
-		intent.putExtra("message", editText3.getText().toString());
+		intent.putExtra("lesson", lesson);
+		intent.putExtra("message", message);
 		this.startActivity(intent);
 	}
 

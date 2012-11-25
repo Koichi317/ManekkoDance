@@ -10,7 +10,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -24,21 +23,22 @@ import android.widget.TextView;
 
 public class ActionActivity extends Activity {
 
-	private String playerCommandsText;
 	private String path = "mydata2.txt";
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle("実行画面");
 		setContentView(R.layout.action_screen);
-		doLoad();
-		Intent intent = this.getIntent();
-		if(intent.getAction().equals(Intent.ACTION_SEND)) {
-			Bundle bundle = intent.getExtras();
-			playerCommandsText = bundle.getCharSequence(Intent.EXTRA_TEXT).toString();
-		}
-		EditText editText1 = (EditText)this.findViewById(R.id.editText1);
-		editText1.append(playerCommandsText);
+		//doLoad();
+		
+		TextView playerEditText = (TextView)findViewById(R.id.editTextActionScreen1);
+		TextView partnerEditText = (TextView)findViewById(R.id.editTextActionScreen2);
+		Intent intent = getIntent();
+		String playerCommandsText = intent.getStringExtra("text_data");
+		String partnerCommandsText = intent.getStringExtra("lesson");
+		playerEditText.setText(playerCommandsText);
+		partnerEditText.setText(partnerCommandsText);
+		
 		Button btn1 = (Button) this.findViewById(R.id.button1);
 		btn1.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -49,21 +49,6 @@ public class ActionActivity extends Activity {
 		});
 	}
 	
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-	 super.onWindowFocusChanged(hasFocus);
-	 
-	 ImageView img = (ImageView)findViewById(R.id.imageView1);
-	 // AnimationDrawableのXMLリソースを指定
-	 img.setBackgroundResource(R.drawable.default_position);
-	 
-	 // AnimationDrawableを取得
-	 AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
-	 
-	 // アニメーションの開始
-	 frameAnimation.start();
-	}
-	
 	private final class CommandExecutor implements Runnable {
 		private final Handler handler;
 
@@ -72,22 +57,57 @@ public class ActionActivity extends Activity {
 		}
 
 		public void run() {
-			ImageView playerImage = (ImageView)findViewById(R.id.imageView1);
-			ImageView partnerImage = (ImageView)findViewById(R.id.imageView2);
-			TextView partnerEditText = (TextView) findViewById(R.id.editText2);
+			ImageView playerImage1 = (ImageView)findViewById(R.id.playerLeftHand1);
+			ImageView playerImage2 = (ImageView)findViewById(R.id.playerLeftHand2);
+			ImageView playerImage3 = (ImageView)findViewById(R.id.playerLeftHand3);
+			ImageView playerImage4 = (ImageView)findViewById(R.id.playerRightHand1);
+			ImageView playerImage5 = (ImageView)findViewById(R.id.playerRightHand2);
+			ImageView playerImage6 = (ImageView)findViewById(R.id.playerRightHand3);
+			ImageView playerImage7 = (ImageView)findViewById(R.id.playerBasic);
+			ImageView playerImage8 = (ImageView)findViewById(R.id.playerLeftFoot1);
+			ImageView playerImage9 = (ImageView)findViewById(R.id.playerLeftFoot2);
+			ImageView playerImage10 = (ImageView)findViewById(R.id.playerLeftFoot3);
+			ImageView playerImage11 = (ImageView)findViewById(R.id.playerRightFoot1);
+			ImageView playerImage12 = (ImageView)findViewById(R.id.playerRightFoot2);
+			ImageView playerImage13 = (ImageView)findViewById(R.id.playerRightFoot3);
+			
+			ImageView partnerImage1 = (ImageView)findViewById(R.id.partnerLeftHand1);
+			ImageView partnerImage2 = (ImageView)findViewById(R.id.partnerLeftHand2);
+			ImageView partnerImage3 = (ImageView)findViewById(R.id.partnerLeftHand3);
+			ImageView partnerImage4 = (ImageView)findViewById(R.id.partnerRightHand1);
+			ImageView partnerImage5 = (ImageView)findViewById(R.id.partnerRightHand2);
+			ImageView partnerImage6 = (ImageView)findViewById(R.id.partnerRightHand3);
+			ImageView partnerImage7 = (ImageView)findViewById(R.id.partnerBasic);
+			ImageView partnerImage8 = (ImageView)findViewById(R.id.partnerLeftFoot1);
+			ImageView partnerImage9 = (ImageView)findViewById(R.id.partnerLeftFoot2);
+			ImageView partnerImage10 = (ImageView)findViewById(R.id.partnerLeftFoot3);
+			ImageView partnerImage11 = (ImageView)findViewById(R.id.partnerRightFoot1);
+			ImageView partnerImage12 = (ImageView)findViewById(R.id.partnerRightFoot2);
+			ImageView partnerImage13 = (ImageView)findViewById(R.id.partnerRightFoot3);
+			
+			TextView playerEditText = (TextView)findViewById(R.id.editTextActionScreen1);
+			TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
+			String playerCommandsText = playerEditText.getText().toString();
 			String partnerCommandsText = partnerEditText.getText().toString();
 			
 			List<String> playerCommands = StringCommandParser.parse(playerCommandsText);
 			List<String> partnerCommands = StringCommandParser.parse(partnerCommandsText);
 
-			Runnable playerRunnable = new StringCommandExecutor(playerImage, playerCommands);
-			Runnable partnerRunnable = new StringCommandExecutor(partnerImage, partnerCommands);
+			Runnable playerRunnable = new StringCommandExecutor(playerImage1,playerImage2,playerImage3,playerImage4,playerImage5,playerImage6,playerImage7, playerImage8,playerImage9,playerImage10,playerImage11,playerImage12,playerImage13,playerCommands);
+			Runnable partnerRunnable = new StringCommandExecutor(partnerImage1,partnerImage2,partnerImage3,partnerImage4,partnerImage5,partnerImage6,partnerImage7, partnerImage8,partnerImage9,partnerImage10,partnerImage11,partnerImage12,partnerImage13,partnerCommands);
 
 			for (int i = 0; i < playerCommands.size(); i++) { /* 解析&実行 */
 				handler.post(playerRunnable); /* 光らせる */
 				handler.post(partnerRunnable);
 				try { /* 1秒待機 */
-					Thread.sleep(500);
+					Thread.sleep(250);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				handler.post(playerRunnable); /* 光らせる */
+				handler.post(partnerRunnable);
+				try { /* 1秒待機 */
+					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -97,7 +117,7 @@ public class ActionActivity extends Activity {
 	
 	@SuppressLint("WorldReadableFiles")
 	public void doSave() {
-		EditText editText2 = (EditText)this.findViewById(R.id.editText2);
+		EditText editText2 = (EditText)this.findViewById(R.id.editTextActionScreen2);
 		Editable str = editText2.getText();
 		FileOutputStream output = null;
 		try {
@@ -117,7 +137,7 @@ public class ActionActivity extends Activity {
 	}
 	
 	public void doLoad() { 
-		EditText editText2 = (EditText)this.findViewById(R.id.editText2);
+		EditText editText2 = (EditText)this.findViewById(R.id.editTextActionScreen2);
 		FileInputStream input = null;
 		try {
 			input = this.openFileInput(path);

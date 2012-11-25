@@ -30,4 +30,10 @@
     <string name="Title_Button_2">つづきから</string>
     <string name="look_answer_button">お手本を見る</string>
     <string name="text_look">まずは、お手本をチェック！</string>
+    <string name="player_source_cord">playerSourceCordArea</string>
+    <string name="partner_source_cord">お手本のソースコードエリア</string>
+    <string name="lesson_information">レッスン情報</string>
+    <string name="image_area">image</string>
+    <string name="hint_secret">開発者情報</string>
+    <string name="hint_player_source_cord">プレイヤーのソースコードが書かれるエリア</string>
 </resources>

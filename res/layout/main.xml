@@ -23,12 +23,6 @@
         <requestFocus />
     </EditText>
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" />
-
     <Button
         android:id="@+id/button11"
         android:layout_width="wrap_content"
@@ -156,24 +150,111 @@
         android:layout_alignParentRight="true"
         android:text="@string/return_action" />
 
-    <EditText
-        android:id="@+id/editText2"
+    <FrameLayout
+        android:id="@+id/frameLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/editText1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:visibility="invisible" />
+        android:layout_alignParentRight="true" >
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:ems="10"
-        android:visibility="invisible" />
+        <ImageView
+            android:id="@+id/playerLeftHand1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/playerLeftHand2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/playerLeftHand3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:visibility="invisible" />
+        
+        <ImageView
+            android:id="@+id/playerRightHand1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:src="@drawable/right_hand_up_piyo1"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/playerRightHand2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:src="@drawable/right_hand_up_piyo2"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/playerRightHand3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:src="@drawable/right_hand_up_piyo3"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/playerBasic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:src="@drawable/basic_piyo"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/playerLeftFoot1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:src="@drawable/left_foot_up_piyo1"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/playerLeftFoot2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:src="@drawable/left_foot_up_piyo2"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/playerLeftFoot3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:src="@drawable/left_foot_up_piyo3"
+            android:visibility="invisible" />
+        
+        <ImageView
+            android:id="@+id/playerRightFoot1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:visibility="visible" />
+        
+        <ImageView
+            android:id="@+id/playerRightFoot2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:visibility="invisible" />
+        
+        <ImageView
+            android:id="@+id/playerRightFoot3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_area"
+            android:visibility="invisible" />
+
+    </FrameLayout>
 
 </RelativeLayout>

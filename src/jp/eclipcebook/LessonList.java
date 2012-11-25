@@ -5,10 +5,7 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -32,14 +29,13 @@ public class LessonList extends ListActivity {
 
 	/************ Listが選択された時の動作 **************/
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		SharedPreferences sp = PreferenceManager
-				.getDefaultSharedPreferences(getApplication());
+/*		SharedPreferences sp = PreferenceManager
+				.getDefaultSharedPreferences(getApplication()); */
 
 		switch (position) {
 		case 0:
-			// Lessonに応じたお手本の動きをロードしたい（ToDo）
 			Intent intent0 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
-			intent0.putExtra("lesson0", sp.getString("lesson0", null));
+			//intent0.putExtra("lesson0", sp.getString("lesson0", null));
 			intent0.putExtra("lesson",
 					"左腕を上げる\n左腕を下げる\n右腕を上げる\n右腕を下げる\nジャンプする"); // お手本の答え
 			intent0.putExtra("message", "lesson1");

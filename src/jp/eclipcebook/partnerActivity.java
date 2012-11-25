@@ -10,7 +10,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -65,16 +64,6 @@ public class PartnerActivity extends Activity {
 		});
 	}
 
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) { // アプリを立ち上げた時からbasicのアニメを開始
-		super.onWindowFocusChanged(hasFocus);
-		ImageView img = (ImageView) findViewById(R.id.imageView1);
-		img.setBackgroundResource(R.drawable.default_position);
-		AnimationDrawable frameAnimation = (AnimationDrawable) img
-				.getBackground();
-		frameAnimation.start();
-	}
-
 	private final class CommandExecutor implements Runnable {
 		private final Handler handler;
 
@@ -84,24 +73,52 @@ public class PartnerActivity extends Activity {
 
 		public void run() {
 			TextView editText1 = (TextView) findViewById(R.id.editText1);
-			ImageView image1 = (ImageView) findViewById(R.id.imageView1);
+			ImageView leftHand1 = (ImageView) findViewById(R.id.partnerLeftHand1);
+			ImageView leftHand2 = (ImageView) findViewById(R.id.partnerLeftHand2);
+			ImageView leftHand3 = (ImageView) findViewById(R.id.partnerLeftHand3);
+			ImageView rightHand1 = (ImageView) findViewById(R.id.partnerRightHand1);
+			ImageView rightHand2 = (ImageView) findViewById(R.id.partnerRightHand2);
+			ImageView rightHand3 = (ImageView) findViewById(R.id.partnerRightHand3);
+			ImageView basic = (ImageView) findViewById(R.id.partnerBasic);
+			ImageView leftFoot1 = (ImageView) findViewById(R.id.partnerLeftFoot1);
+			ImageView leftFoot2 = (ImageView) findViewById(R.id.partnerLeftFoot2);
+			ImageView leftFoot3 = (ImageView) findViewById(R.id.partnerLeftFoot3);
+			ImageView rightFoot1 = (ImageView) findViewById(R.id.partnerRightFoot1);
+			ImageView rightFoot2 = (ImageView) findViewById(R.id.partnerRightFoot2);
+			ImageView rightFoot3 = (ImageView) findViewById(R.id.partnerRightFoot3);
 			String commandsText = editText1.getText().toString();
 
 			List<String> commands = StringCommandParser.parse(commandsText);
 
-			executeCommands(image1, commands);
+			executeCommands(leftHand1, leftHand2, leftHand3, rightHand1,
+					rightHand2, rightHand3, basic, leftFoot1, leftFoot2,
+					leftFoot3, rightFoot1, rightFoot2, rightFoot3, commands);
 		}
 
-		private void executeCommands(ImageView image1, List<String> commands) {
-			Runnable runnable = new StringCommandExecutor(image1, commands);
+		private void executeCommands(ImageView lh1, ImageView lh2,
+				ImageView lh3, ImageView rh1, ImageView rh2, ImageView rh3,
+				ImageView basic, ImageView lf1, ImageView lf2, ImageView lf3,
+				ImageView rf1, ImageView rf2, ImageView rf3,
+				List<String> commands) {
+			Runnable runnable = new StringCommandExecutor(lh1, lh2, lh3, rh1,
+					rh2, rh3, basic, lf1, lf2, lf3, rf1, rf2, rf3, commands);
 			for (int i = 0; i < commands.size(); i++) { /* 解析&実行 */
 				handler.post(runnable); /* 光らせる */
 
 				try { /* 1秒待機 */
-					Thread.sleep(500);
+					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				
+				handler.post(runnable); /* 光らせる */
+
+				try { /* 1秒待機 */
+					Thread.sleep(250);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
 			}
 		}
 	}
