@@ -56,12 +56,13 @@ public final class R {
         public static final int button8=0x7f080021;
         public static final int button9=0x7f080025;
         public static final int editText1=0x7f08001e;
-        public static final int editText2=0x7f08002d;
+        public static final int editText2=0x7f08002e;
         public static final int editTextActionScreen1=0x7f080001;
         public static final int editTextActionScreen2=0x7f080003;
         public static final int frameLayout1=0x7f08002c;
-        public static final int imageView2=0x7f08002e;
-        public static final int menu_settings=0x7f080030;
+        public static final int imageInEdit=0x7f08002d;
+        public static final int imageView2=0x7f08002f;
+        public static final int menu_settings=0x7f080031;
         public static final int partnerBasic=0x7f080017;
         public static final int partnerLeftFoot1=0x7f080018;
         public static final int partnerLeftFoot2=0x7f080019;
@@ -88,7 +89,7 @@ public final class R {
         public static final int playerRightHand1=0x7f080007;
         public static final int playerRightHand2=0x7f080008;
         public static final int playerRightHand3=0x7f080009;
-        public static final int titleButton=0x7f08002f;
+        public static final int titleButton=0x7f080030;
     }
     public static final class layout {
         public static final int action_screen=0x7f030000;

@@ -32,12 +32,15 @@ public class MainActivity extends Activity {
 	private String path = "mydata.txt"; // file保存
 	private String lesson;
 	private String message;
+	private ImageInEdit mImageEdit;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle("プレイヤー画面");
 		setContentView(R.layout.main);
+		
+		mImageEdit = (ImageInEdit)findViewById(R.id.imageInEdit);
 
 		/********** 音楽 **************/
 		MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); // ゲーム音楽
@@ -140,6 +143,8 @@ public class MainActivity extends Activity {
 	public void doActionLeftHandUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("左腕を上げる");
+
+		mImageEdit .insertResourceImage(MainActivity.this, R.drawable.basic_piyo);
 	}
 
 	public void doActionLeftHandDown(View view) {

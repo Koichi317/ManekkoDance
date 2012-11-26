@@ -48,6 +48,8 @@ public class ActionActivity extends Activity {
 				trd.start();
 			}
 		});
+		
+		
 	}
 	
 	private final class CommandExecutor implements Runnable {
@@ -129,6 +131,11 @@ public class ActionActivity extends Activity {
 			}
 			answer.compare(); // 答えの配列とプレイヤーの配列を比較
 			Log.d("デバッグ", "AnswerCheck:" + answer.show()); // 正解、不正解の表示
+			
+			/*AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
+            builder.setMessage("hoge");
+            builder.show();*/ //ダイアログの生成でどうしてもエラーが出てしまう
+
 		}
 	}
 	

@@ -37,7 +37,7 @@ public class LessonList extends ListActivity {
 			Intent intent0 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
 			//intent0.putExtra("lesson0", sp.getString("lesson0", null));
 			intent0.putExtra("lesson",
-					"¶˜r‚ğã‚°‚é\n¶˜r‚ğ‰º‚°‚é\n‰E˜r‚ğã‚°‚é\n‰E˜r‚ğ‰º‚°‚é\nƒWƒƒƒ“ƒv‚·‚é"); // ‚¨è–{‚Ì“š‚¦
+					"¶˜r‚ğã‚°‚é\n¶˜r‚ğ‰º‚°‚é\n‰E˜r‚ğã‚°‚é\n‰E˜r‚ğ‰º‚°‚é"); // ‚¨è–{‚Ì“š‚¦
 			intent0.putExtra("message", "lesson1");
 			this.startActivity(intent0);
 			break;
