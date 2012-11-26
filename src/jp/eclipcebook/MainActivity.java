@@ -19,7 +19,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -98,7 +97,7 @@ public class MainActivity extends Activity {
 			ImageView rightFoot2 = (ImageView) findViewById(R.id.playerRightFoot2);
 			ImageView rightFoot3 = (ImageView) findViewById(R.id.playerRightFoot3);
 
-			String commandsText = editText1.getText().toString();
+			String commandsText = editText1.getText().toString(); // 1行ずつ配列に収納
 
 			List<String> commands = StringCommandParser.parse(commandsText);
 
@@ -106,9 +105,6 @@ public class MainActivity extends Activity {
 					rightHand2, rightHand3, basic, leftFoot1, leftFoot2,
 					leftFoot3, rightFoot1, rightFoot2, rightFoot3, commands);
 
-			AnswerCheck answer = new AnswerCheck();
-			answer.compare(commands); // 答えの配列とプレイヤーの配列を比較
-			Log.d("デバッグ", "AnswerCheck:" + answer.show()); // 正解、不正解の表示
 		}
 
 		private void executeCommands(ImageView lh1, ImageView lh2,

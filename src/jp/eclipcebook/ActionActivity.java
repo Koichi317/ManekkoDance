@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -96,22 +97,38 @@ public class ActionActivity extends Activity {
 			Runnable playerRunnable = new StringCommandExecutor(playerImage1,playerImage2,playerImage3,playerImage4,playerImage5,playerImage6,playerImage7, playerImage8,playerImage9,playerImage10,playerImage11,playerImage12,playerImage13,playerCommands);
 			Runnable partnerRunnable = new StringCommandExecutor(partnerImage1,partnerImage2,partnerImage3,partnerImage4,partnerImage5,partnerImage6,partnerImage7, partnerImage8,partnerImage9,partnerImage10,partnerImage11,partnerImage12,partnerImage13,partnerCommands);
 
-			for (int i = 0; i < playerCommands.size(); i++) { /* 解析&実行 */
-				handler.post(playerRunnable); /* 光らせる */
-				handler.post(partnerRunnable);
+			AnswerCheck answer = new AnswerCheck(playerCommands, partnerCommands);
+					
+			for (int i = 0; i < Math.max(playerCommands.size(), partnerCommands.size()); i++) { /* 解析&実行 */
+				
+				if(i < playerCommands.size() ) {
+					handler.post(playerRunnable); /* 光らせる */
+				}
+				if(i < partnerCommands.size()) {
+					handler.post(partnerRunnable);
+				}
+				
 				try { /* 1秒待機 */
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				handler.post(playerRunnable); /* 光らせる */
-				handler.post(partnerRunnable);
+				
+				if(i < playerCommands.size() ) {
+					handler.post(playerRunnable); /* 光らせる */
+				}
+				if(i < partnerCommands.size()) {
+					handler.post(partnerRunnable);
+				}
+				
 				try { /* 1秒待機 */
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
+			answer.compare(); // 答えの配列とプレイヤーの配列を比較
+			Log.d("デバッグ", "AnswerCheck:" + answer.show()); // 正解、不正解の表示
 		}
 	}
 	

@@ -13,6 +13,7 @@
         android:background="#ffffff"
         android:contentDescription="@string/player_source_cord"
         android:focusable="false"
+        android:gravity="center_vertical|top"
         android:hint="@string/hint_player_source_cord"
         android:textColor="#000000"
         android:textSize="18sp"
@@ -31,7 +32,7 @@
         android:contentDescription="@string/player_source_cord"
         android:hint="@string/hint_secret"
         android:textSize="18sp"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="match_parent"
