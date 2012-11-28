@@ -31,9 +31,9 @@ public class StringCommandExecutor implements Runnable {
 		this.leftFoot1 = leftFoot1;
 		this.leftFoot2 = leftFoot2;
 		this.leftFoot3 = leftFoot3;
-		this.leftFoot1 = rightFoot1;
-		this.leftFoot2 = rightFoot2;
-		this.leftFoot3 = rightFoot3;
+		this.rightFoot1 = rightFoot1;
+		this.rightFoot2 = rightFoot2;
+		this.rightFoot3 = rightFoot3;
 		this.expandedCommands = stringArray;
 		this.lineIndex = 0;
 		this.addLineIndex = true;
@@ -79,7 +79,7 @@ public class StringCommandExecutor implements Runnable {
 				rightHand1.setVisibility(View.INVISIBLE);
 				leftFoot1.setVisibility(View.INVISIBLE);
 				rightFoot1.setVisibility(View.INVISIBLE);
-				basic.setImageResource(R.drawable.jump2_piyo);
+				basic.setImageResource(R.drawable.jump_bo);
 			}
 			
 			addLineIndex = false;
@@ -119,7 +119,7 @@ public class StringCommandExecutor implements Runnable {
 				rightFoot1.setVisibility(View.VISIBLE);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("ƒWƒƒƒ“ƒv‚·‚é") != -1) {
-				basic.setImageResource(R.drawable.basic_piyo);
+				basic.setImageResource(R.drawable.basic_bo);
 				leftHand1.setVisibility(View.VISIBLE);
 				rightHand1.setVisibility(View.VISIBLE);
 				leftFoot1.setVisibility(View.VISIBLE);

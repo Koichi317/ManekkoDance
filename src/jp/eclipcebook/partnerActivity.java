@@ -1,56 +1,46 @@
 package jp.eclipcebook;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class PartnerActivity extends Activity {
 
-	private String path = "mydata2.txt"; // file保存
+	// private String path = "mydata2.txt"; // file保存
+	private String text_data;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルバー非表示
 		setTitle("お手本画面");
 		setContentView(R.layout.partner);
-		//doLoad();
+		// doLoad();
 
-		TextView editText1 = (TextView)findViewById(R.id.editText1);
-		TextView editText2 = (TextView)findViewById(R.id.editText2);
-		ImageView messageImageView1 = (ImageView)findViewById(R.id.imageView2);
+		TextView editText1 = (TextView) findViewById(R.id.editText1);
+		TextView editText2 = (TextView) findViewById(R.id.editText2);
+		ImageView messageImageView1 = (ImageView) findViewById(R.id.imageView2);
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("lesson");
 		String message = intent.getStringExtra("message");
+		text_data = intent.getStringExtra("text_data");
 		editText1.setText(data);
 		editText2.setText(message);
-		if(message.equals("lesson1")) {
+		if (message.equals("lesson1")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message1);
-		}
-		else if(message.equals("lesson2")) {
+		} else if (message.equals("lesson2")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message2);
-		}
-		else if(message.equals("lesson3")) {
+		} else if (message.equals("lesson3")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message3);
-		}
-		else if(message.equals("lesson4")) {
+		} else if (message.equals("lesson4")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message4);
 		}
 
@@ -110,7 +100,7 @@ public class PartnerActivity extends Activity {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
+
 				handler.post(runnable); /* 光らせる */
 
 				try { /* 1秒待機 */
@@ -123,152 +113,64 @@ public class PartnerActivity extends Activity {
 		}
 	}
 
-	public void doActionLeftHandUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左腕を上げる");
-	}
-
-	public void doActionLeftHandDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左腕を下げる");
-	}
-
-	public void doActionRightHandUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右腕を上げる");
-	}
-
-	public void doActionRightHandDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右腕を下げる");
-	}
-
-	public void doActionLeftFootUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左足を上げる");
-	}
-
-	public void doActionLeftFootDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左足を下げる");
-	}
-
-	public void doActionRightFootUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右足を上げる");
-	}
-
-	public void doActionRightFootDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右足を下げる");
-	}
-
-	public void doActionJump(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("ジャンプする");
-	}
-
-	public void doActionEnter(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("\n");
-	}
-
-	public void doActionLoop(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("loop");
-	}
-
-	public void doActionKoko(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("ここまで");
-	}
-
 	/******************** ファイル保存 doSave(View view) *************************/
-	@SuppressLint("WorldReadableFiles")
-	public void doSave() {
-		EditText editText1 = (EditText) this.findViewById(R.id.editText1);
-		Editable str = editText1.getText();
-		FileOutputStream output = null;
-		try {
-			output = this.openFileOutput(path, Context.MODE_WORLD_READABLE);
-			output.write(str.toString().getBytes());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				output.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+	/*
+	 * @SuppressLint("WorldReadableFiles") public void doSave() { EditText
+	 * editText1 = (EditText) this.findViewById(R.id.editText1); Editable str =
+	 * editText1.getText(); FileOutputStream output = null; try { output =
+	 * this.openFileOutput(path, Context.MODE_WORLD_READABLE);
+	 * output.write(str.toString().getBytes()); } catch (FileNotFoundException
+	 * e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace();
+	 * } finally { try { output.close(); } catch (Exception e) {
+	 * e.printStackTrace(); } } }
+	 */
 
 	/******************** ファイルロード doLoad(View view) *************************/
-	public void doLoad() {
-		EditText editText1 = (EditText) this.findViewById(R.id.editText1);
-		FileInputStream input = null;
-		try {
-			input = this.openFileInput(path);
-			byte[] buffer = new byte[1000];
-			input.read(buffer);
-			String s = new String(buffer).trim();
-			editText1.setText(s);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				input.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+	/*
+	 * public void doLoad() { EditText editText1 = (EditText)
+	 * this.findViewById(R.id.editText1); FileInputStream input = null; try {
+	 * input = this.openFileInput(path); byte[] buffer = new byte[1000];
+	 * input.read(buffer); String s = new String(buffer).trim();
+	 * editText1.setText(s); } catch (FileNotFoundException e) {
+	 * e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+	 * finally { try { input.close(); } catch (Exception e) {
+	 * e.printStackTrace(); } } }
+	 */
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		super.onCreateOptionsMenu(menu);
-		final Activity activity = this;
 		MenuItem item1 = menu.add("実行");
-		MenuItem item2 = menu.add("クリア");
-		MenuItem item3 = menu.add("プレイヤー");
+		MenuItem item2 = menu.add("プレイヤー");
 
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				Toast toast = Toast.makeText(activity, "This is Menu1",
-						Toast.LENGTH_SHORT);
-				toast.show();
+				Intent intent = new Intent(getApplication(),
+						jp.eclipcebook.ActionActivity.class);
+				changeScreen(intent);
 				return false;
 			}
 		});
 		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				TextView editText1 = (TextView) findViewById(R.id.editText1);
-				editText1.getEditableText().clear();
-				return false;
-			}
-		});
-		item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {
-				doSave();
-				changeScreen();
+				// doSave();
+				Intent intent = new Intent(getApplication(),
+						jp.eclipcebook.MainActivity.class);
+				changeScreen(intent);
 				return false;
 			}
 		});
 		return true;
 	}
 
-	private void changeScreen() {
-		Intent intent = new Intent(getApplication(),
-				jp.eclipcebook.MainActivity.class);
-		TextView editText1 = (TextView)findViewById(R.id.editText1);
-		TextView editText2 = (TextView)findViewById(R.id.editText2);
+	private void changeScreen(Intent intent) {
+		TextView editText1 = (TextView) findViewById(R.id.editText1);
+		TextView editText2 = (TextView) findViewById(R.id.editText2);
 		intent.putExtra("lesson", editText1.getText().toString());
 		intent.putExtra("message", editText2.getText().toString());
+		intent.putExtra("text_data", text_data);
+
 		this.startActivity(intent);
 	}
 }

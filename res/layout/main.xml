@@ -5,156 +5,169 @@
     android:background="@drawable/back_image"
     android:gravity="top" >
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/button_action" />
+
+    <jp.eclipcebook.ImageInEdit
+        android:id="@+id/imageInEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tableLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button1"
+        android:background="#ffffff"
+        android:ems="10"
+        android:gravity="center_vertical|top"
+        android:inputType="textMultiLine"
+        android:textColor="#000000"
+        android:visibility="invisible" />
+
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:stretchColumns="0,1,2,3"
+        android:layout_alignParentRight="true" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionLeftHandUp"
+                android:textSize="12sp"
+                android:text="@string/left_hand_up" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionRightHandUp"
+                android:textSize="12sp"
+                android:text="@string/right_hand_up" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionLeftFootUp"
+                android:textSize="12sp"
+                android:text="@string/left_foot_up" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionRightFootUp"
+                android:textSize="12sp"
+                android:text="@string/right_foot_up" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionLeftHandDown"
+                android:textSize="12sp"
+                android:text="@string/left_hand_down" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionRightHandDown"
+                android:textSize="12sp"
+                android:text="@string/right_hand_down" />
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionLeftFootDown"
+                android:textSize="12sp"
+                android:text="@string/left_foot_down" />
+
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionRightFootDown"
+                android:textSize="12sp"
+                android:text="@string/right_foot_down" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionJump"
+                android:textSize="12sp" 
+                android:text="@string/jump" />
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionLoop"
+                android:text="@string/loop"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionKoko"
+                android:text="@string/koko"
+                android:textSize="12sp" />
+
+        </TableRow>
+    </TableLayout>
+
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button12"
+        android:layout_above="@+id/tableLayout1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/imageInEdit"
         android:background="#ffffff"
         android:ems="10"
         android:gravity="center_vertical|top"
         android:hint="@string/hint_text"
         android:inputType="textMultiLine"
-        android:textColor="#000000" >
-
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/button11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:onClick="doActionJump"
-        android:text="@string/jump" />
-
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/button11"
-        android:onClick="doActionKoko"
-        android:text="@string/koko" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button11"
-        android:layout_alignParentRight="true"
-        android:onClick="doActionEnter"
-        android:text="@string/Enter" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button6"
-        android:layout_toLeftOf="@+id/button8"
-        android:onClick="doActionLoop"
-        android:text="@string/loop" />
-
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button11"
-        android:layout_toLeftOf="@+id/button11"
-        android:onClick="doActionLeftFootDown"
-        android:text="@string/left_foot_down" />
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button10"
-        android:layout_alignBottom="@+id/button10"
-        android:layout_toLeftOf="@+id/button10"
-        android:onClick="doActionLeftFootUp"
-        android:text="@string/left_foot_up" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button9"
-        android:layout_alignBottom="@+id/button9"
-        android:layout_toLeftOf="@+id/button9"
-        android:onClick="doActionRightFootDown"
-        android:text="@string/right_foot_down" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_toLeftOf="@+id/button2"
-        android:onClick="doActionRightFootUp"
-        android:text="@string/right_foot_up" />
-
-    <Button
-        android:id="@+id/button13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:onClick="doActionLeftHandDown"
-        android:text="@string/left_hand_down" />
-
-    <Button
-        android:id="@+id/button12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignParentLeft="true"
-        android:onClick="doActionLeftHandUp"
-        android:text="@string/left_hand_up" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button9"
-        android:layout_toLeftOf="@+id/button9"
-        android:onClick="doActionRightHandDown"
-        android:text="@string/right_hand_down" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button9"
-        android:layout_alignLeft="@+id/button9"
-        android:onClick="doActionRightHandUp"
-        android:text="@string/right_hand_up" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button10"
-        android:layout_toRightOf="@+id/button9"
-        android:text="@string/button_action" />
-
-    <Button
-        android:id="@+id/button14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button6"
-        android:layout_alignParentRight="true"
-        android:text="@string/return_action" />
+        android:textColor="#000000"
+        android:visibility="visible" />
 
     <FrameLayout
         android:id="@+id/frameLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText1"
+        android:layout_alignBottom="@+id/imageInEdit"
         android:layout_alignParentRight="true" >
 
         <ImageView
@@ -162,6 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
+            android:src="@drawable/left_hand_up1_bo"
             android:visibility="visible" />
 
         <ImageView
@@ -169,6 +183,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
+            android:src="@drawable/left_hand_up2_bo"
             android:visibility="invisible" />
 
         <ImageView
@@ -176,14 +191,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
+            android:src="@drawable/left_hand_up3_bo"
             android:visibility="invisible" />
-        
+
         <ImageView
             android:id="@+id/playerRightHand1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/right_hand_up_piyo1"
+            android:src="@drawable/right_hand_up1_bo"
             android:visibility="visible" />
 
         <ImageView
@@ -191,7 +207,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/right_hand_up_piyo2"
+            android:src="@drawable/right_hand_up2_bo"
             android:visibility="invisible" />
 
         <ImageView
@@ -199,7 +215,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/right_hand_up_piyo3"
+            android:src="@drawable/right_hand_up3_bo"
             android:visibility="invisible" />
 
         <ImageView
@@ -207,7 +223,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/basic_piyo"
+            android:src="@drawable/basic_bo"
             android:visibility="visible" />
 
         <ImageView
@@ -215,7 +231,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/left_foot_up_piyo1"
+            android:src="@drawable/left_foot_up1_bo"
             android:visibility="visible" />
 
         <ImageView
@@ -223,7 +239,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/left_foot_up_piyo2"
+            android:src="@drawable/left_foot_up2_bo"
             android:visibility="invisible" />
 
         <ImageView
@@ -231,43 +247,51 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/left_foot_up_piyo3"
+            android:src="@drawable/left_foot_up3_bo"
             android:visibility="invisible" />
-        
+
         <ImageView
             android:id="@+id/playerRightFoot1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
+            android:src="@drawable/right_foot_up1_bo"
             android:visibility="visible" />
-        
+
         <ImageView
             android:id="@+id/playerRightFoot2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
+            android:src="@drawable/right_foot_up2_bo"
             android:visibility="invisible" />
-        
+
         <ImageView
             android:id="@+id/playerRightFoot3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
+            android:src="@drawable/right_foot_up3_bo"
             android:visibility="invisible" />
-
     </FrameLayout>
 
-    <jp.eclipcebook.ImageInEdit
-        android:id="@+id/imageInEdit"
+    <Button
+        android:id="@+id/button14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText1"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:ems="10"
-        android:gravity="center_vertical|top"
-        android:hint=""
-        android:inputType="textMultiLine" />
+        android:onClick="doActionBackSpace"
+        android:text="@string/back_space"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/button14"
+        android:onClick="doActionEnter"
+        android:text="@string/Enter" />
 
 </RelativeLayout>

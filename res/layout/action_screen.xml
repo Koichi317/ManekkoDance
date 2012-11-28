@@ -6,18 +6,36 @@
     android:background="@drawable/back_image"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/editTextActionScreen1"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#ffffff"
-        android:contentDescription="@string/player_source_cord"
-        android:focusable="false"
-        android:gravity="center_vertical|top"
-        android:hint="@string/hint_player_source_cord"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible" />
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/editTextActionScreen1"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#ffffff"
+            android:contentDescription="@string/player_source_cord"
+            android:ems="10"
+            android:focusable="false"
+            android:gravity="center_vertical|top"
+            android:hint="@string/hint_player_source_cord"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:visibility="visible" >
+
+            <requestFocus />
+        </EditText>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/image_area"
+            android:src="@drawable/answer_false"
+            android:visibility="visible" />
+
+    </FrameLayout>
 
     <Button
         android:id="@+id/button1"
@@ -32,7 +50,7 @@
         android:contentDescription="@string/player_source_cord"
         android:hint="@string/hint_secret"
         android:textSize="18sp"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <LinearLayout
         android:layout_width="match_parent"
