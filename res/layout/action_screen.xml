@@ -33,7 +33,7 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/image_area"
             android:src="@drawable/answer_false"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
     </FrameLayout>
 
