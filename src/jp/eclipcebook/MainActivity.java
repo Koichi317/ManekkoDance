@@ -5,6 +5,7 @@
 
 package jp.eclipcebook;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -21,7 +22,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	//private String path = "mydata.txt"; // fileï€ë∂
+	// private String path = "mydata.txt"; // fileï€ë∂
 	private String lesson;
 	private String message;
 	private String text_data;
@@ -96,23 +97,18 @@ public class MainActivity extends Activity {
 			ImageView rightFoot3 = (ImageView) findViewById(R.id.playerRightFoot3);
 
 			String commandsText = editText1.getText().toString(); // 1çsÇ∏Ç¬îzóÒÇ…é˚î[
+			List<Integer> numberSorting = new ArrayList<Integer>();
+			List<String> commands = new ArrayList<String>();
+			StringCommandParser.parse(commandsText, numberSorting, commands);
 
-			List<String> commands = StringCommandParser.parse(commandsText);
-
-			executeCommands(leftHand1, leftHand2, leftHand3, rightHand1,
-					rightHand2, rightHand3, basic, leftFoot1, leftFoot2,
-					leftFoot3, rightFoot1, rightFoot2, rightFoot3, commands);
+			executeCommands(new ImageContainer(leftHand1, leftHand2, leftHand3, rightHand1,
+					rightHand2, rightHand3, basic, leftFoot1, leftFoot2, leftFoot3, rightFoot1,
+					rightFoot2, rightFoot3), commands);
 
 		}
 
-		private void executeCommands(ImageView lh1, ImageView lh2,
-				ImageView lh3, ImageView rh1, ImageView rh2, ImageView rh3,
-				ImageView basic, ImageView lf1, ImageView lf2, ImageView lf3,
-				ImageView rf1, ImageView rf2, ImageView rf3,
-				List<String> expandedCommands) {
-			Runnable runnable = new StringCommandExecutor(lh1, lh2, lh3, rh1,
-					rh2, rh3, basic, lf1, lf2, lf3, rf1, rf2, rf3,
-					expandedCommands);
+		private void executeCommands(ImageContainer images, List<String> expandedCommands) {
+			Runnable runnable = new StringCommandExecutor(images, expandedCommands);
 			for (int i = 0; i < expandedCommands.size(); i++) { /* âêÕ&é¿çs */
 				handler.post(runnable); /* åıÇÁÇπÇÈ */
 
@@ -139,8 +135,7 @@ public class MainActivity extends Activity {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("ç∂òrÇè„Ç∞ÇÈ");
 
-		mImageEdit.insertResourceImage(MainActivity.this,
-				R.drawable.icon_left_hand);
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_hand);
 	}
 
 	public void doActionLeftHandDown(View view) {
@@ -151,8 +146,7 @@ public class MainActivity extends Activity {
 	public void doActionRightHandUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("âEòrÇè„Ç∞ÇÈ");
-		mImageEdit.insertResourceImage(MainActivity.this,
-				R.drawable.icon_right_hand);
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_hand);
 	}
 
 	public void doActionRightHandDown(View view) {
@@ -163,8 +157,7 @@ public class MainActivity extends Activity {
 	public void doActionLeftFootUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("ç∂ë´Çè„Ç∞ÇÈ");
-		mImageEdit.insertResourceImage(MainActivity.this,
-				R.drawable.icon_left_foot);
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_foot);
 	}
 
 	public void doActionLeftFootDown(View view) {
@@ -175,8 +168,7 @@ public class MainActivity extends Activity {
 	public void doActionRightFootUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("âEë´Çè„Ç∞ÇÈ");
-		mImageEdit.insertResourceImage(MainActivity.this,
-				R.drawable.icon_right_foot);
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_foot);
 	}
 
 	public void doActionRightFootDown(View view) {
@@ -204,7 +196,7 @@ public class MainActivity extends Activity {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("Ç±Ç±Ç‹Ç≈");
 	}
-	
+
 	public void doActionBackSpace(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("\b");

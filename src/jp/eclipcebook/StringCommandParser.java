@@ -12,47 +12,63 @@ public class StringCommandParser {
 
 	}
 
-	public static List<String> parse(String commandsText) {
+	public static void parse(String commandsText, List<Integer> numberSorting, List<String> expandedCommands) {
 		String[] commands = commandsText.split("\n"); // 1行毎に配列に格納
-		List<String> originalCommand = new ArrayList<String>(Arrays.asList(commands)); //List型配列に変換
-		List<String> expandedCommands = new ArrayList<String>(); 
-		expandCommands(originalCommand, expandedCommands);
+		List<String> originalCommand = new ArrayList<String>(Arrays.asList(commands)); // List型配列に変換
+		List<Integer> lineNumberSequence = new ArrayList<Integer>(); // 文字の行を記憶
+
+		List<Integer> expandedLineNumberSequence = new ArrayList<Integer>(); // 実行箇所の行を記憶
+
+		// 行番号を付ける(1行目：0番目、2行目:1番目、・・・)
+		for (int i = 0; i < commands.length; i++)
+			lineNumberSequence.add(i);
+
+		expandCommands(originalCommand, expandedCommands, lineNumberSequence,
+				expandedLineNumberSequence);
 		expandedCommands.add("\n");
-		return expandedCommands;
+
 	}
 
-	private static void expandCommands(List<String> originalCommands, List<String> expandedCommands) {
+	private static void expandCommands(List<String> originalCommands,
+			List<String> expandedCommands, List<Integer> lineNumberSequence,
+			List<Integer> expandedLineNumberSequence) {
 		// TODO Auto-generated method stub
 		Stack<Integer> loopStack = new Stack<Integer>();
 		Stack<Integer> loopCountStack = new Stack<Integer>();
 		for (int i = 0; i < originalCommands.size(); i++) {
-			if (originalCommands.get(i) == null)
+			if (originalCommands.get(i) == null) {
 				continue;
-			else if (originalCommands.get(i).contains("loop")) { // loopがある
+			} else if (originalCommands.get(i).contains("loop")) { // "loop"がある場合
 				loopStack.push(i);
 				loopCountStack.push(readCount(originalCommands.get(i)));
-			} else if (originalCommands.get(i).contains("ここまで")) { // kokoがある
+			} else if (originalCommands.get(i).contains("ここまで")) { // "ここまで"がある場合
 				int loopPosition = loopStack.pop();
 				int loopCount = loopCountStack.pop();
 				originalCommands.remove(i);
+				lineNumberSequence.remove(i);
 				originalCommands.remove(loopPosition);
-				makeLoop(originalCommands, loopPosition, i - 2, loopCount);
+				lineNumberSequence.remove(loopPosition);
+				makeLoop(originalCommands, loopPosition, i - 2, loopCount, lineNumberSequence);
 				i = loopPosition - 1;
 			} else if (loopStack.empty()) { // スタックが空
 				expandedCommands.add(originalCommands.get(i));
+				expandedLineNumberSequence.add(lineNumberSequence.get(i));
 			}
 		}
 	}
 
-	private static void makeLoop(List<String> originalCommands, int firstIndex,
-			int lastIndex, int count) {
+	private static void makeLoop(List<String> originalCommands, int firstIndex, int lastIndex,
+			int count, List<Integer> lineNumberSequence) {
 		String[] str = new String[lastIndex - firstIndex + 1];
+		int[] num  = new int[lastIndex - firstIndex +1];
 		for (int i = firstIndex; i <= lastIndex; i++) {
 			str[i - firstIndex] = originalCommands.get(i);
+			num[i - firstIndex] = lineNumberSequence.get(i);
 		}
 		for (int i = 0; i < count - 1; i++) { // 3回繰り返しなら、i < 2 (1回分＋2回分追加)
 			for (int j = str.length - 1; j >= 0; j--) {
 				originalCommands.add(firstIndex, str[j]);
+				lineNumberSequence.add(firstIndex, num[j]);
 			}
 		}
 	}

@@ -8,122 +8,216 @@ import android.widget.ImageView;
 public class StringCommandExecutor implements Runnable {
 
 	/**** フィールド ****/
-	private ImageView leftHand1, leftHand2, leftHand3, rightHand1, rightHand2,
-			rightHand3, basic, leftFoot1, leftFoot2, leftFoot3, rightFoot1,
-			rightFoot2, rightFoot3;
 	private List<String> expandedCommands;
 	private int lineIndex;
 	private boolean addLineIndex;
+	private boolean[] fragState;
+	private boolean[] fragNextState;
+	private final ImageContainer images;
 
 	/**** コンストラクタ ****/
-	public StringCommandExecutor(ImageView leftHand1, ImageView leftHand2,
-			ImageView leftHand3, ImageView rightHand1, ImageView rightHand2,
-			ImageView rightHand3, ImageView basic, ImageView leftFoot1,
-			ImageView leftFoot2, ImageView leftFoot3, ImageView rightFoot1,
-			ImageView rightFoot2, ImageView rightFoot3, List<String> stringArray) {
-		this.leftHand1 = leftHand1;
-		this.leftHand2 = leftHand2;
-		this.leftHand3 = leftHand3;
-		this.rightHand1 = rightHand1;
-		this.rightHand2 = rightHand2;
-		this.rightHand3 = rightHand3;
-		this.basic = basic;
-		this.leftFoot1 = leftFoot1;
-		this.leftFoot2 = leftFoot2;
-		this.leftFoot3 = leftFoot3;
-		this.rightFoot1 = rightFoot1;
-		this.rightFoot2 = rightFoot2;
-		this.rightFoot3 = rightFoot3;
+	public StringCommandExecutor(ImageContainer images, List<String> stringArray) {
+		this.images = images;
 		this.expandedCommands = stringArray;
 		this.lineIndex = 0;
 		this.addLineIndex = true;
+		fragState = new boolean[8];
+		fragStateInitialization(fragState);
+		fragNextState = new boolean[9];
+	}
+
+	private void fragStateInitialization(boolean[] fragState) {
+		// TODO Auto-generated method stub
+		fragState[0] = false; // 左腕を上げている(0:false, 1:true)
+		fragState[1] = true; // 左腕を下げている
+		fragState[2] = false; // 右腕を上げている
+		fragState[3] = true; // 右腕を下げている
+		fragState[4] = false; // 左足を上げている
+		fragState[5] = true; // 左足を下げている
+		fragState[6] = false; // 右足を上げている
+		fragState[7] = true; // 右足を下げている
 	}
 
 	@Override
 	public void run() {
 		if (addLineIndex) {
-			if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1) {
-				leftHand1.setVisibility(View.INVISIBLE);
-				leftHand2.setVisibility(View.VISIBLE);
+			for (int i = 0; i < fragNextState.length; i++)
+				fragNextState[i] = false; // fragのリセット
+
+			if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1)
+				fragNextState[0] = true;
+			if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1)
+				fragNextState[1] = true;
+			if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1)
+				fragNextState[2] = true;
+			if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1)
+				fragNextState[3] = true;
+			if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1)
+				fragNextState[4] = true;
+			if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1)
+				fragNextState[5] = true;
+			if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1)
+				fragNextState[6] = true;
+			if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1)
+				fragNextState[7] = true;
+			if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1)
+				fragNextState[8] = true;
+
+			// 無効な命令の並び（左腕を上げる&&左腕を下げる 等）
+			if ((fragNextState[0] && fragNextState[1])
+					|| (fragNextState[2] && fragNextState[3])
+					|| (fragNextState[4] && fragNextState[5])
+					|| (fragNextState[6] && fragNextState[7])
+					|| (fragNextState[4] && fragNextState[6])
+					|| (fragNextState[5] && fragNextState[7])
+					|| (fragNextState[0] || fragNextState[1] || fragNextState[2]
+							|| fragNextState[3] || fragNextState[4] || fragNextState[5]
+							|| fragNextState[6] || fragNextState[7])) {
+				// 転んだ画像のエラー処理
 			}
-			if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1) {
-				leftHand3.setVisibility(View.INVISIBLE);
-				leftHand2.setVisibility(View.VISIBLE);
+
+			if (fragNextState[0]) { // 左腕を上げる
+				if (fragState[0]) { // 既に左腕を上げている
+					// エラー処理
+				} else {
+					images.getLeftHand1().setVisibility(View.INVISIBLE);
+					images.getLeftHand2().setVisibility(View.VISIBLE);
+					fragState[0] = true; // 左腕を上げている(1:true)
+					fragState[1] = false; // 左腕を下げている(0:false)
+				}
 			}
-			if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
-				rightHand1.setVisibility(View.INVISIBLE);
-				rightHand2.setVisibility(View.VISIBLE);
+
+			if (fragNextState[1]) {
+				if (fragState[1]) {
+					// エラー処理
+				} else {
+					images.getLeftHand3().setVisibility(View.INVISIBLE);
+					images.getLeftHand2().setVisibility(View.VISIBLE);
+					fragState[0] = false;
+					fragState[1] = true;
+				}
 			}
-			if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1) {
-				rightHand3.setVisibility(View.INVISIBLE);
-				rightHand2.setVisibility(View.VISIBLE);
+
+			if (fragNextState[2]) {
+				if (fragState[2]) {
+					// エラー処理
+				} else {
+					images.getRightHand1().setVisibility(View.INVISIBLE);
+					images.getRightHand2().setVisibility(View.VISIBLE);
+					fragState[2] = true;
+					fragState[3] = false;
+				}
 			}
-			if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1) {
-				leftFoot1.setVisibility(View.INVISIBLE);
-				leftFoot2.setVisibility(View.VISIBLE);
+
+			if (fragNextState[3]) {
+				if (fragState[3]) {
+					// エラー処理
+				} else {
+					images.getRightHand3().setVisibility(View.INVISIBLE);
+					images.getRightHand2().setVisibility(View.VISIBLE);
+					fragState[2] = false;
+					fragState[3] = true;
+				}
 			}
-			if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1) {
-				leftFoot3.setVisibility(View.INVISIBLE);
-				leftFoot2.setVisibility(View.VISIBLE);
+
+			if (fragNextState[4]) {
+				if (fragState[4]) {
+					// エラー処理
+				} else {
+					images.getLeftFoot1().setVisibility(View.INVISIBLE);
+					images.getLeftFoot2().setVisibility(View.VISIBLE);
+					fragState[4] = true;
+					fragState[5] = false;
+				}
 			}
-			if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1) {
-				rightFoot1.setVisibility(View.INVISIBLE);
-				rightFoot2.setVisibility(View.VISIBLE);
+
+			if (fragNextState[5]) {
+				if (fragState[5]) {
+					// エラー処理
+				} else {
+					images.getLeftFoot3().setVisibility(View.INVISIBLE);
+					images.getLeftFoot2().setVisibility(View.VISIBLE);
+					fragState[4] = false;
+					fragState[5] = true;
+				}
 			}
-			if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1) {
-				rightFoot3.setVisibility(View.INVISIBLE);
-				rightFoot2.setVisibility(View.VISIBLE);
+
+			if (fragNextState[6]) {
+				if (fragState[6]) {
+					// エラー処理
+				} else {
+					images.getRightFoot1().setVisibility(View.INVISIBLE);
+					images.getRightFoot2().setVisibility(View.VISIBLE);
+					fragState[6] = true;
+					fragState[7] = false;
+				}
 			}
-			if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1) {
-				leftHand1.setVisibility(View.INVISIBLE);
-				rightHand1.setVisibility(View.INVISIBLE);
-				leftFoot1.setVisibility(View.INVISIBLE);
-				rightFoot1.setVisibility(View.INVISIBLE);
-				basic.setImageResource(R.drawable.jump_bo);
+
+			if (fragNextState[7]) {
+				if (fragState[7]) {
+					// エラー処理
+				} else {
+					images.getRightFoot3().setVisibility(View.INVISIBLE);
+					images.getRightFoot2().setVisibility(View.VISIBLE);
+					fragState[6] = false;
+					fragState[7] = true;
+				}
 			}
-			
+
+			if (fragNextState[8]) {
+				if (fragState[0] || fragState[2] || fragState[4] || fragState[6]) {
+					// エラー処理
+				} else { // 何も上げていなければ、
+					images.getLeftHand1().setVisibility(View.INVISIBLE);
+					images.getRightHand1().setVisibility(View.INVISIBLE);
+					images.getLeftFoot1().setVisibility(View.INVISIBLE);
+					images.getRightFoot1().setVisibility(View.INVISIBLE);
+					images.getBasic().setImageResource(R.drawable.jump_bo);
+				}
+			}
+
 			addLineIndex = false;
-			
+
 		} else {
 
 			if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1) {
-				leftHand2.setVisibility(View.INVISIBLE);
-				leftHand3.setVisibility(View.VISIBLE);
+				images.getLeftHand2().setVisibility(View.INVISIBLE);
+				images.getLeftHand3().setVisibility(View.VISIBLE);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1) {
-				leftHand2.setVisibility(View.INVISIBLE);
-				leftHand1.setVisibility(View.VISIBLE);
+				images.getLeftHand2().setVisibility(View.INVISIBLE);
+				images.getLeftHand1().setVisibility(View.VISIBLE);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
-				rightHand2.setVisibility(View.INVISIBLE);
-				rightHand3.setVisibility(View.VISIBLE);
+				images.getRightHand2().setVisibility(View.INVISIBLE);
+				images.getRightHand3().setVisibility(View.VISIBLE);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1) {
-				rightHand2.setVisibility(View.INVISIBLE);
-				rightHand1.setVisibility(View.VISIBLE);
+				images.getRightHand2().setVisibility(View.INVISIBLE);
+				images.getRightHand1().setVisibility(View.VISIBLE);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1) {
-				leftFoot2.setVisibility(View.INVISIBLE);
-				leftFoot3.setVisibility(View.VISIBLE);
+				images.getLeftFoot2().setVisibility(View.INVISIBLE);
+				images.getLeftFoot3().setVisibility(View.VISIBLE);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1) {
-				leftFoot2.setVisibility(View.INVISIBLE);
-				leftFoot1.setVisibility(View.VISIBLE);
+				images.getLeftFoot2().setVisibility(View.INVISIBLE);
+				images.getLeftFoot1().setVisibility(View.VISIBLE);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1) {
-				rightFoot2.setVisibility(View.INVISIBLE);
-				rightFoot3.setVisibility(View.VISIBLE);
+				images.getRightFoot2().setVisibility(View.INVISIBLE);
+				images.getRightFoot3().setVisibility(View.VISIBLE);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1) {
-				rightFoot2.setVisibility(View.INVISIBLE);
-				rightFoot1.setVisibility(View.VISIBLE);
+				images.getRightFoot2().setVisibility(View.INVISIBLE);
+				images.getRightFoot1().setVisibility(View.VISIBLE);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1) {
-				basic.setImageResource(R.drawable.basic_bo);
-				leftHand1.setVisibility(View.VISIBLE);
-				rightHand1.setVisibility(View.VISIBLE);
-				leftFoot1.setVisibility(View.VISIBLE);
-				rightFoot1.setVisibility(View.VISIBLE);
+				images.getBasic().setImageResource(R.drawable.basic_bo);
+				images.getLeftHand1().setVisibility(View.VISIBLE);
+				images.getRightHand1().setVisibility(View.VISIBLE);
+				images.getLeftFoot1().setVisibility(View.VISIBLE);
+				images.getRightFoot1().setVisibility(View.VISIBLE);
 			} else {
 
 			}

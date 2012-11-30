@@ -1,5 +1,6 @@
 package jp.eclipcebook;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -77,21 +78,18 @@ public class PartnerActivity extends Activity {
 			ImageView rightFoot2 = (ImageView) findViewById(R.id.partnerRightFoot2);
 			ImageView rightFoot3 = (ImageView) findViewById(R.id.partnerRightFoot3);
 			String commandsText = editText1.getText().toString();
+			List<Integer> numberSorting = new ArrayList<Integer>();
+			List<String> commands = new ArrayList<String>();
 
-			List<String> commands = StringCommandParser.parse(commandsText);
+			StringCommandParser.parse(commandsText, numberSorting, commands);
 
-			executeCommands(leftHand1, leftHand2, leftHand3, rightHand1,
-					rightHand2, rightHand3, basic, leftFoot1, leftFoot2,
-					leftFoot3, rightFoot1, rightFoot2, rightFoot3, commands);
+			executeCommands(new ImageContainer(leftHand1, leftHand2, leftHand3, rightHand1,
+					rightHand2, rightHand3, basic, leftFoot1, leftFoot2, leftFoot3, rightFoot1,
+					rightFoot2, rightFoot3), commands);
 		}
 
-		private void executeCommands(ImageView lh1, ImageView lh2,
-				ImageView lh3, ImageView rh1, ImageView rh2, ImageView rh3,
-				ImageView basic, ImageView lf1, ImageView lf2, ImageView lf3,
-				ImageView rf1, ImageView rf2, ImageView rf3,
-				List<String> commands) {
-			Runnable runnable = new StringCommandExecutor(lh1, lh2, lh3, rh1,
-					rh2, rh3, basic, lf1, lf2, lf3, rf1, rf2, rf3, commands);
+		private void executeCommands(ImageContainer images, List<String> commands) {
+			Runnable runnable = new StringCommandExecutor(images, commands);
 			for (int i = 0; i < commands.size(); i++) { /* ‰ðÍ&ŽÀs */
 				handler.post(runnable); /* Œõ‚ç‚¹‚é */
 
@@ -146,8 +144,7 @@ public class PartnerActivity extends Activity {
 
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				Intent intent = new Intent(getApplication(),
-						jp.eclipcebook.ActionActivity.class);
+				Intent intent = new Intent(getApplication(), jp.eclipcebook.ActionActivity.class);
 				changeScreen(intent);
 				return false;
 			}
@@ -155,8 +152,7 @@ public class PartnerActivity extends Activity {
 		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				// doSave();
-				Intent intent = new Intent(getApplication(),
-						jp.eclipcebook.MainActivity.class);
+				Intent intent = new Intent(getApplication(), jp.eclipcebook.MainActivity.class);
 				changeScreen(intent);
 				return false;
 			}
