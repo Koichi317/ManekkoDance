@@ -55,14 +55,6 @@ public class ActionActivity extends Activity {
 				final Handler handler = new Handler();
 				Thread trd = new Thread(new CommandExecutor(handler));
 				trd.start();
-				if (answerCheckEnd) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
-					builder.setMessage("hoge");
-					builder.show();
-					// ダイアログの生成でどうしてもエラーが出てしまう
-					answerCheckEnd = false;
-				}
-
 			}
 		});
 
@@ -76,6 +68,7 @@ public class ActionActivity extends Activity {
 		}
 
 		public void run() {
+
 			ImageView playerImage1 = (ImageView) findViewById(R.id.playerLeftHand1);
 			ImageView playerImage2 = (ImageView) findViewById(R.id.playerLeftHand2);
 			ImageView playerImage3 = (ImageView) findViewById(R.id.playerLeftHand3);
@@ -106,6 +99,7 @@ public class ActionActivity extends Activity {
 
 			TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 			TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
+
 			String playerCommandsText = playerEditText.getText().toString();
 			String partnerCommandsText = partnerEditText.getText().toString();
 			List<Integer> playerNumberSorting = new ArrayList<Integer>();
@@ -115,26 +109,25 @@ public class ActionActivity extends Activity {
 			StringCommandParser.parse(playerCommandsText, playerNumberSorting, playerCommands);
 			StringCommandParser.parse(partnerCommandsText, partnerNumberSorting, partnerCommands);
 
-			Runnable playerRunnable = new StringCommandExecutor(new ImageContainer(playerImage1, playerImage2,
-					playerImage3, playerImage4, playerImage5, playerImage6, playerImage7,
-					playerImage8, playerImage9, playerImage10, playerImage11, playerImage12,
-					playerImage13), playerCommands);
-			Runnable partnerRunnable = new StringCommandExecutor(new ImageContainer(partnerImage1, partnerImage2,
-					partnerImage3, partnerImage4, partnerImage5, partnerImage6, partnerImage7,
-					partnerImage8, partnerImage9, partnerImage10, partnerImage11, partnerImage12,
-					partnerImage13), partnerCommands);
+			Runnable playerRunnable = new StringCommandExecutor(new ImageContainer(playerImage1,
+					playerImage2, playerImage3, playerImage4, playerImage5, playerImage6,
+					playerImage7, playerImage8, playerImage9, playerImage10, playerImage11,
+					playerImage12, playerImage13), playerCommands/*, playerEditText,
+					playerNumberSorting*/);
+			Runnable partnerRunnable = new StringCommandExecutor(new ImageContainer(partnerImage1,
+					partnerImage2, partnerImage3, partnerImage4, partnerImage5, partnerImage6,
+					partnerImage7, partnerImage8, partnerImage9, partnerImage10, partnerImage11,
+					partnerImage12, partnerImage13), partnerCommands);
 
 			AnswerCheck answer = new AnswerCheck(playerCommands, partnerCommands);
 
 			// 解析&実行
 			for (int i = 0; i < Math.max(playerCommands.size(), partnerCommands.size()); i++) {
 
-				if (i < playerCommands.size()) {
+				if (i < playerCommands.size())
 					handler.post(playerRunnable); /* 光らせる */
-				}
-				if (i < partnerCommands.size()) {
+				if (i < partnerCommands.size())
 					handler.post(partnerRunnable);
-				}
 
 				try { /* 1秒待機 */
 					Thread.sleep(250);
@@ -142,12 +135,10 @@ public class ActionActivity extends Activity {
 					e.printStackTrace();
 				}
 
-				if (i < playerCommands.size()) {
+				if (i < playerCommands.size())
 					handler.post(playerRunnable); /* 光らせる */
-				}
-				if (i < partnerCommands.size()) {
+				if (i < partnerCommands.size())
 					handler.post(partnerRunnable);
-				}
 
 				try { /* 1秒待機 */
 					Thread.sleep(250);
@@ -158,11 +149,19 @@ public class ActionActivity extends Activity {
 			answer.compare(); // 答えの配列とプレイヤーの配列を比較
 			Log.d("デバッグ", "AnswerCheck:" + answer.show()); // 正解、不正解の表示
 			// ImageView answerWord = (ImageView)findViewById(R.id.imageView3);
-			answerCheckEnd  = true;
+			answerCheckEnd = true;
+			if (answerCheckEnd) {
+				/*
+				 * AlertDialog.Builder builder = new
+				 * AlertDialog.Builder(ActionActivity.this);
+				 * builder.setMessage("hoge"); builder.show();
+				 */// ダイアログの生成でどうしてもエラーが出てしまう
+				answerCheckEnd = false;
+			}
 
 		}
 	}
-	
+
 	@SuppressLint("WorldReadableFiles")
 	public void doSave() {
 		EditText editText2 = (EditText) this.findViewById(R.id.editTextActionScreen2);

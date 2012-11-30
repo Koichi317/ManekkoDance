@@ -175,7 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/left_hand_up1_bo"
+            android:src="@drawable/left_hand_up_piyo1"
             android:visibility="visible" />
 
         <ImageView
@@ -183,7 +183,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/left_hand_up2_bo"
+            android:src="@drawable/left_hand_up_piyo2"
             android:visibility="invisible" />
 
         <ImageView
@@ -191,7 +191,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/left_hand_up3_bo"
+            android:src="@drawable/left_hand_up_piyo3"
             android:visibility="invisible" />
 
         <ImageView
@@ -199,7 +199,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/right_hand_up1_bo"
+            android:src="@drawable/right_hand_up_piyo1"
             android:visibility="visible" />
 
         <ImageView
@@ -207,7 +207,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/right_hand_up2_bo"
+            android:src="@drawable/right_hand_up_piyo2"
             android:visibility="invisible" />
 
         <ImageView
@@ -215,7 +215,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/right_hand_up3_bo"
+            android:src="@drawable/right_hand_up_piyo3"
             android:visibility="invisible" />
 
         <ImageView
@@ -223,7 +223,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/basic_bo"
+            android:src="@drawable/basic_piyo"
             android:visibility="visible" />
 
         <ImageView
@@ -231,7 +231,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/left_foot_up1_bo"
+            android:src="@drawable/left_foot_up_piyo1"
             android:visibility="visible" />
 
         <ImageView
@@ -239,7 +239,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/left_foot_up2_bo"
+            android:src="@drawable/left_foot_up_piyo2"
             android:visibility="invisible" />
 
         <ImageView
@@ -247,7 +247,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/left_foot_up3_bo"
+            android:src="@drawable/left_foot_up_piyo3"
             android:visibility="invisible" />
 
         <ImageView
@@ -255,7 +255,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/right_foot_up1_bo"
+            android:src="@drawable/right_foot_up_piyo1"
             android:visibility="visible" />
 
         <ImageView
@@ -263,7 +263,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/right_foot_up2_bo"
+            android:src="@drawable/right_foot_up_piyo2"
             android:visibility="invisible" />
 
         <ImageView
@@ -271,7 +271,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_area"
-            android:src="@drawable/right_foot_up3_bo"
+            android:src="@drawable/right_foot_up_piyo3"
             android:visibility="invisible" />
     </FrameLayout>
 

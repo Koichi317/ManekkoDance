@@ -65,6 +65,7 @@
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/left_hand_up"
+                android:src="@drawable/left_hand_up_piyo1"
                 android:visibility="visible" />
 
             <ImageView
@@ -72,6 +73,7 @@
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/left_hand_up"
+                android:src="@drawable/left_hand_up_piyo2"
                 android:visibility="invisible" />
 
             <ImageView
@@ -79,6 +81,7 @@
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/left_hand_up"
+                android:src="@drawable/left_hand_up_piyo3"
                 android:visibility="invisible" />
 
             <ImageView
@@ -142,6 +145,7 @@
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/right_foot_up"
+                android:src="@drawable/right_foot_up_piyo1"
                 android:visibility="visible" />
 
             <ImageView
@@ -149,6 +153,7 @@
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/right_foot_up"
+                android:src="@drawable/right_foot_up_piyo2"
                 android:visibility="invisible" />
 
             <ImageView
@@ -156,6 +161,7 @@
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/right_foot_up"
+                android:src="@drawable/right_foot_up_piyo3"
                 android:visibility="invisible" />
 
         </FrameLayout>

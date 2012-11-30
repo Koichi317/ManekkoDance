@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -100,20 +101,19 @@ public class MainActivity extends Activity {
 			List<Integer> numberSorting = new ArrayList<Integer>();
 			List<String> commands = new ArrayList<String>();
 			StringCommandParser.parse(commandsText, numberSorting, commands);
-
-			executeCommands(new ImageContainer(leftHand1, leftHand2, leftHand3, rightHand1,
-					rightHand2, rightHand3, basic, leftFoot1, leftFoot2, leftFoot3, rightFoot1,
-					rightFoot2, rightFoot3), commands);
+			executeCommands(new ImageContainer(leftHand1, leftHand2, leftHand3, rightHand1, rightHand2, rightHand3,
+					basic, leftFoot1, leftFoot2, leftFoot3, rightFoot1, rightFoot2, rightFoot3),
+					commands, editText1, numberSorting);
 
 		}
 
-		private void executeCommands(ImageContainer images, List<String> expandedCommands) {
-			Runnable runnable = new StringCommandExecutor(images, expandedCommands);
+		private void executeCommands(ImageContainer images,	List<String> expandedCommands, TextView editText1, List<Integer> numberSorting) {
+			Runnable runnable = new StringCommandExecutor(images, expandedCommands, editText1, numberSorting);
 			for (int i = 0; i < expandedCommands.size(); i++) { /* ‰ðÍ&ŽÀs */
 				handler.post(runnable); /* Œõ‚ç‚¹‚é */
 
 				try { /* 1•b‘Ò‹@ */
-					Thread.sleep(250);
+					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -121,7 +121,7 @@ public class MainActivity extends Activity {
 				handler.post(runnable);
 
 				try { /* 1•b‘Ò‹@ */
-					Thread.sleep(250);
+					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

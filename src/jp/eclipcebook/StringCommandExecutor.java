@@ -2,8 +2,10 @@ package jp.eclipcebook;
 
 import java.util.List;
 
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class StringCommandExecutor implements Runnable {
 
@@ -14,6 +16,11 @@ public class StringCommandExecutor implements Runnable {
 	private boolean[] fragState;
 	private boolean[] fragNextState;
 	private final ImageContainer images;
+	private TextView textView;
+	private List<Integer> playerNumberSorting;
+	private int colorPosition;
+	private String[] playerCommandsText;
+	private String[] baseCommandsText;
 
 	/**** コンストラクタ ****/
 	public StringCommandExecutor(ImageContainer images, List<String> stringArray) {
@@ -24,6 +31,21 @@ public class StringCommandExecutor implements Runnable {
 		fragState = new boolean[8];
 		fragStateInitialization(fragState);
 		fragNextState = new boolean[9];
+	}
+
+	public StringCommandExecutor(ImageContainer images, List<String> stringArray,
+			TextView textView, List<Integer> playerNumberSorting) {
+		this.images = images;
+		this.expandedCommands = stringArray;
+		this.lineIndex = 0;
+		this.addLineIndex = true;
+		fragState = new boolean[8];
+		fragStateInitialization(fragState);
+		fragNextState = new boolean[9];
+		this.textView = textView;
+		this.playerNumberSorting = playerNumberSorting;
+		colorPosition = 0;
+		baseCommandsText = textView.getText().toString().split("\n");
 	}
 
 	private void fragStateInitialization(boolean[] fragState) {
@@ -41,6 +63,22 @@ public class StringCommandExecutor implements Runnable {
 	@Override
 	public void run() {
 		if (addLineIndex) {
+			
+			 colorPosition =playerNumberSorting.get(lineIndex);
+			 playerCommandsText =textView.getText().toString().split("\n");
+			 textView.getEditableText().clear();
+			 
+			 for(int i = 0; i < playerCommandsText.length; i++) {
+			
+				 if(colorPosition == i) {
+					 textView.append(Html.fromHtml("<font color=#ff0000>"+playerCommandsText[i]+"</font>"));
+					 textView.append("\n");
+				 }else {
+					 textView.append(playerCommandsText[i]+"\n"); 
+				 }
+			 }
+			 
+
 			for (int i = 0; i < fragNextState.length; i++)
 				fragNextState[i] = false; // fragのリセット
 
@@ -172,7 +210,7 @@ public class StringCommandExecutor implements Runnable {
 					images.getRightHand1().setVisibility(View.INVISIBLE);
 					images.getLeftFoot1().setVisibility(View.INVISIBLE);
 					images.getRightFoot1().setVisibility(View.INVISIBLE);
-					images.getBasic().setImageResource(R.drawable.jump_bo);
+					images.getBasic().setImageResource(R.drawable.jump2_piyo);
 				}
 			}
 
