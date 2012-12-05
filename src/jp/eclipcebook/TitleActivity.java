@@ -1,5 +1,6 @@
 package jp.eclipcebook;
 
+import jp.eclipcebook.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

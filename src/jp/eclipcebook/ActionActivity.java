@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.eclipcebook.R;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,7 +17,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,7 +61,7 @@ public class ActionActivity extends Activity {
 		});
 
 	}
-	
+
 	public final class CommandExecutor implements Runnable {
 		private final Handler handler;
 
@@ -90,8 +91,8 @@ public class ActionActivity extends Activity {
 			List<String> playerCommands = new ArrayList<String>();
 			List<Integer> partnerNumberSorting = new ArrayList<Integer>();
 			List<String> partnerCommands = new ArrayList<String>();
-			  
-			AnswerCheck answer;
+
+			final AnswerCheck answer;
 
 			StringCommandParser.parse(playerCommandsText, playerNumberSorting, playerCommands);
 			StringCommandParser.parse(partnerCommandsText, partnerNumberSorting, partnerCommands);
@@ -120,46 +121,56 @@ public class ActionActivity extends Activity {
 
 				if (i < playerCommands.size())
 					handler.post(playerAction);
-					if (i < partnerCommands.size())
-						handler.post(partnerAction);
+				if (i < partnerCommands.size())
+					handler.post(partnerAction);
 				try { /* 1秒待機 */
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}
-        	answer.compare(); // 答えの配列とプレイヤーの配列を比較
 
-        	Log.d("デバッグ", "AnswerCheck:" + answer.show()); // 正解、不正解の表示
+			}
+
+			handler.post(new Runnable() {
+				public void run() {
+					AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
+					builder.setTitle(answer.show());
+					builder.setMessage(answer.show());
+					if (answer.judge)
+						builder.setIcon(R.drawable.answer_ture);
+					if (!answer.judge)
+						builder.setIcon(R.drawable.answer_false);
+					builder.show();
+				}
+			});
+		}
+
+	}
+
+	class SampleTask extends AsyncTask<Void, Void, Void> {
+
+		/**
+		 * executeが実行された後に実行される。
+		 * 
+		 * @return
+		 */
+		@Override
+		protected Void doInBackground(Void... params) {
+			// DB登録等のUIに関与しない処理
+			return null;
+		}
+
+		/**
+		 * doInBackgroundの後に実行される。 このメソッド内ではUIを操作できる。
+		 */
+		public void onPostExecute(Void... params) {
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
+			builder.setMessage("hoge");
+			builder.show();
 		}
 	}
 
-
-	class SampleTask extends AsyncTask<Void, Void, Void> {  
-		
-		        /** 
-         * executeが実行された後に実行される。 
-         * @return 
-         */  
-        @Override  
-        protected Void doInBackground(Void... params) {
-						// DB登録等のUIに関与しない処理  
-			return null;
-        }  
-  
-        /** 
-         * doInBackgroundの後に実行される。 
-         * このメソッド内ではUIを操作できる。 
-         */  
-        public void onPostExecute(Void... params) {  
-            
-        	
-        	AlertDialog.Builder builder = new
-       		AlertDialog.Builder(ActionActivity.this);
-       		builder.setMessage("hoge"); builder.show();
-        }  
-    }  
-	
 	@SuppressLint("WorldReadableFiles")
 	public void doSave() {
 		EditText editText2 = (EditText) this.findViewById(R.id.editTextActionScreen2);
@@ -181,16 +192,27 @@ public class ActionActivity extends Activity {
 		}
 	}
 
-	/*
-	 * public void doLoad() { EditText editText2 =
-	 * (EditText)this.findViewById(R.id.editTextActionScreen2); FileInputStream
-	 * input = null; try { input = this.openFileInput(path); byte[] buffer = new
-	 * byte[1000]; input.read(buffer); String s = new String(buffer).trim();
-	 * editText2.setText(s); } catch(FileNotFoundException e) {
-	 * e.printStackTrace(); } catch(IOException e) { e.printStackTrace(); }
-	 * finally { try { input.close(); } catch (Exception e) {
-	 * e.printStackTrace(); } } }
-	 */
+//	public void doLoad() {
+//		EditText editText2 = (EditText) this.findViewById(R.id.editTextActionScreen2);
+//		FileInputStream input = null;
+//		try {
+//			input = this.openFileInput(path);
+//			byte[] buffer = new byte[1000];
+//			input.read(buffer);
+//			String s = new String(buffer).trim();
+//			editText2.setText(s);
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				input.close();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

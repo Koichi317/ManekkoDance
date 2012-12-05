@@ -2,6 +2,8 @@ package jp.eclipcebook;
 
 import java.util.List;
 
+import jp.eclipcebook.R;
+
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;

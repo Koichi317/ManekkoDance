@@ -6,7 +6,7 @@ public class AnswerCheck {
 
 	static int[][] playerAnswer;
 	static int[][] partnerAnswer;
-	public static boolean judge;
+	public boolean judge;
 
 	public AnswerCheck(List<String> playerCommands, List<String> partnerCommands) { // プレイヤーとお手本の使用されている命令をフラグとして管理
 

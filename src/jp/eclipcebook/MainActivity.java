@@ -8,6 +8,8 @@ package jp.eclipcebook;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.eclipcebook.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
