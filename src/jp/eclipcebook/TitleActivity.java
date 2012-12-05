@@ -8,6 +8,7 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 
 public class TitleActivity extends Activity{
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルバー非表示
@@ -28,4 +29,5 @@ public class TitleActivity extends Activity{
 		Intent intent = new Intent(this, jp.eclipcebook.LessonList.class);
 		this.startActivity(intent);
 	}
+	
 }

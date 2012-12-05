@@ -65,27 +65,19 @@ public class PartnerActivity extends Activity {
 		public void run() {
 			TextView editText1 = (TextView) findViewById(R.id.editText1);
 			ImageView leftHand1 = (ImageView) findViewById(R.id.partnerLeftHand1);
-			ImageView leftHand2 = (ImageView) findViewById(R.id.partnerLeftHand2);
-			ImageView leftHand3 = (ImageView) findViewById(R.id.partnerLeftHand3);
 			ImageView rightHand1 = (ImageView) findViewById(R.id.partnerRightHand1);
-			ImageView rightHand2 = (ImageView) findViewById(R.id.partnerRightHand2);
-			ImageView rightHand3 = (ImageView) findViewById(R.id.partnerRightHand3);
 			ImageView basic = (ImageView) findViewById(R.id.partnerBasic);
 			ImageView leftFoot1 = (ImageView) findViewById(R.id.partnerLeftFoot1);
-			ImageView leftFoot2 = (ImageView) findViewById(R.id.partnerLeftFoot2);
-			ImageView leftFoot3 = (ImageView) findViewById(R.id.partnerLeftFoot3);
 			ImageView rightFoot1 = (ImageView) findViewById(R.id.partnerRightFoot1);
-			ImageView rightFoot2 = (ImageView) findViewById(R.id.partnerRightFoot2);
-			ImageView rightFoot3 = (ImageView) findViewById(R.id.partnerRightFoot3);
 			String commandsText = editText1.getText().toString();
 			List<Integer> numberSorting = new ArrayList<Integer>();
 			List<String> commands = new ArrayList<String>();
 
 			StringCommandParser.parse(commandsText, numberSorting, commands);
 
-			executeCommands(new ImageContainer(leftHand1, leftHand2, leftHand3, rightHand1,
-					rightHand2, rightHand3, basic, leftFoot1, leftFoot2, leftFoot3, rightFoot1,
-					rightFoot2, rightFoot3), commands);
+			executeCommands(
+					new ImageContainer(leftHand1, rightHand1, basic, leftFoot1, rightFoot1),
+					commands);
 		}
 
 		private void executeCommands(ImageContainer images, List<String> commands) {

@@ -10,10 +10,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,8 +36,10 @@ public class MainActivity extends Activity {
 		mImageEdit = (ImageInEdit) findViewById(R.id.imageInEdit);
 
 		/********** 音楽 **************/
-		MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); // ゲーム音楽
-		bgm1.start(); // BGMスタート
+		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
+		// ゲーム音楽
+		// bgm1.start(); // BGMスタート
+
 		// doLoad(); // セーブデータをロード
 
 		/********** Lesson data　の 取得 **************/
@@ -84,31 +84,25 @@ public class MainActivity extends Activity {
 		public void run() {
 			TextView editText1 = (TextView) findViewById(R.id.editText1);
 			ImageView leftHand1 = (ImageView) findViewById(R.id.playerLeftHand1);
-			ImageView leftHand2 = (ImageView) findViewById(R.id.playerLeftHand2);
-			ImageView leftHand3 = (ImageView) findViewById(R.id.playerLeftHand3);
 			ImageView rightHand1 = (ImageView) findViewById(R.id.playerRightHand1);
-			ImageView rightHand2 = (ImageView) findViewById(R.id.playerRightHand2);
-			ImageView rightHand3 = (ImageView) findViewById(R.id.playerRightHand3);
 			ImageView basic = (ImageView) findViewById(R.id.playerBasic);
 			ImageView leftFoot1 = (ImageView) findViewById(R.id.playerLeftFoot1);
-			ImageView leftFoot2 = (ImageView) findViewById(R.id.playerLeftFoot2);
-			ImageView leftFoot3 = (ImageView) findViewById(R.id.playerLeftFoot3);
 			ImageView rightFoot1 = (ImageView) findViewById(R.id.playerRightFoot1);
-			ImageView rightFoot2 = (ImageView) findViewById(R.id.playerRightFoot2);
-			ImageView rightFoot3 = (ImageView) findViewById(R.id.playerRightFoot3);
 
 			String commandsText = editText1.getText().toString(); // 1行ずつ配列に収納
 			List<Integer> numberSorting = new ArrayList<Integer>();
 			List<String> commands = new ArrayList<String>();
 			StringCommandParser.parse(commandsText, numberSorting, commands);
-			executeCommands(new ImageContainer(leftHand1, leftHand2, leftHand3, rightHand1, rightHand2, rightHand3,
-					basic, leftFoot1, leftFoot2, leftFoot3, rightFoot1, rightFoot2, rightFoot3),
+			executeCommands(
+					new ImageContainer(leftHand1, rightHand1, basic, leftFoot1, rightFoot1),
 					commands, editText1, numberSorting);
 
 		}
 
-		private void executeCommands(ImageContainer images,	List<String> expandedCommands, TextView editText1, List<Integer> numberSorting) {
-			Runnable runnable = new StringCommandExecutor(images, expandedCommands, editText1, numberSorting);
+		private void executeCommands(ImageContainer images, List<String> expandedCommands,
+				TextView editText1, List<Integer> numberSorting) {
+			Runnable runnable = new StringCommandExecutor(images, expandedCommands, editText1,
+					numberSorting);
 			for (int i = 0; i < expandedCommands.size(); i++) { /* 解析&実行 */
 				handler.post(runnable); /* 光らせる */
 
@@ -134,46 +128,51 @@ public class MainActivity extends Activity {
 	public void doActionLeftHandUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("左腕を上げる");
-
-		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_hand);
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_hand_up);
 	}
 
 	public void doActionLeftHandDown(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("左腕を下げる");
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_hand_down);
 	}
 
 	public void doActionRightHandUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("右腕を上げる");
-		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_hand);
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_hand_up);
 	}
 
 	public void doActionRightHandDown(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("右腕を下げる");
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_hand_down);
+
 	}
 
 	public void doActionLeftFootUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("左足を上げる");
-		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_foot);
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_foot_up);
 	}
 
 	public void doActionLeftFootDown(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("左足を下げる");
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_foot_down);
+
 	}
 
 	public void doActionRightFootUp(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("右足を上げる");
-		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_foot);
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_foot_up);
 	}
 
 	public void doActionRightFootDown(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("右足を下げる");
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_foot_down);
 	}
 
 	public void doActionJump(View view) {
@@ -185,16 +184,20 @@ public class MainActivity extends Activity {
 	public void doActionEnter(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("\n");
+		mImageEdit.append("\n");
 	}
 
 	public void doActionLoop(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("loop");
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_loop);
 	}
 
 	public void doActionKoko(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("ここまで");
+		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_kokomade);
+
 	}
 
 	public void doActionBackSpace(View view) {

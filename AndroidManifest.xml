@@ -22,7 +22,7 @@
         </activity>
         <activity
             android:name=".LessonList"
-            android:label="lesson_list" >
+            android:label="@string/title_activity_lesson_list" >
         </activity>
         <activity
             android:name=".MainActivity"
@@ -30,11 +30,11 @@
         </activity>
         <activity
             android:name=".PartnerActivity"
-            android:label="partner" >
+            android:label="@string/title_activity_partner" >
         </activity>
         <activity
             android:name=".ActionActivity"
-            android:label="action_screen" >
+            android:label="@string/title_activity_action" >
         </activity>
     </application>
 

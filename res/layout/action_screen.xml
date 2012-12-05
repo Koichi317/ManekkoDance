@@ -34,7 +34,6 @@
             android:contentDescription="@string/image_area"
             android:src="@drawable/answer_false"
             android:visibility="invisible" />
-
     </FrameLayout>
 
     <Button
@@ -65,55 +64,23 @@
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/left_hand_up"
-                android:src="@drawable/left_hand_up_piyo1"
+                android:src="@drawable/piyo_left_hand_up1"
                 android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/playerLeftHand2"
-                android:layout_width="148dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/left_hand_up"
-                android:src="@drawable/left_hand_up_piyo2"
-                android:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/playerLeftHand3"
-                android:layout_width="148dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/left_hand_up"
-                android:src="@drawable/left_hand_up_piyo3"
-                android:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/playerRightHand1"
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/right_hand_up"
-                android:src="@drawable/right_hand_up_piyo1"
+                android:src="@drawable/piyo_right_hand_up1"
                 android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/playerRightHand2"
-                android:layout_width="148dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/right_hand_up"
-                android:src="@drawable/right_hand_up_piyo2"
-                android:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/playerRightHand3"
-                android:layout_width="148dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/right_hand_up"
-                android:src="@drawable/right_hand_up_piyo3"
-                android:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/playerBasic"
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/player"
-                android:src="@drawable/basic_piyo"
+                android:src="@drawable/piyo_basic"
                 android:visibility="visible" />
 
             <ImageView
@@ -121,49 +88,16 @@
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/left_foot_up"
-                android:src="@drawable/left_foot_up_piyo1"
+                android:src="@drawable/piyo_left_foot_up1"
                 android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/playerLeftFoot2"
-                android:layout_width="148dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/left_foot_up"
-                android:src="@drawable/left_foot_up_piyo2"
-                android:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/playerLeftFoot3"
-                android:layout_width="148dp"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/left_foot_up"
-                android:src="@drawable/left_foot_up_piyo3"
-                android:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/playerRightFoot1"
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/right_foot_up"
-                android:src="@drawable/right_foot_up_piyo1"
+                android:src="@drawable/piyo_right_foot_up1"
                 android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/playerRightFoot2"
-                android:layout_width="148dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/right_foot_up"
-                android:src="@drawable/right_foot_up_piyo2"
-                android:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/playerRightFoot3"
-                android:layout_width="148dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/right_foot_up"
-                android:src="@drawable/right_foot_up_piyo3"
-                android:visibility="invisible" />
-
         </FrameLayout>
 
         <FrameLayout
@@ -175,91 +109,39 @@
                 android:layout_width="171dp"
                 android:layout_height="218dp"
                 android:contentDescription="@string/left_hand_up"
+                android:src="@drawable/cocco_left_hand_up1"
                 android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/partnerLeftHand2"
-                android:layout_width="171dp"
-                android:layout_height="218dp"
-                android:contentDescription="@string/left_hand_up"
-                android:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/partnerLeftHand3"
-                android:layout_width="171dp"
-                android:layout_height="218dp"
-                android:contentDescription="@string/left_hand_up"
-                android:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/partnerRightHand1"
                 android:layout_width="171dp"
                 android:layout_height="218dp"
                 android:contentDescription="@string/right_hand_up"
+                android:src="@drawable/cocco_right_hand_up1"
                 android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/partnerRightHand2"
-                android:layout_width="171dp"
-                android:layout_height="218dp"
-                android:contentDescription="@string/right_hand_up"
-                android:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/partnerRightHand3"
-                android:layout_width="171dp"
-                android:layout_height="218dp"
-                android:contentDescription="@string/right_hand_up"
-                android:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/partnerBasic"
                 android:layout_width="171dp"
                 android:layout_height="218dp"
                 android:contentDescription="@string/partner_screen"
-                android:src="@drawable/basic"
+                android:src="@drawable/cocco_basic"
                 android:visibility="visible" />
-            
-                        <ImageView
-                            android:id="@+id/partnerLeftFoot1"
-                            android:layout_width="171dp"
-                            android:layout_height="218dp"
-                            android:contentDescription="@string/left_foot_up"
-                            android:visibility="visible" />
 
             <ImageView
-                android:id="@+id/partnerLeftFoot2"
+                android:id="@+id/partnerLeftFoot1"
                 android:layout_width="171dp"
                 android:layout_height="218dp"
                 android:contentDescription="@string/left_foot_up"
-                android:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/partnerLeftFoot3"
-                android:layout_width="171dp"
-                android:layout_height="218dp"
-                android:contentDescription="@string/left_foot_up"
-                android:visibility="invisible" />
+                android:src="@drawable/cocco_left_foot_up1"
+                android:visibility="visible" />
 
             <ImageView
                 android:id="@+id/partnerRightFoot1"
                 android:layout_width="171dp"
                 android:layout_height="218dp"
                 android:contentDescription="@string/right_foot_up"
-                android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/partnerRightFoot2"
-                android:layout_width="171dp"
-                android:layout_height="218dp"
-                android:contentDescription="@string/right_hand_up"
-                android:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/partnerRightFoot3"
-                android:layout_width="171dp"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/right_hand_up"
+                android:src="@drawable/cocco_right_foot_up1"
                 android:visibility="visible" />
 
         </FrameLayout>

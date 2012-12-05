@@ -4,7 +4,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_partner">partner</string>
+    <string name="title_activity_partner">PartnerActivity</string>
+    <string name="title_activity_action">ActionActivity</string>
+    <string name="title_activity_lesson_list">LessonList</string>
     <string name="Up">↑</string>
     <string name="Down">↓</string>
     <string name="Left">←</string>

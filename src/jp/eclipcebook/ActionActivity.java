@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -59,8 +60,8 @@ public class ActionActivity extends Activity {
 		});
 
 	}
-
-	private final class CommandExecutor implements Runnable {
+	
+	public final class CommandExecutor implements Runnable {
 		private final Handler handler;
 
 		private CommandExecutor(Handler handler) {
@@ -68,34 +69,17 @@ public class ActionActivity extends Activity {
 		}
 
 		public void run() {
-
 			ImageView playerImage1 = (ImageView) findViewById(R.id.playerLeftHand1);
-			ImageView playerImage2 = (ImageView) findViewById(R.id.playerLeftHand2);
-			ImageView playerImage3 = (ImageView) findViewById(R.id.playerLeftHand3);
 			ImageView playerImage4 = (ImageView) findViewById(R.id.playerRightHand1);
-			ImageView playerImage5 = (ImageView) findViewById(R.id.playerRightHand2);
-			ImageView playerImage6 = (ImageView) findViewById(R.id.playerRightHand3);
 			ImageView playerImage7 = (ImageView) findViewById(R.id.playerBasic);
 			ImageView playerImage8 = (ImageView) findViewById(R.id.playerLeftFoot1);
-			ImageView playerImage9 = (ImageView) findViewById(R.id.playerLeftFoot2);
-			ImageView playerImage10 = (ImageView) findViewById(R.id.playerLeftFoot3);
 			ImageView playerImage11 = (ImageView) findViewById(R.id.playerRightFoot1);
-			ImageView playerImage12 = (ImageView) findViewById(R.id.playerRightFoot2);
-			ImageView playerImage13 = (ImageView) findViewById(R.id.playerRightFoot3);
 
 			ImageView partnerImage1 = (ImageView) findViewById(R.id.partnerLeftHand1);
-			ImageView partnerImage2 = (ImageView) findViewById(R.id.partnerLeftHand2);
-			ImageView partnerImage3 = (ImageView) findViewById(R.id.partnerLeftHand3);
 			ImageView partnerImage4 = (ImageView) findViewById(R.id.partnerRightHand1);
-			ImageView partnerImage5 = (ImageView) findViewById(R.id.partnerRightHand2);
-			ImageView partnerImage6 = (ImageView) findViewById(R.id.partnerRightHand3);
 			ImageView partnerImage7 = (ImageView) findViewById(R.id.partnerBasic);
 			ImageView partnerImage8 = (ImageView) findViewById(R.id.partnerLeftFoot1);
-			ImageView partnerImage9 = (ImageView) findViewById(R.id.partnerLeftFoot2);
-			ImageView partnerImage10 = (ImageView) findViewById(R.id.partnerLeftFoot3);
 			ImageView partnerImage11 = (ImageView) findViewById(R.id.partnerRightFoot1);
-			ImageView partnerImage12 = (ImageView) findViewById(R.id.partnerRightFoot2);
-			ImageView partnerImage13 = (ImageView) findViewById(R.id.partnerRightFoot3);
 
 			TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 			TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
@@ -106,28 +90,27 @@ public class ActionActivity extends Activity {
 			List<String> playerCommands = new ArrayList<String>();
 			List<Integer> partnerNumberSorting = new ArrayList<Integer>();
 			List<String> partnerCommands = new ArrayList<String>();
+			  
+			AnswerCheck answer;
+
 			StringCommandParser.parse(playerCommandsText, playerNumberSorting, playerCommands);
 			StringCommandParser.parse(partnerCommandsText, partnerNumberSorting, partnerCommands);
 
-			Runnable playerRunnable = new StringCommandExecutor(new ImageContainer(playerImage1,
-					playerImage2, playerImage3, playerImage4, playerImage5, playerImage6,
-					playerImage7, playerImage8, playerImage9, playerImage10, playerImage11,
-					playerImage12, playerImage13), playerCommands/*, playerEditText,
-					playerNumberSorting*/);
-			Runnable partnerRunnable = new StringCommandExecutor(new ImageContainer(partnerImage1,
-					partnerImage2, partnerImage3, partnerImage4, partnerImage5, partnerImage6,
-					partnerImage7, partnerImage8, partnerImage9, partnerImage10, partnerImage11,
-					partnerImage12, partnerImage13), partnerCommands);
+			Runnable playerAction = new StringCommandExecutor(new ImageContainer(playerImage1,
+					playerImage4, playerImage7, playerImage8, playerImage11), playerCommands,
+					playerEditText, playerNumberSorting);
+			Runnable partnerAction = new StringCommandExecutor(new ImageContainer(partnerImage1,
+					partnerImage4, partnerImage7, partnerImage8, partnerImage11), partnerCommands);
 
-			AnswerCheck answer = new AnswerCheck(playerCommands, partnerCommands);
+			answer = new AnswerCheck(playerCommands, partnerCommands);
 
 			// 解析&実行
 			for (int i = 0; i < Math.max(playerCommands.size(), partnerCommands.size()); i++) {
 
 				if (i < playerCommands.size())
-					handler.post(playerRunnable); /* 光らせる */
+					handler.post(playerAction); /* 光らせる */
 				if (i < partnerCommands.size())
-					handler.post(partnerRunnable);
+					handler.post(partnerAction);
 
 				try { /* 1秒待機 */
 					Thread.sleep(250);
@@ -136,32 +119,47 @@ public class ActionActivity extends Activity {
 				}
 
 				if (i < playerCommands.size())
-					handler.post(playerRunnable); /* 光らせる */
-				if (i < partnerCommands.size())
-					handler.post(partnerRunnable);
-
+					handler.post(playerAction);
+					if (i < partnerCommands.size())
+						handler.post(partnerAction);
 				try { /* 1秒待機 */
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			answer.compare(); // 答えの配列とプレイヤーの配列を比較
-			Log.d("デバッグ", "AnswerCheck:" + answer.show()); // 正解、不正解の表示
-			// ImageView answerWord = (ImageView)findViewById(R.id.imageView3);
-			answerCheckEnd = true;
-			if (answerCheckEnd) {
-				/*
-				 * AlertDialog.Builder builder = new
-				 * AlertDialog.Builder(ActionActivity.this);
-				 * builder.setMessage("hoge"); builder.show();
-				 */// ダイアログの生成でどうしてもエラーが出てしまう
-				answerCheckEnd = false;
-			}
+        	answer.compare(); // 答えの配列とプレイヤーの配列を比較
 
+        	Log.d("デバッグ", "AnswerCheck:" + answer.show()); // 正解、不正解の表示
 		}
 	}
 
+
+	class SampleTask extends AsyncTask<Void, Void, Void> {  
+		
+		        /** 
+         * executeが実行された後に実行される。 
+         * @return 
+         */  
+        @Override  
+        protected Void doInBackground(Void... params) {
+						// DB登録等のUIに関与しない処理  
+			return null;
+        }  
+  
+        /** 
+         * doInBackgroundの後に実行される。 
+         * このメソッド内ではUIを操作できる。 
+         */  
+        public void onPostExecute(Void... params) {  
+            
+        	
+        	AlertDialog.Builder builder = new
+       		AlertDialog.Builder(ActionActivity.this);
+       		builder.setMessage("hoge"); builder.show();
+        }  
+    }  
+	
 	@SuppressLint("WorldReadableFiles")
 	public void doSave() {
 		EditText editText2 = (EditText) this.findViewById(R.id.editTextActionScreen2);

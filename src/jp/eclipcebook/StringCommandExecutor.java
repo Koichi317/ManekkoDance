@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.text.Html;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class StringCommandExecutor implements Runnable {
@@ -20,7 +19,7 @@ public class StringCommandExecutor implements Runnable {
 	private List<Integer> playerNumberSorting;
 	private int colorPosition;
 	private String[] playerCommandsText;
-	private String[] baseCommandsText;
+	private boolean colorAttached; //true:player false:partner
 
 	/**** コンストラクタ ****/
 	public StringCommandExecutor(ImageContainer images, List<String> stringArray) {
@@ -31,6 +30,7 @@ public class StringCommandExecutor implements Runnable {
 		fragState = new boolean[8];
 		fragStateInitialization(fragState);
 		fragNextState = new boolean[9];
+		colorAttached = false;
 	}
 
 	public StringCommandExecutor(ImageContainer images, List<String> stringArray,
@@ -45,7 +45,7 @@ public class StringCommandExecutor implements Runnable {
 		this.textView = textView;
 		this.playerNumberSorting = playerNumberSorting;
 		colorPosition = 0;
-		baseCommandsText = textView.getText().toString().split("\n");
+		colorAttached = true;
 	}
 
 	private void fragStateInitialization(boolean[] fragState) {
@@ -63,21 +63,28 @@ public class StringCommandExecutor implements Runnable {
 	@Override
 	public void run() {
 		if (addLineIndex) {
-			
-			 colorPosition =playerNumberSorting.get(lineIndex);
-			 playerCommandsText =textView.getText().toString().split("\n");
-			 textView.getEditableText().clear();
-			 
-			 for(int i = 0; i < playerCommandsText.length; i++) {
-			
-				 if(colorPosition == i) {
-					 textView.append(Html.fromHtml("<font color=#ff0000>"+playerCommandsText[i]+"</font>"));
-					 textView.append("\n");
-				 }else {
-					 textView.append(playerCommandsText[i]+"\n"); 
-				 }
-			 }
-			 
+			// ImageView answerWord = (ImageView)findViewById(R.id.imageView3);
+			/*
+			 * AlertDialog.Builder builder = new
+			 * AlertDialog.Builder(ActionActivity.this);
+			 * builder.setMessage("hoge"); builder.show();
+			 */// ダイアログの生成でどうしてもエラーが出てしまう
+			if (colorAttached) {
+				colorPosition = playerNumberSorting.get(lineIndex);
+				playerCommandsText = textView.getText().toString().split("\n");
+				textView.getEditableText().clear();
+
+				for (int i = 0; i < playerCommandsText.length; i++) {
+
+					if (colorPosition == i) {
+						textView.append(Html.fromHtml("<font color=#ff0000>"
+								+ playerCommandsText[i] + "</font>"));
+						textView.append("\n");
+					} else {
+						textView.append(playerCommandsText[i] + "\n");
+					}
+				}
+			}
 
 			for (int i = 0; i < fragNextState.length; i++)
 				fragNextState[i] = false; // fragのリセット
@@ -118,8 +125,8 @@ public class StringCommandExecutor implements Runnable {
 				if (fragState[0]) { // 既に左腕を上げている
 					// エラー処理
 				} else {
-					images.getLeftHand1().setVisibility(View.INVISIBLE);
-					images.getLeftHand2().setVisibility(View.VISIBLE);
+					if(colorAttached) images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up2);
+					if(!colorAttached) images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up2);
 					fragState[0] = true; // 左腕を上げている(1:true)
 					fragState[1] = false; // 左腕を下げている(0:false)
 				}
@@ -129,8 +136,8 @@ public class StringCommandExecutor implements Runnable {
 				if (fragState[1]) {
 					// エラー処理
 				} else {
-					images.getLeftHand3().setVisibility(View.INVISIBLE);
-					images.getLeftHand2().setVisibility(View.VISIBLE);
+					if(colorAttached) images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up2);
+					if(!colorAttached) images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up2);
 					fragState[0] = false;
 					fragState[1] = true;
 				}
@@ -140,8 +147,8 @@ public class StringCommandExecutor implements Runnable {
 				if (fragState[2]) {
 					// エラー処理
 				} else {
-					images.getRightHand1().setVisibility(View.INVISIBLE);
-					images.getRightHand2().setVisibility(View.VISIBLE);
+					if(colorAttached) images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up2);
+					if(!colorAttached) images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up2);
 					fragState[2] = true;
 					fragState[3] = false;
 				}
@@ -151,8 +158,8 @@ public class StringCommandExecutor implements Runnable {
 				if (fragState[3]) {
 					// エラー処理
 				} else {
-					images.getRightHand3().setVisibility(View.INVISIBLE);
-					images.getRightHand2().setVisibility(View.VISIBLE);
+					if(colorAttached) images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up2);
+					if(!colorAttached) images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up2);
 					fragState[2] = false;
 					fragState[3] = true;
 				}
@@ -162,8 +169,8 @@ public class StringCommandExecutor implements Runnable {
 				if (fragState[4]) {
 					// エラー処理
 				} else {
-					images.getLeftFoot1().setVisibility(View.INVISIBLE);
-					images.getLeftFoot2().setVisibility(View.VISIBLE);
+					if(colorAttached) images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up2);
+					if(!colorAttached) images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up2);
 					fragState[4] = true;
 					fragState[5] = false;
 				}
@@ -173,8 +180,8 @@ public class StringCommandExecutor implements Runnable {
 				if (fragState[5]) {
 					// エラー処理
 				} else {
-					images.getLeftFoot3().setVisibility(View.INVISIBLE);
-					images.getLeftFoot2().setVisibility(View.VISIBLE);
+					if(colorAttached) images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up2);
+					if(!colorAttached) images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up2);
 					fragState[4] = false;
 					fragState[5] = true;
 				}
@@ -184,8 +191,8 @@ public class StringCommandExecutor implements Runnable {
 				if (fragState[6]) {
 					// エラー処理
 				} else {
-					images.getRightFoot1().setVisibility(View.INVISIBLE);
-					images.getRightFoot2().setVisibility(View.VISIBLE);
+					if(colorAttached) images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up2);
+					if(!colorAttached) images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up2);
 					fragState[6] = true;
 					fragState[7] = false;
 				}
@@ -195,8 +202,8 @@ public class StringCommandExecutor implements Runnable {
 				if (fragState[7]) {
 					// エラー処理
 				} else {
-					images.getRightFoot3().setVisibility(View.INVISIBLE);
-					images.getRightFoot2().setVisibility(View.VISIBLE);
+					if(colorAttached) images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up2);
+					if(!colorAttached) images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up2);
 					fragState[6] = false;
 					fragState[7] = true;
 				}
@@ -210,7 +217,8 @@ public class StringCommandExecutor implements Runnable {
 					images.getRightHand1().setVisibility(View.INVISIBLE);
 					images.getLeftFoot1().setVisibility(View.INVISIBLE);
 					images.getRightFoot1().setVisibility(View.INVISIBLE);
-					images.getBasic().setImageResource(R.drawable.jump2_piyo);
+					if(colorAttached) images.getBasic().setImageResource(R.drawable.piyo_jump2);
+					if(!colorAttached) images.getBasic().setImageResource(R.drawable.cocco_jump2);
 				}
 			}
 
@@ -219,46 +227,46 @@ public class StringCommandExecutor implements Runnable {
 		} else {
 
 			if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1) {
-				images.getLeftHand2().setVisibility(View.INVISIBLE);
-				images.getLeftHand3().setVisibility(View.VISIBLE);
+				if(colorAttached) images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up3);
+				if(!colorAttached) images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1) {
-				images.getLeftHand2().setVisibility(View.INVISIBLE);
-				images.getLeftHand1().setVisibility(View.VISIBLE);
+				if(colorAttached) images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up1);
+				if(!colorAttached) images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
-				images.getRightHand2().setVisibility(View.INVISIBLE);
-				images.getRightHand3().setVisibility(View.VISIBLE);
+				if(colorAttached) images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up3);
+				if(!colorAttached) images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1) {
-				images.getRightHand2().setVisibility(View.INVISIBLE);
-				images.getRightHand1().setVisibility(View.VISIBLE);
+				if(colorAttached) images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up1);
+				if(!colorAttached) images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1) {
-				images.getLeftFoot2().setVisibility(View.INVISIBLE);
-				images.getLeftFoot3().setVisibility(View.VISIBLE);
+				if(colorAttached) images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up3);
+				if(!colorAttached) images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1) {
-				images.getLeftFoot2().setVisibility(View.INVISIBLE);
-				images.getLeftFoot1().setVisibility(View.VISIBLE);
+				if(colorAttached) images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up1);
+				if(!colorAttached) images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1) {
-				images.getRightFoot2().setVisibility(View.INVISIBLE);
-				images.getRightFoot3().setVisibility(View.VISIBLE);
+				if(colorAttached) images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up3);
+				if(!colorAttached) images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1) {
-				images.getRightFoot2().setVisibility(View.INVISIBLE);
-				images.getRightFoot1().setVisibility(View.VISIBLE);
+				if(colorAttached) images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up1);
+				if(!colorAttached) images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1) {
-				images.getBasic().setImageResource(R.drawable.basic_bo);
+				if(colorAttached) images.getBasic().setImageResource(R.drawable.piyo_basic);
+				if(!colorAttached) images.getBasic().setImageResource(R.drawable.cocco_basic);
 				images.getLeftHand1().setVisibility(View.VISIBLE);
 				images.getRightHand1().setVisibility(View.VISIBLE);
 				images.getLeftFoot1().setVisibility(View.VISIBLE);
 				images.getRightFoot1().setVisibility(View.VISIBLE);
-			} else {
-
-			}
+			} 
+			
 			lineIndex++;
 			addLineIndex = true;
 		}
