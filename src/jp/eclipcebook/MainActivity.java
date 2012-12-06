@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -36,6 +38,18 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 
 		mImageEdit = (ImageInEdit) findViewById(R.id.imageInEdit);
+		
+		TabHost host = (TabHost)findViewById(R.id.tabhost);
+		 host.setup();
+		 TabSpec tab1 = host.newTabSpec("tab1");
+		 tab1.setIndicator("文字");
+		 tab1.setContent(R.id.tab1);
+		 host.addTab(tab1);
+		 
+		 TabSpec tab2 = host.newTabSpec("tab2");
+		 tab2.setIndicator("絵文字");
+		 tab2.setContent(R.id.tab2);
+		 host.addTab(tab2);
 
 		/********** 音楽 **************/
 		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
@@ -162,7 +176,6 @@ public class MainActivity extends Activity {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("左足を下げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_foot_down);
-
 	}
 
 	public void doActionRightFootUp(View view) {
@@ -204,7 +217,7 @@ public class MainActivity extends Activity {
 
 	public void doActionBackSpace(View view) {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("\b");
+		editText1.append("\r");
 	}
 
 	/******************** ファイル保存 doSave(View view) *************************/

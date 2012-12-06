@@ -5,37 +5,14 @@
     android:background="@drawable/back_image"
     android:gravity="top" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/button_action" />
-
-    <jp.eclipcebook.ImageInEdit
-        android:id="@+id/imageInEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tableLayout1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/button1"
-        android:background="#ffffff"
-        android:ems="10"
-        android:gravity="center_vertical|top"
-        android:inputType="textMultiLine"
-        android:textColor="#000000"
-        android:visibility="invisible" />
-
     <TableLayout
         android:id="@+id/tableLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:stretchColumns="0,1,2,3"
-        android:layout_alignParentRight="true" >
+        android:layout_alignParentRight="true"
+        android:stretchColumns="0,1,2,3" >
 
         <TableRow
             android:id="@+id/tableRow1"
@@ -43,36 +20,27 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/button14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="doActionLeftHandUp"
-                android:textSize="12sp"
-                android:text="@string/left_hand_up" />
+                android:onClick="doActionBackSpace"
+                android:text="@string/back_space"
+                android:textSize="12sp" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="doActionRightHandUp"
-                android:textSize="12sp"
-                android:text="@string/right_hand_up" />
+                android:layout_weight="2"
+                android:text="@string/button_action" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/button13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="doActionLeftFootUp"
-                android:textSize="12sp"
-                android:text="@string/left_foot_up" />
-
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionRightFootUp"
-                android:textSize="12sp"
-                android:text="@string/right_foot_up" />
+                android:onClick="doActionEnter"
+                android:text="@string/Enter"
+                android:textSize="12sp" />
 
         </TableRow>
 
@@ -82,37 +50,36 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="doActionLeftHandDown"
-                android:textSize="12sp"
-                android:text="@string/left_hand_down" />
+                android:onClick="doActionLeftHandUp"
+                android:text="@string/left_hand_up"
+                android:textSize="12sp" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/button4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="doActionRightHandDown"
-                android:textSize="12sp"
-                android:text="@string/right_hand_down" />
+                android:onClick="doActionRightHandUp"
+                android:text="@string/right_hand_up"
+                android:textSize="12sp" />
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/button5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="doActionLeftFootDown"
-                android:textSize="12sp"
-                android:text="@string/left_foot_down" />
+                android:onClick="doActionLeftFootUp"
+                android:text="@string/left_foot_up"
+                android:textSize="12sp" />
 
             <Button
-                android:id="@+id/button10"
+                android:id="@+id/button6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="doActionRightFootDown"
-                android:textSize="12sp"
-                android:text="@string/right_foot_down" />
-
+                android:onClick="doActionRightFootUp"
+                android:text="@string/right_foot_up"
+                android:textSize="12sp" />
         </TableRow>
 
         <TableRow
@@ -121,12 +88,50 @@
             android:layout_height="wrap_content" >
 
             <Button
+                android:id="@+id/button7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionLeftHandDown"
+                android:text="@string/left_hand_down"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionRightHandDown"
+                android:text="@string/right_hand_down"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionLeftFootDown"
+                android:text="@string/left_foot_down"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="doActionRightFootDown"
+                android:text="@string/right_foot_down"
+                android:textSize="12sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="doActionJump"
-                android:textSize="12sp" 
-                android:text="@string/jump" />
+                android:text="@string/jump"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/button11"
@@ -143,31 +148,86 @@
                 android:onClick="doActionKoko"
                 android:text="@string/koko"
                 android:textSize="12sp" />
-
         </TableRow>
     </TableLayout>
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TabHost
+        android:id="@+id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@+id/tableLayout1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/imageInEdit"
-        android:background="#ffffff"
-        android:ems="10"
-        android:gravity="center_vertical|top"
-        android:hint="@string/hint_text"
-        android:inputType="textMultiLine"
-        android:textColor="#000000"
-        android:visibility="visible" />
+        android:layout_alignParentLeft="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <EditText
+                        android:id="@+id/editText1"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#ffffff"
+                        android:ems="10"
+                        android:gravity="center_vertical|top"
+                        android:hint="@string/hint_text"
+                        android:inputType="textMultiLine"
+                        android:textColor="#000000"
+                        android:visibility="visible" >
+
+                        <requestFocus />
+                    </EditText>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <jp.eclipcebook.ImageInEdit
+                        android:id="@+id/imageInEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#ffffff"
+                        android:ems="10"
+                        android:fitsSystemWindows="true"
+                        android:gravity="center_vertical|top"
+                        android:inputType="textMultiLine"
+                        android:textColor="#000000"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
 
     <FrameLayout
         android:id="@+id/frameLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageInEdit"
+        android:layout_alignBottom="@+id/tabhost"
         android:layout_alignParentRight="true" >
 
         <ImageView
@@ -210,24 +270,5 @@
             android:src="@drawable/piyo_right_foot_up1"
             android:visibility="visible" />
     </FrameLayout>
-
-    <Button
-        android:id="@+id/button14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:onClick="doActionBackSpace"
-        android:text="@string/back_space"
-        android:textSize="12sp" />
-
-    <Button
-        android:id="@+id/button13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/button14"
-        android:onClick="doActionEnter"
-        android:text="@string/Enter" />
 
 </RelativeLayout>

@@ -6,14 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.eclipcebook.R;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -133,43 +131,37 @@ public class ActionActivity extends Activity {
 
 			handler.post(new Runnable() {
 				public void run() {
+					
+					answer.compare();
 					AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
 					builder.setTitle(answer.show());
-					builder.setMessage(answer.show());
+					//builder.setMessage(answer.show());
 					if (answer.judge)
 						builder.setIcon(R.drawable.answer_ture);
 					if (!answer.judge)
 						builder.setIcon(R.drawable.answer_false);
+				
+					builder.setNegativeButton("次のLessonに進む", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							Intent intent = new Intent(getApplication(), jp.eclipcebook.LessonList.class);
+							startActivity(intent);
+						}
+					});
+					
+					builder.setPositiveButton("もう一度Challenge", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							changeMainScreen();
+						}
+					});
+					
 					builder.show();
 				}
 			});
 		}
-
+		
 	}
 
-	class SampleTask extends AsyncTask<Void, Void, Void> {
-
-		/**
-		 * executeが実行された後に実行される。
-		 * 
-		 * @return
-		 */
-		@Override
-		protected Void doInBackground(Void... params) {
-			// DB登録等のUIに関与しない処理
-			return null;
-		}
-
-		/**
-		 * doInBackgroundの後に実行される。 このメソッド内ではUIを操作できる。
-		 */
-		public void onPostExecute(Void... params) {
-
-			AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
-			builder.setMessage("hoge");
-			builder.show();
-		}
-	}
 
 	@SuppressLint("WorldReadableFiles")
 	public void doSave() {
