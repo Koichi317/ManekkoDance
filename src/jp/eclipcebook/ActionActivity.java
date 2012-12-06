@@ -136,24 +136,46 @@ public class ActionActivity extends Activity {
 					AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
 					builder.setTitle(answer.show());
 					//builder.setMessage(answer.show());
-					if (answer.judge)
+					if (answer.judge) {
 						builder.setIcon(R.drawable.answer_ture);
-					if (!answer.judge)
+						builder.setNegativeButton("次のLessonに進む", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Intent intent = new Intent(getApplication(), jp.eclipcebook.PartnerActivity.class);
+								int nextLessonNumber = Integer.parseInt(message) + 1;
+								message = String.valueOf(nextLessonNumber);
+								intent.putExtra("message", message);
+								//intent.putExtra("lesson", );
+								startActivity(intent);
+							}
+						});
+						
+						builder.setPositiveButton("もう一度Challenge", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								changeMainScreen();
+							}
+						});
+					}
+						
+					if (!answer.judge) {
 						builder.setIcon(R.drawable.answer_false);
+						builder.setNegativeButton("Lessonを選択し直す", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Intent intent = new Intent(getApplication(), jp.eclipcebook.LessonList.class);
+								startActivity(intent);
+							}
+						});
+						
+						builder.setPositiveButton("もう一度Challenge", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								changeMainScreen();
+							}
+						});
+					}
+						
 				
-					builder.setNegativeButton("次のLessonに進む", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Intent intent = new Intent(getApplication(), jp.eclipcebook.LessonList.class);
-							startActivity(intent);
-						}
-					});
 					
-					builder.setPositiveButton("もう一度Challenge", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							changeMainScreen();
-						}
-					});
 					
 					builder.show();
 				}

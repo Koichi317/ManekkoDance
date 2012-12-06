@@ -37,13 +37,13 @@ public class PartnerActivity extends Activity {
 		text_data = intent.getStringExtra("text_data");
 		editText1.setText(data);
 		editText2.setText(message);
-		if (message.equals("lesson1")) {
+		if (message.equals("1")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message1);
-		} else if (message.equals("lesson2")) {
+		} else if (message.equals("2")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message2);
-		} else if (message.equals("lesson3")) {
+		} else if (message.equals("3")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message3);
-		} else if (message.equals("lesson4")) {
+		} else if (message.equals("4")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message4);
 		}
 
