@@ -50,7 +50,7 @@ public class ImageInEdit extends EditText {
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
 		super.onLayout(changed, left, top, right, bottom);
 
-		mTextSize = 2*(int) getTextSize();
+		mTextSize = 3*(int) getTextSize();
 
 	}
 

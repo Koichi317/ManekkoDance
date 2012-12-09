@@ -8,12 +8,11 @@ package jp.eclipcebook;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.eclipcebook.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,18 +37,40 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 
 		mImageEdit = (ImageInEdit) findViewById(R.id.imageInEdit);
-		
-		TabHost host = (TabHost)findViewById(R.id.tabhost);
-		 host.setup();
-		 TabSpec tab1 = host.newTabSpec("tab1");
-		 tab1.setIndicator("文字");
-		 tab1.setContent(R.id.tab1);
-		 host.addTab(tab1);
-		 
-		 TabSpec tab2 = host.newTabSpec("tab2");
-		 tab2.setIndicator("絵文字");
-		 tab2.setContent(R.id.tab2);
-		 host.addTab(tab2);
+
+		/******************* tabの実装と切り替え *****************/
+
+		TabHost host = (TabHost) findViewById(R.id.tabhost);
+		host.setup();
+
+		TabSpec tab1 = host.newTabSpec("tab1");
+		tab1.setIndicator("文字");
+		tab1.setContent(R.id.tab1);
+		host.addTab(tab1);
+
+		TabSpec tab2 = host.newTabSpec("tab2");
+		tab2.setIndicator("絵文字");
+		tab2.setContent(R.id.tab2);
+		host.addTab(tab2);
+
+		final InterconversionStringAndImage isa = new InterconversionStringAndImage();
+
+		host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+			public void onTabChanged(String tabId) {
+				TextView editText1 = (TextView) findViewById(R.id.editText1);
+
+				if (tabId == "tab2") {
+					String str = editText1.getText().toString();
+					str = isa.convertStringToImage(str, mImageEdit, MainActivity.this);
+					mImageEdit.setText(str);
+				} else if (tabId == "tab1") {
+					String str = mImageEdit.getText().toString();
+					str = isa.convertImageToString(str);
+					editText1.setText(str);
+					Log.v("tag", str);
+				}
+			}
+		});
 
 		/********** 音楽 **************/
 		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
@@ -65,7 +86,8 @@ public class MainActivity extends Activity {
 		text_data = intent.getStringExtra("text_data");
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		editText1.setText(text_data);
-		Button actionButton = (Button) this.findViewById(R.id.button1);
+		
+		Button actionButton = (Button) this.findViewById(R.id.Button3);
 		actionButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				final Handler handler = new Handler();
@@ -74,20 +96,6 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
-
-	/*
-	 * @Override public void onWindowFocusChanged(boolean hasFocus) { //
-	 * アプリを立ち上げた時からbasicのアニメを開始 super.onWindowFocusChanged(hasFocus);
-	 * 
-	 * ImageView img = (ImageView) findViewById(R.id.imageView1); //
-	 * AnimationDrawableのXMLリソースを指定
-	 * img.setBackgroundResource(R.drawable.default_position);
-	 * 
-	 * // AnimationDrawableを取得 AnimationDrawable frameAnimation =
-	 * (AnimationDrawable) img .getBackground();
-	 * 
-	 * // アニメーションの開始 frameAnimation.start(); }
-	 */
 
 	/******************** 構文解析＆実行 *************************/
 	public final class CommandExecutor implements Runnable {
@@ -142,82 +150,82 @@ public class MainActivity extends Activity {
 
 	/******************** ボタン(絵文字)の処理 *************************/
 	public void doActionLeftHandUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左腕を上げる");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("左腕を上げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_hand_up);
 	}
 
 	public void doActionLeftHandDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左腕を下げる");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("左腕を下げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_hand_down);
 	}
 
 	public void doActionRightHandUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右腕を上げる");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("右腕を上げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_hand_up);
 	}
 
 	public void doActionRightHandDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右腕を下げる");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("右腕を下げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_hand_down);
 
 	}
 
 	public void doActionLeftFootUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左足を上げる");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("左足を上げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_foot_up);
 	}
 
 	public void doActionLeftFootDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左足を下げる");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("左足を下げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_foot_down);
 	}
 
 	public void doActionRightFootUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右足を上げる");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("右足を上げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_foot_up);
 	}
 
 	public void doActionRightFootDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右足を下げる");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("右足を下げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_foot_down);
 	}
 
 	public void doActionJump(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("ジャンプする");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("ジャンプする");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_jump);
 	}
 
 	public void doActionEnter(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("\n");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("\n");
 		mImageEdit.append("\n");
 	}
 
 	public void doActionLoop(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("loop");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("loop");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_loop);
 	}
 
 	public void doActionKoko(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("ここまで");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("ここまで");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_kokomade);
 
 	}
 
 	public void doActionBackSpace(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("\r");
+		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		// editText1.append("\r");
 	}
 
 	/******************** ファイル保存 doSave(View view) *************************/

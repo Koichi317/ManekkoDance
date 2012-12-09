@@ -5,157 +5,11 @@
     android:background="@drawable/back_image"
     android:gravity="top" >
 
-    <TableLayout
-        android:id="@+id/tableLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:stretchColumns="0,1,2,3" >
-
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/button14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionBackSpace"
-                android:text="@string/back_space"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="@string/button_action" />
-
-            <Button
-                android:id="@+id/button13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionEnter"
-                android:text="@string/Enter"
-                android:textSize="12sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionLeftHandUp"
-                android:text="@string/left_hand_up"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionRightHandUp"
-                android:text="@string/right_hand_up"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionLeftFootUp"
-                android:text="@string/left_foot_up"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionRightFootUp"
-                android:text="@string/right_foot_up"
-                android:textSize="12sp" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/button7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionLeftHandDown"
-                android:text="@string/left_hand_down"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/button8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionRightHandDown"
-                android:text="@string/right_hand_down"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/button9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionLeftFootDown"
-                android:text="@string/left_foot_down"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/button10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionRightFootDown"
-                android:text="@string/right_foot_down"
-                android:textSize="12sp" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionJump"
-                android:text="@string/jump"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/button11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionLoop"
-                android:text="@string/loop"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/button12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="doActionKoko"
-                android:text="@string/koko"
-                android:textSize="12sp" />
-        </TableRow>
-    </TableLayout>
-
     <TabHost
         android:id="@+id/tabhost"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tableLayout1"
+        android:layout_above="@+id/horizontalScrollView1"
         android:layout_alignParentLeft="true" >
 
         <LinearLayout
@@ -270,5 +124,145 @@
             android:src="@drawable/piyo_right_foot_up1"
             android:visibility="visible" />
     </FrameLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+            
+            <Button
+                android:id="@+id/Button1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionEnter"
+                android:text="@string/Enter"
+                android:scaleType="fitXY" />
+
+            <Button
+                android:id="@+id/Button2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionBackSpace"
+                android:text="@string/back_space"
+                android:scaleType="fitXY" />
+
+            <Button
+                android:id="@+id/Button3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="@string/button_action" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/horizontalScrollView2"
+        android:layout_alignParentLeft="true"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionLeftHandUp"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_left_hand_up" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionLeftHandDown"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_left_hand_down" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionRightHandUp"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_right_hand_up" />
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionRightHandDown"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_right_hand_down" />
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionLeftFootUp"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_left_foot_up" />
+
+            <ImageButton
+                android:id="@+id/imageButton6"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionLeftFootDown"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_left_foot_down" />
+
+            <ImageButton
+                android:id="@+id/imageButton7"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionRightHandUp"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_right_foot_up" />
+
+            <ImageButton
+                android:id="@+id/imageButton8"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionRightFootDown"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_right_foot_down" />
+
+            <ImageButton
+                android:id="@+id/imageButton9"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionJump"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_jump" />
+
+            <ImageButton
+                android:id="@+id/imageButton10"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionLoop"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_loop" />
+
+            <ImageButton
+                android:id="@+id/imageButton11"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionKoko"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_kokomade" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </RelativeLayout>

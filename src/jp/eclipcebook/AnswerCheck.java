@@ -55,6 +55,7 @@ public class AnswerCheck {
 				partnerAnswer[8][i] = 1;
 		}
 
+		
 	}
 
 	public void compare() {

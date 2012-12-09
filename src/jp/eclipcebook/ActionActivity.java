@@ -173,10 +173,7 @@ public class ActionActivity extends Activity {
 							}
 						});
 					}
-						
-				
-					
-					
+
 					builder.show();
 				}
 			});
