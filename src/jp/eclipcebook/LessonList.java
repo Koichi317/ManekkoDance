@@ -7,7 +7,10 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 public class LessonList extends ListActivity {
@@ -65,5 +68,4 @@ public class LessonList extends ListActivity {
 		}
 		super.onListItemClick(l, v, position, id);
 	}
-
 }

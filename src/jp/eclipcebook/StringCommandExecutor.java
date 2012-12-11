@@ -2,76 +2,107 @@ package jp.eclipcebook;
 
 import java.util.List;
 
-import jp.eclipcebook.R;
-
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 public class StringCommandExecutor implements Runnable {
 
+	private static class Input {
+		boolean 左腕を上げる;
+		boolean 左腕を下げる;
+		boolean 右腕を上げる;
+		boolean 右腕を下げる;
+		boolean 左足を上げる;
+		boolean 左足を下げる;
+		boolean 右足を上げる;
+		boolean 右足を下げる;
+		boolean ジャンプする;
+
+		private void inputReset() {
+			左腕を上げる = false;
+			左腕を下げる = false;
+			右腕を上げる = false;
+			右腕を下げる = false;
+			左足を上げる = false;
+			左足を下げる = false;
+			右足を上げる = false;
+			右足を下げる = false;
+			ジャンプする = false;
+		}
+	}
+
+	private static class State {
+		boolean isLeftHandUp;
+		boolean isLeftHandDown;
+		boolean isRightHandUp;
+		boolean isRightHandDown;
+		boolean isLeftFootUp;
+		boolean isLeftFootDown;
+		boolean isRightFootUp;
+		boolean isRightFootDown;
+
+		private State() {
+			isLeftHandUp = false;
+			isLeftHandDown = true;
+			isRightHandUp = false;
+			isRightHandDown = true;
+			isLeftFootUp = false;
+			isLeftFootDown = true;
+			isRightFootUp = false;
+			isRightFootDown = true;
+		}
+	}
+
 	/**** フィールド ****/
 	private List<String> expandedCommands;
 	private int lineIndex;
 	private boolean addLineIndex;
-	private boolean[] fragState;
-	private boolean[] fragNextState;
 	private final ImageContainer images;
 	private TextView textView;
 	private List<Integer> playerNumberSorting;
-	private int colorPosition;
 	private String[] playerCommandsText;
-	private boolean colorAttached; //true:player false:partner
+	private int colorPosition;
+	private boolean player; // true:player false:partner
+	public static boolean errorCheck;
+	private Input input;
+	private State state;
 
 	/**** コンストラクタ ****/
+	// お手本
 	public StringCommandExecutor(ImageContainer images, List<String> stringArray) {
 		this.images = images;
 		this.expandedCommands = stringArray;
 		this.lineIndex = 0;
 		this.addLineIndex = true;
-		fragState = new boolean[8];
-		fragStateInitialization(fragState);
-		fragNextState = new boolean[9];
-		colorAttached = false;
+		input = new Input();
+		state = new State();
+		player = false;
+		errorCheck = false;
 	}
 
+	// プレイヤー
 	public StringCommandExecutor(ImageContainer images, List<String> stringArray,
 			TextView textView, List<Integer> playerNumberSorting) {
 		this.images = images;
 		this.expandedCommands = stringArray;
 		this.lineIndex = 0;
 		this.addLineIndex = true;
-		fragState = new boolean[8];
-		fragStateInitialization(fragState);
-		fragNextState = new boolean[9];
+		input = new Input();
+		state = new State();
 		this.textView = textView;
 		this.playerNumberSorting = playerNumberSorting;
 		colorPosition = 0;
-		colorAttached = true;
-	}
-
-	private void fragStateInitialization(boolean[] fragState) {
-		// TODO Auto-generated method stub
-		fragState[0] = false; // 左腕を上げている(0:false, 1:true)
-		fragState[1] = true; // 左腕を下げている
-		fragState[2] = false; // 右腕を上げている
-		fragState[3] = true; // 右腕を下げている
-		fragState[4] = false; // 左足を上げている
-		fragState[5] = true; // 左足を下げている
-		fragState[6] = false; // 右足を上げている
-		fragState[7] = true; // 右足を下げている
+		player = true;
+		errorCheck = false;
 	}
 
 	@Override
 	public void run() {
 		if (addLineIndex) {
-			// ImageView answerWord = (ImageView)findViewById(R.id.imageView3);
-			/*
-			 * AlertDialog.Builder builder = new
-			 * AlertDialog.Builder(ActionActivity.this);
-			 * builder.setMessage("hoge"); builder.show();
-			 */// ダイアログの生成でどうしてもエラーが出てしまう
-			if (colorAttached) {
+
+			if (player) { // 実行中の文字列を赤くする
 				colorPosition = playerNumberSorting.get(lineIndex);
 				playerCommandsText = textView.getText().toString().split("\n");
 				textView.getEditableText().clear();
@@ -88,189 +119,231 @@ public class StringCommandExecutor implements Runnable {
 				}
 			}
 
-			for (int i = 0; i < fragNextState.length; i++)
-				fragNextState[i] = false; // fragのリセット
+			input.inputReset(); // inputの初期化
 
-			if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1)
-				fragNextState[0] = true;
+			// inputの取得
+			if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1) {
+				Log.v("tag", "左腕を上げる");
+				input.左腕を上げる = true;
+			}
 			if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1)
-				fragNextState[1] = true;
-			if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1)
-				fragNextState[2] = true;
+				input.左腕を下げる = true;
+			if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
+				input.右腕を上げる = true;
+				Log.v("tag", "右腕を上げる");
+			}
 			if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1)
-				fragNextState[3] = true;
+				input.右腕を下げる = true;
 			if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1)
-				fragNextState[4] = true;
+				input.左足を上げる = true;
 			if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1)
-				fragNextState[5] = true;
+				input.左足を下げる = true;
 			if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1)
-				fragNextState[6] = true;
+				input.右足を上げる = true;
 			if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1)
-				fragNextState[7] = true;
+				input.右足を下げる = true;
 			if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1)
-				fragNextState[8] = true;
+				input.ジャンプする = true;
 
 			// 無効な命令の並び（左腕を上げる&&左腕を下げる 等）
-			if ((fragNextState[0] && fragNextState[1])
-					|| (fragNextState[2] && fragNextState[3])
-					|| (fragNextState[4] && fragNextState[5])
-					|| (fragNextState[6] && fragNextState[7])
-					|| (fragNextState[4] && fragNextState[6])
-					|| (fragNextState[5] && fragNextState[7])
-					|| (fragNextState[0] || fragNextState[1] || fragNextState[2]
-							|| fragNextState[3] || fragNextState[4] || fragNextState[5]
-							|| fragNextState[6] || fragNextState[7])) {
-				// 転んだ画像のエラー処理
+			if ((input.左腕を上げる && input.左腕を下げる)
+					|| (input.右腕を上げる && input.右腕を下げる)
+					|| (input.左足を上げる && input.左足を下げる)
+					|| (input.右足を上げる && input.右足を下げる)
+					|| (input.左足を上げる && input.右足を上げる)
+					|| (input.左足を下げる && input.右足を下げる)
+					|| (input.ジャンプする && (input.左腕を上げる || input.左腕を下げる || input.右腕を上げる
+							|| input.右腕を下げる || input.左足を上げる || input.左足を下げる || input.右足を上げる || input.右足を下げる))) {
+				errorCheck = true;
+				Log.v("tag", "error");
+				errorImage(images);
+				addLineIndex = false;
+				return;
 			}
 
-			if (fragNextState[0]) { // 左腕を上げる
-				if (fragState[0]) { // 既に左腕を上げている
-					// エラー処理
-				} else {
-					if(colorAttached) images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up2);
-					if(!colorAttached) images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up2);
-					fragState[0] = true; // 左腕を上げている(1:true)
-					fragState[1] = false; // 左腕を下げている(0:false)
-				}
+			// 無効な命令（左腕を上げている状態の時に"左腕を上げる" 等）
+			if ((input.左腕を上げる && state.isLeftHandUp)
+					|| (input.左腕を下げる && state.isLeftHandDown)
+					|| (input.右腕を上げる && state.isRightHandUp)
+					|| (input.右腕を下げる && state.isRightHandDown)
+					|| (input.左足を上げる && state.isLeftFootUp)
+					|| (input.左足を下げる && state.isLeftFootDown)
+					|| (input.右足を上げる && state.isRightFootUp)
+					|| (input.右足を下げる && state.isRightFootDown)
+					|| (input.ジャンプする && (state.isLeftHandUp || state.isRightHandUp
+							|| state.isLeftFootUp || state.isRightFootUp))) {
+				errorCheck = true;
+				errorImage(images);
+				addLineIndex = false;
+				return;
 			}
 
-			if (fragNextState[1]) {
-				if (fragState[1]) {
-					// エラー処理
-				} else {
-					if(colorAttached) images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up2);
-					if(!colorAttached) images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up2);
-					fragState[0] = false;
-					fragState[1] = true;
-				}
+			if (input.左腕を上げる) { // 左腕を上げる
+				if (player)
+					images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up2);
+				if (!player)
+					images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up2);
+				state.isLeftHandUp = true; // 左腕を上げている(1:true)
+				state.isLeftHandDown = false; // 左腕を下げている(0:false)
 			}
 
-			if (fragNextState[2]) {
-				if (fragState[2]) {
-					// エラー処理
-				} else {
-					if(colorAttached) images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up2);
-					if(!colorAttached) images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up2);
-					fragState[2] = true;
-					fragState[3] = false;
-				}
+			if (input.左腕を下げる) {
+				if (player)
+					images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up2);
+				if (!player)
+					images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up2);
+				state.isLeftHandUp = false;
+				state.isLeftHandDown = true;
 			}
 
-			if (fragNextState[3]) {
-				if (fragState[3]) {
-					// エラー処理
-				} else {
-					if(colorAttached) images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up2);
-					if(!colorAttached) images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up2);
-					fragState[2] = false;
-					fragState[3] = true;
-				}
+			if (input.右腕を上げる) {
+				if (player)
+					images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up2);
+				if (!player)
+					images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up2);
+				state.isRightHandUp = true;
+				state.isRightHandDown = false;
 			}
 
-			if (fragNextState[4]) {
-				if (fragState[4]) {
-					// エラー処理
-				} else {
-					if(colorAttached) images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up2);
-					if(!colorAttached) images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up2);
-					fragState[4] = true;
-					fragState[5] = false;
-				}
+			if (input.右腕を下げる) {
+				if (player)
+					images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up2);
+				if (!player)
+					images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up2);
+				state.isRightHandUp = false;
+				state.isRightHandDown = true;
 			}
 
-			if (fragNextState[5]) {
-				if (fragState[5]) {
-					// エラー処理
-				} else {
-					if(colorAttached) images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up2);
-					if(!colorAttached) images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up2);
-					fragState[4] = false;
-					fragState[5] = true;
-				}
+			if (input.左足を上げる) {
+				if (player)
+					images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up2);
+				if (!player)
+					images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up2);
+				state.isLeftFootUp = true;
+				state.isLeftFootDown = false;
 			}
 
-			if (fragNextState[6]) {
-				if (fragState[6]) {
-					// エラー処理
-				} else {
-					if(colorAttached) images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up2);
-					if(!colorAttached) images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up2);
-					fragState[6] = true;
-					fragState[7] = false;
-				}
+			if (input.左足を下げる) {
+				if (player)
+					images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up2);
+				if (!player)
+					images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up2);
+				state.isLeftFootUp = false;
+				state.isLeftFootDown = true;
 			}
 
-			if (fragNextState[7]) {
-				if (fragState[7]) {
-					// エラー処理
-				} else {
-					if(colorAttached) images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up2);
-					if(!colorAttached) images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up2);
-					fragState[6] = false;
-					fragState[7] = true;
-				}
+			if (input.右足を上げる) {
+				if (player)
+					images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up2);
+				if (!player)
+					images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up2);
+				state.isRightFootUp = true;
+				state.isRightFootDown = false;
 			}
 
-			if (fragNextState[8]) {
-				if (fragState[0] || fragState[2] || fragState[4] || fragState[6]) {
-					// エラー処理
-				} else { // 何も上げていなければ、
-					images.getLeftHand1().setVisibility(View.INVISIBLE);
-					images.getRightHand1().setVisibility(View.INVISIBLE);
-					images.getLeftFoot1().setVisibility(View.INVISIBLE);
-					images.getRightFoot1().setVisibility(View.INVISIBLE);
-					if(colorAttached) images.getBasic().setImageResource(R.drawable.piyo_jump2);
-					if(!colorAttached) images.getBasic().setImageResource(R.drawable.cocco_jump2);
-				}
+			if (input.右足を下げる) {
+				if (player)
+					images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up2);
+				if (!player)
+					images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up2);
+				state.isRightFootUp = false;
+				state.isRightFootDown = true;
 			}
 
+			if (input.ジャンプする) {
+				images.getLeftHand1().setVisibility(View.INVISIBLE);
+				images.getRightHand1().setVisibility(View.INVISIBLE);
+				images.getLeftFoot1().setVisibility(View.INVISIBLE);
+				images.getRightFoot1().setVisibility(View.INVISIBLE);
+				if (player)
+					images.getBasic().setImageResource(R.drawable.piyo_jump2);
+				if (!player)
+					images.getBasic().setImageResource(R.drawable.cocco_jump2);
+			}
 			addLineIndex = false;
 
 		} else {
+			if (errorCheck) {
+				errorImage(images);
+				addLineIndex = true;
+				return;
+			}
 
 			if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1) {
-				if(colorAttached) images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up3);
-				if(!colorAttached) images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up3);
+				if (player)
+					images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up3);
+				if (!player)
+					images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1) {
-				if(colorAttached) images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up1);
-				if(!colorAttached) images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up1);
+				if (player)
+					images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up1);
+				if (!player)
+					images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
-				if(colorAttached) images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up3);
-				if(!colorAttached) images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up3);
+				if (player)
+					images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up3);
+				if (!player)
+					images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1) {
-				if(colorAttached) images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up1);
-				if(!colorAttached) images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up1);
+				if (player)
+					images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up1);
+				if (!player)
+					images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1) {
-				if(colorAttached) images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up3);
-				if(!colorAttached) images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up3);
+				if (player)
+					images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up3);
+				if (!player)
+					images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1) {
-				if(colorAttached) images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up1);
-				if(!colorAttached) images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up1);
+				if (player)
+					images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up1);
+				if (!player)
+					images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1) {
-				if(colorAttached) images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up3);
-				if(!colorAttached) images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up3);
+				if (player)
+					images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up3);
+				if (!player)
+					images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1) {
-				if(colorAttached) images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up1);
-				if(!colorAttached) images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up1);
+				if (player)
+					images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up1);
+				if (!player)
+					images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1) {
-				if(colorAttached) images.getBasic().setImageResource(R.drawable.piyo_basic);
-				if(!colorAttached) images.getBasic().setImageResource(R.drawable.cocco_basic);
+				if (player)
+					images.getBasic().setImageResource(R.drawable.piyo_basic);
+				if (!player)
+					images.getBasic().setImageResource(R.drawable.cocco_basic);
 				images.getLeftHand1().setVisibility(View.VISIBLE);
 				images.getRightHand1().setVisibility(View.VISIBLE);
 				images.getLeftFoot1().setVisibility(View.VISIBLE);
 				images.getRightFoot1().setVisibility(View.VISIBLE);
-			} 
-			
+			}
+
 			lineIndex++;
 			addLineIndex = true;
 		}
+	}
+
+	public void errorImage(ImageContainer images) {
+		if (addLineIndex) {
+			images.getBasic().setImageResource(R.drawable.korobu_1);
+			images.getLeftHand1().setVisibility(View.INVISIBLE);
+			images.getRightHand1().setVisibility(View.INVISIBLE);
+			images.getLeftFoot1().setVisibility(View.INVISIBLE);
+			images.getRightFoot1().setVisibility(View.INVISIBLE);
+		} else {
+			images.getBasic().setImageResource(R.drawable.korobu_3);
+			addLineIndex = true;
+		}
+
 	}
 }

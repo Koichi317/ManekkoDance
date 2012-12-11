@@ -5,7 +5,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 public class TitleActivity extends Activity{
@@ -29,6 +32,32 @@ public class TitleActivity extends Activity{
 	public void doActionContinue(View view) {
 		Intent intent = new Intent(this, jp.eclipcebook.LessonList.class);
 		this.startActivity(intent);
+	}
+	
+	protected void onDestroy() {
+		super.onDestroy();
+		cleanupView(findViewById(R.id.titleRoot));
+		System.gc();
+	}
+
+	public static final void cleanupView(View view) {
+		if (view instanceof ImageButton) {
+			ImageButton ib = (ImageButton) view;
+			ib.setImageDrawable(null);
+		} else if (view instanceof ImageView) {
+			ImageView iv = (ImageView) view;
+			iv.setImageDrawable(null);
+			// } else if(view instanceof(XXX)) {
+			// ëºÇ…Ç‡DrawableÇégópÇ∑ÇÈëŒè€Ç™Ç†ÇÍÇŒÇ±Ç±Ç≈íÜêgÇnullÇ…
+		}
+		view.setBackgroundDrawable(null);
+		if (view instanceof ViewGroup) {
+			ViewGroup vg = (ViewGroup) view;
+			int size = vg.getChildCount();
+			for (int i = 0; i < size; i++) {
+				cleanupView(vg.getChildAt(i));
+			}
+		}
 	}
 	
 }

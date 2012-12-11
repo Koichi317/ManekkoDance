@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_image" >
+    android:background="@drawable/back_image"
+    android:id="@+id/partnerRoot" >
 
     <EditText
         android:id="@+id/editText1"
@@ -49,15 +50,16 @@
         android:text="@string/look_answer_button" />
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button5"
-        android:layout_centerHorizontal="true" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button5" >
 
         <ImageView
             android:id="@+id/partnerLeftHand1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@string/image_area"
             android:fitsSystemWindows="true"
             android:src="@drawable/cocco_left_hand_up1"
@@ -65,32 +67,32 @@
 
         <ImageView
             android:id="@+id/partnerRightHand1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@string/image_area"
             android:src="@drawable/cocco_right_hand_up1"
             android:visibility="visible" />
         
         <ImageView
             android:id="@+id/partnerBasic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@string/image_area"
             android:src="@drawable/cocco_basic"
             android:visibility="visible" />
 
         <ImageView
             android:id="@+id/partnerLeftFoot1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@string/image_area"
             android:src="@drawable/cocco_left_foot_up1"
             android:visibility="visible" />
 
         <ImageView
             android:id="@+id/partnerRightFoot1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@string/image_area"
             android:src="@drawable/cocco_right_foot_up1"
             android:visibility="visible" />

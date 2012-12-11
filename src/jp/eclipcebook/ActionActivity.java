@@ -18,8 +18,10 @@ import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -134,7 +136,7 @@ public class ActionActivity extends Activity {
 					
 					answer.compare();
 					AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
-					builder.setTitle(answer.show());
+					builder.setTitle(" ");
 					//builder.setMessage(answer.show());
 					if (answer.judge) {
 						builder.setIcon(R.drawable.answer_ture);
@@ -145,7 +147,9 @@ public class ActionActivity extends Activity {
 								int nextLessonNumber = Integer.parseInt(message) + 1;
 								message = String.valueOf(nextLessonNumber);
 								intent.putExtra("message", message);
-								//intent.putExtra("lesson", );
+								String str = LessonData.getLessonData(nextLessonNumber);
+								lesson = str;
+								intent.putExtra("lesson", lesson);
 								startActivity(intent);
 							}
 						});
@@ -256,6 +260,32 @@ public class ActionActivity extends Activity {
 		intent.putExtra("lesson", partnerEditText.getText().toString());
 		intent.putExtra("message", message);
 		this.startActivity(intent);
+	}
+	
+	protected void onDestroy() {
+		super.onDestroy();
+		cleanupView(findViewById(R.id.actionRoot));
+		System.gc();
+	}
+
+	public static final void cleanupView(View view) {
+		if (view instanceof ImageButton) {
+			ImageButton ib = (ImageButton) view;
+			ib.setImageDrawable(null);
+		} else if (view instanceof ImageView) {
+			ImageView iv = (ImageView) view;
+			iv.setImageDrawable(null);
+			// } else if(view instanceof(XXX)) {
+			// ëºÇ…Ç‡DrawableÇégópÇ∑ÇÈëŒè€Ç™Ç†ÇÍÇŒÇ±Ç±Ç≈íÜêgÇnullÇ…
+		}
+		view.setBackgroundDrawable(null);
+		if (view instanceof ViewGroup) {
+			ViewGroup vg = (ViewGroup) view;
+			int size = vg.getChildCount();
+			for (int i = 0; i < size; i++) {
+				cleanupView(vg.getChildAt(i));
+			}
+		}
 	}
 
 }

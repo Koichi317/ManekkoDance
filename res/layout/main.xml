@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back_image"
-    android:gravity="top" >
+    android:gravity="top"
+    android:id="@+id/root" >
 
     <TabHost
         android:id="@+id/tabhost"
@@ -227,7 +228,7 @@
                 android:id="@+id/imageButton7"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:onClick="doActionRightHandUp"
+                android:onClick="doActionRightFootUp"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_right_foot_up" />
 

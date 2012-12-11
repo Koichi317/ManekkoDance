@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +18,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
@@ -28,6 +32,7 @@ public class MainActivity extends Activity {
 	private String lesson;
 	private String message;
 	private String text_data;
+
 	private ImageInEdit mImageEdit;
 
 	@Override
@@ -55,22 +60,23 @@ public class MainActivity extends Activity {
 
 		final InterconversionStringAndImage isa = new InterconversionStringAndImage();
 
-		host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-			public void onTabChanged(String tabId) {
-				TextView editText1 = (TextView) findViewById(R.id.editText1);
-
-				if (tabId == "tab2") {
-					String str = editText1.getText().toString();
-					str = isa.convertStringToImage(str, mImageEdit, MainActivity.this);
-					mImageEdit.setText(str);
-				} else if (tabId == "tab1") {
-					String str = mImageEdit.getText().toString();
-					str = isa.convertImageToString(str);
-					editText1.setText(str);
-					Log.v("tag", str);
-				}
-			}
-		});
+		// host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+		// public void onTabChanged(String tabId) {
+		// TextView editText1 = (TextView) findViewById(R.id.editText1);
+		//
+		// if (tabId == "tab2") {
+		// mImageEdit.setText(editText1.getText().toString());
+		// mImageEdit.replaceImage(MainActivity.this,
+		// R.drawable.icon_left_hand_up);
+		//
+		// } else if (tabId == "tab1") {
+		// String str = mImageEdit.getText().toString();
+		// str = isa.convertImageToString(str);
+		// editText1.setText(str);
+		// Log.v("tag", str);
+		// }
+		// }
+		// });
 
 		/********** 音楽 **************/
 		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
@@ -86,7 +92,7 @@ public class MainActivity extends Activity {
 		text_data = intent.getStringExtra("text_data");
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		editText1.setText(text_data);
-		
+
 		Button actionButton = (Button) this.findViewById(R.id.Button3);
 		actionButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -143,89 +149,131 @@ public class MainActivity extends Activity {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+
+				if (StringCommandExecutor.errorCheck) // for文から抜けて画像を初期化
+					break;
+			}
+
+			if (StringCommandExecutor.errorCheck) {
+				handler.post(new Runnable() {
+					public void run() {
+						AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+						builder.setTitle("間違った文を書いているよ");
+						builder.setPositiveButton("もう一度Challenge",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int which) {
+										initializeImage();
+									}
+								});
+						builder.show();
+					}
+				});
+			}else {
+				handler.post(new Runnable() {
+					public void run() {
+						initializeImage();
+					}
+				});
 			}
 		}
-
+		
 	}
 
 	/******************** ボタン(絵文字)の処理 *************************/
 	public void doActionLeftHandUp(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("左腕を上げる");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("左腕を上げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_hand_up);
 	}
 
 	public void doActionLeftHandDown(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("左腕を下げる");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("左腕を下げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_hand_down);
 	}
 
 	public void doActionRightHandUp(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("右腕を上げる");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("右腕を上げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_hand_up);
 	}
 
 	public void doActionRightHandDown(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("右腕を下げる");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("右腕を下げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_hand_down);
 
 	}
 
 	public void doActionLeftFootUp(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("左足を上げる");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("左足を上げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_foot_up);
 	}
 
 	public void doActionLeftFootDown(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("左足を下げる");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("左足を下げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_foot_down);
 	}
 
 	public void doActionRightFootUp(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("右足を上げる");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("右足を上げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_foot_up);
 	}
 
 	public void doActionRightFootDown(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("右足を下げる");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("右足を下げる");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_foot_down);
 	}
 
 	public void doActionJump(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("ジャンプする");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("ジャンプする");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_jump);
 	}
 
 	public void doActionEnter(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("\n");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("\n");
 		mImageEdit.append("\n");
 	}
 
 	public void doActionLoop(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("loop");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("loop");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_loop);
 	}
 
 	public void doActionKoko(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("ここまで");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("ここまで");
 		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_kokomade);
 
 	}
 
 	public void doActionBackSpace(View view) {
-		// TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		// editText1.append("\r");
+		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
+		editText1.append("\r");
+	}
+
+	public void initializeImage() {
+		ImageView leftHand1 = (ImageView) findViewById(R.id.playerLeftHand1);
+		ImageView rightHand1 = (ImageView) findViewById(R.id.playerRightHand1);
+		ImageView basic = (ImageView) findViewById(R.id.playerBasic);
+		ImageView leftFoot1 = (ImageView) findViewById(R.id.playerLeftFoot1);
+		ImageView rightFoot1 = (ImageView) findViewById(R.id.playerRightFoot1);
+		leftHand1.setImageResource(R.drawable.piyo_left_hand_up1);
+		rightHand1.setImageResource(R.drawable.piyo_right_hand_up1);
+		basic.setImageResource(R.drawable.piyo_basic);
+		leftFoot1.setImageResource(R.drawable.piyo_left_foot_up1);
+		rightFoot1.setImageResource(R.drawable.piyo_right_foot_up1);
+		leftHand1.setVisibility(View.VISIBLE);
+		rightHand1.setVisibility(View.VISIBLE);
+		leftFoot1.setVisibility(View.VISIBLE);
+		rightFoot1.setVisibility(View.VISIBLE);
 	}
 
 	/******************** ファイル保存 doSave(View view) *************************/
@@ -301,6 +349,32 @@ public class MainActivity extends Activity {
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", editText1.getText().toString());
 		this.startActivity(intent);
+	}
+
+	protected void onDestroy() {
+		super.onDestroy();
+		cleanupView(findViewById(R.id.root));
+		System.gc();
+	}
+
+	public static final void cleanupView(View view) {
+		if (view instanceof ImageButton) {
+			ImageButton ib = (ImageButton) view;
+			ib.setImageDrawable(null);
+		} else if (view instanceof ImageView) {
+			ImageView iv = (ImageView) view;
+			iv.setImageDrawable(null);
+			// } else if(view instanceof(XXX)) {
+			// 他にもDrawableを使用する対象があればここで中身をnullに
+		}
+		view.setBackgroundDrawable(null);
+		if (view instanceof ViewGroup) {
+			ViewGroup vg = (ViewGroup) view;
+			int size = vg.getChildCount();
+			for (int i = 0; i < size; i++) {
+				cleanupView(vg.getChildAt(i));
+			}
+		}
 	}
 
 }

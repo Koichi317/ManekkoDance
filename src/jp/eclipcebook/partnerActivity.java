@@ -12,7 +12,9 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -162,5 +164,31 @@ public class PartnerActivity extends Activity {
 		intent.putExtra("text_data", text_data);
 
 		this.startActivity(intent);
+	}
+	
+	protected void onDestroy() {
+		super.onDestroy();
+		cleanupView(findViewById(R.id.partnerRoot));
+		System.gc();
+	}
+
+	public static final void cleanupView(View view) {
+		if (view instanceof ImageButton) {
+			ImageButton ib = (ImageButton) view;
+			ib.setImageDrawable(null);
+		} else if (view instanceof ImageView) {
+			ImageView iv = (ImageView) view;
+			iv.setImageDrawable(null);
+			// } else if(view instanceof(XXX)) {
+			// ëºÇ…Ç‡DrawableÇégópÇ∑ÇÈëŒè€Ç™Ç†ÇÍÇŒÇ±Ç±Ç≈íÜêgÇnullÇ…
+		}
+		view.setBackgroundDrawable(null);
+		if (view instanceof ViewGroup) {
+			ViewGroup vg = (ViewGroup) view;
+			int size = vg.getChildCount();
+			for (int i = 0; i < size; i++) {
+				cleanupView(vg.getChildAt(i));
+			}
+		}
 	}
 }
