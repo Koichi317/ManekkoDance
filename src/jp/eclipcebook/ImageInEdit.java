@@ -2,6 +2,7 @@ package jp.eclipcebook;
 
 import java.io.IOException;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -120,42 +121,49 @@ public class ImageInEdit extends EditText {
 				spanned.length());
 
 	}
-	
-	public void replaceImage(Context context, int id) {
-		Drawable drawable = context.getResources().getDrawable(id);
-		replaceTextToImage(drawable);
-	}
-	
-	public void replaceTextToImage(final Drawable drawable) {
-		
-		//this.setText(this.getText()); //文字テキストを絵文字テキストにコピー
 
-		String[] commands = new String[] { "左腕を上げる", "左腕を下げる", "右腕を上げる", "右腕を下げる", "左足を上げる",
-				"左足を下げる", "右足を上げる", "右足を下げる", "loop", "ここまで" };
-
-		TreeMap<Integer, String> map = new TreeMap<Integer, String>();
-		for (String command : commands) {
-			// commandの位置を探す
-			int start = 0;
-			int end = 5;
-			
-			int i = -1;
+//	public void replaceTextToImage(final iconContainer icon) {
+//
+//		String line = this.getText().toString();
+//		String[] commands = new String[] { "左腕を上げる", "左腕を下げる", "右腕を上げる", "右腕を下げる", "左足を上げる",
+//				"左足を下げる", "右足を上げる", "右足を下げる", "loop", "ここまで" };
+//
+//		TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+//		for (String command : commands) {
+//			// commandの位置を探す
+//			int start = 0; // プログラム的に
+//			int end = 5;
+//
+//			int i = -1;
 //			while ((i = line.indexOf(command, i + 1)) >= 0) {
 //				map.put(i, command);
 //			}
-
-			ImageGetter imageGetter = new ImageGetter() {
-				@Override
-				public Drawable getDrawable(String source) {
-					drawable.setBounds(0, 0, mTextSize, mTextSize);
-					return drawable;
-				}
-			};
-			String img = "<img src=\"" + drawable.toString() + "\" />";
-			Spanned spanned = Html.fromHtml(img, imageGetter, null);
-
-			this.getText().replace(start, end, spanned, 0, spanned.length());
-		}
-
-	}
+//			
+//			for (Entry<Integer, String> indexAndStr : map.entrySet()) {
+//				String command = indexAndStr.getValue();
+//
+//				if (command.equals("左腕を上げる")) {
+//
+//				} else if (command.equals("左腕を下げる")) {
+//
+//				} else if (command.equals("右腕を上げる")) {
+//
+//				}
+//				// ...
+//			}
+//
+//			ImageGetter imageGetter = new ImageGetter() {
+//				@Override
+//				public Drawable getDrawable(String source) {
+//					drawable.setBounds(0, 0, mTextSize, mTextSize);
+//					return drawable;
+//				}
+//			};
+//			String img = "<img src=\"" + drawable.toString() + "\" />";
+//			Spanned spanned = Html.fromHtml(img, imageGetter, null);
+//
+//			this.getText().replace(start, end, spanned, 0, spanned.length());
+//		}
+//
+//	}
 }

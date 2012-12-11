@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -60,23 +61,22 @@ public class MainActivity extends Activity {
 
 		final InterconversionStringAndImage isa = new InterconversionStringAndImage();
 
-		// host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-		// public void onTabChanged(String tabId) {
-		// TextView editText1 = (TextView) findViewById(R.id.editText1);
-		//
-		// if (tabId == "tab2") {
-		// mImageEdit.setText(editText1.getText().toString());
-		// mImageEdit.replaceImage(MainActivity.this,
-		// R.drawable.icon_left_hand_up);
-		//
-		// } else if (tabId == "tab1") {
-		// String str = mImageEdit.getText().toString();
-		// str = isa.convertImageToString(str);
-		// editText1.setText(str);
-		// Log.v("tag", str);
-		// }
-		// }
-		// });
+//		host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+//			public void onTabChanged(String tabId) {
+//				TextView editText1 = (TextView) findViewById(R.id.editText1);
+//				iconContainer icon = new iconContainer(getApplication());
+//				if (tabId == "tab2") {
+//					mImageEdit.setText(editText1.getText().toString());
+//					mImageEdit.replaceTextToImage(icon);
+//
+//				} else if (tabId == "tab1") {
+//					String str = mImageEdit.getText().toString();
+//					str = isa.convertImageToString(str);
+//					editText1.setText(str);
+//					Log.v("tag", str);
+//				}
+//			}
+//		});
 
 		/********** âπäy **************/
 		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
@@ -168,7 +168,7 @@ public class MainActivity extends Activity {
 						builder.show();
 					}
 				});
-			}else {
+			} else {
 				handler.post(new Runnable() {
 					public void run() {
 						initializeImage();
@@ -176,7 +176,7 @@ public class MainActivity extends Activity {
 				});
 			}
 		}
-		
+
 	}
 
 	/******************** É{É^Éì(äGï∂éö)ÇÃèàóù *************************/
