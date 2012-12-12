@@ -1,60 +1,55 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/partnerRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back_image"
-    android:id="@+id/partnerRoot" >
+    android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:ems="10"
-        android:gravity="center_vertical|top"
-        android:hint="@string/hint_text"
-        android:inputType="textMultiLine"
-        android:textColor="#ffffff"
-        android:visibility="invisible" >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3.0" >
 
-        <requestFocus />
-    </EditText>
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center_vertical|top"
+            android:hint="@string/hint_text"
+            android:inputType="textMultiLine"
+            android:textColor="#ffffff"
+            android:visibility="invisible" >
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:ems="10"
-        android:hint="@string/hint_secret"
-        android:visibility="invisible" />
+            <requestFocus />
+        </EditText>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:contentDescription="@string/image_area" />
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_secret"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/image_area" />
+    </FrameLayout>
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/imageView2"
         android:text="@string/look_answer_button" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/button5" >
+        android:layout_weight="2.0" >
 
         <ImageView
             android:id="@+id/partnerLeftHand1"
@@ -72,7 +67,7 @@
             android:contentDescription="@string/image_area"
             android:src="@drawable/cocco_right_hand_up1"
             android:visibility="visible" />
-        
+
         <ImageView
             android:id="@+id/partnerBasic"
             android:layout_width="match_parent"
@@ -96,7 +91,37 @@
             android:contentDescription="@string/image_area"
             android:src="@drawable/cocco_right_foot_up1"
             android:visibility="visible" />
-
     </FrameLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#2f2f2f"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:text="@string/partner_screen" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:onClick="changeMainScreen"
+            android:text="@string/player" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:onClick="changeActionScreen"
+            android:text="@string/action" />
+
+    </LinearLayout>
+
+</LinearLayout>

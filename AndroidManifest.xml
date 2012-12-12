@@ -26,7 +26,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
             android:name=".PartnerActivity"
@@ -35,6 +36,10 @@
         <activity
             android:name=".ActionActivity"
             android:label="@string/title_activity_action" >
+        </activity>
+        <activity
+            android:name=".Tutorial"
+            android:label="@string/title_tutorial" >
         </activity>
     </application>
 

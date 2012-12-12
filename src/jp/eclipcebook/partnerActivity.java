@@ -141,28 +141,38 @@ public class PartnerActivity extends Activity {
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				Intent intent = new Intent(getApplication(), jp.eclipcebook.ActionActivity.class);
-				changeScreen(intent);
+				//changeScreen(intent);
 				return false;
 			}
 		});
 		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				// doSave();
-				Intent intent = new Intent(getApplication(), jp.eclipcebook.MainActivity.class);
-				changeScreen(intent);
+				
+				//changeScreen(intent);
 				return false;
 			}
 		});
 		return true;
 	}
 
-	private void changeScreen(Intent intent) {
+	public void changeMainScreen(View view) {
+		Intent intent = new Intent(getApplication(), jp.eclipcebook.MainActivity.class);
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		TextView editText2 = (TextView) findViewById(R.id.editText2);
 		intent.putExtra("lesson", editText1.getText().toString());
 		intent.putExtra("message", editText2.getText().toString());
 		intent.putExtra("text_data", text_data);
-
+		this.startActivity(intent);
+	}
+	
+	public void changeActionScreen(View view) {
+		Intent intent = new Intent(getApplication(), jp.eclipcebook.ActionActivity.class);
+		TextView editText1 = (TextView) findViewById(R.id.editText1);
+		TextView editText2 = (TextView) findViewById(R.id.editText2);
+		intent.putExtra("lesson", editText1.getText().toString());
+		intent.putExtra("message", editText2.getText().toString());
+		intent.putExtra("text_data", text_data);
 		this.startActivity(intent);
 	}
 	

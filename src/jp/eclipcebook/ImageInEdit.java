@@ -1,8 +1,10 @@
 package jp.eclipcebook;
 
 import java.io.IOException;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -121,49 +123,76 @@ public class ImageInEdit extends EditText {
 				spanned.length());
 
 	}
+	
 
-//	public void replaceTextToImage(final iconContainer icon) {
-//
-//		String line = this.getText().toString();
-//		String[] commands = new String[] { "¶˜r‚ğã‚°‚é", "¶˜r‚ğ‰º‚°‚é", "‰E˜r‚ğã‚°‚é", "‰E˜r‚ğ‰º‚°‚é", "¶‘«‚ğã‚°‚é",
-//				"¶‘«‚ğ‰º‚°‚é", "‰E‘«‚ğã‚°‚é", "‰E‘«‚ğ‰º‚°‚é", "loop", "‚±‚±‚Ü‚Å" };
-//
-//		TreeMap<Integer, String> map = new TreeMap<Integer, String>();
-//		for (String command : commands) {
-//			// command‚ÌˆÊ’u‚ğ’T‚·
-//			int start = 0; // ƒvƒƒOƒ‰ƒ€“I‚É
-//			int end = 5;
-//
-//			int i = -1;
-//			while ((i = line.indexOf(command, i + 1)) >= 0) {
-//				map.put(i, command);
-//			}
-//			
-//			for (Entry<Integer, String> indexAndStr : map.entrySet()) {
-//				String command = indexAndStr.getValue();
-//
-//				if (command.equals("¶˜r‚ğã‚°‚é")) {
-//
-//				} else if (command.equals("¶˜r‚ğ‰º‚°‚é")) {
-//
-//				} else if (command.equals("‰E˜r‚ğã‚°‚é")) {
-//
-//				}
-//				// ...
-//			}
-//
-//			ImageGetter imageGetter = new ImageGetter() {
-//				@Override
-//				public Drawable getDrawable(String source) {
-//					drawable.setBounds(0, 0, mTextSize, mTextSize);
-//					return drawable;
-//				}
-//			};
-//			String img = "<img src=\"" + drawable.toString() + "\" />";
-//			Spanned spanned = Html.fromHtml(img, imageGetter, null);
-//
-//			this.getText().replace(start, end, spanned, 0, spanned.length());
-//		}
-//
-//	}
+	public void replaceTextToImage(final iconContainer icon) {
+
+		String[] commands = new String[] { "¶˜r‚ğã‚°‚é", "¶˜r‚ğ‰º‚°‚é", "‰E˜r‚ğã‚°‚é", "‰E˜r‚ğ‰º‚°‚é", "¶‘«‚ğã‚°‚é",
+				"¶‘«‚ğ‰º‚°‚é", "‰E‘«‚ğã‚°‚é", "‰E‘«‚ğ‰º‚°‚é", "loop", "‚±‚±‚Ü‚Å" };
+
+		TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+		ArrayList<Integer> start = new ArrayList<Integer>(); // ƒvƒƒOƒ‰ƒ€“I‚É
+		ArrayList<Integer> end = new ArrayList<Integer>();
+		
+		for (String command : commands) {
+			// command‚ÌˆÊ’u‚ğ’T‚·
+			int i = -1;
+			while ((i = this.getText().toString().indexOf(command, i + 1)) >= 0) {
+				//ImageInEdit‚©‚ç•¶š‚ğ“Ç‚İæ‚èAcommand‚ÌˆÊ’u‚ğ’T‚·
+				map.put(i, command);
+				start.add(i);
+				end.add(i);
+			}
+		}
+
+		Collections.sort(start);
+		Collections.sort(end);
+
+		
+		for (Entry<Integer, String> indexAndStr : map.entrySet()) {
+			String command = indexAndStr.getValue();
+			int i = 0;
+			
+			if (command.equals("¶˜r‚ğã‚°‚é")) {
+				setIcon(icon.getIconLeftHandUp(), start.get(i), end.get(i));
+			} else if (command.equals("¶˜r‚ğ‰º‚°‚é")) {
+				setIcon(icon.getIconLeftHandDown(), start.get(i), end.get(i));
+			} else if (command.equals("‰E˜r‚ğã‚°‚é")) {
+				setIcon(icon.getIconRightHandUp(), start.get(i), end.get(i));
+			} else if (command.equals("‰E˜r‚ğ‰º‚°‚é")) {
+				setIcon(icon.getIconRightHandDown(), start.get(i), end.get(i));
+			} else if (command.equals("¶‘«‚ğã‚°‚é")) {
+				setIcon(icon.getIconLeftFootUp(), start.get(i), end.get(i));
+			} else if (command.equals("¶‘«‚ğ‰º‚°‚é")) {
+				setIcon(icon.getIconLeftFootDown(), start.get(i), end.get(i));
+			} else if (command.equals("‰E‘«‚ğã‚°‚é")) {
+				setIcon(icon.getIconRightFootUp(), start.get(i), end.get(i));
+			} else if (command.equals("‰E‘«‚ğ‰º‚°‚é")) {
+				setIcon(icon.getIconRightFootDown(), start.get(i), end.get(i));
+			} else if (command.equals("ƒWƒƒƒ“ƒv‚·‚é")) {
+				setIcon(icon.getIconJump(), start.get(i), end.get(i));
+			} else if (command.equals("loop")) {
+				setIcon(icon.getIconLoop(), start.get(i), end.get(i));
+			} else if (command.equals("‚±‚±‚Ü‚Å")) {
+				setIcon(icon.getIconKokomade(), start.get(i), end.get(i));
+			}
+			i++;
+		}
+
+	}
+
+	private void setIcon(final Drawable drawable, int start, int end) {
+		ImageGetter imageGetter = new ImageGetter() {
+			@Override
+			public Drawable getDrawable(String source) {
+				drawable.setBounds(0, 0, mTextSize, mTextSize);
+				return drawable;
+			}
+		};
+		String img = "<img src=\"" + drawable.toString() + "\" />";
+		Spanned spanned = Html.fromHtml(img, imageGetter, null);
+
+		this.getText().replace(start, end, spanned, 0, spanned.length());
+	}
+
 }

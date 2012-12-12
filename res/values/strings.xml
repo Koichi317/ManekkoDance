@@ -6,6 +6,7 @@
     <string name="title_activity_partner">PartnerActivity</string>
     <string name="title_activity_action">ActionActivity</string>
     <string name="title_activity_lesson_list">LessonList</string>
+    <string name="title_tutorial">Tutorial</string>
     <string name="button_action">実行</string>
     <string name="Enter">改行</string>
     <string name="hint_text">ここに入力</string>
@@ -21,7 +22,8 @@
     <string name="left_foot_down">左足↓</string>
     <string name="jump">ジャンプ</string>
     <string name="partner_screen">お手本</string>
-    <string name="player">編集画面</string>
+    <string name="player">編集</string>
+    <string name="action">判定</string>
     <string name="return_action">戻る</string>
     <string name="Title_Button_1">はじめから</string>
     <string name="Title_Button_2">つづきから</string>

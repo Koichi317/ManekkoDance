@@ -24,8 +24,8 @@ public class TitleActivity extends Activity{
 		relativeLayout.setVisibility(View.VISIBLE);
 	}
 	
-	public void doActionFromTheBiginning(View view) {
-		Intent intent = new Intent(this, jp.eclipcebook.LessonList.class);
+	public void doActionFromTheBeginning(View view) {
+		Intent intent = new Intent(this, jp.eclipcebook.Tutorial.class);
 		this.startActivity(intent);
 	}
 	

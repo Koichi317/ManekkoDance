@@ -245,15 +245,35 @@ public class ActionActivity extends Activity {
 		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				doSave();
-				changeMainScreen();
+				//changeMainScreen();
 				return false;
 			}
 		});
 		return true;
 	}
 
+	public void changeMainScreen(View view) {
+		Intent intent = new Intent(this, jp.eclipcebook.MainActivity.class);
+		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
+		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
+		intent.putExtra("text_data", playerEditText.getText().toString());
+		intent.putExtra("lesson", partnerEditText.getText().toString());
+		intent.putExtra("message", message);
+		this.startActivity(intent);
+	}
+	
 	private void changeMainScreen() {
 		Intent intent = new Intent(this, jp.eclipcebook.MainActivity.class);
+		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
+		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
+		intent.putExtra("text_data", playerEditText.getText().toString());
+		intent.putExtra("lesson", partnerEditText.getText().toString());
+		intent.putExtra("message", message);
+		this.startActivity(intent);
+	}
+	
+	public void changePartnerScreen(View view) {
+		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
 		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
 		intent.putExtra("text_data", playerEditText.getText().toString());
