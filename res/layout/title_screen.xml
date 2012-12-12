@@ -35,7 +35,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="48dp"
             android:onClick="doActionContinue"
-            android:text="@string/Title_Button_2" />
+            android:text="@string/Title_start_button" />
 
         <Button
             android:id="@+id/button1"
@@ -45,7 +45,7 @@
             android:layout_alignLeft="@+id/button2"
             android:layout_marginBottom="22dp"
             android:onClick="doActionFromTheBeginning"
-            android:text="@string/Title_Button_1" />
+            android:text="@string/Title_how_to_play" />
 
     </RelativeLayout>
 

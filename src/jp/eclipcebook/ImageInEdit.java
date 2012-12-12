@@ -12,6 +12,7 @@ import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.text.Spanned;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.EditText;
 
 /**
@@ -139,19 +140,18 @@ public class ImageInEdit extends EditText {
 			int i = -1;
 			while ((i = this.getText().toString().indexOf(command, i + 1)) >= 0) {
 				//ImageInEdit‚©‚ç•¶š‚ğ“Ç‚İæ‚èAcommand‚ÌˆÊ’u‚ğ’T‚·
-				map.put(i, command);
+				map.put(i*-1, command);
 				start.add(i);
-				end.add(i);
+				end.add(i+command.length());
 			}
 		}
 
 		Collections.sort(start);
 		Collections.sort(end);
 
-		
+				int i = start.size()-1;	
 		for (Entry<Integer, String> indexAndStr : map.entrySet()) {
 			String command = indexAndStr.getValue();
-			int i = 0;
 			
 			if (command.equals("¶˜r‚ğã‚°‚é")) {
 				setIcon(icon.getIconLeftHandUp(), start.get(i), end.get(i));
@@ -176,12 +176,16 @@ public class ImageInEdit extends EditText {
 			} else if (command.equals("‚±‚±‚Ü‚Å")) {
 				setIcon(icon.getIconKokomade(), start.get(i), end.get(i));
 			}
-			i++;
+			Log.v("tag", start.get(i).toString());
+			Log.v("tag", end.get(i).toString());
+			i--;
 		}
 
 	}
 
 	private void setIcon(final Drawable drawable, int start, int end) {
+		
+		
 		ImageGetter imageGetter = new ImageGetter() {
 			@Override
 			public Drawable getDrawable(String source) {
@@ -191,8 +195,8 @@ public class ImageInEdit extends EditText {
 		};
 		String img = "<img src=\"" + drawable.toString() + "\" />";
 		Spanned spanned = Html.fromHtml(img, imageGetter, null);
-
 		this.getText().replace(start, end, spanned, 0, spanned.length());
+		Log.v("tag", "");
 	}
 
 }

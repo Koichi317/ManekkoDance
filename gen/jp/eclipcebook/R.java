@@ -157,8 +157,8 @@ public final class R {
     }
     public static final class string {
         public static final int Enter=0x7f040008;
-        public static final int Title_Button_1=0x7f040019;
-        public static final int Title_Button_2=0x7f04001a;
+        public static final int Title_how_to_play=0x7f040019;
+        public static final int Title_start_button=0x7f04001a;
         public static final int action=0x7f040017;
         public static final int answer_lesson1=0x7f040025;
         public static final int answer_lesson2=0x7f040026;

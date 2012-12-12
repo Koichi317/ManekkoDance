@@ -10,19 +10,17 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -45,10 +43,12 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setTitle("プレイヤー画面");
 		setContentView(R.layout.main);
+		setTitleColor(0xffffff81);
+		
 		
 
-
 		mImageEdit = (ImageInEdit) findViewById(R.id.imageInEdit);
+		mImageEdit.buildLayer();
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 //		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.detectable_layout);
 //		DSKLayout.setListener(listner);
@@ -80,10 +80,10 @@ public class MainActivity extends Activity {
 					mImageEdit.replaceTextToImage(icon);
 
 				} else if (tabId == "tab1") {
-//					String str = mImageEdit.getText().toString();
-//					str = isa.convertImageToString(str);
-//					editText1.setText(str);
-//					Log.v("tag", str);
+					String str = mImageEdit.getText().toString();
+					str = isa.convertImageToString(str);
+					editText1.setText(str);
+					Log.v("文字", str);
 				}
 			}
 		});
@@ -137,10 +137,6 @@ public class MainActivity extends Activity {
 		});
 		
 	}
-	
-	
-	
-	
 
 	/******************** 構文解析＆実行 *************************/
 	public final class CommandExecutor implements Runnable {
@@ -310,6 +306,7 @@ public class MainActivity extends Activity {
 		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
 		editText1.append("\r");
 	}
+	
 
 	public void initializeImage() {
 		ImageView leftHand1 = (ImageView) findViewById(R.id.playerLeftHand1);
@@ -358,8 +355,8 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		super.onCreateOptionsMenu(menu);
 		MenuItem item1 = menu.add("クリア");
-//		MenuItem item2 = menu.add("");
-//		MenuItem item3 = menu.add("");
+		MenuItem item2 = menu.add("タイトル画面へ戻る");
+//		MenuItem item3 = menu.add("命令一覧を見る");
 
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
@@ -368,11 +365,12 @@ public class MainActivity extends Activity {
 				return false;
 			}
 		});
-//		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//			public boolean onMenuItemClick(MenuItem item) {
-//				return false;
-//			}
-//		});
+		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				changeTitleScreen();
+				return false;
+			}
+		});
 //		item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 //			public boolean onMenuItemClick(MenuItem item) {
 //				return false;
@@ -398,6 +396,11 @@ public class MainActivity extends Activity {
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", editText1.getText().toString());
+		this.startActivity(intent);
+	}
+	
+	private void changeTitleScreen() {
+		Intent intent = new Intent(this, jp.eclipcebook.TitleActivity.class);
 		this.startActivity(intent);
 	}
 

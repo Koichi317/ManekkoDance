@@ -54,7 +54,7 @@ public class LessonList extends ListActivity {
 		case 2:
 			Intent intent2 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
 			intent2.putExtra("lesson", getText(R.string.answer_lesson3));
-			intent2.putExtra("message", "n3");
+			intent2.putExtra("message", "3");
 			this.startActivity(intent2);
 			break;
 		case 3:

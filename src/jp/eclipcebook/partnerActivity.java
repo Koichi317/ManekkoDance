@@ -135,27 +135,25 @@ public class PartnerActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		super.onCreateOptionsMenu(menu);
-		MenuItem item1 = menu.add("実行");
-		MenuItem item2 = menu.add("プレイヤー");
+		MenuItem item1 = menu.add("編集画面");
+		MenuItem item2 = menu.add("タイトル画面へ戻る");
 
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				Intent intent = new Intent(getApplication(), jp.eclipcebook.ActionActivity.class);
-				//changeScreen(intent);
+				changeMainScreen(null);
 				return false;
 			}
 		});
 		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				// doSave();
-				
-				//changeScreen(intent);
+				changeTitleScreen();
 				return false;
 			}
 		});
 		return true;
 	}
-
+	
 	public void changeMainScreen(View view) {
 		Intent intent = new Intent(getApplication(), jp.eclipcebook.MainActivity.class);
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
@@ -173,6 +171,11 @@ public class PartnerActivity extends Activity {
 		intent.putExtra("lesson", editText1.getText().toString());
 		intent.putExtra("message", editText2.getText().toString());
 		intent.putExtra("text_data", text_data);
+		this.startActivity(intent);
+	}
+	
+	public void changeTitleScreen() {
+		Intent intent = new Intent(getApplication(), jp.eclipcebook.TitleActivity.class);
 		this.startActivity(intent);
 	}
 	
