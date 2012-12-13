@@ -47,6 +47,18 @@ public class PartnerActivity extends Activity {
 			messageImageView1.setImageResource(R.drawable.lesson_message3);
 		} else if (message.equals("4")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message4);
+		} else if (message.equals("5")) {
+			messageImageView1.setImageResource(R.drawable.lesson_message5);
+		} else if (message.equals("6")) {
+			messageImageView1.setImageResource(R.drawable.lesson_message6);
+		} else if (message.equals("7")) {
+			messageImageView1.setImageResource(R.drawable.lesson_message7);
+		} else if (message.equals("8")) {
+			messageImageView1.setImageResource(R.drawable.lesson_message8);
+		} else if (message.equals("9")) {
+			messageImageView1.setImageResource(R.drawable.lesson_message9);
+		} else if (message.equals("10")) {
+			messageImageView1.setImageResource(R.drawable.lesson_message10);
 		}
 
 		Button btn5 = (Button) this.findViewById(R.id.button5);

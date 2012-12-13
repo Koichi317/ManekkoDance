@@ -122,16 +122,12 @@ public class StringCommandExecutor implements Runnable {
 			input.inputReset(); // input‚Ì‰Šú‰»
 
 			// input‚Ìæ“¾
-			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğã‚°‚é") != -1) {
-				Log.v("tag", "¶˜r‚ğã‚°‚é");
+			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğã‚°‚é") != -1) 
 				input.¶˜r‚ğã‚°‚é = true;
-			}
 			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğ‰º‚°‚é") != -1)
 				input.¶˜r‚ğ‰º‚°‚é = true;
-			if (expandedCommands.get(lineIndex).indexOf("‰E˜r‚ğã‚°‚é") != -1) {
+			if (expandedCommands.get(lineIndex).indexOf("‰E˜r‚ğã‚°‚é") != -1)
 				input.‰E˜r‚ğã‚°‚é = true;
-				Log.v("tag", "‰E˜r‚ğã‚°‚é");
-			}
 			if (expandedCommands.get(lineIndex).indexOf("‰E˜r‚ğ‰º‚°‚é") != -1)
 				input.‰E˜r‚ğ‰º‚°‚é = true;
 			if (expandedCommands.get(lineIndex).indexOf("¶‘«‚ğã‚°‚é") != -1)
@@ -263,10 +259,12 @@ public class StringCommandExecutor implements Runnable {
 			addLineIndex = false;
 
 		} else {
-			if (errorCheck) {
-				errorImage(images);
-				addLineIndex = true;
-				return;
+			if(player) {
+				if (errorCheck) {
+					errorImage(images);
+					addLineIndex = true;
+					return;
+				}
 			}
 
 			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğã‚°‚é") != -1) {
@@ -342,7 +340,7 @@ public class StringCommandExecutor implements Runnable {
 			images.getRightFoot1().setVisibility(View.INVISIBLE);
 		} else {
 			images.getBasic().setImageResource(R.drawable.korobu_3);
-			addLineIndex = true;
+			addLineIndex = true; 
 		}
 
 	}

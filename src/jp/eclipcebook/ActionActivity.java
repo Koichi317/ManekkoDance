@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,7 +105,8 @@ public class ActionActivity extends Activity {
 					partnerImage4, partnerImage7, partnerImage8, partnerImage11), partnerCommands);
 
 			answer = new AnswerCheck(playerCommands, partnerCommands);
-
+			answer.compare();
+			Log.v("tag", answer.show());
 			// âêÕ&é¿çs
 			for (int i = 0; i < Math.max(playerCommands.size(), partnerCommands.size()); i++) {
 
@@ -114,7 +116,7 @@ public class ActionActivity extends Activity {
 					handler.post(partnerAction);
 
 				try { /* 1ïbë“ã@ */
-					Thread.sleep(250);
+					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -124,17 +126,16 @@ public class ActionActivity extends Activity {
 				if (i < partnerCommands.size())
 					handler.post(partnerAction);
 				try { /* 1ïbë“ã@ */
-					Thread.sleep(250);
+					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-
+				if(StringCommandExecutor.errorCheck)
+					break;
 			}
 
 			handler.post(new Runnable() {
 				public void run() {
-					
-					answer.compare();
 					AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
 					builder.setTitle(" ");
 					//builder.setMessage(answer.show());
