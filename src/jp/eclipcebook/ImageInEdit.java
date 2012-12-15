@@ -196,7 +196,6 @@ public class ImageInEdit extends EditText {
 		String img = "<img src=\"" + drawable.toString() + "\" />";
 		Spanned spanned = Html.fromHtml(img, imageGetter, null);
 		this.getText().replace(start, end, spanned, 0, spanned.length());
-		Log.v("tag", "");
 	}
 
 }

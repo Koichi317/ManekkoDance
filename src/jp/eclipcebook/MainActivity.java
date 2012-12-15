@@ -14,15 +14,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
@@ -37,6 +39,9 @@ public class MainActivity extends Activity {
 	private ImageInEdit mImageEdit;
 	private DetectableSoftKeyLayout DSKLayout;
 	private FrameLayout fLayout;
+	private LinearLayout buttonGroup2;
+	private HorizontalScrollView iconList;
+	private TextView editText1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,15 +49,15 @@ public class MainActivity extends Activity {
 		setTitle("プレイヤー画面");
 		setContentView(R.layout.main);
 		setTitleColor(0xffffff81);
-		
-		
 
+		editText1 = (TextView) this.findViewById(R.id.editText1);
 		mImageEdit = (ImageInEdit) findViewById(R.id.imageInEdit);
 		mImageEdit.buildLayer();
-		TextView editText1 = (TextView) findViewById(R.id.editText1);
-//		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.detectable_layout);
-//		DSKLayout.setListener(listner);
-//		fLayout = (FrameLayout) findViewById(R.id.frameLayout_piyo);
+		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.root);
+		DSKLayout.setListener(listner);
+		fLayout = (FrameLayout) findViewById(R.id.frameLayout_piyo);
+		buttonGroup2 = (LinearLayout) findViewById(R.id.buttonGroup2);
+		iconList = (HorizontalScrollView) findViewById(R.id.iconList);
 
 		/******************* tabの実装と切り替え *****************/
 
@@ -73,7 +78,6 @@ public class MainActivity extends Activity {
 
 		host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 			public void onTabChanged(String tabId) {
-				TextView editText1 = (TextView) findViewById(R.id.editText1);
 				iconContainer icon = new iconContainer(getApplication());
 				if (tabId == "tab2") {
 					mImageEdit.setText(editText1.getText().toString());
@@ -87,30 +91,33 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
-		
-//		editText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//	        @Override
-//	        public void onFocusChange(View v, boolean hasFocus) {
-//	        	FrameLayout fLayout = (FrameLayout)findViewById(R.id.frameLayout_piyo);
-//	        	HorizontalScrollView buttonGroup = (HorizontalScrollView)findViewById(R.id.buttonGroup);
-//	            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//	            // フォーカスを受け取ったとき
-//	            if(hasFocus){
-//	                // ソフトキーボードを表示する
-//	                inputMethodManager.showSoftInput(v, InputMethodManager.SHOW_FORCED);
-//	                fLayout.setVisibility(View.INVISIBLE);
-//	                buttonGroup.setVisibility(View.INVISIBLE);
-//	            }
-//	            // フォーカスが外れたとき
-//	            else{
-//	                // ソフトキーボードを閉じる
-//	                inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(),0);
-//	                fLayout.setVisibility(View.VISIBLE);
-//	                buttonGroup.setVisibility(View.VISIBLE);
-//	            }
-//	        }
-//	    });
-		//getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_AD);
+
+		// editText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+		// @Override
+		// public void onFocusChange(View v, boolean hasFocus) {
+		// FrameLayout fLayout =
+		// (FrameLayout)findViewById(R.id.frameLayout_piyo);
+		// HorizontalScrollView buttonGroup =
+		// (HorizontalScrollView)findViewById(R.id.buttonGroup);
+		// InputMethodManager inputMethodManager = (InputMethodManager)
+		// getSystemService(Context.INPUT_METHOD_SERVICE);
+		// // フォーカスを受け取ったとき
+		// if(hasFocus){
+		// // ソフトキーボードを表示する
+		// inputMethodManager.showSoftInput(v, InputMethodManager.SHOW_FORCED);
+		// fLayout.setVisibility(View.INVISIBLE);
+		// buttonGroup.setVisibility(View.INVISIBLE);
+		// }
+		// // フォーカスが外れたとき
+		// else{
+		// // ソフトキーボードを閉じる
+		// inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(),0);
+		// fLayout.setVisibility(View.VISIBLE);
+		// buttonGroup.setVisibility(View.VISIBLE);
+		// }
+		// }
+		// });
+		// getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_AD);
 
 		/********** 音楽 **************/
 		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
@@ -127,7 +134,7 @@ public class MainActivity extends Activity {
 		editText1 = (TextView) findViewById(R.id.editText1);
 		editText1.setText(text_data);
 
-		Button actionButton = (Button) this.findViewById(R.id.Button3);
+		FrameLayout actionButton = (FrameLayout) this.findViewById(R.id.frameLayout_piyo);
 		actionButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				final Handler handler = new Handler();
@@ -135,7 +142,7 @@ public class MainActivity extends Activity {
 				trd.start();
 			}
 		});
-		
+
 	}
 
 	/******************** 構文解析＆実行 *************************/
@@ -147,7 +154,7 @@ public class MainActivity extends Activity {
 		}
 
 		public void run() {
-			TextView editText1 = (TextView) findViewById(R.id.editText1);
+			editText1 = (TextView)findViewById(R.id.editText1);
 			ImageView leftHand1 = (ImageView) findViewById(R.id.playerLeftHand1);
 			ImageView rightHand1 = (ImageView) findViewById(R.id.playerRightHand1);
 			ImageView basic = (ImageView) findViewById(R.id.playerBasic);
@@ -212,101 +219,138 @@ public class MainActivity extends Activity {
 		}
 
 	}
-	
-//	DetectableSoftKeyLayout.OnSoftKeyShownListener listner = new DetectableSoftKeyLayout.OnSoftKeyShownListener() {
-//		@Override
-//		public void onSoftKeyShown(boolean isShown) {
-//			if (isShown) {
-//				// ソフトキーボードが表示されている場合
-//				// postボタンを非表示にする
-//				fLayout.setVisibility(View.GONE);
-//			} else {
-//				// ソフトキーボードが表示されてなければ、表示する
-//				fLayout.setVisibility(View.VISIBLE);
-//			}
-//		}
-//	};
+
+	DetectableSoftKeyLayout.OnSoftKeyShownListener listner = new DetectableSoftKeyLayout.OnSoftKeyShownListener() {
+		@Override
+		public void onSoftKeyShown(boolean isShown) {
+			if (isShown) {
+				// ソフトキーボードが表示されている場合
+				// postボタンを非表示にする
+				fLayout.setVisibility(View.GONE);
+				buttonGroup2.setVisibility(View.GONE);
+				iconList.setVisibility(View.VISIBLE);
+			} else {
+				// ソフトキーボードが表示されてなければ、表示する
+				fLayout.setVisibility(View.VISIBLE);
+				buttonGroup2.setVisibility(View.VISIBLE);
+				iconList.setVisibility(View.GONE);
+			}
+		}
+	};
 
 	/******************** ボタン(絵文字)の処理 *************************/
 	public void doActionLeftHandUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左腕を上げる");
-//		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_hand_up);
+		editText1 = (TextView) this.findViewById(R.id.editText1);
+		int start = editText1.getSelectionStart();
+		int end = editText1.getSelectionEnd();
+		Editable editable = (Editable) editText1.getText();
+		editable.replace(Math.min(start, end), Math.max(start, end), "左腕を上げる");
+		// mImageEdit.insertResourceImage(MainActivity.this,
+		// R.drawable.icon_left_hand_up);
 	}
 
 	public void doActionLeftHandDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左腕を下げる");
-//		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_hand_down);
+		editText1 = (TextView) this.findViewById(R.id.editText1);
+		int start = editText1.getSelectionStart();
+		int end = editText1.getSelectionEnd();
+		Editable editable = (Editable) editText1.getText();
+		editable.replace(Math.min(start, end), Math.max(start, end), "左腕を下げる");
+		// mImageEdit.insertResourceImage(MainActivity.this,
+		// R.drawable.icon_left_hand_down);
 	}
 
 	public void doActionRightHandUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右腕を上げる");
-//		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_hand_up);
+		editText1 = (TextView) this.findViewById(R.id.editText1);
+		int start = editText1.getSelectionStart();
+		int end = editText1.getSelectionEnd();
+		Editable editable = (Editable) editText1.getText();
+		editable.replace(Math.min(start, end), Math.max(start, end), "右腕を上げる");
+		// mImageEdit.insertResourceImage(MainActivity.this,
+		// R.drawable.icon_right_hand_up);
 	}
 
 	public void doActionRightHandDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右腕を下げる");
-//		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_hand_down);
+		editText1 = (TextView) this.findViewById(R.id.editText1);
+		int start = editText1.getSelectionStart();
+		int end = editText1.getSelectionEnd();
+		Editable editable = (Editable) editText1.getText();
+		editable.replace(Math.min(start, end), Math.max(start, end), "右腕を下げる");
+		// mImageEdit.insertResourceImage(MainActivity.this,
+		// R.drawable.icon_right_hand_down);
 
 	}
 
 	public void doActionLeftFootUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左足を上げる");
-//		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_foot_up);
+		editText1 = (TextView) this.findViewById(R.id.editText1);
+		int start = editText1.getSelectionStart();
+		int end = editText1.getSelectionEnd();
+		Editable editable = (Editable) editText1.getText();
+		editable.replace(Math.min(start, end), Math.max(start, end), "左足を上げる");
+		// mImageEdit.insertResourceImage(MainActivity.this,
+		// R.drawable.icon_left_foot_up);
 	}
 
 	public void doActionLeftFootDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("左足を下げる");
-//		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_left_foot_down);
+		editText1 = (TextView) this.findViewById(R.id.editText1);
+		int start = editText1.getSelectionStart();
+		int end = editText1.getSelectionEnd();
+		Editable editable = (Editable) editText1.getText();
+		editable.replace(Math.min(start, end), Math.max(start, end), "左足を下げる");
+		// mImageEdit.insertResourceImage(MainActivity.this,
+		// R.drawable.icon_left_foot_down);
 	}
 
 	public void doActionRightFootUp(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右足を上げる");
-//		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_foot_up);
+		editText1 = (TextView) this.findViewById(R.id.editText1);
+		int start = editText1.getSelectionStart();
+		int end = editText1.getSelectionEnd();
+		Editable editable = (Editable) editText1.getText();
+		editable.replace(Math.min(start, end), Math.max(start, end), "右足を上げる");
+		// mImageEdit.insertResourceImage(MainActivity.this,
+		// R.drawable.icon_right_foot_up);
 	}
 
 	public void doActionRightFootDown(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("右足を下げる");
-//		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_right_foot_down);
+		editText1 = (TextView) this.findViewById(R.id.editText1);
+		int start = editText1.getSelectionStart();
+		int end = editText1.getSelectionEnd();
+		Editable editable = (Editable) editText1.getText();
+		editable.replace(Math.min(start, end), Math.max(start, end), "右足を下げる");
+		// mImageEdit.insertResourceImage(MainActivity.this,
+		// R.drawable.icon_right_foot_down);
 	}
 
 	public void doActionJump(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("ジャンプする");
-//		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_jump);
-	}
-
-	public void doActionEnter(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("\n");
-//		mImageEdit.append("\n");
+		editText1 = (TextView) this.findViewById(R.id.editText1);
+		int start = editText1.getSelectionStart();
+		int end = editText1.getSelectionEnd();
+		Editable editable = (Editable) editText1.getText();
+		editable.replace(Math.min(start, end), Math.max(start, end), "ジャンプする");
+		// mImageEdit.insertResourceImage(MainActivity.this,
+		// R.drawable.icon_jump);
 	}
 
 	public void doActionLoop(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("loop");
-//		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_loop);
+		editText1 = (TextView) this.findViewById(R.id.editText1);
+		int start = editText1.getSelectionStart();
+		int end = editText1.getSelectionEnd();
+		Editable editable = (Editable) editText1.getText();
+		editable.replace( Math.min( start, end ), Math.max( start, end ), "loop");
+		// mImageEdit.insertResourceImage(MainActivity.this,
+		// R.drawable.icon_loop);
 	}
 
 	public void doActionKoko(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("ここまで");
-//		mImageEdit.insertResourceImage(MainActivity.this, R.drawable.icon_kokomade);
+		editText1 = (TextView) this.findViewById(R.id.editText1);
+		int start = editText1.getSelectionStart();
+		int end = editText1.getSelectionEnd();
+		Editable editable = (Editable) editText1.getText();
+		editable.replace( Math.min( start, end ), Math.max( start, end ), "ここまで");
+		// mImageEdit.insertResourceImage(MainActivity.this,
+		// R.drawable.icon_kokomade);
 
 	}
 
-	public void doActionBackSpace(View view) {
-		TextView editText1 = (TextView) this.findViewById(R.id.editText1);
-		editText1.append("\r");
-	}
-	
 
 	public void initializeImage() {
 		ImageView leftHand1 = (ImageView) findViewById(R.id.playerLeftHand1);
@@ -356,11 +400,10 @@ public class MainActivity extends Activity {
 		super.onCreateOptionsMenu(menu);
 		MenuItem item1 = menu.add("クリア");
 		MenuItem item2 = menu.add("タイトル画面へ戻る");
-//		MenuItem item3 = menu.add("命令一覧を見る");
+		// MenuItem item3 = menu.add("命令一覧を見る");
 
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				TextView editText1 = (TextView) findViewById(R.id.editText1);
 				editText1.getEditableText().clear();
 				return false;
 			}
@@ -371,19 +414,19 @@ public class MainActivity extends Activity {
 				return false;
 			}
 		});
-//		item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//			public boolean onMenuItemClick(MenuItem item) {
-//				return false;
-//			}
-//		});
-		
+		// item3.setOnMenuItemClickListener(new
+		// MenuItem.OnMenuItemClickListener() {
+		// public boolean onMenuItemClick(MenuItem item) {
+		// return false;
+		// }
+		// });
+
 		return true;
 	}
 
 	/************************* インテント（画面遷移） *****************************/
 	public void changeActionScreen(View view) {
 		Intent intent = new Intent(this, jp.eclipcebook.ActionActivity.class);
-		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		intent.putExtra("text_data", editText1.getText().toString());
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
@@ -392,13 +435,12 @@ public class MainActivity extends Activity {
 
 	public void changePartnerScreen(View view) { // お手本画面へ遷移
 		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
-		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", editText1.getText().toString());
 		this.startActivity(intent);
 	}
-	
+
 	private void changeTitleScreen() {
 		Intent intent = new Intent(this, jp.eclipcebook.TitleActivity.class);
 		this.startActivity(intent);

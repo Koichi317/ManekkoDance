@@ -91,25 +91,24 @@ public final class R {
         public static final int true_answer=0x7f02004d;
     }
     public static final class id {
-        public static final int Button1=0x7f070029;
-        public static final int Button2=0x7f07002a;
-        public static final int Button3=0x7f07002b;
         public static final int actionRoot=0x7f070000;
         public static final int button1=0x7f070003;
         public static final int button2=0x7f07000f;
         public static final int button3=0x7f070010;
         public static final int button4=0x7f070011;
-        public static final int button5=0x7f07002c;
-        public static final int button6=0x7f07002d;
-        public static final int buttonGroup=0x7f070027;
+        public static final int button5=0x7f070028;
+        public static final int button6=0x7f070029;
+        public static final int buttonGroup2=0x7f070027;
+        public static final int detectable_layout=0x7f07002a;
         public static final int editText1=0x7f070016;
         public static final int editText2=0x7f07002f;
         public static final int editTextActionScreen1=0x7f070001;
         public static final int editTextActionScreen2=0x7f070004;
+        public static final int edittext=0x7f07002c;
         public static final int flipper=0x7f070033;
         public static final int frameLayout2=0x7f070013;
         public static final int frameLayout_piyo=0x7f07001a;
-        public static final int horizontalScrollView1=0x7f07001b;
+        public static final int iconList=0x7f07001b;
         public static final int imageButton1=0x7f07001c;
         public static final int imageButton10=0x7f070025;
         public static final int imageButton11=0x7f070026;
@@ -124,7 +123,6 @@ public final class R {
         public static final int imageInEdit=0x7f070018;
         public static final int imageView2=0x7f070030;
         public static final int imageView3=0x7f070002;
-        public static final int linearLayoutButton3=0x7f070028;
         public static final int menu_settings=0x7f070039;
         public static final int partnerBasic=0x7f07000c;
         public static final int partnerLeftFoot1=0x7f07000d;
@@ -137,11 +135,13 @@ public final class R {
         public static final int playerLeftHand1=0x7f070005;
         public static final int playerRightFoot1=0x7f070009;
         public static final int playerRightHand1=0x7f070006;
+        public static final int post_btn=0x7f07002d;
         public static final int root=0x7f070012;
         public static final int tab1=0x7f070015;
         public static final int tab2=0x7f070017;
         public static final int tab3=0x7f070019;
         public static final int tabhost=0x7f070014;
+        public static final int title=0x7f07002b;
         public static final int titleButton=0x7f070032;
         public static final int titleRoot=0x7f070031;
         public static final int view1=0x7f070034;
@@ -153,10 +153,11 @@ public final class R {
     public static final class layout {
         public static final int action_screen=0x7f030000;
         public static final int main=0x7f030001;
-        public static final int main_menu=0x7f030002;
-        public static final int partner=0x7f030003;
-        public static final int title_screen=0x7f030004;
-        public static final int tutorial=0x7f030005;
+        public static final int main2=0x7f030002;
+        public static final int main_menu=0x7f030003;
+        public static final int partner=0x7f030004;
+        public static final int title_screen=0x7f030005;
+        public static final int tutorial=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f060000;

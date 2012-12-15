@@ -7,14 +7,10 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 public class LessonList extends ListActivity {
-	private ArrayAdapter<String> arrayadapter = null;
+	private MySpecialAdapter arrayadapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +27,7 @@ public class LessonList extends ListActivity {
 		lessonList.add("Lesson‚W ŒJ‚è•Ô‚µ2");
 		lessonList.add("Lesson‚X ŒJ‚è•Ô‚µ3");
 		lessonList.add("Lesson‚P‚O ŒJ‚è•Ô‚µ4");
-		arrayadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+		arrayadapter = new MySpecialAdapter(this, android.R.layout.simple_list_item_1,
 				lessonList);
 		this.setListAdapter(arrayadapter);
 	}

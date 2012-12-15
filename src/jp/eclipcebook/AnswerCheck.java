@@ -3,6 +3,7 @@ package jp.eclipcebook;
 import java.util.List;
 
 import android.util.Log;
+import android.widget.TextView;
 
 public class AnswerCheck {
 
@@ -81,6 +82,12 @@ public class AnswerCheck {
 				}
 			}
 		}
+	}
+	
+	public void loopCheck(String str, TextView textView) {
+		int loopNum = Integer.parseInt(str);
+		String playerCommand = textView.getText().toString();
+			
 	}
 
 	public String show() {
