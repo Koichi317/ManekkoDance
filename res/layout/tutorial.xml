@@ -14,37 +14,39 @@
             android:id="@+id/view1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/back_image" />
+            android:background="@drawable/tutorial1" />
 
         <View
             android:id="@+id/view2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#000000" />
+            android:background="@drawable/tutorial2" />
 
         <View
             android:id="@+id/view3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/icon1" />
+            android:background="@drawable/tutorial3" />
 
         <View
             android:id="@+id/view4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/tutorial4" />
 
         <View
             android:id="@+id/view5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/answer_ture" />
+            android:background="@drawable/tutorial5" />
 
     </ViewFlipper>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#2f2f2f" >
+        android:background="#2f2f2f"
+        android:visibility="gone" >
 
         <Button
             android:id="@+id/button1"

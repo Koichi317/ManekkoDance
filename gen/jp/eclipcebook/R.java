@@ -89,6 +89,11 @@ public final class R {
         public static final int piyo_right_hand_up2=0x7f02004b;
         public static final int piyo_right_hand_up3=0x7f02004c;
         public static final int true_answer=0x7f02004d;
+        public static final int tutorial1=0x7f02004e;
+        public static final int tutorial2=0x7f02004f;
+        public static final int tutorial3=0x7f020050;
+        public static final int tutorial4=0x7f020051;
+        public static final int tutorial5=0x7f020052;
     }
     public static final class id {
         public static final int actionRoot=0x7f080000;
