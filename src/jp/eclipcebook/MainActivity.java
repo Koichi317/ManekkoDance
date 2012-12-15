@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -42,13 +43,13 @@ public class MainActivity extends Activity {
 	private LinearLayout buttonGroup2;
 	private HorizontalScrollView iconList;
 	private TextView editText1;
+	private MediaPlayer bgm;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle("プレイヤー画面");
 		setContentView(R.layout.main);
-		setTitleColor(0xffffff81);
 
 		editText1 = (TextView) this.findViewById(R.id.editText1);
 		mImageEdit = (ImageInEdit) findViewById(R.id.imageInEdit);
@@ -92,32 +93,6 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		// editText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-		// @Override
-		// public void onFocusChange(View v, boolean hasFocus) {
-		// FrameLayout fLayout =
-		// (FrameLayout)findViewById(R.id.frameLayout_piyo);
-		// HorizontalScrollView buttonGroup =
-		// (HorizontalScrollView)findViewById(R.id.buttonGroup);
-		// InputMethodManager inputMethodManager = (InputMethodManager)
-		// getSystemService(Context.INPUT_METHOD_SERVICE);
-		// // フォーカスを受け取ったとき
-		// if(hasFocus){
-		// // ソフトキーボードを表示する
-		// inputMethodManager.showSoftInput(v, InputMethodManager.SHOW_FORCED);
-		// fLayout.setVisibility(View.INVISIBLE);
-		// buttonGroup.setVisibility(View.INVISIBLE);
-		// }
-		// // フォーカスが外れたとき
-		// else{
-		// // ソフトキーボードを閉じる
-		// inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(),0);
-		// fLayout.setVisibility(View.VISIBLE);
-		// buttonGroup.setVisibility(View.VISIBLE);
-		// }
-		// }
-		// });
-		// getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_AD);
 
 		/********** 音楽 **************/
 		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
@@ -426,6 +401,8 @@ public class MainActivity extends Activity {
 
 	/************************* インテント（画面遷移） *****************************/
 	public void changeActionScreen(View view) {
+		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+		bgm.start();
 		Intent intent = new Intent(this, jp.eclipcebook.ActionActivity.class);
 		intent.putExtra("text_data", editText1.getText().toString());
 		intent.putExtra("lesson", lesson);
@@ -434,6 +411,8 @@ public class MainActivity extends Activity {
 	}
 
 	public void changePartnerScreen(View view) { // お手本画面へ遷移
+		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+		bgm.start();
 		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);

@@ -1,8 +1,8 @@
 package jp.eclipcebook;
 
-import jp.eclipcebook.R;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +17,7 @@ public class TitleActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルバー非表示
 		setContentView(R.layout.title_screen);
+			
 	}
 	
 	public void doActionTitle(View view) {
@@ -25,11 +26,15 @@ public class TitleActivity extends Activity{
 	}
 	
 	public void doActionFromTheBeginning(View view) {
+		MediaPlayer bgm = MediaPlayer.create(getApplicationContext(), R.raw.titlecall);
+		bgm.start();
 		Intent intent = new Intent(this, jp.eclipcebook.Tutorial.class);
 		this.startActivity(intent);
 	}
 	
 	public void doActionContinue(View view) {
+		MediaPlayer bgm = MediaPlayer.create(getApplicationContext(), R.raw.titlecall);
+		bgm.start();
 		Intent intent = new Intent(this, jp.eclipcebook.LessonList.class);
 		this.startActivity(intent);
 	}

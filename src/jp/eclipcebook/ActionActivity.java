@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -33,6 +34,7 @@ public class ActionActivity extends Activity {
 	private String message;
 	private String text_data;
 	public boolean answerCheckEnd = false;
+	private MediaPlayer bgm;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -106,6 +108,7 @@ public class ActionActivity extends Activity {
 
 			answer = new AnswerCheck(playerCommands, partnerCommands);
 			answer.compare();
+			answer.loopCheck(message, playerEditText);
 			Log.v("tag", answer.show());
 			// 解析&実行
 			for (int i = 0; i < Math.max(playerCommands.size(), partnerCommands.size()); i++) {
@@ -130,7 +133,7 @@ public class ActionActivity extends Activity {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if(StringCommandExecutor.errorCheck)
+				if (StringCommandExecutor.errorCheck)
 					break;
 			}
 
@@ -138,54 +141,97 @@ public class ActionActivity extends Activity {
 				public void run() {
 					AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
 					builder.setTitle(" ");
-					//builder.setMessage(answer.show());
+					// builder.setMessage(answer.show());
 					if (answer.judge) {
-						builder.setIcon(R.drawable.answer_ture);
-						builder.setNegativeButton("次のLessonに進む", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								Intent intent = new Intent(getApplication(), jp.eclipcebook.PartnerActivity.class);
-								int nextLessonNumber = Integer.parseInt(message) + 1;
-								message = String.valueOf(nextLessonNumber);
-								intent.putExtra("message", message);
-								String str = LessonData.getLessonData(nextLessonNumber);
-								lesson = str;
-								intent.putExtra("lesson", lesson);
-								startActivity(intent);
-							}
-						});
+
+						if (message == "10") {
+							bgm = MediaPlayer.create(getApplicationContext(), R.raw.perfect);
+							bgm.start();
+							builder.setIcon(R.drawable.answer_ture);
+							builder.setNegativeButton("タイトルへ戻る",
+									new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+											bgm.start();
+											Intent intent = new Intent(getApplication(),
+													jp.eclipcebook.TitleActivity.class);
+											startActivity(intent);
+										}
+									});
+
+							builder.setPositiveButton("もう一度Challenge",
+									new DialogInterface.OnClickListener() {
+										public void onClick(DialogInterface dialog, int which) {
+											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+											bgm.start();
+											changeMainScreen();
+										}
+									});
+						} else {
+							bgm = MediaPlayer.create(getApplicationContext(), R.raw.good_answer);
+							bgm.start();
+							builder.setIcon(R.drawable.answer_ture);
+							builder.setNegativeButton("次のLessonに進む",
+									new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+											bgm.start();
+											Intent intent = new Intent(getApplication(),
+													jp.eclipcebook.PartnerActivity.class);
+											int nextLessonNumber = Integer.parseInt(message) + 1;
+											message = String.valueOf(nextLessonNumber);
+											intent.putExtra("message", message);
+											String str = LessonData.getLessonData(nextLessonNumber);
+											lesson = str;
+											intent.putExtra("lesson", lesson);
+											startActivity(intent);
+										}
+									});
+
+							builder.setPositiveButton("もう一度Challenge",
+									new DialogInterface.OnClickListener() {
+										public void onClick(DialogInterface dialog, int which) {
+											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+											bgm.start();
+											changeMainScreen();
+										}
+									});
+						}
 						
-						builder.setPositiveButton("もう一度Challenge", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								changeMainScreen();
-							}
-						});
-					}
-						
-					if (!answer.judge) {
+					}else {
+						bgm = MediaPlayer.create(getApplicationContext(), R.raw.fail);
+						bgm.start();
 						builder.setIcon(R.drawable.answer_false);
-						builder.setNegativeButton("Lessonを選択し直す", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								Intent intent = new Intent(getApplication(), jp.eclipcebook.LessonList.class);
-								startActivity(intent);
-							}
-						});
-						
-						builder.setPositiveButton("もう一度Challenge", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								changeMainScreen();
-							}
-						});
+						builder.setNegativeButton("Lessonを選択し直す",
+								new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+										bgm.start();
+										Intent intent = new Intent(getApplication(),
+												jp.eclipcebook.LessonList.class);
+										startActivity(intent);
+									}
+								});
+
+						builder.setPositiveButton("もう一度Challenge",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int which) {
+										bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+										bgm.start();
+										changeMainScreen();
+									}
+								});
 					}
 
 					builder.show();
 				}
 			});
 		}
-		
-	}
 
+	}
 
 	@SuppressLint("WorldReadableFiles")
 	public void doSave() {
@@ -208,27 +254,28 @@ public class ActionActivity extends Activity {
 		}
 	}
 
-//	public void doLoad() {
-//		EditText editText2 = (EditText) this.findViewById(R.id.editTextActionScreen2);
-//		FileInputStream input = null;
-//		try {
-//			input = this.openFileInput(path);
-//			byte[] buffer = new byte[1000];
-//			input.read(buffer);
-//			String s = new String(buffer).trim();
-//			editText2.setText(s);
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				input.close();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
+	// public void doLoad() {
+	// EditText editText2 = (EditText)
+	// this.findViewById(R.id.editTextActionScreen2);
+	// FileInputStream input = null;
+	// try {
+	// input = this.openFileInput(path);
+	// byte[] buffer = new byte[1000];
+	// input.read(buffer);
+	// String s = new String(buffer).trim();
+	// editText2.setText(s);
+	// } catch (FileNotFoundException e) {
+	// e.printStackTrace();
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// } finally {
+	// try {
+	// input.close();
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
+	// }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -262,7 +309,7 @@ public class ActionActivity extends Activity {
 		intent.putExtra("message", message);
 		this.startActivity(intent);
 	}
-	
+
 	private void changeMainScreen() {
 		Intent intent = new Intent(this, jp.eclipcebook.MainActivity.class);
 		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
@@ -272,7 +319,7 @@ public class ActionActivity extends Activity {
 		intent.putExtra("message", message);
 		this.startActivity(intent);
 	}
-	
+
 	public void changePartnerScreen(View view) {
 		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
 		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
@@ -282,12 +329,12 @@ public class ActionActivity extends Activity {
 		intent.putExtra("message", message);
 		this.startActivity(intent);
 	}
-	
+
 	private void changeTitleScreen() {
 		Intent intent = new Intent(this, jp.eclipcebook.TitleActivity.class);
 		this.startActivity(intent);
 	}
-	
+
 	protected void onDestroy() {
 		super.onDestroy();
 		cleanupView(findViewById(R.id.actionRoot));

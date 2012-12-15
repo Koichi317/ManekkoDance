@@ -5,13 +5,13 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
 public class LessonList extends ListActivity {
 	private MySpecialAdapter arrayadapter;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,6 +27,10 @@ public class LessonList extends ListActivity {
 		lessonList.add("Lesson‚W ŒJ‚è•Ô‚µ2");
 		lessonList.add("Lesson‚X ŒJ‚è•Ô‚µ3");
 		lessonList.add("Lesson‚P‚O ŒJ‚è•Ô‚µ4");
+		lessonList.add("");
+		lessonList.add("");
+		lessonList.add("");
+		lessonList.add("");
 		arrayadapter = new MySpecialAdapter(this, android.R.layout.simple_list_item_1,
 				lessonList);
 		this.setListAdapter(arrayadapter);
@@ -38,6 +42,8 @@ public class LessonList extends ListActivity {
 		 * SharedPreferences sp = PreferenceManager
 		 * .getDefaultSharedPreferences(getApplication());
 		 */
+		MediaPlayer bgm = MediaPlayer.create(getApplicationContext(), R.raw.get);
+		bgm.start();
 
 		switch (position) {
 		case 0:

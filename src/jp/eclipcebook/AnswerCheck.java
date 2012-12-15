@@ -58,7 +58,6 @@ public class AnswerCheck {
 				partnerAnswer[8][i] = true;
 		}
 
-		
 	}
 
 	public void compare() {
@@ -73,9 +72,9 @@ public class AnswerCheck {
 					if (playerAnswer[j][i] == partnerAnswer[j][i]) {
 						Log.v("i", String.valueOf(i));
 						Log.v("j", String.valueOf(j));
-						//continue; // お手本の各行の命令がプレイヤーの同じ行にあるかどうか
-						
-					}else {
+						// continue; // お手本の各行の命令がプレイヤーの同じ行にあるかどうか
+
+					} else {
 						judge = false;
 						break;
 					}
@@ -83,11 +82,23 @@ public class AnswerCheck {
 			}
 		}
 	}
-	
-	public void loopCheck(String str, TextView textView) {
-		int loopNum = Integer.parseInt(str);
+
+	public void loopCheck(String message, TextView textView) {
+		int loopNum = Integer.parseInt(message);
 		String playerCommand = textView.getText().toString();
-			
+		int i = -1;
+		int count = 0;
+		if (!(loopNum >= 8))
+			return;
+		while ((i = playerCommand.indexOf("loop", i + 1)) >= 0)
+			count++;
+		if (loopNum == 8) {
+			if (count != 1)
+				judge = false;
+		} else if (loopNum >= 9) {
+			if (count != 2)
+				judge = false;
+		}
 	}
 
 	public String show() {

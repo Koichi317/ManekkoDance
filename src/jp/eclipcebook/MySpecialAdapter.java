@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.TwoLineListItem;
 
 
 
 public class MySpecialAdapter extends ArrayAdapter<String> {
-
+	
 	public MySpecialAdapter(Context context, int textViewResourceId, List<String> objects) {
 		super(context, textViewResourceId, objects);
 		// TODO Auto-generated constructor stub
@@ -25,8 +26,8 @@ public class MySpecialAdapter extends ArrayAdapter<String> {
 		}else {
 			view.setBackgroundColor(Color.rgb(255, 204, 204));
 		}
-		TextView textView = (TextView)super.getView(position,convertView,parent);
-		textView.setTextSize(24);
+		TextView v = (TextView)view;
+		v.setTextSize(18);
 		return view;
 	}
 }

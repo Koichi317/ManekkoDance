@@ -29,23 +29,25 @@
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="48dp"
             android:onClick="doActionContinue"
-            android:text="@string/Title_start_button" />
+            android:text="@string/Title_start_button"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
             android:layout_above="@+id/button2"
             android:layout_alignLeft="@+id/button2"
             android:layout_marginBottom="22dp"
             android:onClick="doActionFromTheBeginning"
-            android:text="@string/Title_how_to_play" />
+            android:text="@string/Title_how_to_play"
+            android:textSize="24sp" />
 
     </RelativeLayout>
 
