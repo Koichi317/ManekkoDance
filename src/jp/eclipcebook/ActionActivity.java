@@ -141,10 +141,9 @@ public class ActionActivity extends Activity {
 				public void run() {
 					AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
 					builder.setTitle(" ");
-					// builder.setMessage(answer.show());
 					if (answer.judge) {
 
-						if (message == "10") {
+						if (Integer.parseInt(message) == 10) {
 							bgm = MediaPlayer.create(getApplicationContext(), R.raw.perfect);
 							bgm.start();
 							builder.setIcon(R.drawable.answer_ture);

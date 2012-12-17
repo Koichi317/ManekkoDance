@@ -373,28 +373,29 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		super.onCreateOptionsMenu(menu);
-		MenuItem item1 = menu.add("クリア");
-		MenuItem item2 = menu.add("タイトル画面へ戻る");
-		// MenuItem item3 = menu.add("命令一覧を見る");
+		MenuItem item1 = menu.add("ヘルプ");
+		MenuItem item2 = menu.add("クリア");
+		MenuItem item3 = menu.add("タイトル画面へ戻る");
 
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				editText1.getEditableText().clear();
+				changeHelpScreen();
 				return false;
 			}
 		});
 		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				changeTitleScreen();
+				editText1.getEditableText().clear();
 				return false;
 			}
 		});
-		// item3.setOnMenuItemClickListener(new
-		// MenuItem.OnMenuItemClickListener() {
-		// public boolean onMenuItemClick(MenuItem item) {
-		// return false;
-		// }
-		// });
+		 item3.setOnMenuItemClickListener(new
+		 MenuItem.OnMenuItemClickListener() {
+		 public boolean onMenuItemClick(MenuItem item) {
+				changeTitleScreen();
+		 return false;
+		 }
+		 });
 
 		return true;
 	}
@@ -414,6 +415,16 @@ public class MainActivity extends Activity {
 		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 		bgm.start();
 		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+		intent.putExtra("lesson", lesson);
+		intent.putExtra("message", message);
+		intent.putExtra("text_data", editText1.getText().toString());
+		this.startActivity(intent);
+	}
+	
+	public void changeHelpScreen() { // お手本画面へ遷移
+		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+		bgm.start();
+		Intent intent = new Intent(this, jp.eclipcebook.Help.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", editText1.getText().toString());

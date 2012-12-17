@@ -36,6 +36,7 @@
     <string name="hint_secret">開発者情報</string>
     <string name="hint_player_source_cord">プレイヤーのソースコードが書かれるエリア</string>
     <string name="touch_to_start">touch to start</string>
+    <string name="help">ヘルプ</string>
     <string name="back_space">1字戻る</string>
     <string name="answer_lesson1">左腕を上げる\n左腕を下げる\n右腕を上げる\n右腕を下げる</string>
     <string name="answer_lesson2">左足を上げる\n左足を下げる\n右足を上げる\n右足を下げる</string>
@@ -47,5 +48,12 @@
     <string name="answer_lesson8">loop3\n左足を上げる\n左足を下げる\n右足を上げる\n右足を下げる\nここまで</string>
     <string name="answer_lesson9">loop3\n左足を上げる\n左足を下げる\n右足を上げる\n右足を下げる\nここまで\n loop2\n左腕を上げる 右腕を上げる\n 左腕を下げる 右腕を下げる\nここまで</string>
     <string name="answer_lesson10">loop3\n loop2\n 左腕を上げる 右腕を上げる\n左腕を下げる 右腕を下げる\nここまで\nジャンプする\nここまで</string>
+
+    <string-array name="help">
+        <item>基本動作</item>
+        <item>応用動作</item>
+        <item>ジャンプ</item>
+        <item>繰り返し</item>
+    </string-array>
 
 </resources>

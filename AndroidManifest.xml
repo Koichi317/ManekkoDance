@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jp.eclipcebook"
-    android:versionCode="4"
-    android:versionName="1.0.3" >
+    android:versionCode="6"
+    android:versionName="1.0.5" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -40,6 +40,10 @@
         <activity
             android:name=".Tutorial"
             android:label="@string/title_tutorial" >
+        </activity>
+        <activity
+            android:name=".Help"
+            android:label="@string/help" >
         </activity>
     </application>
 
