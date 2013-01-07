@@ -4,17 +4,60 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/helpText"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:ems="10"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:gravity="top|left"
-        android:onClick="changeScreen" >
+        android:layout_weight="1"
+        android:background="#000000" >
 
-        <requestFocus />
-    </EditText>
+        <ImageView
+            android:id="@+id/helpImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+
+    </FrameLayout>
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:background="#8181ff" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="prev"
+            android:text="@string/arrow_left" />
+
+        <EditText
+            android:id="@+id/page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="next"
+            android:text="@string/arrow_right" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="changeScreen"
+            android:text="@string/close" />
+
+    </TableRow>
 
 </LinearLayout>

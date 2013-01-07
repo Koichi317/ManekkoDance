@@ -2,15 +2,20 @@ package jp.eclipcebook;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.Editable;
 import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.text.Spanned;
+import android.text.style.ImageSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.EditText;
@@ -124,9 +129,8 @@ public class ImageInEdit extends EditText {
 				spanned.length());
 
 	}
-	
 
-	public void replaceTextToImage(final iconContainer icon) {
+	public void replaceTextToImage(final IconContainer icon) {
 
 		String[] commands = new String[] { "¶˜r‚ğã‚°‚é", "¶˜r‚ğ‰º‚°‚é", "‰E˜r‚ğã‚°‚é", "‰E˜r‚ğ‰º‚°‚é", "¶‘«‚ğã‚°‚é",
 				"¶‘«‚ğ‰º‚°‚é", "‰E‘«‚ğã‚°‚é", "‰E‘«‚ğ‰º‚°‚é", "loop", "‚±‚±‚Ü‚Å" };
@@ -134,25 +138,25 @@ public class ImageInEdit extends EditText {
 		TreeMap<Integer, String> map = new TreeMap<Integer, String>();
 		ArrayList<Integer> start = new ArrayList<Integer>(); // ƒvƒƒOƒ‰ƒ€“I‚É
 		ArrayList<Integer> end = new ArrayList<Integer>();
-		
+
 		for (String command : commands) {
 			// command‚ÌˆÊ’u‚ğ’T‚·
 			int i = -1;
 			while ((i = this.getText().toString().indexOf(command, i + 1)) >= 0) {
-				//ImageInEdit‚©‚ç•¶š‚ğ“Ç‚İæ‚èAcommand‚ÌˆÊ’u‚ğ’T‚·
-				map.put(i*-1, command);
+				// ImageInEdit‚©‚ç•¶š‚ğ“Ç‚İæ‚èAcommand‚ÌˆÊ’u‚ğ’T‚·
+				map.put(i * -1, command);
 				start.add(i);
-				end.add(i+command.length());
+				end.add(i + command.length());
 			}
 		}
 
 		Collections.sort(start);
 		Collections.sort(end);
 
-				int i = start.size()-1;	
+		int i = start.size() - 1;
 		for (Entry<Integer, String> indexAndStr : map.entrySet()) {
 			String command = indexAndStr.getValue();
-			
+
 			if (command.equals("¶˜r‚ğã‚°‚é")) {
 				setIcon(icon.getIconLeftHandUp(), start.get(i), end.get(i));
 			} else if (command.equals("¶˜r‚ğ‰º‚°‚é")) {
@@ -184,8 +188,6 @@ public class ImageInEdit extends EditText {
 	}
 
 	private void setIcon(final Drawable drawable, int start, int end) {
-		
-		
 		ImageGetter imageGetter = new ImageGetter() {
 			@Override
 			public Drawable getDrawable(String source) {
@@ -196,6 +198,24 @@ public class ImageInEdit extends EditText {
 		String img = "<img src=\"" + drawable.toString() + "\" />";
 		Spanned spanned = Html.fromHtml(img, imageGetter, null);
 		this.getText().replace(start, end, spanned, 0, spanned.length());
+	}
+
+	public String getTextFromImage(IconContainer iconContainer) {
+		final Editable text = this.getText();
+		List<ImageSpan> spanList = Arrays.asList(text.getSpans(0, text.length(), ImageSpan.class));
+		ArrayList<ImageSpan> spans = new ArrayList<ImageSpan>(spanList);
+		Collections.sort(spans, new Comparator<ImageSpan>() {
+			@Override
+			public int compare(ImageSpan s1, ImageSpan s2) {
+				return text.getSpanStart(s2) - text.getSpanStart(s1);
+			}
+		});
+		for (ImageSpan span : spans) {
+			String iconText = iconContainer.getStringFromIcon(span.getDrawable());
+			text.replace(text.getSpanStart(span), text.getSpanEnd(span),
+					iconText, 0, iconText.length());
+		}
+		return text.toString();
 	}
 
 }

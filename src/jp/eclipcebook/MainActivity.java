@@ -32,28 +32,29 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+	private static final int TEXT_VIEW = 0;
+	private static final int IMAGE_VIEW = 1;
 	// private String path = "mydata.txt"; // fileï€ë∂
 	private String lesson;
 	private String message;
 	private String text_data;
 
-	private ImageInEdit mImageEdit;
+	private TextView textView;
+	private ImageInEdit imgTextView;
 	private DetectableSoftKeyLayout DSKLayout;
 	private FrameLayout fLayout;
 	private LinearLayout buttonGroup2;
 	private HorizontalScrollView iconList;
-	private TextView editText1;
 	private MediaPlayer bgm;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle("ÉvÉåÉCÉÑÅ[âÊñ ");
+		setTitle("ï“èWâÊñ ");
 		setContentView(R.layout.main);
 
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		mImageEdit = (ImageInEdit) findViewById(R.id.imageInEdit);
-		mImageEdit.buildLayer();
+		imgTextView = (ImageInEdit) findViewById(R.id.imageInEdit);
+		imgTextView.buildLayer();
 		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.root);
 		DSKLayout.setListener(listner);
 		fLayout = (FrameLayout) findViewById(R.id.frameLayout_piyo);
@@ -62,7 +63,7 @@ public class MainActivity extends Activity {
 
 		/******************* tabÇÃé¿ëïÇ∆êÿÇËë÷Ç¶ *****************/
 
-		TabHost host = (TabHost) findViewById(R.id.tabhost);
+		host = (TabHost) findViewById(R.id.tabhost);
 		host.setup();
 
 		TabSpec tab1 = host.newTabSpec("tab1");
@@ -75,24 +76,26 @@ public class MainActivity extends Activity {
 		tab2.setContent(R.id.tab2);
 		host.addTab(tab2);
 
+		host.setCurrentTab(1);
+
 		final InterconversionStringAndImage isa = new InterconversionStringAndImage();
+		iconContainer = new IconContainer(getApplication());
 
 		host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 			public void onTabChanged(String tabId) {
-				iconContainer icon = new iconContainer(getApplication());
 				if (tabId == "tab2") {
-					mImageEdit.setText(editText1.getText().toString());
-					mImageEdit.replaceTextToImage(icon);
+					imgTextView.setText(textView.getText().toString());
+					imgTextView.replaceTextToImage(iconContainer);
 
 				} else if (tabId == "tab1") {
-					String str = mImageEdit.getText().toString();
-					str = isa.convertImageToString(str);
-					editText1.setText(str);
-					Log.v("ï∂éö", str);
+					// String str = mImageEdit.getText().toString();
+					// str = isa.convertImageToString(str);
+					// editText1.setText(mImageEdit.getText());
+					// Log.v("ï∂éö", str);
+					textView.setText(imgTextView.getTextFromImage(iconContainer));
 				}
 			}
 		});
-
 
 		/********** âπäy **************/
 		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
@@ -106,12 +109,13 @@ public class MainActivity extends Activity {
 		lesson = intent.getStringExtra("lesson");
 		message = intent.getStringExtra("message");
 		text_data = intent.getStringExtra("text_data");
-		editText1 = (TextView) findViewById(R.id.editText1);
-		editText1.setText(text_data);
+		textView = (TextView) findViewById(R.id.editText1);
+		textView.setText(text_data);
 
 		FrameLayout actionButton = (FrameLayout) this.findViewById(R.id.frameLayout_piyo);
 		actionButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				host.setCurrentTab(TEXT_VIEW);
 				final Handler handler = new Handler();
 				Thread trd = new Thread(new CommandExecutor(handler));
 				trd.start();
@@ -129,20 +133,20 @@ public class MainActivity extends Activity {
 		}
 
 		public void run() {
-			editText1 = (TextView)findViewById(R.id.editText1);
+			textView = (TextView) findViewById(R.id.editText1);
 			ImageView leftHand1 = (ImageView) findViewById(R.id.playerLeftHand1);
 			ImageView rightHand1 = (ImageView) findViewById(R.id.playerRightHand1);
 			ImageView basic = (ImageView) findViewById(R.id.playerBasic);
 			ImageView leftFoot1 = (ImageView) findViewById(R.id.playerLeftFoot1);
 			ImageView rightFoot1 = (ImageView) findViewById(R.id.playerRightFoot1);
 
-			String commandsText = editText1.getText().toString(); // 1çsÇ∏Ç¬îzóÒÇ…é˚î[
+			String commandsText = textView.getText().toString(); // 1çsÇ∏Ç¬îzóÒÇ…é˚î[
 			List<Integer> numberSorting = new ArrayList<Integer>();
 			List<String> commands = new ArrayList<String>();
 			StringCommandParser.parse(commandsText, numberSorting, commands);
 			executeCommands(
 					new ImageContainer(leftHand1, rightHand1, basic, leftFoot1, rightFoot1),
-					commands, editText1, numberSorting);
+					commands, textView, numberSorting);
 		}
 
 		private void executeCommands(ImageContainer images, List<String> expandedCommands,
@@ -212,120 +216,132 @@ public class MainActivity extends Activity {
 			}
 		}
 	};
+	private TabHost host;
+	private IconContainer iconContainer;
 
 	/******************** É{É^Éì(äGï∂éö)ÇÃèàóù *************************/
 	public void doActionLeftHandUp(View view) {
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		int start = editText1.getSelectionStart();
-		int end = editText1.getSelectionEnd();
-		Editable editable = (Editable) editText1.getText();
-		editable.replace(Math.min(start, end), Math.max(start, end), "ç∂òrÇè„Ç∞ÇÈ");
-		// mImageEdit.insertResourceImage(MainActivity.this,
-		// R.drawable.icon_left_hand_up);
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconLeftHandUp());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "ç∂òrÇè„Ç∞ÇÈ");
+		}
 	}
 
 	public void doActionLeftHandDown(View view) {
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		int start = editText1.getSelectionStart();
-		int end = editText1.getSelectionEnd();
-		Editable editable = (Editable) editText1.getText();
-		editable.replace(Math.min(start, end), Math.max(start, end), "ç∂òrÇâ∫Ç∞ÇÈ");
-		// mImageEdit.insertResourceImage(MainActivity.this,
-		// R.drawable.icon_left_hand_down);
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconLeftHandDown());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "ç∂òrÇâ∫Ç∞ÇÈ");
+		}
 	}
 
 	public void doActionRightHandUp(View view) {
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		int start = editText1.getSelectionStart();
-		int end = editText1.getSelectionEnd();
-		Editable editable = (Editable) editText1.getText();
-		editable.replace(Math.min(start, end), Math.max(start, end), "âEòrÇè„Ç∞ÇÈ");
-		// mImageEdit.insertResourceImage(MainActivity.this,
-		// R.drawable.icon_right_hand_up);
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconRightHandUp());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "âEòrÇè„Ç∞ÇÈ");
+		}
 	}
 
 	public void doActionRightHandDown(View view) {
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		int start = editText1.getSelectionStart();
-		int end = editText1.getSelectionEnd();
-		Editable editable = (Editable) editText1.getText();
-		editable.replace(Math.min(start, end), Math.max(start, end), "âEòrÇâ∫Ç∞ÇÈ");
-		// mImageEdit.insertResourceImage(MainActivity.this,
-		// R.drawable.icon_right_hand_down);
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconRightHandDown());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "âEòrÇâ∫Ç∞ÇÈ");
+		}
 
 	}
 
 	public void doActionLeftFootUp(View view) {
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		int start = editText1.getSelectionStart();
-		int end = editText1.getSelectionEnd();
-		Editable editable = (Editable) editText1.getText();
-		editable.replace(Math.min(start, end), Math.max(start, end), "ç∂ë´Çè„Ç∞ÇÈ");
-		// mImageEdit.insertResourceImage(MainActivity.this,
-		// R.drawable.icon_left_foot_up);
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconLeftFootUp());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "ç∂ë´Çè„Ç∞ÇÈ");
+		}
 	}
 
 	public void doActionLeftFootDown(View view) {
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		int start = editText1.getSelectionStart();
-		int end = editText1.getSelectionEnd();
-		Editable editable = (Editable) editText1.getText();
-		editable.replace(Math.min(start, end), Math.max(start, end), "ç∂ë´Çâ∫Ç∞ÇÈ");
-		// mImageEdit.insertResourceImage(MainActivity.this,
-		// R.drawable.icon_left_foot_down);
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconLeftFootDown());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "ç∂ë´Çâ∫Ç∞ÇÈ");
+		}
 	}
 
 	public void doActionRightFootUp(View view) {
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		int start = editText1.getSelectionStart();
-		int end = editText1.getSelectionEnd();
-		Editable editable = (Editable) editText1.getText();
-		editable.replace(Math.min(start, end), Math.max(start, end), "âEë´Çè„Ç∞ÇÈ");
-		// mImageEdit.insertResourceImage(MainActivity.this,
-		// R.drawable.icon_right_foot_up);
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconRightFootUp());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "âEë´Çè„Ç∞ÇÈ");
+		}
 	}
 
 	public void doActionRightFootDown(View view) {
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		int start = editText1.getSelectionStart();
-		int end = editText1.getSelectionEnd();
-		Editable editable = (Editable) editText1.getText();
-		editable.replace(Math.min(start, end), Math.max(start, end), "âEë´Çâ∫Ç∞ÇÈ");
-		// mImageEdit.insertResourceImage(MainActivity.this,
-		// R.drawable.icon_right_foot_down);
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconRightFootDown());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "âEë´Çâ∫Ç∞ÇÈ");
+		}
 	}
 
 	public void doActionJump(View view) {
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		int start = editText1.getSelectionStart();
-		int end = editText1.getSelectionEnd();
-		Editable editable = (Editable) editText1.getText();
-		editable.replace(Math.min(start, end), Math.max(start, end), "ÉWÉÉÉìÉvÇ∑ÇÈ");
-		// mImageEdit.insertResourceImage(MainActivity.this,
-		// R.drawable.icon_jump);
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconJump());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "ÉWÉÉÉìÉvÇ∑ÇÈ");
+		}
 	}
 
 	public void doActionLoop(View view) {
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		int start = editText1.getSelectionStart();
-		int end = editText1.getSelectionEnd();
-		Editable editable = (Editable) editText1.getText();
-		editable.replace( Math.min( start, end ), Math.max( start, end ), "loop");
-		// mImageEdit.insertResourceImage(MainActivity.this,
-		// R.drawable.icon_loop);
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconLoop());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "loop");
+		}
 	}
 
 	public void doActionKoko(View view) {
-		editText1 = (TextView) this.findViewById(R.id.editText1);
-		int start = editText1.getSelectionStart();
-		int end = editText1.getSelectionEnd();
-		Editable editable = (Editable) editText1.getText();
-		editable.replace( Math.min( start, end ), Math.max( start, end ), "Ç±Ç±Ç‹Ç≈");
-		// mImageEdit.insertResourceImage(MainActivity.this,
-		// R.drawable.icon_kokomade);
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconKokomade());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "Ç±Ç±Ç‹Ç≈");
+		}
 
 	}
-
 
 	public void initializeImage() {
 		ImageView leftHand1 = (ImageView) findViewById(R.id.playerLeftHand1);
@@ -385,17 +401,16 @@ public class MainActivity extends Activity {
 		});
 		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				editText1.getEditableText().clear();
+				textView.getEditableText().clear();
 				return false;
 			}
 		});
-		 item3.setOnMenuItemClickListener(new
-		 MenuItem.OnMenuItemClickListener() {
-		 public boolean onMenuItemClick(MenuItem item) {
+		item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
 				changeTitleScreen();
-		 return false;
-		 }
-		 });
+				return false;
+			}
+		});
 
 		return true;
 	}
@@ -404,8 +419,9 @@ public class MainActivity extends Activity {
 	public void changeActionScreen(View view) {
 		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 		bgm.start();
+		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this, jp.eclipcebook.ActionActivity.class);
-		intent.putExtra("text_data", editText1.getText().toString());
+		intent.putExtra("text_data", textView.getText().toString());
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		this.startActivity(intent);
@@ -414,20 +430,23 @@ public class MainActivity extends Activity {
 	public void changePartnerScreen(View view) { // Ç®éËñ{âÊñ Ç÷ëJà⁄
 		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 		bgm.start();
+		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
-		intent.putExtra("text_data", editText1.getText().toString());
+		intent.putExtra("text_data", textView.getText().toString());
 		this.startActivity(intent);
 	}
-	
-	public void changeHelpScreen() { // Ç®éËñ{âÊñ Ç÷ëJà⁄
-		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-		bgm.start();
+
+	public void changeHelpScreen() { // ÉwÉãÉvâÊñ Ç÷ëJà⁄
+//		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+//		bgm.start();
+		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this, jp.eclipcebook.Help.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
-		intent.putExtra("text_data", editText1.getText().toString());
+		intent.putExtra("text_data", textView.getText().toString());
+		intent.putExtra("actibity_data", "main");
 		this.startActivity(intent);
 	}
 

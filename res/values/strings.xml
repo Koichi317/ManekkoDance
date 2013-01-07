@@ -23,11 +23,11 @@
     <string name="jump">ジャンプ</string>
     <string name="partner_screen">お手本</string>
     <string name="player">編集</string>
-    <string name="action">判定</string>
+    <string name="action">判定画面</string>
     <string name="return_action">戻る</string>
     <string name="Title_how_to_play">遊びかた</string>
     <string name="Title_start_button">はじめる</string>
-    <string name="look_answer_button">お手本を見る</string>
+    <string name="look_answer_button">①お手本を見る</string>
     <string name="text_look">まずは、お手本をチェック！</string>
     <string name="player_source_cord">playerSourceCordArea</string>
     <string name="partner_source_cord">お手本のソースコードエリア</string>
@@ -49,11 +49,24 @@
     <string name="answer_lesson9">loop3\n左足を上げる\n左足を下げる\n右足を上げる\n右足を下げる\nここまで\n loop2\n左腕を上げる 右腕を上げる\n 左腕を下げる 右腕を下げる\nここまで</string>
     <string name="answer_lesson10">loop3\n loop2\n 左腕を上げる 右腕を上げる\n左腕を下げる 右腕を下げる\nここまで\nジャンプする\nここまで</string>
 
-    <string-array name="help">
+    <string-array name="move">
         <item>基本動作</item>
         <item>応用動作</item>
         <item>ジャンプ</item>
         <item>繰り返し</item>
     </string-array>
+    <string-array name="help">
+    <item>命令一覧</item>
+    <item>間違った動作例</item>
+    <item>操作方法</item>
+    <item>チュートリアル</item>
+  </string-array>
+        <string name="challenge">②Let\'s チャレンジ！！</string>
+        <string name="hantei">判定！</string>
+        <string name="player_screen">編集画面</string>
+        <string name="look_answer_button2">お手本を見る</string>
+        <string name="arrow_right">次へ</string>
+        <string name="arrow_left">前へ</string>
+        <string name="close">閉じる</string>
 
 </resources>

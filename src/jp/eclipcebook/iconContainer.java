@@ -1,9 +1,11 @@
 package jp.eclipcebook;
 
+import java.util.HashMap;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
-public class iconContainer {
+public class IconContainer {
 	
 	private Drawable iconLeftHandUp;
 	private Drawable iconLeftHandDown;
@@ -16,8 +18,9 @@ public class iconContainer {
 	private Drawable iconJump;
 	private Drawable iconLoop;
 	private Drawable iconKokomade;
+	private HashMap<Drawable, String> icon2Strings;
 	
-	public iconContainer(Context context) {
+	public IconContainer(Context context) {
 		this.iconLeftHandUp = context.getResources().getDrawable(R.drawable.icon_left_hand_up);
 		this.iconLeftHandDown = context.getResources().getDrawable(R.drawable.icon_left_hand_down);
 		this.iconRightHandUp = context.getResources().getDrawable(R.drawable.icon_right_hand_up);
@@ -29,6 +32,24 @@ public class iconContainer {
 		this.iconJump = context.getResources().getDrawable(R.drawable.icon_jump);
 		this.iconLoop = context.getResources().getDrawable(R.drawable.icon_loop);
 		this.iconKokomade = context.getResources().getDrawable(R.drawable.icon_kokomade);
+		this.icon2Strings = new HashMap<Drawable, String>();
+		
+		icon2Strings.put(iconLeftHandUp, "左腕を上げる");
+		icon2Strings.put(iconLeftHandDown, "左腕を下げる");
+		icon2Strings.put(iconRightHandUp, "右腕を上げる");
+		icon2Strings.put(iconRightHandDown, "右腕を下げる");
+		icon2Strings.put(iconLeftFootUp, "左足を上げる");
+		icon2Strings.put(iconLeftFootDown, "左足を下げる");
+		icon2Strings.put(iconRightFootUp, "右足を上げる");
+		icon2Strings.put(iconRightFootDown, "右足を下げる");
+		icon2Strings.put(iconJump, "ジャンプする");
+		icon2Strings.put(iconLoop, "loop");
+		icon2Strings.put(iconKokomade, "ここまで");
+		// ...
+	}
+	
+	public String getStringFromIcon(Drawable icon) {
+		return icon2Strings.get(icon);
 	}
 	
 	public Drawable getIconLeftHandUp() {

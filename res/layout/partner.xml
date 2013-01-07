@@ -100,27 +100,12 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/button1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:text="@string/partner_screen" />
-
-        <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:onClick="changeMainScreen"
-            android:text="@string/player" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:onClick="changeActionScreen"
-            android:text="@string/action" />
+            android:text="@string/challenge" />
 
     </LinearLayout>
 

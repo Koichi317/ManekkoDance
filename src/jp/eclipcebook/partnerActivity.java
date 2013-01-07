@@ -176,16 +176,6 @@ public class PartnerActivity extends Activity {
 		this.startActivity(intent);
 	}
 	
-	public void changeActionScreen(View view) {
-		Intent intent = new Intent(getApplication(), jp.eclipcebook.ActionActivity.class);
-		TextView editText1 = (TextView) findViewById(R.id.editText1);
-		TextView editText2 = (TextView) findViewById(R.id.editText2);
-		intent.putExtra("lesson", editText1.getText().toString());
-		intent.putExtra("message", editText2.getText().toString());
-		intent.putExtra("text_data", text_data);
-		this.startActivity(intent);
-	}
-	
 	public void changeTitleScreen() {
 		Intent intent = new Intent(getApplication(), jp.eclipcebook.TitleActivity.class);
 		this.startActivity(intent);

@@ -42,11 +42,11 @@
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_action" />
+        android:text="@string/hantei" />
 
     <EditText
         android:id="@+id/editTextActionScreen2"
-        android:layout_width="match_parent"
+        android:layout_width="255dp"
         android:layout_height="30dp"
         android:contentDescription="@string/player_source_cord"
         android:hint="@string/hint_secret"
@@ -110,6 +110,13 @@
             android:layout_weight="1.0" >
 
             <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:src="@drawable/help" />
+
+            <ImageView
                 android:id="@+id/partnerLeftHand1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -163,7 +170,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="changePartnerScreen"
-            android:text="@string/partner_screen" />
+            android:text="@string/look_answer_button2" />
 
         <Button
             android:id="@+id/button3"
@@ -171,14 +178,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="changeMainScreen"
-            android:text="@string/player" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/action" />
+            android:text="@string/player_screen" />
 
     </LinearLayout>
 

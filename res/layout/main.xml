@@ -52,6 +52,7 @@
                             android:inputType="textMultiLine"
                             android:textColor="#000000"
                             android:visibility="visible" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -81,6 +82,13 @@
                 </FrameLayout>
             </LinearLayout>
         </TabHost>
+
+        <ImageView
+            android:id="@+id/helpBuuton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/help" />
 
         <FrameLayout
             android:id="@+id/frameLayout_piyo"
@@ -243,14 +251,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="changePartnerScreen"
-            android:text="@string/partner_screen" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/player" />
+            android:text="@string/look_answer_button2" />
 
         <Button
             android:id="@+id/button6"

@@ -2,7 +2,6 @@ package jp.eclipcebook;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,15 +25,15 @@ public class TitleActivity extends Activity{
 	}
 	
 	public void doActionFromTheBeginning(View view) {
-		MediaPlayer bgm = MediaPlayer.create(getApplicationContext(), R.raw.titlecall);
-		bgm.start();
-		Intent intent = new Intent(this, jp.eclipcebook.Tutorial.class);
+//		MediaPlayer bgm = MediaPlayer.create(getApplicationContext(), R.raw.titlecall);
+//		bgm.start();
+		Intent intent = new Intent(this, jp.eclipcebook.Help.class);
 		this.startActivity(intent);
 	}
 	
 	public void doActionContinue(View view) {
-		MediaPlayer bgm = MediaPlayer.create(getApplicationContext(), R.raw.titlecall);
-		bgm.start();
+//		MediaPlayer bgm = MediaPlayer.create(getApplicationContext(), R.raw.titlecall);
+//		bgm.start();
 		Intent intent = new Intent(this, jp.eclipcebook.LessonList.class);
 		this.startActivity(intent);
 	}
