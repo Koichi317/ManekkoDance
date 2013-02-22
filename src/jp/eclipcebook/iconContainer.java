@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 public class IconContainer {
 	
@@ -22,6 +23,7 @@ public class IconContainer {
 	
 	public IconContainer(Context context) {
 		this.iconLeftHandUp = context.getResources().getDrawable(R.drawable.icon_left_hand_up);
+		Log.v("", "ctr: width: " + iconLeftHandUp.getBounds().width());
 		this.iconLeftHandDown = context.getResources().getDrawable(R.drawable.icon_left_hand_down);
 		this.iconRightHandUp = context.getResources().getDrawable(R.drawable.icon_right_hand_up);
 		this.iconRightHandDown = context.getResources().getDrawable(R.drawable.icon_right_hand_down);
@@ -48,11 +50,16 @@ public class IconContainer {
 		// ...
 	}
 	
+	public void reload() {
+		
+	}
+	
 	public String getStringFromIcon(Drawable icon) {
 		return icon2Strings.get(icon);
 	}
 	
 	public Drawable getIconLeftHandUp() {
+		Log.v("", "get: width: " + iconLeftHandUp.getBounds().width());
 		return iconLeftHandUp;
 	}
 	

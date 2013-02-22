@@ -36,6 +36,15 @@ public class LessonData {
 		case 10:
 			answer = "loop3\n loop2\n ¶˜r‚ğã‚°‚é ‰E˜r‚ğã‚°‚é\n¶˜r‚ğ‰º‚°‚é ‰E˜r‚ğ‰º‚°‚é\n‚±‚±‚Ü‚Å\nƒWƒƒƒ“ƒv‚·‚é\n‚±‚±‚Ü‚Å";
 			break;
+		case 11:
+			answer = "loop2\n¶˜r‚ğã‚°‚é\n¶˜r‚ğ‰º‚°‚é\n‚±‚±‚Ü‚Å";
+			break;
+		case 12:
+			answer = "loop2\n¶˜r‚ğã‚°‚é\n¶˜r‚ğ‰º‚°‚é\n‚±‚±‚Ü‚Å\nloop2\n‰E˜r‚ğã‚°‚é\n‰E˜r‚ğ‰º‚°‚é\n‚±‚±‚Ü‚Å";
+			break;
+		case 13:
+			answer = "loop2\nloop2\n¶˜r‚ğã‚°‚é\n¶˜r‚ğ‰º‚°‚é\n‚±‚±‚Ü‚Å\n‰E˜r‚ğã‚°‚é\n‰E˜r‚ğ‰º‚°‚é\n‚±‚±‚Ü‚Å";
+			break;
 		default:
 			answer = "null";
 			break;

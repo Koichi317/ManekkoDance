@@ -17,7 +17,6 @@ import android.text.Html.ImageGetter;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.EditText;
 
 /**
@@ -127,13 +126,12 @@ public class ImageInEdit extends EditText {
 
 		this.getText().replace(Math.min(start, end), Math.max(start, end), spanned, 0,
 				spanned.length());
-
 	}
 
 	public void replaceTextToImage(final IconContainer icon) {
 
 		String[] commands = new String[] { "左腕を上げる", "左腕を下げる", "右腕を上げる", "右腕を下げる", "左足を上げる",
-				"左足を下げる", "右足を上げる", "右足を下げる", "loop", "ここまで" };
+				"左足を下げる", "右足を上げる", "右足を下げる", "ジャンプする", "loop", "ここまで" };
 
 		TreeMap<Integer, String> map = new TreeMap<Integer, String>();
 		ArrayList<Integer> start = new ArrayList<Integer>(); // プログラム的に
@@ -180,8 +178,8 @@ public class ImageInEdit extends EditText {
 			} else if (command.equals("ここまで")) {
 				setIcon(icon.getIconKokomade(), start.get(i), end.get(i));
 			}
-			Log.v("tag", start.get(i).toString());
-			Log.v("tag", end.get(i).toString());
+//			Log.v("tag", start.get(i).toString());
+//			Log.v("tag", end.get(i).toString());
 			i--;
 		}
 

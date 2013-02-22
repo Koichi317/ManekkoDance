@@ -12,7 +12,6 @@ public class Help extends Activity {
 	private String lesson;
 	private String text_data;
 	private String message;
-	private String activity_data;
 	private int pageNumber;
 	private String page;
 
@@ -24,7 +23,6 @@ public class Help extends Activity {
 		lesson = intent.getStringExtra("lesson");
 		message = intent.getStringExtra("message");
 		text_data = intent.getStringExtra("text_data");
-		activity_data = intent.getStringExtra("activity_data");
 		pageNumber = 1;
 		page = " / 8";
 		ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
@@ -65,7 +63,7 @@ public class Help extends Activity {
 			helpImage.setImageResource(R.drawable.helptext2);
 			break;
 		case 8:
-			helpImage.setImageResource(R.drawable.helptext2);
+			helpImage.setImageResource(R.drawable.helptext3);
 			break;
 		}
 

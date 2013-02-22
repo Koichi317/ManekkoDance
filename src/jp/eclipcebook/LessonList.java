@@ -27,10 +27,9 @@ public class LessonList extends ListActivity {
 		lessonList.add("Lesson‚W ŒJ‚è•Ô‚µ2");
 		lessonList.add("Lesson‚X ŒJ‚è•Ô‚µ3");
 		lessonList.add("Lesson‚P‚O ŒJ‚è•Ô‚µ4");
-		lessonList.add("");
-		lessonList.add("");
-		lessonList.add("");
-		lessonList.add("");
+		lessonList.add("Lesson‚P‚P ‚¨‚Ü‚¯1");
+		lessonList.add("Lesson‚P‚Q ‚¨‚Ü‚¯2");
+		lessonList.add("Lesson‚P‚R ‚¨‚Ü‚¯3");
 		arrayadapter = new MySpecialAdapter(this, android.R.layout.simple_list_item_1,
 				lessonList);
 		this.setListAdapter(arrayadapter);
@@ -112,6 +111,27 @@ public class LessonList extends ListActivity {
 			intent9.putExtra("lesson", getText(R.string.answer_lesson10));
 			intent9.putExtra("message", "10");
 			this.startActivity(intent9);
+			break;
+			
+		case 10:
+			Intent intent10 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			intent10.putExtra("lesson", getText(R.string.answer_lesson11));
+			intent10.putExtra("message", "11");
+			this.startActivity(intent10);
+			break;
+
+		case 11:
+			Intent intent11 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			intent11.putExtra("lesson", getText(R.string.answer_lesson12));
+			intent11.putExtra("message", "12");
+			this.startActivity(intent11);
+			break;
+
+		case 12:
+			Intent intent12 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			intent12.putExtra("lesson", getText(R.string.answer_lesson13));
+			intent12.putExtra("message", "13");
+			this.startActivity(intent12);
 			break;
 
 		default:

@@ -12,7 +12,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.MediaPlayer;
+//import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -34,7 +34,7 @@ public class ActionActivity extends Activity {
 	private String message;
 	private String text_data;
 	public boolean answerCheckEnd = false;
-	private MediaPlayer bgm;
+//	private MediaPlayer bgm;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -144,15 +144,15 @@ public class ActionActivity extends Activity {
 					if (answer.judge) {
 
 						if (Integer.parseInt(message) == 10) {
-							bgm = MediaPlayer.create(getApplicationContext(), R.raw.perfect);
-							bgm.start();
+//							bgm = MediaPlayer.create(getApplicationContext(), R.raw.perfect);
+//							bgm.start();
 							builder.setIcon(R.drawable.answer_ture);
 							builder.setNegativeButton("タイトルへ戻る",
 									new DialogInterface.OnClickListener() {
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
-											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-											bgm.start();
+//											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+//											bgm.start();
 											Intent intent = new Intent(getApplication(),
 													jp.eclipcebook.TitleActivity.class);
 											startActivity(intent);
@@ -162,21 +162,21 @@ public class ActionActivity extends Activity {
 							builder.setPositiveButton("もう一度Challenge",
 									new DialogInterface.OnClickListener() {
 										public void onClick(DialogInterface dialog, int which) {
-											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-											bgm.start();
+//											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+//											bgm.start();
 											changeMainScreen();
 										}
 									});
 						} else {
-							bgm = MediaPlayer.create(getApplicationContext(), R.raw.good_answer);
-							bgm.start();
+//							bgm = MediaPlayer.create(getApplicationContext(), R.raw.good_answer);
+//							bgm.start();
 							builder.setIcon(R.drawable.answer_ture);
 							builder.setNegativeButton("次のLessonに進む",
 									new DialogInterface.OnClickListener() {
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
-											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-											bgm.start();
+//											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+//											bgm.start();
 											Intent intent = new Intent(getApplication(),
 													jp.eclipcebook.PartnerActivity.class);
 											int nextLessonNumber = Integer.parseInt(message) + 1;
@@ -192,23 +192,23 @@ public class ActionActivity extends Activity {
 							builder.setPositiveButton("もう一度Challenge",
 									new DialogInterface.OnClickListener() {
 										public void onClick(DialogInterface dialog, int which) {
-											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-											bgm.start();
+//											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+//											bgm.start();
 											changeMainScreen();
 										}
 									});
 						}
 						
 					}else {
-						bgm = MediaPlayer.create(getApplicationContext(), R.raw.fail);
-						bgm.start();
+//						bgm = MediaPlayer.create(getApplicationContext(), R.raw.fail);
+//						bgm.start();
 						builder.setIcon(R.drawable.answer_false);
 						builder.setNegativeButton("Lessonを選択し直す",
 								new DialogInterface.OnClickListener() {
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
-										bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-										bgm.start();
+//										bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+//										bgm.start();
 										Intent intent = new Intent(getApplication(),
 												jp.eclipcebook.LessonList.class);
 										startActivity(intent);
@@ -218,8 +218,8 @@ public class ActionActivity extends Activity {
 						builder.setPositiveButton("もう一度Challenge",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog, int which) {
-										bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-										bgm.start();
+//										bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+//										bgm.start();
 										changeMainScreen();
 									}
 								});
@@ -331,6 +331,16 @@ public class ActionActivity extends Activity {
 
 	private void changeTitleScreen() {
 		Intent intent = new Intent(this, jp.eclipcebook.TitleActivity.class);
+		this.startActivity(intent);
+	}
+	
+	public void changeHelpScreen(View view) { // ヘルプ画面へ遷移
+//		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+//		bgm.start();
+		Intent intent = new Intent(this, jp.eclipcebook.Help.class);
+		intent.putExtra("lesson", lesson);
+		intent.putExtra("message", message);
+		intent.putExtra("text_data", text_data);
 		this.startActivity(intent);
 	}
 

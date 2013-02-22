@@ -59,6 +59,8 @@ public class PartnerActivity extends Activity {
 			messageImageView1.setImageResource(R.drawable.lesson_message9);
 		} else if (message.equals("10")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message10);
+		}else {
+			messageImageView1.setImageResource(R.drawable.lesson_message11);
 		}
 
 		Button btn5 = (Button) this.findViewById(R.id.button5);

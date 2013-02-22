@@ -54,13 +54,22 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 
 		imgTextView = (ImageInEdit) findViewById(R.id.imageInEdit);
-		imgTextView.buildLayer();
+		//imgTextView.buildLayer();
 		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.root);
 		DSKLayout.setListener(listner);
 		fLayout = (FrameLayout) findViewById(R.id.frameLayout_piyo);
 		buttonGroup2 = (LinearLayout) findViewById(R.id.buttonGroup2);
 		iconList = (HorizontalScrollView) findViewById(R.id.iconList);
 
+		/********** Lesson data　の 取得 **************/
+		Intent intent = getIntent();
+		lesson = intent.getStringExtra("lesson");
+		message = intent.getStringExtra("message");
+		text_data = intent.getStringExtra("text_data");
+		textView = (TextView) findViewById(R.id.editText1);
+		Log.v("my_debug", "" + text_data);
+		textView.setText(text_data);
+		
 		/******************* tabの実装と切り替え *****************/
 
 		host = (TabHost) findViewById(R.id.tabhost);
@@ -75,42 +84,51 @@ public class MainActivity extends Activity {
 		tab2.setIndicator("絵文字");
 		tab2.setContent(R.id.tab2);
 		host.addTab(tab2);
+		
+		if (iconContainer == null) {
+			iconContainer = new IconContainer(getApplication());
+		}
 
-		host.setCurrentTab(1);
-
-		final InterconversionStringAndImage isa = new InterconversionStringAndImage();
-		iconContainer = new IconContainer(getApplication());
-
+		final MainActivity mainActivity = this;
+		
+//		imgTextView.setOnSystemUiVisibilityChangeListener(new OnSystemUiVisibilityChangeListener() {
+//			public void onSystemUiVisibilityChange(int visibility) {
+//				Log.v("my_debug", "onSystemUiVisibilityChange: " + visibility);
+//			}
+//		});
+		
+		
 		host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 			public void onTabChanged(String tabId) {
+				Log.v("my_debug", "onTabChanged" + tabId);
 				if (tabId == "tab2") {
-					imgTextView.setText(textView.getText().toString());
-					imgTextView.replaceTextToImage(iconContainer);
-
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							
+							mainActivity.runOnUiThread(new Runnable() {
+								@Override
+								public void run() {
+									imgTextView.setText(textView.getText().toString());
+									imgTextView.replaceTextToImage(iconContainer);
+								}
+							});
+						}
+					}).start();
 				} else if (tabId == "tab1") {
-					// String str = mImageEdit.getText().toString();
-					// str = isa.convertImageToString(str);
-					// editText1.setText(mImageEdit.getText());
-					// Log.v("文字", str);
 					textView.setText(imgTextView.getTextFromImage(iconContainer));
 				}
 			}
 		});
-
+		
+		host.setCurrentTab(IMAGE_VIEW);
+		
 		/********** 音楽 **************/
 		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
 		// ゲーム音楽
 		// bgm1.start(); // BGMスタート
 
 		// doLoad(); // セーブデータをロード
-
-		/********** Lesson data　の 取得 **************/
-		Intent intent = getIntent();
-		lesson = intent.getStringExtra("lesson");
-		message = intent.getStringExtra("message");
-		text_data = intent.getStringExtra("text_data");
-		textView = (TextView) findViewById(R.id.editText1);
-		textView.setText(text_data);
 
 		FrameLayout actionButton = (FrameLayout) this.findViewById(R.id.frameLayout_piyo);
 		actionButton.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +139,6 @@ public class MainActivity extends Activity {
 				trd.start();
 			}
 		});
-
 	}
 
 	/******************** 構文解析＆実行 *************************/
@@ -205,19 +222,19 @@ public class MainActivity extends Activity {
 			if (isShown) {
 				// ソフトキーボードが表示されている場合
 				// postボタンを非表示にする
-				fLayout.setVisibility(View.GONE);
+				//fLayout.setVisibility(View.GONE);
 				buttonGroup2.setVisibility(View.GONE);
 				iconList.setVisibility(View.VISIBLE);
 			} else {
 				// ソフトキーボードが表示されてなければ、表示する
-				fLayout.setVisibility(View.VISIBLE);
+				//fLayout.setVisibility(View.VISIBLE);
 				buttonGroup2.setVisibility(View.VISIBLE);
 				iconList.setVisibility(View.GONE);
 			}
 		}
 	};
 	private TabHost host;
-	private IconContainer iconContainer;
+	private static IconContainer iconContainer;
 
 	/******************** ボタン(絵文字)の処理 *************************/
 	public void doActionLeftHandUp(View view) {
@@ -446,7 +463,17 @@ public class MainActivity extends Activity {
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", textView.getText().toString());
-		intent.putExtra("actibity_data", "main");
+		this.startActivity(intent);
+	}
+	
+	public void changeHelpScreen(View view) { // ヘルプ画面へ遷移
+//		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+//		bgm.start();
+		host.setCurrentTab(TEXT_VIEW);
+		Intent intent = new Intent(this, jp.eclipcebook.Help.class);
+		intent.putExtra("lesson", lesson);
+		intent.putExtra("message", message);
+		intent.putExtra("text_data", textView.getText().toString());
 		this.startActivity(intent);
 	}
 
