@@ -118,7 +118,7 @@ public class PartnerActivity extends Activity {
 				}
 			}
 		}
-		
+
 	}
 
 	/******************** ƒtƒ@ƒCƒ‹•Û‘¶ doSave(View view) *************************/
@@ -167,7 +167,7 @@ public class PartnerActivity extends Activity {
 		});
 		return true;
 	}
-	
+
 	public void changeMainScreen(View view) {
 		Intent intent = new Intent(getApplication(), jp.eclipcebook.MainActivity.class);
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
@@ -177,12 +177,12 @@ public class PartnerActivity extends Activity {
 		intent.putExtra("text_data", text_data);
 		this.startActivity(intent);
 	}
-	
+
 	public void changeTitleScreen() {
 		Intent intent = new Intent(getApplication(), jp.eclipcebook.TitleActivity.class);
 		this.startActivity(intent);
 	}
-	
+
 	protected void onDestroy() {
 		super.onDestroy();
 		cleanupView(findViewById(R.id.partnerRoot));
