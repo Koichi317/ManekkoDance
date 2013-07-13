@@ -18,7 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PartnerActivity extends Activity {
+public class PartnerActivity2 extends Activity {
 
 	// private String path = "mydata2.txt"; // file•Û‘¶
 	private String text_data;

@@ -6,7 +6,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
-public class IconContainer {
+public class IconContainer2 {
 	
 	private Drawable iconLeftHandUp;
 	private Drawable iconLeftHandDown;
@@ -21,7 +21,7 @@ public class IconContainer {
 	private Drawable iconKokomade;
 	private HashMap<Drawable, String> icon2Strings;
 	
-	public IconContainer(Context context) {
+	public IconContainer2(Context context) {
 		this.iconLeftHandUp = context.getResources().getDrawable(R.drawable.icon_left_hand_up);
 		Log.v("", "ctr: width: " + iconLeftHandUp.getBounds().width());
 		this.iconLeftHandDown = context.getResources().getDrawable(R.drawable.icon_left_hand_down);

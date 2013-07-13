@@ -46,89 +46,89 @@ public class LessonList extends ListActivity {
 
 		switch (position) {
 		case 0:
-			Intent intent0 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent0 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			// intent0.putExtra("lesson0", sp.getString("lesson0", null));
 			intent0.putExtra("lesson", getText(R.string.answer_lesson1)); // ‚¨Žè–{‚Ì“š‚¦
 			intent0.putExtra("message", "1");
 			this.startActivity(intent0);
 			break;
 		case 1:
-			Intent intent1 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent1 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent1.putExtra("lesson", getText(R.string.answer_lesson2));
 			intent1.putExtra("message", "2");
 			this.startActivity(intent1);
 			break;
 		case 2:
-			Intent intent2 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent2 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent2.putExtra("lesson", getText(R.string.answer_lesson3));
 			intent2.putExtra("message", "3");
 			this.startActivity(intent2);
 			break;
 		case 3:
-			Intent intent3 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent3 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent3.putExtra("lesson", getText(R.string.answer_lesson4));
 			intent3.putExtra("message", "4");
 			this.startActivity(intent3);
 			break;
 
 		case 4:
-			Intent intent4 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent4 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent4.putExtra("lesson", getText(R.string.answer_lesson5));
 			intent4.putExtra("message", "5");
 			this.startActivity(intent4);
 			break;
 
 		case 5:
-			Intent intent5 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent5 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent5.putExtra("lesson", getText(R.string.answer_lesson6));
 			intent5.putExtra("message", "6");
 			this.startActivity(intent5);
 			break;
 
 		case 6:
-			Intent intent6 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent6 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent6.putExtra("lesson", getText(R.string.answer_lesson7));
 			intent6.putExtra("message", "7");
 			this.startActivity(intent6);
 			break;
 
 		case 7:
-			Intent intent7 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent7 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent7.putExtra("lesson", getText(R.string.answer_lesson8));
 			intent7.putExtra("message", "8");
 			this.startActivity(intent7);
 			break;
 
 		case 8:
-			Intent intent8 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent8 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent8.putExtra("lesson", getText(R.string.answer_lesson9));
 			intent8.putExtra("message", "9");
 			this.startActivity(intent8);
 			break;
 
 		case 9:
-			Intent intent9 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent9 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent9.putExtra("lesson", getText(R.string.answer_lesson10));
 			intent9.putExtra("message", "10");
 			this.startActivity(intent9);
 			break;
 			
 		case 10:
-			Intent intent10 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent10 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent10.putExtra("lesson", getText(R.string.answer_lesson11));
 			intent10.putExtra("message", "11");
 			this.startActivity(intent10);
 			break;
 
 		case 11:
-			Intent intent11 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent11 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent11.putExtra("lesson", getText(R.string.answer_lesson12));
 			intent11.putExtra("message", "12");
 			this.startActivity(intent11);
 			break;
 
 		case 12:
-			Intent intent12 = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+			Intent intent12 = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
 			intent12.putExtra("lesson", getText(R.string.answer_lesson13));
 			intent12.putExtra("message", "13");
 			this.startActivity(intent12);
