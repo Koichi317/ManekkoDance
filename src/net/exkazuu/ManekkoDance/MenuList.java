@@ -1,4 +1,4 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 import android.app.Activity;
 

@@ -1,4 +1,4 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 public class LessonData {
 	public static String getLessonData(int number) {

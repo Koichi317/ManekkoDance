@@ -3,10 +3,12 @@
 /* フラグメントによるTabの実装 */
 /* 絵文字の実装 */
 
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.eclipcebook.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -54,7 +56,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 
 		imgTextView = (ImageInEdit) findViewById(R.id.imageInEdit);
-		//imgTextView.buildLayer();
+		// imgTextView.buildLayer();
 		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.root);
 		DSKLayout.setListener(listner);
 		fLayout = (FrameLayout) findViewById(R.id.frameLayout_piyo);
@@ -69,7 +71,7 @@ public class MainActivity extends Activity {
 		textView = (TextView) findViewById(R.id.editText1);
 		Log.v("my_debug", "" + text_data);
 		textView.setText(text_data);
-		
+
 		/******************* tabの実装と切り替え *****************/
 
 		host = (TabHost) findViewById(R.id.tabhost);
@@ -84,20 +86,20 @@ public class MainActivity extends Activity {
 		tab2.setIndicator("絵文字");
 		tab2.setContent(R.id.tab2);
 		host.addTab(tab2);
-		
+
 		if (iconContainer == null) {
 			iconContainer = new IconContainer(getApplication());
 		}
 
 		final MainActivity mainActivity = this;
-		
-//		imgTextView.setOnSystemUiVisibilityChangeListener(new OnSystemUiVisibilityChangeListener() {
-//			public void onSystemUiVisibilityChange(int visibility) {
-//				Log.v("my_debug", "onSystemUiVisibilityChange: " + visibility);
-//			}
-//		});
-		
-		
+
+		// imgTextView.setOnSystemUiVisibilityChangeListener(new
+		// OnSystemUiVisibilityChangeListener() {
+		// public void onSystemUiVisibilityChange(int visibility) {
+		// Log.v("my_debug", "onSystemUiVisibilityChange: " + visibility);
+		// }
+		// });
+
 		host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 			public void onTabChanged(String tabId) {
 				Log.v("my_debug", "onTabChanged" + tabId);
@@ -105,24 +107,27 @@ public class MainActivity extends Activity {
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							
+
 							mainActivity.runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
-									imgTextView.setText(textView.getText().toString());
-									imgTextView.replaceTextToImage(iconContainer);
+									imgTextView.setText(textView.getText()
+											.toString());
+									imgTextView
+											.replaceTextToImage(iconContainer);
 								}
 							});
 						}
 					}).start();
 				} else if (tabId == "tab1") {
-					textView.setText(imgTextView.getTextFromImage(iconContainer));
+					textView.setText(imgTextView
+							.getTextFromImage(iconContainer));
 				}
 			}
 		});
-		
+
 		host.setCurrentTab(IMAGE_VIEW);
-		
+
 		/********** 音楽 **************/
 		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
 		// ゲーム音楽
@@ -130,7 +135,8 @@ public class MainActivity extends Activity {
 
 		// doLoad(); // セーブデータをロード
 
-		FrameLayout actionButton = (FrameLayout) this.findViewById(R.id.frameLayout_piyo);
+		FrameLayout actionButton = (FrameLayout) this
+				.findViewById(R.id.frameLayout_piyo);
 		actionButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				host.setCurrentTab(TEXT_VIEW);
@@ -161,15 +167,15 @@ public class MainActivity extends Activity {
 			List<Integer> numberSorting = new ArrayList<Integer>();
 			List<String> commands = new ArrayList<String>();
 			StringCommandParser.parse(commandsText, numberSorting, commands);
-			executeCommands(
-					new ImageContainer(leftHand1, rightHand1, basic, leftFoot1, rightFoot1),
-					commands, textView, numberSorting);
+			executeCommands(new ImageContainer(leftHand1, rightHand1, basic,
+					leftFoot1, rightFoot1), commands, textView, numberSorting);
 		}
 
-		private void executeCommands(ImageContainer images, List<String> expandedCommands,
-				TextView editText1, List<Integer> numberSorting) {
-			Runnable runnable = new StringCommandExecutor(images, expandedCommands, editText1,
-					numberSorting);
+		private void executeCommands(ImageContainer images,
+				List<String> expandedCommands, TextView editText1,
+				List<Integer> numberSorting) {
+			Runnable runnable = new StringCommandExecutor(images,
+					expandedCommands, editText1, numberSorting);
 			for (int i = 0; i < expandedCommands.size(); i++) { /* 解析&実行 */
 				handler.post(runnable); /* 光らせる */
 
@@ -194,11 +200,13 @@ public class MainActivity extends Activity {
 			if (StringCommandExecutor.errorCheck) {
 				handler.post(new Runnable() {
 					public void run() {
-						AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+						AlertDialog.Builder builder = new AlertDialog.Builder(
+								MainActivity.this);
 						builder.setTitle("間違った文を書いているよ");
 						builder.setPositiveButton("もう一度Challenge",
 								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog, int which) {
+									public void onClick(DialogInterface dialog,
+											int which) {
 										initializeImage();
 									}
 								});
@@ -222,12 +230,12 @@ public class MainActivity extends Activity {
 			if (isShown) {
 				// ソフトキーボードが表示されている場合
 				// postボタンを非表示にする
-				//fLayout.setVisibility(View.GONE);
+				// fLayout.setVisibility(View.GONE);
 				buttonGroup2.setVisibility(View.GONE);
 				iconList.setVisibility(View.VISIBLE);
 			} else {
 				// ソフトキーボードが表示されてなければ、表示する
-				//fLayout.setVisibility(View.VISIBLE);
+				// fLayout.setVisibility(View.VISIBLE);
 				buttonGroup2.setVisibility(View.VISIBLE);
 				iconList.setVisibility(View.GONE);
 			}
@@ -244,7 +252,8 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "左腕を上げる");
+			editable.replace(Math.min(start, end), Math.max(start, end),
+					"左腕を上げる");
 		}
 	}
 
@@ -255,7 +264,8 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "左腕を下げる");
+			editable.replace(Math.min(start, end), Math.max(start, end),
+					"左腕を下げる");
 		}
 	}
 
@@ -266,7 +276,8 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "右腕を上げる");
+			editable.replace(Math.min(start, end), Math.max(start, end),
+					"右腕を上げる");
 		}
 	}
 
@@ -277,7 +288,8 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "右腕を下げる");
+			editable.replace(Math.min(start, end), Math.max(start, end),
+					"右腕を下げる");
 		}
 
 	}
@@ -289,7 +301,8 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "左足を上げる");
+			editable.replace(Math.min(start, end), Math.max(start, end),
+					"左足を上げる");
 		}
 	}
 
@@ -300,7 +313,8 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "左足を下げる");
+			editable.replace(Math.min(start, end), Math.max(start, end),
+					"左足を下げる");
 		}
 	}
 
@@ -311,7 +325,8 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "右足を上げる");
+			editable.replace(Math.min(start, end), Math.max(start, end),
+					"右足を上げる");
 		}
 	}
 
@@ -322,7 +337,8 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "右足を下げる");
+			editable.replace(Math.min(start, end), Math.max(start, end),
+					"右足を下げる");
 		}
 	}
 
@@ -333,7 +349,8 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "ジャンプする");
+			editable.replace(Math.min(start, end), Math.max(start, end),
+					"ジャンプする");
 		}
 	}
 
@@ -437,7 +454,7 @@ public class MainActivity extends Activity {
 		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 		bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
-		Intent intent = new Intent(this, jp.eclipcebook.ActionActivity.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.ActionActivity.class);
 		intent.putExtra("text_data", textView.getText().toString());
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
@@ -448,7 +465,7 @@ public class MainActivity extends Activity {
 		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 		bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
-		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.PartnerActivity.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", textView.getText().toString());
@@ -456,21 +473,21 @@ public class MainActivity extends Activity {
 	}
 
 	public void changeHelpScreen() { // ヘルプ画面へ遷移
-//		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-//		bgm.start();
+	// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+	// bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
-		Intent intent = new Intent(this, jp.eclipcebook.Help.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", textView.getText().toString());
 		this.startActivity(intent);
 	}
-	
+
 	public void changeHelpScreen(View view) { // ヘルプ画面へ遷移
-//		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-//		bgm.start();
+	// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+	// bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
-		Intent intent = new Intent(this, jp.eclipcebook.Help.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", textView.getText().toString());
@@ -478,7 +495,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void changeTitleScreen() {
-		Intent intent = new Intent(this, jp.eclipcebook.TitleActivity.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.TitleActivity.class);
 		this.startActivity(intent);
 	}
 

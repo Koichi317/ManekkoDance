@@ -1,4 +1,4 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 import java.util.List;
 
@@ -70,8 +70,8 @@ public class AnswerCheck {
 			for (int i = 0; i < playerAnswer[0].length; i++) {
 				for (int j = 0; j < playerAnswer.length; j++) {
 					if (playerAnswer[j][i] == partnerAnswer[j][i]) {
-//						Log.v("i", String.valueOf(i));
-//						Log.v("j", String.valueOf(j));
+						// Log.v("i", String.valueOf(i));
+						// Log.v("j", String.valueOf(j));
 						// continue; // お手本の各行の命令がプレイヤーの同じ行にあるかどうか
 
 					} else {
@@ -95,7 +95,8 @@ public class AnswerCheck {
 		if (loopNum == 8 || loopNum == 11) {
 			if (count != 1)
 				judge = false;
-		} else if (loopNum == 9 || loopNum == 10 || loopNum == 12 || loopNum == 13) {
+		} else if (loopNum == 9 || loopNum == 10 || loopNum == 12
+				|| loopNum == 13) {
 			if (count != 2)
 				judge = false;
 		}

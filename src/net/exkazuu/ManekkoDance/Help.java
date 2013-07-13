@@ -1,5 +1,6 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
+import jp.eclipcebook.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ public class Help extends Activity {
 		page = " / 8";
 		ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
 		helpImage.setImageResource(R.drawable.tutorial1);
-		EditText pageText = (EditText)findViewById(R.id.page);
+		EditText pageText = (EditText) findViewById(R.id.page);
 		pageText.setText("1 / 8");
 	}
 
@@ -37,7 +38,7 @@ public class Help extends Activity {
 		pageNumber++;
 
 		ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
-		EditText pageText = (EditText)findViewById(R.id.page);
+		EditText pageText = (EditText) findViewById(R.id.page);
 		pageText.setText(String.valueOf(pageNumber) + page);
 
 		switch (pageNumber) {
@@ -75,7 +76,7 @@ public class Help extends Activity {
 		pageNumber--;
 
 		ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
-		EditText pageText = (EditText)findViewById(R.id.page);
+		EditText pageText = (EditText) findViewById(R.id.page);
 		pageText.setText(String.valueOf(pageNumber) + page);
 
 		switch (pageNumber) {
@@ -107,7 +108,6 @@ public class Help extends Activity {
 
 	}
 
-	
 	public void changeScreen(View view) {
 		Intent intent = new Intent();
 		intent.putExtra("lesson", lesson);

@@ -1,4 +1,4 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class PartnerActivity extends Activity {
 			messageImageView1.setImageResource(R.drawable.lesson_message9);
 		} else if (message.equals("10")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message10);
-		}else {
+		} else {
 			messageImageView1.setImageResource(R.drawable.lesson_message11);
 		}
 
@@ -93,12 +93,12 @@ public class PartnerActivity extends Activity {
 
 			StringCommandParser.parse(commandsText, numberSorting, commands);
 
-			executeCommands(
-					new ImageContainer(leftHand1, rightHand1, basic, leftFoot1, rightFoot1),
-					commands);
+			executeCommands(new ImageContainer(leftHand1, rightHand1, basic,
+					leftFoot1, rightFoot1), commands);
 		}
 
-		private void executeCommands(ImageContainer images, List<String> commands) {
+		private void executeCommands(ImageContainer images,
+				List<String> commands) {
 			Runnable runnable = new StringCommandExecutor(images, commands);
 			for (int i = 0; i < commands.size(); i++) { /* 解析&実行 */
 				handler.post(runnable); /* 光らせる */
@@ -118,7 +118,7 @@ public class PartnerActivity extends Activity {
 				}
 			}
 		}
-		
+
 	}
 
 	/******************** ファイル保存 doSave(View view) *************************/
@@ -167,9 +167,10 @@ public class PartnerActivity extends Activity {
 		});
 		return true;
 	}
-	
+
 	public void changeMainScreen(View view) {
-		Intent intent = new Intent(getApplication(), jp.eclipcebook.MainActivity.class);
+		Intent intent = new Intent(getApplication(),
+				net.exkazuu.ManekkoDance.MainActivity.class);
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		TextView editText2 = (TextView) findViewById(R.id.editText2);
 		intent.putExtra("lesson", editText1.getText().toString());
@@ -177,12 +178,13 @@ public class PartnerActivity extends Activity {
 		intent.putExtra("text_data", text_data);
 		this.startActivity(intent);
 	}
-	
+
 	public void changeTitleScreen() {
-		Intent intent = new Intent(getApplication(), jp.eclipcebook.TitleActivity.class);
+		Intent intent = new Intent(getApplication(),
+				net.exkazuu.ManekkoDance.TitleActivity.class);
 		this.startActivity(intent);
 	}
-	
+
 	protected void onDestroy() {
 		super.onDestroy();
 		cleanupView(findViewById(R.id.partnerRoot));

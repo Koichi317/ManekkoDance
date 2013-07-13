@@ -1,4 +1,4 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -11,7 +11,8 @@ public class InterconversionStringAndImage {
 	//
 	// }
 
-	String convertStringToImage(String text1, ImageInEdit mImageEdit, Context context) {
+	String convertStringToImage(String text1, ImageInEdit mImageEdit,
+			Context context) {
 		String[] commands = new String[] { "ç∂òrÇè„Ç∞ÇÈ", "ç∂òrÇâ∫Ç∞ÇÈ"/* .. */};
 
 		for (String line : commands /* fix it */) {

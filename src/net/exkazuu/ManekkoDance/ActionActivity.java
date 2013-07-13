@@ -1,4 +1,4 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -6,13 +6,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.eclipcebook.R;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-//import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -26,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+//import android.media.MediaPlayer;
 
 public class ActionActivity extends Activity {
 
@@ -34,7 +36,8 @@ public class ActionActivity extends Activity {
 	private String message;
 	private String text_data;
 	public boolean answerCheckEnd = false;
-//	private MediaPlayer bgm;
+
+	// private MediaPlayer bgm;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -97,21 +100,27 @@ public class ActionActivity extends Activity {
 
 			final AnswerCheck answer;
 
-			StringCommandParser.parse(playerCommandsText, playerNumberSorting, playerCommands);
-			StringCommandParser.parse(partnerCommandsText, partnerNumberSorting, partnerCommands);
+			StringCommandParser.parse(playerCommandsText, playerNumberSorting,
+					playerCommands);
+			StringCommandParser.parse(partnerCommandsText,
+					partnerNumberSorting, partnerCommands);
 
-			Runnable playerAction = new StringCommandExecutor(new ImageContainer(playerImage1,
-					playerImage4, playerImage7, playerImage8, playerImage11), playerCommands,
-					playerEditText, playerNumberSorting);
-			Runnable partnerAction = new StringCommandExecutor(new ImageContainer(partnerImage1,
-					partnerImage4, partnerImage7, partnerImage8, partnerImage11), partnerCommands);
+			Runnable playerAction = new StringCommandExecutor(
+					new ImageContainer(playerImage1, playerImage4,
+							playerImage7, playerImage8, playerImage11),
+					playerCommands, playerEditText, playerNumberSorting);
+			Runnable partnerAction = new StringCommandExecutor(
+					new ImageContainer(partnerImage1, partnerImage4,
+							partnerImage7, partnerImage8, partnerImage11),
+					partnerCommands);
 
 			answer = new AnswerCheck(playerCommands, partnerCommands);
 			answer.compare();
 			answer.loopCheck(message, playerEditText);
 			Log.v("tag", answer.show());
 			// 解析&実行
-			for (int i = 0; i < Math.max(playerCommands.size(), partnerCommands.size()); i++) {
+			for (int i = 0; i < Math.max(playerCommands.size(),
+					partnerCommands.size()); i++) {
 
 				if (i < playerCommands.size())
 					handler.post(playerAction); /* 光らせる */
@@ -139,50 +148,70 @@ public class ActionActivity extends Activity {
 
 			handler.post(new Runnable() {
 				public void run() {
-					AlertDialog.Builder builder = new AlertDialog.Builder(ActionActivity.this);
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							ActionActivity.this);
 					builder.setTitle(" ");
 					if (answer.judge) {
 
 						if (Integer.parseInt(message) == 10) {
-//							bgm = MediaPlayer.create(getApplicationContext(), R.raw.perfect);
-//							bgm.start();
+							// bgm = MediaPlayer.create(getApplicationContext(),
+							// R.raw.perfect);
+							// bgm.start();
 							builder.setIcon(R.drawable.answer_ture);
 							builder.setNegativeButton("タイトルへ戻る",
 									new DialogInterface.OnClickListener() {
 										@Override
-										public void onClick(DialogInterface dialog, int which) {
-//											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-//											bgm.start();
-											Intent intent = new Intent(getApplication(),
-													jp.eclipcebook.TitleActivity.class);
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// bgm =
+											// MediaPlayer.create(getApplicationContext(),
+											// R.raw.select);
+											// bgm.start();
+											Intent intent = new Intent(
+													getApplication(),
+													net.exkazuu.ManekkoDance.TitleActivity.class);
 											startActivity(intent);
 										}
 									});
 
 							builder.setPositiveButton("もう一度Challenge",
 									new DialogInterface.OnClickListener() {
-										public void onClick(DialogInterface dialog, int which) {
-//											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-//											bgm.start();
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// bgm =
+											// MediaPlayer.create(getApplicationContext(),
+											// R.raw.select);
+											// bgm.start();
 											changeMainScreen();
 										}
 									});
 						} else {
-//							bgm = MediaPlayer.create(getApplicationContext(), R.raw.good_answer);
-//							bgm.start();
+							// bgm = MediaPlayer.create(getApplicationContext(),
+							// R.raw.good_answer);
+							// bgm.start();
 							builder.setIcon(R.drawable.answer_ture);
 							builder.setNegativeButton("次のLessonに進む",
 									new DialogInterface.OnClickListener() {
 										@Override
-										public void onClick(DialogInterface dialog, int which) {
-//											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-//											bgm.start();
-											Intent intent = new Intent(getApplication(),
-													jp.eclipcebook.PartnerActivity.class);
-											int nextLessonNumber = Integer.parseInt(message) + 1;
-											message = String.valueOf(nextLessonNumber);
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// bgm =
+											// MediaPlayer.create(getApplicationContext(),
+											// R.raw.select);
+											// bgm.start();
+											Intent intent = new Intent(
+													getApplication(),
+													net.exkazuu.ManekkoDance.PartnerActivity.class);
+											int nextLessonNumber = Integer
+													.parseInt(message) + 1;
+											message = String
+													.valueOf(nextLessonNumber);
 											intent.putExtra("message", message);
-											String str = LessonData.getLessonData(nextLessonNumber);
+											String str = LessonData
+													.getLessonData(nextLessonNumber);
 											lesson = str;
 											intent.putExtra("lesson", lesson);
 											startActivity(intent);
@@ -191,35 +220,47 @@ public class ActionActivity extends Activity {
 
 							builder.setPositiveButton("もう一度Challenge",
 									new DialogInterface.OnClickListener() {
-										public void onClick(DialogInterface dialog, int which) {
-//											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-//											bgm.start();
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// bgm =
+											// MediaPlayer.create(getApplicationContext(),
+											// R.raw.select);
+											// bgm.start();
 											changeMainScreen();
 										}
 									});
 						}
-						
-					}else {
-//						bgm = MediaPlayer.create(getApplicationContext(), R.raw.fail);
-//						bgm.start();
+
+					} else {
+						// bgm = MediaPlayer.create(getApplicationContext(),
+						// R.raw.fail);
+						// bgm.start();
 						builder.setIcon(R.drawable.answer_false);
 						builder.setNegativeButton("Lessonを選択し直す",
 								new DialogInterface.OnClickListener() {
 									@Override
-									public void onClick(DialogInterface dialog, int which) {
-//										bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-//										bgm.start();
-										Intent intent = new Intent(getApplication(),
-												jp.eclipcebook.LessonList.class);
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// bgm =
+										// MediaPlayer.create(getApplicationContext(),
+										// R.raw.select);
+										// bgm.start();
+										Intent intent = new Intent(
+												getApplication(),
+												net.exkazuu.ManekkoDance.LessonList.class);
 										startActivity(intent);
 									}
 								});
 
 						builder.setPositiveButton("もう一度Challenge",
 								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog, int which) {
-//										bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-//										bgm.start();
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// bgm =
+										// MediaPlayer.create(getApplicationContext(),
+										// R.raw.select);
+										// bgm.start();
 										changeMainScreen();
 									}
 								});
@@ -234,7 +275,8 @@ public class ActionActivity extends Activity {
 
 	@SuppressLint("WorldReadableFiles")
 	public void doSave() {
-		EditText editText2 = (EditText) this.findViewById(R.id.editTextActionScreen2);
+		EditText editText2 = (EditText) this
+				.findViewById(R.id.editTextActionScreen2);
 		Editable str = editText2.getText();
 		FileOutputStream output = null;
 		try {
@@ -300,7 +342,7 @@ public class ActionActivity extends Activity {
 	}
 
 	public void changeMainScreen(View view) {
-		Intent intent = new Intent(this, jp.eclipcebook.MainActivity.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.MainActivity.class);
 		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
 		intent.putExtra("text_data", playerEditText.getText().toString());
@@ -310,7 +352,7 @@ public class ActionActivity extends Activity {
 	}
 
 	private void changeMainScreen() {
-		Intent intent = new Intent(this, jp.eclipcebook.MainActivity.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.MainActivity.class);
 		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
 		intent.putExtra("text_data", playerEditText.getText().toString());
@@ -320,7 +362,7 @@ public class ActionActivity extends Activity {
 	}
 
 	public void changePartnerScreen(View view) {
-		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.PartnerActivity.class);
 		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
 		intent.putExtra("text_data", playerEditText.getText().toString());
@@ -330,14 +372,14 @@ public class ActionActivity extends Activity {
 	}
 
 	private void changeTitleScreen() {
-		Intent intent = new Intent(this, jp.eclipcebook.TitleActivity.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.TitleActivity.class);
 		this.startActivity(intent);
 	}
-	
+
 	public void changeHelpScreen(View view) { // ヘルプ画面へ遷移
-//		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-//		bgm.start();
-		Intent intent = new Intent(this, jp.eclipcebook.Help.class);
+		// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+		// bgm.start();
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", text_data);

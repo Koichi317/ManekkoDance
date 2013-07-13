@@ -1,4 +1,4 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,7 +64,8 @@ public class ImageInEdit extends EditText {
 	}
 
 	@Override
-	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+	protected void onLayout(boolean changed, int left, int top, int right,
+			int bottom) {
 		super.onLayout(changed, left, top, right, bottom);
 
 		mTextSize = 3 * (int) getTextSize();
@@ -94,7 +95,8 @@ public class ImageInEdit extends EditText {
 	 */
 	public void insertAssetsImage(Context context, String path) {
 		try {
-			Drawable drawable = Drawable.createFromStream(context.getAssets().open(path), null);
+			Drawable drawable = Drawable.createFromStream(context.getAssets()
+					.open(path), null);
 			insertImage(drawable);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -124,14 +126,15 @@ public class ImageInEdit extends EditText {
 		int start = this.getSelectionStart();
 		int end = this.getSelectionEnd();
 
-		this.getText().replace(Math.min(start, end), Math.max(start, end), spanned, 0,
-				spanned.length());
+		this.getText().replace(Math.min(start, end), Math.max(start, end),
+				spanned, 0, spanned.length());
 	}
 
 	public void replaceTextToImage(final IconContainer icon) {
 
-		String[] commands = new String[] { "左腕を上げる", "左腕を下げる", "右腕を上げる", "右腕を下げる", "左足を上げる",
-				"左足を下げる", "右足を上げる", "右足を下げる", "ジャンプする", "loop", "ここまで" };
+		String[] commands = new String[] { "左腕を上げる", "左腕を下げる", "右腕を上げる",
+				"右腕を下げる", "左足を上げる", "左足を下げる", "右足を上げる", "右足を下げる", "ジャンプする",
+				"loop", "ここまで" };
 
 		TreeMap<Integer, String> map = new TreeMap<Integer, String>();
 		ArrayList<Integer> start = new ArrayList<Integer>(); // プログラム的に
@@ -178,8 +181,8 @@ public class ImageInEdit extends EditText {
 			} else if (command.equals("ここまで")) {
 				setIcon(icon.getIconKokomade(), start.get(i), end.get(i));
 			}
-//			Log.v("tag", start.get(i).toString());
-//			Log.v("tag", end.get(i).toString());
+			// Log.v("tag", start.get(i).toString());
+			// Log.v("tag", end.get(i).toString());
 			i--;
 		}
 
@@ -200,7 +203,8 @@ public class ImageInEdit extends EditText {
 
 	public String getTextFromImage(IconContainer iconContainer) {
 		final Editable text = this.getText();
-		List<ImageSpan> spanList = Arrays.asList(text.getSpans(0, text.length(), ImageSpan.class));
+		List<ImageSpan> spanList = Arrays.asList(text.getSpans(0,
+				text.length(), ImageSpan.class));
 		ArrayList<ImageSpan> spans = new ArrayList<ImageSpan>(spanList);
 		Collections.sort(spans, new Comparator<ImageSpan>() {
 			@Override
@@ -209,7 +213,8 @@ public class ImageInEdit extends EditText {
 			}
 		});
 		for (ImageSpan span : spans) {
-			String iconText = iconContainer.getStringFromIcon(span.getDrawable());
+			String iconText = iconContainer.getStringFromIcon(span
+					.getDrawable());
 			text.replace(text.getSpanStart(span), text.getSpanEnd(span),
 					iconText, 0, iconText.length());
 		}

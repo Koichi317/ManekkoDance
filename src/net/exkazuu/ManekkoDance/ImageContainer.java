@@ -1,4 +1,4 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 import android.widget.ImageView;
 
@@ -9,8 +9,8 @@ public class ImageContainer {
 	private ImageView leftFoot1;
 	private ImageView rightFoot1;
 
-	public ImageContainer(ImageView leftHand1, ImageView rightHand1, ImageView basic,
-			ImageView leftFoot1, ImageView rightFoot1) {
+	public ImageContainer(ImageView leftHand1, ImageView rightHand1,
+			ImageView basic, ImageView leftFoot1, ImageView rightFoot1) {
 		this.leftHand1 = leftHand1;
 		this.rightHand1 = rightHand1;
 		this.basic = basic;

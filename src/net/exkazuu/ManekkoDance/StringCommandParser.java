@@ -1,4 +1,4 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,9 +12,11 @@ public class StringCommandParser {
 
 	}
 
-	public static void parse(String commandsText, List<Integer> numberSorting, List<String> expandedCommands) {
+	public static void parse(String commandsText, List<Integer> numberSorting,
+			List<String> expandedCommands) {
 		String[] commands = commandsText.split("\n"); // 1行毎に配列に格納
-		List<String> originalCommand = new ArrayList<String>(Arrays.asList(commands)); // List型配列に変換
+		List<String> originalCommand = new ArrayList<String>(
+				Arrays.asList(commands)); // List型配列に変換
 		List<Integer> lineNumberSequence = new ArrayList<Integer>(); // 文字の行を記憶
 
 		// 行番号を付ける(1行目：0番目、2行目:1番目、・・・)
@@ -23,7 +25,7 @@ public class StringCommandParser {
 
 		expandCommands(originalCommand, expandedCommands, lineNumberSequence,
 				numberSorting);
-		//expandedCommands.add("\n");
+		// expandedCommands.add("\n");
 	}
 
 	private static void expandCommands(List<String> originalCommands,
@@ -45,7 +47,8 @@ public class StringCommandParser {
 				lineNumberSequence.remove(i);
 				originalCommands.remove(loopPosition);
 				lineNumberSequence.remove(loopPosition);
-				makeLoop(originalCommands, loopPosition, i - 2, loopCount, lineNumberSequence);
+				makeLoop(originalCommands, loopPosition, i - 2, loopCount,
+						lineNumberSequence);
 				i = loopPosition - 1;
 			} else if (loopStack.empty()) { // スタックが空
 				expandedCommands.add(originalCommands.get(i));
@@ -54,10 +57,10 @@ public class StringCommandParser {
 		}
 	}
 
-	private static void makeLoop(List<String> originalCommands, int firstIndex, int lastIndex,
-			int count, List<Integer> numberSorting) {
+	private static void makeLoop(List<String> originalCommands, int firstIndex,
+			int lastIndex, int count, List<Integer> numberSorting) {
 		String[] str = new String[lastIndex - firstIndex + 1];
-		int[] num  = new int[lastIndex - firstIndex +1];
+		int[] num = new int[lastIndex - firstIndex + 1];
 		for (int i = firstIndex; i <= lastIndex; i++) {
 			str[i - firstIndex] = originalCommands.get(i);
 			num[i - firstIndex] = numberSorting.get(i);

@@ -1,6 +1,8 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 import java.util.List;
+
+import jp.eclipcebook.R;
 
 import android.text.Html;
 import android.util.Log;
@@ -83,8 +85,9 @@ public class StringCommandExecutor implements Runnable {
 	}
 
 	// ƒvƒŒƒCƒ„[
-	public StringCommandExecutor(ImageContainer images, List<String> stringArray,
-			TextView textView, List<Integer> playerNumberSorting) {
+	public StringCommandExecutor(ImageContainer images,
+			List<String> stringArray, TextView textView,
+			List<Integer> playerNumberSorting) {
 		this.images = images;
 		this.expandedCommands = stringArray;
 		this.lineIndex = 0;
@@ -122,7 +125,7 @@ public class StringCommandExecutor implements Runnable {
 			input.inputReset(); // input‚Ì‰Šú‰»
 
 			// input‚Ìæ“¾
-			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğã‚°‚é") != -1) 
+			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğã‚°‚é") != -1)
 				input.¶˜r‚ğã‚°‚é = true;
 			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğ‰º‚°‚é") != -1)
 				input.¶˜r‚ğ‰º‚°‚é = true;
@@ -148,8 +151,9 @@ public class StringCommandExecutor implements Runnable {
 					|| (input.‰E‘«‚ğã‚°‚é && input.‰E‘«‚ğ‰º‚°‚é)
 					|| (input.¶‘«‚ğã‚°‚é && input.‰E‘«‚ğã‚°‚é)
 					|| (input.¶‘«‚ğ‰º‚°‚é && input.‰E‘«‚ğ‰º‚°‚é)
-					|| (input.ƒWƒƒƒ“ƒv‚·‚é && (input.¶˜r‚ğã‚°‚é || input.¶˜r‚ğ‰º‚°‚é || input.‰E˜r‚ğã‚°‚é
-							|| input.‰E˜r‚ğ‰º‚°‚é || input.¶‘«‚ğã‚°‚é || input.¶‘«‚ğ‰º‚°‚é || input.‰E‘«‚ğã‚°‚é || input.‰E‘«‚ğ‰º‚°‚é))) {
+					|| (input.ƒWƒƒƒ“ƒv‚·‚é && (input.¶˜r‚ğã‚°‚é || input.¶˜r‚ğ‰º‚°‚é
+							|| input.‰E˜r‚ğã‚°‚é || input.‰E˜r‚ğ‰º‚°‚é || input.¶‘«‚ğã‚°‚é
+							|| input.¶‘«‚ğ‰º‚°‚é || input.‰E‘«‚ğã‚°‚é || input.‰E‘«‚ğ‰º‚°‚é))) {
 				errorCheck = true;
 				Log.v("tag", "error");
 				errorImage(images);
@@ -166,8 +170,8 @@ public class StringCommandExecutor implements Runnable {
 					|| (input.¶‘«‚ğ‰º‚°‚é && state.isLeftFootDown)
 					|| (input.‰E‘«‚ğã‚°‚é && state.isRightFootUp)
 					|| (input.‰E‘«‚ğ‰º‚°‚é && state.isRightFootDown)
-					|| (input.ƒWƒƒƒ“ƒv‚·‚é && (state.isLeftHandUp || state.isRightHandUp
-							|| state.isLeftFootUp || state.isRightFootUp))) {
+					|| (input.ƒWƒƒƒ“ƒv‚·‚é && (state.isLeftHandUp
+							|| state.isRightHandUp || state.isLeftFootUp || state.isRightFootUp))) {
 				errorCheck = true;
 				errorImage(images);
 				addLineIndex = false;
@@ -176,72 +180,88 @@ public class StringCommandExecutor implements Runnable {
 
 			if (input.¶˜r‚ğã‚°‚é) { // ¶˜r‚ğã‚°‚é
 				if (player)
-					images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up2);
+					images.getLeftHand1().setImageResource(
+							R.drawable.piyo_left_hand_up2);
 				if (!player)
-					images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up2);
+					images.getLeftHand1().setImageResource(
+							R.drawable.cocco_left_hand_up2);
 				state.isLeftHandUp = true; // ¶˜r‚ğã‚°‚Ä‚¢‚é(1:true)
 				state.isLeftHandDown = false; // ¶˜r‚ğ‰º‚°‚Ä‚¢‚é(0:false)
 			}
 
 			if (input.¶˜r‚ğ‰º‚°‚é) {
 				if (player)
-					images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up2);
+					images.getLeftHand1().setImageResource(
+							R.drawable.piyo_left_hand_up2);
 				if (!player)
-					images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up2);
+					images.getLeftHand1().setImageResource(
+							R.drawable.cocco_left_hand_up2);
 				state.isLeftHandUp = false;
 				state.isLeftHandDown = true;
 			}
 
 			if (input.‰E˜r‚ğã‚°‚é) {
 				if (player)
-					images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up2);
+					images.getRightHand1().setImageResource(
+							R.drawable.piyo_right_hand_up2);
 				if (!player)
-					images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up2);
+					images.getRightHand1().setImageResource(
+							R.drawable.cocco_right_hand_up2);
 				state.isRightHandUp = true;
 				state.isRightHandDown = false;
 			}
 
 			if (input.‰E˜r‚ğ‰º‚°‚é) {
 				if (player)
-					images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up2);
+					images.getRightHand1().setImageResource(
+							R.drawable.piyo_right_hand_up2);
 				if (!player)
-					images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up2);
+					images.getRightHand1().setImageResource(
+							R.drawable.cocco_right_hand_up2);
 				state.isRightHandUp = false;
 				state.isRightHandDown = true;
 			}
 
 			if (input.¶‘«‚ğã‚°‚é) {
 				if (player)
-					images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up2);
+					images.getLeftFoot1().setImageResource(
+							R.drawable.piyo_left_foot_up2);
 				if (!player)
-					images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up2);
+					images.getLeftFoot1().setImageResource(
+							R.drawable.cocco_left_foot_up2);
 				state.isLeftFootUp = true;
 				state.isLeftFootDown = false;
 			}
 
 			if (input.¶‘«‚ğ‰º‚°‚é) {
 				if (player)
-					images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up2);
+					images.getLeftFoot1().setImageResource(
+							R.drawable.piyo_left_foot_up2);
 				if (!player)
-					images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up2);
+					images.getLeftFoot1().setImageResource(
+							R.drawable.cocco_left_foot_up2);
 				state.isLeftFootUp = false;
 				state.isLeftFootDown = true;
 			}
 
 			if (input.‰E‘«‚ğã‚°‚é) {
 				if (player)
-					images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up2);
+					images.getRightFoot1().setImageResource(
+							R.drawable.piyo_right_foot_up2);
 				if (!player)
-					images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up2);
+					images.getRightFoot1().setImageResource(
+							R.drawable.cocco_right_foot_up2);
 				state.isRightFootUp = true;
 				state.isRightFootDown = false;
 			}
 
 			if (input.‰E‘«‚ğ‰º‚°‚é) {
 				if (player)
-					images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up2);
+					images.getRightFoot1().setImageResource(
+							R.drawable.piyo_right_foot_up2);
 				if (!player)
-					images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up2);
+					images.getRightFoot1().setImageResource(
+							R.drawable.cocco_right_foot_up2);
 				state.isRightFootUp = false;
 				state.isRightFootDown = true;
 			}
@@ -259,7 +279,7 @@ public class StringCommandExecutor implements Runnable {
 			addLineIndex = false;
 
 		} else {
-			if(player) {
+			if (player) {
 				if (errorCheck) {
 					errorImage(images);
 					addLineIndex = true;
@@ -269,51 +289,67 @@ public class StringCommandExecutor implements Runnable {
 
 			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğã‚°‚é") != -1) {
 				if (player)
-					images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up3);
+					images.getLeftHand1().setImageResource(
+							R.drawable.piyo_left_hand_up3);
 				if (!player)
-					images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up3);
+					images.getLeftHand1().setImageResource(
+							R.drawable.cocco_left_hand_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğ‰º‚°‚é") != -1) {
 				if (player)
-					images.getLeftHand1().setImageResource(R.drawable.piyo_left_hand_up1);
+					images.getLeftHand1().setImageResource(
+							R.drawable.piyo_left_hand_up1);
 				if (!player)
-					images.getLeftHand1().setImageResource(R.drawable.cocco_left_hand_up1);
+					images.getLeftHand1().setImageResource(
+							R.drawable.cocco_left_hand_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("‰E˜r‚ğã‚°‚é") != -1) {
 				if (player)
-					images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up3);
+					images.getRightHand1().setImageResource(
+							R.drawable.piyo_right_hand_up3);
 				if (!player)
-					images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up3);
+					images.getRightHand1().setImageResource(
+							R.drawable.cocco_right_hand_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("‰E˜r‚ğ‰º‚°‚é") != -1) {
 				if (player)
-					images.getRightHand1().setImageResource(R.drawable.piyo_right_hand_up1);
+					images.getRightHand1().setImageResource(
+							R.drawable.piyo_right_hand_up1);
 				if (!player)
-					images.getRightHand1().setImageResource(R.drawable.cocco_right_hand_up1);
+					images.getRightHand1().setImageResource(
+							R.drawable.cocco_right_hand_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("¶‘«‚ğã‚°‚é") != -1) {
 				if (player)
-					images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up3);
+					images.getLeftFoot1().setImageResource(
+							R.drawable.piyo_left_foot_up3);
 				if (!player)
-					images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up3);
+					images.getLeftFoot1().setImageResource(
+							R.drawable.cocco_left_foot_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("¶‘«‚ğ‰º‚°‚é") != -1) {
 				if (player)
-					images.getLeftFoot1().setImageResource(R.drawable.piyo_left_foot_up1);
+					images.getLeftFoot1().setImageResource(
+							R.drawable.piyo_left_foot_up1);
 				if (!player)
-					images.getLeftFoot1().setImageResource(R.drawable.cocco_left_foot_up1);
+					images.getLeftFoot1().setImageResource(
+							R.drawable.cocco_left_foot_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("‰E‘«‚ğã‚°‚é") != -1) {
 				if (player)
-					images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up3);
+					images.getRightFoot1().setImageResource(
+							R.drawable.piyo_right_foot_up3);
 				if (!player)
-					images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up3);
+					images.getRightFoot1().setImageResource(
+							R.drawable.cocco_right_foot_up3);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("‰E‘«‚ğ‰º‚°‚é") != -1) {
 				if (player)
-					images.getRightFoot1().setImageResource(R.drawable.piyo_right_foot_up1);
+					images.getRightFoot1().setImageResource(
+							R.drawable.piyo_right_foot_up1);
 				if (!player)
-					images.getRightFoot1().setImageResource(R.drawable.cocco_right_foot_up1);
+					images.getRightFoot1().setImageResource(
+							R.drawable.cocco_right_foot_up1);
 			}
 			if (expandedCommands.get(lineIndex).indexOf("ƒWƒƒƒ“ƒv‚·‚é") != -1) {
 				if (player)
@@ -340,7 +376,7 @@ public class StringCommandExecutor implements Runnable {
 			images.getRightFoot1().setVisibility(View.INVISIBLE);
 		} else {
 			images.getBasic().setImageResource(R.drawable.korobu_3);
-			addLineIndex = true; 
+			addLineIndex = true;
 		}
 
 	}

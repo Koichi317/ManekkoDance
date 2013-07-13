@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".TitleActivity"
+            android:name="net.exkazuu.ManekkoDance.TitleActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,28 +21,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LessonList"
+            android:name="net.exkazuu.ManekkoDance.LessonList"
             android:label="@string/title_activity_lesson_list" >
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="net.exkazuu.ManekkoDance.MainActivity"
             android:label="@string/title_activity_main"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name=".PartnerActivity"
+            android:name="net.exkazuu.ManekkoDance.PartnerActivity"
             android:label="@string/title_activity_partner" >
         </activity>
         <activity
-            android:name=".ActionActivity"
+            android:name="net.exkazuu.ManekkoDance.ActionActivity"
             android:label="@string/title_activity_action" >
         </activity>
         <activity
-            android:name=".Tutorial"
+            android:name="net.exkazuu.ManekkoDance.Tutorial"
             android:label="@string/title_tutorial" >
         </activity>
         <activity
-            android:name=".Help"
+            android:name="net.exkazuu.ManekkoDance.Help"
             android:label="@string/help" >
         </activity>
     </application>

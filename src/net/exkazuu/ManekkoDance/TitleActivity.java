@@ -1,5 +1,6 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
+import jp.eclipcebook.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,34 +11,36 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-public class TitleActivity extends Activity{
-	
+public class TitleActivity extends Activity {
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルバー非表示
+		requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
 		setContentView(R.layout.title_screen);
-			
+
 	}
-	
+
 	public void doActionTitle(View view) {
-		RelativeLayout relativeLayout = (RelativeLayout)findViewById(R.id.titleButton);
+		RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.titleButton);
 		relativeLayout.setVisibility(View.VISIBLE);
 	}
-	
+
 	public void doActionFromTheBeginning(View view) {
-//		MediaPlayer bgm = MediaPlayer.create(getApplicationContext(), R.raw.titlecall);
-//		bgm.start();
-		Intent intent = new Intent(this, jp.eclipcebook.Help.class);
+		// MediaPlayer bgm = MediaPlayer.create(getApplicationContext(),
+		// R.raw.titlecall);
+		// bgm.start();
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
 		this.startActivity(intent);
 	}
-	
+
 	public void doActionContinue(View view) {
-//		MediaPlayer bgm = MediaPlayer.create(getApplicationContext(), R.raw.titlecall);
-//		bgm.start();
-		Intent intent = new Intent(this, jp.eclipcebook.LessonList.class);
+		// MediaPlayer bgm = MediaPlayer.create(getApplicationContext(),
+		// R.raw.titlecall);
+		// bgm.start();
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.LessonList.class);
 		this.startActivity(intent);
 	}
-	
+
 	protected void onDestroy() {
 		super.onDestroy();
 		cleanupView(findViewById(R.id.titleRoot));
@@ -63,5 +66,5 @@ public class TitleActivity extends Activity{
 			}
 		}
 	}
-	
+
 }

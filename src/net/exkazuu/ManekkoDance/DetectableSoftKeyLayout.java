@@ -1,4 +1,4 @@
-package jp.eclipcebook;
+package net.exkazuu.ManekkoDance;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
-
 
 public class DetectableSoftKeyLayout extends LinearLayout {
 
@@ -38,7 +37,7 @@ public class DetectableSoftKeyLayout extends LinearLayout {
 		int screenHeight = activity.getWindowManager().getDefaultDisplay()
 				.getHeight();
 		// (a)-(b)-(c)>100ピクセルとなったらソフトキーボードが表示されてると判断
-		//（ソフトキーボードはどんなものでも最低100ピクセルあると仮定）
+		// （ソフトキーボードはどんなものでも最低100ピクセルあると仮定）
 		int diff = (screenHeight - statusBarHeight) - viewHeight;
 		if (listener != null) {
 			listener.onSoftKeyShown(diff > 100);
