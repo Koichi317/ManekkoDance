@@ -178,7 +178,7 @@ public class ActionActivity extends Activity {
 //											bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 //											bgm.start();
 											Intent intent = new Intent(getApplication(),
-													jp.eclipcebook.PartnerActivity2.class);
+													jp.eclipcebook.PartnerActivity.class);
 											int nextLessonNumber = Integer.parseInt(message) + 1;
 											message = String.valueOf(nextLessonNumber);
 											intent.putExtra("message", message);
@@ -320,7 +320,7 @@ public class ActionActivity extends Activity {
 	}
 
 	public void changePartnerScreen(View view) {
-		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
+		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
 		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
 		intent.putExtra("text_data", playerEditText.getText().toString());

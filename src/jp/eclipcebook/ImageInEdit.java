@@ -128,7 +128,7 @@ public class ImageInEdit extends EditText {
 				spanned.length());
 	}
 
-	public void replaceTextToImage(final IconContainer2 icon) {
+	public void replaceTextToImage(final IconContainer icon) {
 
 		String[] commands = new String[] { "左腕を上げる", "左腕を下げる", "右腕を上げる", "右腕を下げる", "左足を上げる",
 				"左足を下げる", "右足を上げる", "右足を下げる", "ジャンプする", "loop", "ここまで" };
@@ -198,7 +198,7 @@ public class ImageInEdit extends EditText {
 		this.getText().replace(start, end, spanned, 0, spanned.length());
 	}
 
-	public String getTextFromImage(IconContainer2 iconContainer) {
+	public String getTextFromImage(IconContainer iconContainer) {
 		final Editable text = this.getText();
 		List<ImageSpan> spanList = Arrays.asList(text.getSpans(0, text.length(), ImageSpan.class));
 		ArrayList<ImageSpan> spans = new ArrayList<ImageSpan>(spanList);

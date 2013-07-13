@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
 		host.addTab(tab2);
 		
 		if (iconContainer == null) {
-			iconContainer = new IconContainer2(getApplication());
+			iconContainer = new IconContainer(getApplication());
 		}
 
 		final MainActivity mainActivity = this;
@@ -234,7 +234,7 @@ public class MainActivity extends Activity {
 		}
 	};
 	private TabHost host;
-	private static IconContainer2 iconContainer;
+	private static IconContainer iconContainer;
 
 	/******************** É{É^Éì(äGï∂éö)ÇÃèàóù *************************/
 	public void doActionLeftHandUp(View view) {
@@ -448,7 +448,7 @@ public class MainActivity extends Activity {
 		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 		bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
-		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity2.class);
+		Intent intent = new Intent(this, jp.eclipcebook.PartnerActivity.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", textView.getText().toString());
