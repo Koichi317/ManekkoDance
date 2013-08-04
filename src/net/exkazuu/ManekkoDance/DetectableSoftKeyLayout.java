@@ -29,18 +29,21 @@ public class DetectableSoftKeyLayout extends LinearLayout {
 		// (a)Viewの高さ
 		int viewHeight = MeasureSpec.getSize(heightMeasureSpec);
 		// (b)ステータスバーの高さ
-		Activity activity = (Activity) getContext();
-		Rect rect = new Rect();
-		activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
-		int statusBarHeight = rect.top;
-		// (c)ディスプレイサイズ
-		int screenHeight = activity.getWindowManager().getDefaultDisplay()
-				.getHeight();
-		// (a)-(b)-(c)>100ピクセルとなったらソフトキーボードが表示されてると判断
-		// （ソフトキーボードはどんなものでも最低100ピクセルあると仮定）
-		int diff = (screenHeight - statusBarHeight) - viewHeight;
-		if (listener != null) {
-			listener.onSoftKeyShown(diff > 100);
+		if (getContext() instanceof Activity) {
+			Activity activity = (Activity) getContext();
+			Rect rect = new Rect();
+			activity.getWindow().getDecorView()
+					.getWindowVisibleDisplayFrame(rect);
+			int statusBarHeight = rect.top;
+			// (c)ディスプレイサイズ
+			int screenHeight = activity.getWindowManager().getDefaultDisplay()
+					.getHeight();
+			// (a)-(b)-(c)>100ピクセルとなったらソフトキーボードが表示されてると判断
+			// （ソフトキーボードはどんなものでも最低100ピクセルあると仮定）
+			int diff = (screenHeight - statusBarHeight) - viewHeight;
+			if (listener != null) {
+				listener.onSoftKeyShown(diff > 100);
+			}
 		}
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}

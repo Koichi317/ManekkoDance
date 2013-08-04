@@ -3,10 +3,19 @@
 /* ÉtÉâÉOÉÅÉìÉgÇ…ÇÊÇÈTabÇÃé¿ëï */
 /* äGï∂éöÇÃé¿ëï */
 
-package net.exkazuu.ManekkoDance;
+package net.exkazuu.ManekkoDance.activities;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.exkazuu.ManekkoDance.DetectableSoftKeyLayout;
+import net.exkazuu.ManekkoDance.Help;
+import net.exkazuu.ManekkoDance.IconContainer;
+import net.exkazuu.ManekkoDance.ImageContainer;
+import net.exkazuu.ManekkoDance.ImageInEdit;
+import net.exkazuu.ManekkoDance.StringCommandExecutor;
+import net.exkazuu.ManekkoDance.StringCommandParser;
+import net.exkazuu.ManekkoDance.DetectableSoftKeyLayout.OnSoftKeyShownListener;
 
 import jp.eclipcebook.R;
 import android.app.Activity;
@@ -453,7 +462,7 @@ public class MainActivity extends Activity {
 		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 		bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.ActionActivity.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.activities.ActionActivity.class);
 		intent.putExtra("text_data", textView.getText().toString());
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
@@ -464,7 +473,7 @@ public class MainActivity extends Activity {
 		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 		bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.PartnerActivity.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.activities.PartnerActivity.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", textView.getText().toString());
@@ -496,7 +505,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void changeTitleScreen() {
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.TitleActivity.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.activities.TitleActivity.class);
 		this.startActivity(intent);
 	}
 

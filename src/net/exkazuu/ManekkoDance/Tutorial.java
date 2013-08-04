@@ -45,7 +45,7 @@ public class Tutorial extends Activity {
 	}
 
 	public void changeTitleScreen(View view) {
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.TitleActivity.class);
+		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.activities.TitleActivity.class);
 		this.startActivity(intent);
 	}
 }

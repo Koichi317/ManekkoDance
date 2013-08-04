@@ -38,19 +38,6 @@
     <string name="touch_to_start">touch to start</string>
     <string name="help">ヘルプ</string>
     <string name="back_space">1字戻る</string>
-    <string name="answer_lesson1">左腕を上げる\n左腕を下げる\n右腕を上げる\n右腕を下げる</string>
-    <string name="answer_lesson2">左足を上げる\n左足を下げる\n右足を上げる\n右足を下げる</string>
-    <string name="answer_lesson3">左足を上げる\n左足を下げる\n右足を上げる\n右足を下げる\n左腕を上げる\n左腕を下げる\nジャンプする</string>
-    <string name="answer_lesson4">左腕を上げる 右腕を上げる\n左腕を下げる\n右腕を下げる\n左腕を上げる\n右腕を上げる\n左腕を下げる 右腕を下げる</string>
-    <string name="answer_lesson5">左腕を上げる 右足を上げる\n左腕を下げる 右足を下げる\n右腕を上げる 左足を上げる\n右腕を下げる 左足を下げる</string>
-    <string name="answer_lesson6">左腕を上げる 右腕を上げる\n左腕を下げる 右腕を下げる\n左腕を上げる 左足を上げる\n 右腕を上げる\n 左足を下げる\n左腕を下げる 右腕を下げる\nジャンプする</string>
-    <string name="answer_lesson7">loop3\n左足を上げる\n左足を下げる\n右足を上げる\n右足を下げる\nここまで</string>
-    <string name="answer_lesson8">loop3\n左足を上げる\n左足を下げる\n右足を上げる\n右足を下げる\nここまで</string>
-    <string name="answer_lesson9">loop3\n左足を上げる\n左足を下げる\n右足を上げる\n右足を下げる\nここまで\n loop2\n左腕を上げる 右腕を上げる\n 左腕を下げる 右腕を下げる\nここまで</string>
-    <string name="answer_lesson10">loop3\n loop2\n 左腕を上げる 右腕を上げる\n左腕を下げる 右腕を下げる\nここまで\nジャンプする\nここまで</string>
-    <string name="answer_lesson11">loop2\n左腕を上げる\n左腕を下げる\nここまで</string>
-    <string name="answer_lesson12">loop2\n左腕を上げる\n左腕を下げる\nここまで\nloop2\n右腕を上げる\n右腕を下げる\nここまで</string>
-    <string name="answer_lesson13">loop2\nloop2\n左腕を上げる\n左腕を下げる\nここまで\n右腕を上げる\n右腕を下げる\nここまで</string>
 
     <string-array name="move">
         <item>基本動作</item>

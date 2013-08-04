@@ -1,5 +1,7 @@
-package net.exkazuu.ManekkoDance;
+package net.exkazuu.ManekkoDance.activities;
 
+import net.exkazuu.ManekkoDance.Help;
+import net.exkazuu.ManekkoDance.LessonList;
 import jp.eclipcebook.R;
 import android.app.Activity;
 import android.content.Intent;

@@ -1,10 +1,19 @@
-package net.exkazuu.ManekkoDance;
+package net.exkazuu.ManekkoDance.activities;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.exkazuu.ManekkoDance.AnswerCheck;
+import net.exkazuu.ManekkoDance.Help;
+import net.exkazuu.ManekkoDance.ImageContainer;
+import net.exkazuu.ManekkoDance.LessonData;
+import net.exkazuu.ManekkoDance.LessonList;
+import net.exkazuu.ManekkoDance.StringCommandExecutor;
+import net.exkazuu.ManekkoDance.StringCommandParser;
+import net.exkazuu.ManekkoDance.Timer;
 
 import jp.eclipcebook.R;
 import android.annotation.SuppressLint;
@@ -170,7 +179,7 @@ public class ActionActivity extends Activity {
 											// bgm.start();
 											Intent intent = new Intent(
 													getApplication(),
-													net.exkazuu.ManekkoDance.TitleActivity.class);
+													net.exkazuu.ManekkoDance.activities.TitleActivity.class);
 											startActivity(intent);
 										}
 									});
@@ -204,19 +213,28 @@ public class ActionActivity extends Activity {
 											// MediaPlayer.create(getApplicationContext(),
 											// R.raw.select);
 											// bgm.start();
-											Intent intent = new Intent(
-													getApplication(),
-													net.exkazuu.ManekkoDance.PartnerActivity.class);
 											int nextLessonNumber = Integer
 													.parseInt(message) + 1;
-											message = String
-													.valueOf(nextLessonNumber);
-											intent.putExtra("message", message);
-											String str = LessonData
-													.getLessonData(nextLessonNumber);
-											lesson = str;
-											intent.putExtra("lesson", lesson);
-											startActivity(intent);
+											if (nextLessonNumber <= 3) {
+												Intent intent = new Intent(
+														getApplication(),
+														net.exkazuu.ManekkoDance.activities.PartnerActivity.class);
+												message = String
+														.valueOf(nextLessonNumber);
+												intent.putExtra("message",
+														message);
+												String str = LessonData
+														.getLessonData(nextLessonNumber);
+												lesson = str;
+												intent.putExtra("lesson",
+														lesson);
+												startActivity(intent);
+											} else {
+												Intent intent = new Intent(
+														getApplication(),
+														net.exkazuu.ManekkoDance.LessonList.class);
+												startActivity(intent);
+											}
 										}
 									});
 
@@ -228,7 +246,7 @@ public class ActionActivity extends Activity {
 										}
 									}
 
-									);
+							);
 
 							builder.setPositiveButton("‚à‚¤ˆê“xChallenge",
 									new DialogInterface.OnClickListener() {
@@ -254,10 +272,6 @@ public class ActionActivity extends Activity {
 									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
-										// bgm =
-										// MediaPlayer.create(getApplicationContext(),
-										// R.raw.select);
-										// bgm.start();
 										Intent intent = new Intent(
 												getApplication(),
 												net.exkazuu.ManekkoDance.LessonList.class);
@@ -355,7 +369,8 @@ public class ActionActivity extends Activity {
 	}
 
 	public void changeMainScreen(View view) {
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.MainActivity.class);
+		Intent intent = new Intent(this,
+				net.exkazuu.ManekkoDance.activities.MainActivity.class);
 		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
 		intent.putExtra("text_data", playerEditText.getText().toString());
@@ -365,7 +380,8 @@ public class ActionActivity extends Activity {
 	}
 
 	private void changeMainScreen() {
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.MainActivity.class);
+		Intent intent = new Intent(this,
+				net.exkazuu.ManekkoDance.activities.MainActivity.class);
 		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
 		intent.putExtra("text_data", playerEditText.getText().toString());
@@ -375,7 +391,8 @@ public class ActionActivity extends Activity {
 	}
 
 	public void changePartnerScreen(View view) {
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.PartnerActivity.class);
+		Intent intent = new Intent(this,
+				net.exkazuu.ManekkoDance.activities.PartnerActivity.class);
 		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
 		intent.putExtra("text_data", playerEditText.getText().toString());
@@ -385,7 +402,8 @@ public class ActionActivity extends Activity {
 	}
 
 	private void changeTitleScreen() {
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.TitleActivity.class);
+		Intent intent = new Intent(this,
+				net.exkazuu.ManekkoDance.activities.TitleActivity.class);
 		this.startActivity(intent);
 	}
 

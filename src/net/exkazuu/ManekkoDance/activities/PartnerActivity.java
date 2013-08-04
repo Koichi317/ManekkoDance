@@ -1,7 +1,12 @@
-package net.exkazuu.ManekkoDance;
+package net.exkazuu.ManekkoDance.activities;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.exkazuu.ManekkoDance.ImageContainer;
+import net.exkazuu.ManekkoDance.StringCommandExecutor;
+import net.exkazuu.ManekkoDance.StringCommandParser;
+import net.exkazuu.ManekkoDance.Timer;
 
 import jp.eclipcebook.R;
 import android.app.Activity;
@@ -170,7 +175,7 @@ public class PartnerActivity extends Activity {
 
 	public void changeMainScreen(View view) {
 		Intent intent = new Intent(getApplication(),
-				net.exkazuu.ManekkoDance.MainActivity.class);
+				net.exkazuu.ManekkoDance.activities.MainActivity.class);
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		TextView editText2 = (TextView) findViewById(R.id.editText2);
 		intent.putExtra("lesson", editText1.getText().toString());
@@ -181,7 +186,7 @@ public class PartnerActivity extends Activity {
 
 	public void changeTitleScreen() {
 		Intent intent = new Intent(getApplication(),
-				net.exkazuu.ManekkoDance.TitleActivity.class);
+				net.exkazuu.ManekkoDance.activities.TitleActivity.class);
 		this.startActivity(intent);
 	}
 
