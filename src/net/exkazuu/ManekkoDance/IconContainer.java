@@ -10,36 +10,36 @@ import android.util.Log;
 
 public class IconContainer {
 
-	private Drawable iconLeftHandUp;
-	private Drawable iconLeftHandDown;
-	private Drawable iconRightHandUp;
-	private Drawable iconRightHandDown;
-	private Drawable iconLeftFootUp;
-	private Drawable iconLeftFootDown;
-	private Drawable iconRightFootUp;
-	private Drawable iconRightFootDown;
+	private Drawable leftHandUp;
+	private Drawable leftHandDown;
+	private Drawable rightHandUp;
+	private Drawable rightHandDown;
+	private Drawable leftFootUp;
+	private Drawable leftFootDown;
+	private Drawable rightFootUp;
+	private Drawable rightFootDown;
 	private Drawable iconJump;
 	private Drawable iconLoop;
 	private Drawable iconKokomade;
 	private HashMap<Drawable, String> icon2Strings;
 
 	public IconContainer(Context context) {
-		this.iconLeftHandUp = context.getResources().getDrawable(
+		this.leftHandUp = context.getResources().getDrawable(
 				R.drawable.icon_left_hand_up);
-		Log.v("", "ctr: width: " + iconLeftHandUp.getBounds().width());
-		this.iconLeftHandDown = context.getResources().getDrawable(
+		Log.v("", "ctr: width: " + leftHandUp.getBounds().width());
+		this.leftHandDown = context.getResources().getDrawable(
 				R.drawable.icon_left_hand_down);
-		this.iconRightHandUp = context.getResources().getDrawable(
+		this.rightHandUp = context.getResources().getDrawable(
 				R.drawable.icon_right_hand_up);
-		this.iconRightHandDown = context.getResources().getDrawable(
+		this.rightHandDown = context.getResources().getDrawable(
 				R.drawable.icon_right_hand_down);
-		this.iconLeftFootUp = context.getResources().getDrawable(
+		this.leftFootUp = context.getResources().getDrawable(
 				R.drawable.icon_left_foot_up);
-		this.iconLeftFootDown = context.getResources().getDrawable(
+		this.leftFootDown = context.getResources().getDrawable(
 				R.drawable.icon_left_foot_down);
-		this.iconRightFootUp = context.getResources().getDrawable(
+		this.rightFootUp = context.getResources().getDrawable(
 				R.drawable.icon_right_foot_up);
-		this.iconRightFootDown = context.getResources().getDrawable(
+		this.rightFootDown = context.getResources().getDrawable(
 				R.drawable.icon_right_foot_down);
 		this.iconJump = context.getResources()
 				.getDrawable(R.drawable.icon_jump);
@@ -49,14 +49,14 @@ public class IconContainer {
 				R.drawable.icon_kokomade);
 		this.icon2Strings = new HashMap<Drawable, String>();
 
-		icon2Strings.put(iconLeftHandUp, "ç∂òrÇè„Ç∞ÇÈ");
-		icon2Strings.put(iconLeftHandDown, "ç∂òrÇâ∫Ç∞ÇÈ");
-		icon2Strings.put(iconRightHandUp, "âEòrÇè„Ç∞ÇÈ");
-		icon2Strings.put(iconRightHandDown, "âEòrÇâ∫Ç∞ÇÈ");
-		icon2Strings.put(iconLeftFootUp, "ç∂ë´Çè„Ç∞ÇÈ");
-		icon2Strings.put(iconLeftFootDown, "ç∂ë´Çâ∫Ç∞ÇÈ");
-		icon2Strings.put(iconRightFootUp, "âEë´Çè„Ç∞ÇÈ");
-		icon2Strings.put(iconRightFootDown, "âEë´Çâ∫Ç∞ÇÈ");
+		icon2Strings.put(leftHandUp, "ç∂òrÇè„Ç∞ÇÈ");
+		icon2Strings.put(leftHandDown, "ç∂òrÇâ∫Ç∞ÇÈ");
+		icon2Strings.put(rightHandUp, "âEòrÇè„Ç∞ÇÈ");
+		icon2Strings.put(rightHandDown, "âEòrÇâ∫Ç∞ÇÈ");
+		icon2Strings.put(leftFootUp, "ç∂ë´Çè„Ç∞ÇÈ");
+		icon2Strings.put(leftFootDown, "ç∂ë´Çâ∫Ç∞ÇÈ");
+		icon2Strings.put(rightFootUp, "âEë´Çè„Ç∞ÇÈ");
+		icon2Strings.put(rightFootDown, "âEë´Çâ∫Ç∞ÇÈ");
 		icon2Strings.put(iconJump, "ÉWÉÉÉìÉvÇ∑ÇÈ");
 		icon2Strings.put(iconLoop, "loop");
 		icon2Strings.put(iconKokomade, "Ç±Ç±Ç‹Ç≈");
@@ -72,36 +72,36 @@ public class IconContainer {
 	}
 
 	public Drawable getIconLeftHandUp() {
-		Log.v("", "get: width: " + iconLeftHandUp.getBounds().width());
-		return iconLeftHandUp;
+		Log.v("", "get: width: " + leftHandUp.getBounds().width());
+		return leftHandUp;
 	}
 
 	public Drawable getIconLeftHandDown() {
-		return iconLeftHandDown;
+		return leftHandDown;
 	}
 
 	public Drawable getIconRightHandUp() {
-		return iconRightHandUp;
+		return rightHandUp;
 	}
 
 	public Drawable getIconRightHandDown() {
-		return iconRightHandDown;
+		return rightHandDown;
 	}
 
 	public Drawable getIconLeftFootUp() {
-		return iconLeftFootUp;
+		return leftFootUp;
 	}
 
 	public Drawable getIconLeftFootDown() {
-		return iconLeftFootDown;
+		return leftFootDown;
 	}
 
 	public Drawable getIconRightFootUp() {
-		return iconRightFootUp;
+		return rightFootUp;
 	}
 
 	public Drawable getIconRightFootDown() {
-		return iconRightFootDown;
+		return rightFootDown;
 	}
 
 	public Drawable getIconJump() {
