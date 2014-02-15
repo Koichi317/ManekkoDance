@@ -14,12 +14,12 @@ public class StringCommandParser {
 
 	public static void parse(String commandsText, List<Integer> numberSorting,
 			List<String> expandedCommands) {
-		String[] commands = commandsText.split("\n"); // 1s–ˆ‚É”z—ñ‚ÉŠi”[
+		String[] commands = commandsText.split("\n"); // 1è¡Œæ¯ã«é…åˆ—ã«æ ¼ç´
 		List<String> originalCommand = new ArrayList<String>(
-				Arrays.asList(commands)); // ListŒ^”z—ñ‚É•ÏŠ·
-		List<Integer> lineNumberSequence = new ArrayList<Integer>(); // •¶š‚Ìs‚ğ‹L‰¯
+				Arrays.asList(commands)); // Listå‹é…åˆ—ã«å¤‰æ›
+		List<Integer> lineNumberSequence = new ArrayList<Integer>(); // æ–‡å­—ã®è¡Œã‚’è¨˜æ†¶
 
-		// s”Ô†‚ğ•t‚¯‚é(1s–ÚF0”Ô–ÚA2s–Ú:1”Ô–ÚAEEE)
+		// è¡Œç•ªå·ã‚’ä»˜ã‘ã‚‹(1è¡Œç›®ï¼š0ç•ªç›®ã€2è¡Œç›®:1ç•ªç›®ã€ãƒ»ãƒ»ãƒ»)
 		for (int i = 0; i < commands.length; i++)
 			lineNumberSequence.add(i);
 
@@ -37,10 +37,10 @@ public class StringCommandParser {
 		for (int i = 0; i < originalCommands.size(); i++) {
 			if (originalCommands.get(i) == null) {
 				continue;
-			} else if (originalCommands.get(i).contains("loop")) { // "loop"‚ª‚ ‚éê‡
+			} else if (originalCommands.get(i).contains("loop")) { // "loop"ãŒã‚ã‚‹å ´åˆ
 				loopStack.push(i);
 				loopCountStack.push(readCount(originalCommands.get(i)));
-			} else if (originalCommands.get(i).contains("‚±‚±‚Ü‚Å")) { // "‚±‚±‚Ü‚Å"‚ª‚ ‚éê‡
+			} else if (originalCommands.get(i).contains("ã“ã“ã¾ã§")) { // "ã“ã“ã¾ã§"ãŒã‚ã‚‹å ´åˆ
 				int loopPosition = loopStack.pop();
 				int loopCount = loopCountStack.pop();
 				originalCommands.remove(i);
@@ -50,7 +50,7 @@ public class StringCommandParser {
 				makeLoop(originalCommands, loopPosition, i - 2, loopCount,
 						lineNumberSequence);
 				i = loopPosition - 1;
-			} else if (loopStack.empty()) { // ƒXƒ^ƒbƒN‚ª‹ó
+			} else if (loopStack.empty()) { // ã‚¹ã‚¿ãƒƒã‚¯ãŒç©º
 				expandedCommands.add(originalCommands.get(i));
 				numberSorting.add(lineNumberSequence.get(i));
 			}
@@ -65,7 +65,7 @@ public class StringCommandParser {
 			str[i - firstIndex] = originalCommands.get(i);
 			num[i - firstIndex] = numberSorting.get(i);
 		}
-		for (int i = 0; i < count - 1; i++) { // 3‰ñŒJ‚è•Ô‚µ‚È‚çAi < 2 (1‰ñ•ª{2‰ñ•ª’Ç‰Á)
+		for (int i = 0; i < count - 1; i++) { // 3å›ç¹°ã‚Šè¿”ã—ãªã‚‰ã€i < 2 (1å›åˆ†ï¼‹2å›åˆ†è¿½åŠ )
 			for (int j = str.length - 1; j >= 0; j--) {
 				originalCommands.add(firstIndex, str[j]);
 				numberSorting.add(firstIndex, num[j]);
@@ -77,7 +77,7 @@ public class StringCommandParser {
 		Pattern p = Pattern.compile("[0-9]");
 		Matcher m = p.matcher(loopCount);
 		if (!m.find()) {
-			return 0; // 0‰ñŒJ‚è•Ô‚µ
+			return 0; // 0å›ç¹°ã‚Šè¿”ã—
 		} else {
 			int startIndex = m.start();
 			int countNumber = Integer.parseInt(loopCount.substring(startIndex));

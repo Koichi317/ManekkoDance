@@ -28,26 +28,26 @@ public class StringCommandExecutor implements Runnable {
 	String arg = "";
 
 	private static class Input {
-		boolean ¶˜r‚ğã‚°‚é;
-		boolean ¶˜r‚ğ‰º‚°‚é;
-		boolean ‰E˜r‚ğã‚°‚é;
-		boolean ‰E˜r‚ğ‰º‚°‚é;
-		boolean ¶‘«‚ğã‚°‚é;
-		boolean ¶‘«‚ğ‰º‚°‚é;
-		boolean ‰E‘«‚ğã‚°‚é;
-		boolean ‰E‘«‚ğ‰º‚°‚é;
-		boolean ƒWƒƒƒ“ƒv‚·‚é;
+		boolean å·¦è…•ã‚’ä¸Šã’ã‚‹;
+		boolean å·¦è…•ã‚’ä¸‹ã’ã‚‹;
+		boolean å³è…•ã‚’ä¸Šã’ã‚‹;
+		boolean å³è…•ã‚’ä¸‹ã’ã‚‹;
+		boolean å·¦è¶³ã‚’ä¸Šã’ã‚‹;
+		boolean å·¦è¶³ã‚’ä¸‹ã’ã‚‹;
+		boolean å³è¶³ã‚’ä¸Šã’ã‚‹;
+		boolean å³è¶³ã‚’ä¸‹ã’ã‚‹;
+		boolean ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹;
 
 		private void inputReset() {
-			¶˜r‚ğã‚°‚é = false;
-			¶˜r‚ğ‰º‚°‚é = false;
-			‰E˜r‚ğã‚°‚é = false;
-			‰E˜r‚ğ‰º‚°‚é = false;
-			¶‘«‚ğã‚°‚é = false;
-			¶‘«‚ğ‰º‚°‚é = false;
-			‰E‘«‚ğã‚°‚é = false;
-			‰E‘«‚ğ‰º‚°‚é = false;
-			ƒWƒƒƒ“ƒv‚·‚é = false;
+			å·¦è…•ã‚’ä¸Šã’ã‚‹ = false;
+			å·¦è…•ã‚’ä¸‹ã’ã‚‹ = false;
+			å³è…•ã‚’ä¸Šã’ã‚‹ = false;
+			å³è…•ã‚’ä¸‹ã’ã‚‹ = false;
+			å·¦è¶³ã‚’ä¸Šã’ã‚‹ = false;
+			å·¦è¶³ã‚’ä¸‹ã’ã‚‹ = false;
+			å³è¶³ã‚’ä¸Šã’ã‚‹ = false;
+			å³è¶³ã‚’ä¸‹ã’ã‚‹ = false;
+			ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹ = false;
 		}
 	}
 
@@ -73,7 +73,7 @@ public class StringCommandExecutor implements Runnable {
 		}
 	}
 
-	/**** ƒtƒB[ƒ‹ƒh ****/
+	/**** ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ ****/
 	private List<String> expandedCommands;
 	private int lineIndex;
 	private boolean addLineIndex;
@@ -87,8 +87,8 @@ public class StringCommandExecutor implements Runnable {
 	private Input input;
 	private State state;
 
-	/**** ƒRƒ“ƒXƒgƒ‰ƒNƒ^ ****/
-	// ‚¨è–{
+	/**** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ ****/
+	// ãŠæ‰‹æœ¬
 	public StringCommandExecutor(ImageContainer images, List<String> stringArray) {
 		this.images = images;
 		this.expandedCommands = stringArray;
@@ -100,7 +100,7 @@ public class StringCommandExecutor implements Runnable {
 		errorCheck = false;
 	}
 
-	// ƒvƒŒƒCƒ„[
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	public StringCommandExecutor(ImageContainer images,
 			List<String> stringArray, TextView textView,
 			List<Integer> playerNumberSorting) {
@@ -121,7 +121,7 @@ public class StringCommandExecutor implements Runnable {
 	public void run() {
 		if (addLineIndex) {
 
-			if (player) { // Às’†‚Ì•¶š—ñ‚ğÔ‚­‚·‚é
+			if (player) { // å®Ÿè¡Œä¸­ã®æ–‡å­—åˆ—ã‚’èµ¤ãã™ã‚‹
 				colorPosition = playerNumberSorting.get(lineIndex);
 				playerCommandsText = textView.getText().toString().split("\n");
 				textView.getEditableText().clear();
@@ -138,38 +138,38 @@ public class StringCommandExecutor implements Runnable {
 				}
 			}
 
-			input.inputReset(); // input‚Ì‰Šú‰»
+			input.inputReset(); // inputã®åˆæœŸåŒ–
 
-			// input‚Ìæ“¾
-			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğã‚°‚é") != -1)
-				input.¶˜r‚ğã‚°‚é = true;
-			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğ‰º‚°‚é") != -1)
-				input.¶˜r‚ğ‰º‚°‚é = true;
-			if (expandedCommands.get(lineIndex).indexOf("‰E˜r‚ğã‚°‚é") != -1)
-				input.‰E˜r‚ğã‚°‚é = true;
-			if (expandedCommands.get(lineIndex).indexOf("‰E˜r‚ğ‰º‚°‚é") != -1)
-				input.‰E˜r‚ğ‰º‚°‚é = true;
-			if (expandedCommands.get(lineIndex).indexOf("¶‘«‚ğã‚°‚é") != -1)
-				input.¶‘«‚ğã‚°‚é = true;
-			if (expandedCommands.get(lineIndex).indexOf("¶‘«‚ğ‰º‚°‚é") != -1)
-				input.¶‘«‚ğ‰º‚°‚é = true;
-			if (expandedCommands.get(lineIndex).indexOf("‰E‘«‚ğã‚°‚é") != -1)
-				input.‰E‘«‚ğã‚°‚é = true;
-			if (expandedCommands.get(lineIndex).indexOf("‰E‘«‚ğ‰º‚°‚é") != -1)
-				input.‰E‘«‚ğ‰º‚°‚é = true;
-			if (expandedCommands.get(lineIndex).indexOf("ƒWƒƒƒ“ƒv‚·‚é") != -1)
-				input.ƒWƒƒƒ“ƒv‚·‚é = true;
+			// inputã®å–å¾—
+			if (expandedCommands.get(lineIndex).indexOf("å·¦è…•ã‚’ä¸Šã’ã‚‹") != -1)
+				input.å·¦è…•ã‚’ä¸Šã’ã‚‹ = true;
+			if (expandedCommands.get(lineIndex).indexOf("å·¦è…•ã‚’ä¸‹ã’ã‚‹") != -1)
+				input.å·¦è…•ã‚’ä¸‹ã’ã‚‹ = true;
+			if (expandedCommands.get(lineIndex).indexOf("å³è…•ã‚’ä¸Šã’ã‚‹") != -1)
+				input.å³è…•ã‚’ä¸Šã’ã‚‹ = true;
+			if (expandedCommands.get(lineIndex).indexOf("å³è…•ã‚’ä¸‹ã’ã‚‹") != -1)
+				input.å³è…•ã‚’ä¸‹ã’ã‚‹ = true;
+			if (expandedCommands.get(lineIndex).indexOf("å·¦è¶³ã‚’ä¸Šã’ã‚‹") != -1)
+				input.å·¦è¶³ã‚’ä¸Šã’ã‚‹ = true;
+			if (expandedCommands.get(lineIndex).indexOf("å·¦è¶³ã‚’ä¸‹ã’ã‚‹") != -1)
+				input.å·¦è¶³ã‚’ä¸‹ã’ã‚‹ = true;
+			if (expandedCommands.get(lineIndex).indexOf("å³è¶³ã‚’ä¸Šã’ã‚‹") != -1)
+				input.å³è¶³ã‚’ä¸Šã’ã‚‹ = true;
+			if (expandedCommands.get(lineIndex).indexOf("å³è¶³ã‚’ä¸‹ã’ã‚‹") != -1)
+				input.å³è¶³ã‚’ä¸‹ã’ã‚‹ = true;
+			if (expandedCommands.get(lineIndex).indexOf("ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹") != -1)
+				input.ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹ = true;
 
-			// –³Œø‚È–½—ß‚Ì•À‚Ñi¶˜r‚ğã‚°‚é&&¶˜r‚ğ‰º‚°‚é “™j
-			if ((input.¶˜r‚ğã‚°‚é && input.¶˜r‚ğ‰º‚°‚é)
-					|| (input.‰E˜r‚ğã‚°‚é && input.‰E˜r‚ğ‰º‚°‚é)
-					|| (input.¶‘«‚ğã‚°‚é && input.¶‘«‚ğ‰º‚°‚é)
-					|| (input.‰E‘«‚ğã‚°‚é && input.‰E‘«‚ğ‰º‚°‚é)
-					|| (input.¶‘«‚ğã‚°‚é && input.‰E‘«‚ğã‚°‚é)
-					|| (input.¶‘«‚ğ‰º‚°‚é && input.‰E‘«‚ğ‰º‚°‚é)
-					|| (input.ƒWƒƒƒ“ƒv‚·‚é && (input.¶˜r‚ğã‚°‚é || input.¶˜r‚ğ‰º‚°‚é
-							|| input.‰E˜r‚ğã‚°‚é || input.‰E˜r‚ğ‰º‚°‚é || input.¶‘«‚ğã‚°‚é
-							|| input.¶‘«‚ğ‰º‚°‚é || input.‰E‘«‚ğã‚°‚é || input.‰E‘«‚ğ‰º‚°‚é))) {
+			// ç„¡åŠ¹ãªå‘½ä»¤ã®ä¸¦ã³ï¼ˆå·¦è…•ã‚’ä¸Šã’ã‚‹&&å·¦è…•ã‚’ä¸‹ã’ã‚‹ ç­‰ï¼‰
+			if ((input.å·¦è…•ã‚’ä¸Šã’ã‚‹ && input.å·¦è…•ã‚’ä¸‹ã’ã‚‹)
+					|| (input.å³è…•ã‚’ä¸Šã’ã‚‹ && input.å³è…•ã‚’ä¸‹ã’ã‚‹)
+					|| (input.å·¦è¶³ã‚’ä¸Šã’ã‚‹ && input.å·¦è¶³ã‚’ä¸‹ã’ã‚‹)
+					|| (input.å³è¶³ã‚’ä¸Šã’ã‚‹ && input.å³è¶³ã‚’ä¸‹ã’ã‚‹)
+					|| (input.å·¦è¶³ã‚’ä¸Šã’ã‚‹ && input.å³è¶³ã‚’ä¸Šã’ã‚‹)
+					|| (input.å·¦è¶³ã‚’ä¸‹ã’ã‚‹ && input.å³è¶³ã‚’ä¸‹ã’ã‚‹)
+					|| (input.ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹ && (input.å·¦è…•ã‚’ä¸Šã’ã‚‹ || input.å·¦è…•ã‚’ä¸‹ã’ã‚‹
+							|| input.å³è…•ã‚’ä¸Šã’ã‚‹ || input.å³è…•ã‚’ä¸‹ã’ã‚‹ || input.å·¦è¶³ã‚’ä¸Šã’ã‚‹
+							|| input.å·¦è¶³ã‚’ä¸‹ã’ã‚‹ || input.å³è¶³ã‚’ä¸Šã’ã‚‹ || input.å³è¶³ã‚’ä¸‹ã’ã‚‹))) {
 				errorCheck = true;
 				Log.v("tag", "error");
 				errorImage(images);
@@ -177,16 +177,16 @@ public class StringCommandExecutor implements Runnable {
 				return;
 			}
 
-			// –³Œø‚È–½—ßi¶˜r‚ğã‚°‚Ä‚¢‚éó‘Ô‚Ì‚É"¶˜r‚ğã‚°‚é" “™j
-			if ((input.¶˜r‚ğã‚°‚é && state.isLeftHandUp)
-					|| (input.¶˜r‚ğ‰º‚°‚é && state.isLeftHandDown)
-					|| (input.‰E˜r‚ğã‚°‚é && state.isRightHandUp)
-					|| (input.‰E˜r‚ğ‰º‚°‚é && state.isRightHandDown)
-					|| (input.¶‘«‚ğã‚°‚é && state.isLeftFootUp)
-					|| (input.¶‘«‚ğ‰º‚°‚é && state.isLeftFootDown)
-					|| (input.‰E‘«‚ğã‚°‚é && state.isRightFootUp)
-					|| (input.‰E‘«‚ğ‰º‚°‚é && state.isRightFootDown)
-					|| (input.ƒWƒƒƒ“ƒv‚·‚é && (state.isLeftHandUp
+			// ç„¡åŠ¹ãªå‘½ä»¤ï¼ˆå·¦è…•ã‚’ä¸Šã’ã¦ã„ã‚‹çŠ¶æ…‹ã®æ™‚ã«"å·¦è…•ã‚’ä¸Šã’ã‚‹" ç­‰ï¼‰
+			if ((input.å·¦è…•ã‚’ä¸Šã’ã‚‹ && state.isLeftHandUp)
+					|| (input.å·¦è…•ã‚’ä¸‹ã’ã‚‹ && state.isLeftHandDown)
+					|| (input.å³è…•ã‚’ä¸Šã’ã‚‹ && state.isRightHandUp)
+					|| (input.å³è…•ã‚’ä¸‹ã’ã‚‹ && state.isRightHandDown)
+					|| (input.å·¦è¶³ã‚’ä¸Šã’ã‚‹ && state.isLeftFootUp)
+					|| (input.å·¦è¶³ã‚’ä¸‹ã’ã‚‹ && state.isLeftFootDown)
+					|| (input.å³è¶³ã‚’ä¸Šã’ã‚‹ && state.isRightFootUp)
+					|| (input.å³è¶³ã‚’ä¸‹ã’ã‚‹ && state.isRightFootDown)
+					|| (input.ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹ && (state.isLeftHandUp
 							|| state.isRightHandUp || state.isLeftFootUp || state.isRightFootUp))) {
 				errorCheck = true;
 				errorImage(images);
@@ -195,19 +195,19 @@ public class StringCommandExecutor implements Runnable {
 			}
 
 			// String arg = "";
-			if (input.¶˜r‚ğã‚°‚é) { // ¶˜r‚ğã‚°‚é
+			if (input.å·¦è…•ã‚’ä¸Šã’ã‚‹) { // å·¦è…•ã‚’ä¸Šã’ã‚‹
 				if (player)
 					images.getLeftHand1().setImageResource(
 							R.drawable.piyo_left_hand_up2);
 				if (!player)
 					images.getLeftHand1().setImageResource(
 							R.drawable.cocco_left_hand_up2);
-				state.isLeftHandUp = true; // ¶˜r‚ğã‚°‚Ä‚¢‚é(1:true)
-				state.isLeftHandDown = false; // ¶˜r‚ğ‰º‚°‚Ä‚¢‚é(0:false)
+				state.isLeftHandUp = true; // å·¦è…•ã‚’ä¸Šã’ã¦ã„ã‚‹(1:true)
+				state.isLeftHandDown = false; // å·¦è…•ã‚’ä¸‹ã’ã¦ã„ã‚‹(0:false)
 				arg += "lau";
 			}
 
-			if (input.¶˜r‚ğ‰º‚°‚é) {
+			if (input.å·¦è…•ã‚’ä¸‹ã’ã‚‹) {
 				if (player)
 					images.getLeftHand1().setImageResource(
 							R.drawable.piyo_left_hand_up2);
@@ -219,7 +219,7 @@ public class StringCommandExecutor implements Runnable {
 				arg = arg.replace("lau", "");
 			}
 
-			if (input.‰E˜r‚ğã‚°‚é) {
+			if (input.å³è…•ã‚’ä¸Šã’ã‚‹) {
 				if (player)
 					images.getRightHand1().setImageResource(
 							R.drawable.piyo_right_hand_up2);
@@ -231,7 +231,7 @@ public class StringCommandExecutor implements Runnable {
 				arg += "rau";
 			}
 
-			if (input.‰E˜r‚ğ‰º‚°‚é) {
+			if (input.å³è…•ã‚’ä¸‹ã’ã‚‹) {
 				if (player)
 					images.getRightHand1().setImageResource(
 							R.drawable.piyo_right_hand_up2);
@@ -243,7 +243,7 @@ public class StringCommandExecutor implements Runnable {
 				arg = arg.replace("rau", "");
 			}
 
-			if (input.¶‘«‚ğã‚°‚é) {
+			if (input.å·¦è¶³ã‚’ä¸Šã’ã‚‹) {
 				if (player)
 					images.getLeftFoot1().setImageResource(
 							R.drawable.piyo_left_foot_up2);
@@ -255,7 +255,7 @@ public class StringCommandExecutor implements Runnable {
 				arg += "llu";
 			}
 
-			if (input.¶‘«‚ğ‰º‚°‚é) {
+			if (input.å·¦è¶³ã‚’ä¸‹ã’ã‚‹) {
 				if (player)
 					images.getLeftFoot1().setImageResource(
 							R.drawable.piyo_left_foot_up2);
@@ -267,7 +267,7 @@ public class StringCommandExecutor implements Runnable {
 				arg = arg.replace("llu", "");
 			}
 
-			if (input.‰E‘«‚ğã‚°‚é) {
+			if (input.å³è¶³ã‚’ä¸Šã’ã‚‹) {
 				if (player)
 					images.getRightFoot1().setImageResource(
 							R.drawable.piyo_right_foot_up2);
@@ -279,7 +279,7 @@ public class StringCommandExecutor implements Runnable {
 				arg += "rlu";
 			}
 
-			if (input.‰E‘«‚ğ‰º‚°‚é) {
+			if (input.å³è¶³ã‚’ä¸‹ã’ã‚‹) {
 				if (player)
 					images.getRightFoot1().setImageResource(
 							R.drawable.piyo_right_foot_up2);
@@ -291,7 +291,7 @@ public class StringCommandExecutor implements Runnable {
 				arg = arg.replace("rlu", "");
 			}
 
-			if (input.ƒWƒƒƒ“ƒv‚·‚é) {
+			if (input.ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹) {
 				images.getLeftHand1().setVisibility(View.INVISIBLE);
 				images.getRightHand1().setVisibility(View.INVISIBLE);
 				images.getLeftFoot1().setVisibility(View.INVISIBLE);
@@ -319,7 +319,7 @@ public class StringCommandExecutor implements Runnable {
 				}
 			}
 
-			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğã‚°‚é") != -1) {
+			if (expandedCommands.get(lineIndex).indexOf("å·¦è…•ã‚’ä¸Šã’ã‚‹") != -1) {
 				if (player)
 					images.getLeftHand1().setImageResource(
 							R.drawable.piyo_left_hand_up3);
@@ -327,7 +327,7 @@ public class StringCommandExecutor implements Runnable {
 					images.getLeftHand1().setImageResource(
 							R.drawable.cocco_left_hand_up3);
 			}
-			if (expandedCommands.get(lineIndex).indexOf("¶˜r‚ğ‰º‚°‚é") != -1) {
+			if (expandedCommands.get(lineIndex).indexOf("å·¦è…•ã‚’ä¸‹ã’ã‚‹") != -1) {
 				if (player)
 					images.getLeftHand1().setImageResource(
 							R.drawable.piyo_left_hand_up1);
@@ -335,7 +335,7 @@ public class StringCommandExecutor implements Runnable {
 					images.getLeftHand1().setImageResource(
 							R.drawable.cocco_left_hand_up1);
 			}
-			if (expandedCommands.get(lineIndex).indexOf("‰E˜r‚ğã‚°‚é") != -1) {
+			if (expandedCommands.get(lineIndex).indexOf("å³è…•ã‚’ä¸Šã’ã‚‹") != -1) {
 				if (player)
 					images.getRightHand1().setImageResource(
 							R.drawable.piyo_right_hand_up3);
@@ -343,7 +343,7 @@ public class StringCommandExecutor implements Runnable {
 					images.getRightHand1().setImageResource(
 							R.drawable.cocco_right_hand_up3);
 			}
-			if (expandedCommands.get(lineIndex).indexOf("‰E˜r‚ğ‰º‚°‚é") != -1) {
+			if (expandedCommands.get(lineIndex).indexOf("å³è…•ã‚’ä¸‹ã’ã‚‹") != -1) {
 				if (player)
 					images.getRightHand1().setImageResource(
 							R.drawable.piyo_right_hand_up1);
@@ -351,7 +351,7 @@ public class StringCommandExecutor implements Runnable {
 					images.getRightHand1().setImageResource(
 							R.drawable.cocco_right_hand_up1);
 			}
-			if (expandedCommands.get(lineIndex).indexOf("¶‘«‚ğã‚°‚é") != -1) {
+			if (expandedCommands.get(lineIndex).indexOf("å·¦è¶³ã‚’ä¸Šã’ã‚‹") != -1) {
 				if (player)
 					images.getLeftFoot1().setImageResource(
 							R.drawable.piyo_left_foot_up3);
@@ -359,7 +359,7 @@ public class StringCommandExecutor implements Runnable {
 					images.getLeftFoot1().setImageResource(
 							R.drawable.cocco_left_foot_up3);
 			}
-			if (expandedCommands.get(lineIndex).indexOf("¶‘«‚ğ‰º‚°‚é") != -1) {
+			if (expandedCommands.get(lineIndex).indexOf("å·¦è¶³ã‚’ä¸‹ã’ã‚‹") != -1) {
 				if (player)
 					images.getLeftFoot1().setImageResource(
 							R.drawable.piyo_left_foot_up1);
@@ -367,7 +367,7 @@ public class StringCommandExecutor implements Runnable {
 					images.getLeftFoot1().setImageResource(
 							R.drawable.cocco_left_foot_up1);
 			}
-			if (expandedCommands.get(lineIndex).indexOf("‰E‘«‚ğã‚°‚é") != -1) {
+			if (expandedCommands.get(lineIndex).indexOf("å³è¶³ã‚’ä¸Šã’ã‚‹") != -1) {
 				if (player)
 					images.getRightFoot1().setImageResource(
 							R.drawable.piyo_right_foot_up3);
@@ -375,7 +375,7 @@ public class StringCommandExecutor implements Runnable {
 					images.getRightFoot1().setImageResource(
 							R.drawable.cocco_right_foot_up3);
 			}
-			if (expandedCommands.get(lineIndex).indexOf("‰E‘«‚ğ‰º‚°‚é") != -1) {
+			if (expandedCommands.get(lineIndex).indexOf("å³è¶³ã‚’ä¸‹ã’ã‚‹") != -1) {
 				if (player)
 					images.getRightFoot1().setImageResource(
 							R.drawable.piyo_right_foot_up1);
@@ -383,7 +383,7 @@ public class StringCommandExecutor implements Runnable {
 					images.getRightFoot1().setImageResource(
 							R.drawable.cocco_right_foot_up1);
 			}
-			if (expandedCommands.get(lineIndex).indexOf("ƒWƒƒƒ“ƒv‚·‚é") != -1) {
+			if (expandedCommands.get(lineIndex).indexOf("ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹") != -1) {
 				if (player)
 					images.getBasic().setImageResource(R.drawable.piyo_basic);
 				if (!player)
@@ -433,19 +433,19 @@ class PostTask extends AsyncTask<Void, String, Boolean> {
 
 		// All your code goes in here
 		try {
-			// URLw’è
+			// URLæŒ‡å®š
 			HttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost("http://192.168.91.200:3000/form");
-			// BODY‚É“o˜^Aİ’è
+			// BODYã«ç™»éŒ²ã€è¨­å®š
 			ArrayList<NameValuePair> value = new ArrayList<NameValuePair>();
 			value.add(new BasicNameValuePair("input1", arg));
 
 			String body = null;
 			try {
 				post.setEntity(new UrlEncodedFormEntity(value, "UTF-8"));
-				// ƒŠƒNƒGƒXƒg‘—M
+				// ãƒªã‚¯ã‚¨ã‚¹ãƒˆé€ä¿¡
 				HttpResponse response = client.execute(post);
-				// æ“¾
+				// å–å¾—
 				HttpEntity entity = response.getEntity();
 				body = EntityUtils.toString(entity, "UTF-8");
 			} catch (IOException e) {

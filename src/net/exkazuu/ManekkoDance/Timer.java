@@ -17,7 +17,7 @@ public class Timer {
 		long min = t / 60;
 		long sec = t % 60;
 
-		String result = "ƒ^ƒCƒ€‚Í" + min + "•ª" + sec + "•b‚Å‚·B";
+		String result = "ã‚¿ã‚¤ãƒ ã¯" + min + "åˆ†" + sec + "ç§’ã§ã™ã€‚";
 		return result;
 	}
 }

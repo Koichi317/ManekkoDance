@@ -26,20 +26,20 @@ public class DetectableSoftKeyLayout extends LinearLayout {
 	@SuppressLint("DrawAllocation")
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		// (a)View‚Ì‚‚³
+		// (a)Viewã®é«˜ã•
 		int viewHeight = MeasureSpec.getSize(heightMeasureSpec);
-		// (b)ƒXƒe[ƒ^ƒXƒo[‚Ì‚‚³
+		// (b)ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼ã®é«˜ã•
 		if (getContext() instanceof Activity) {
 			Activity activity = (Activity) getContext();
 			Rect rect = new Rect();
 			activity.getWindow().getDecorView()
 					.getWindowVisibleDisplayFrame(rect);
 			int statusBarHeight = rect.top;
-			// (c)ƒfƒBƒXƒvƒŒƒCƒTƒCƒY
+			// (c)ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ã‚µã‚¤ã‚º
 			int screenHeight = activity.getWindowManager().getDefaultDisplay()
 					.getHeight();
-			// (a)-(b)-(c)>100ƒsƒNƒZƒ‹‚Æ‚È‚Á‚½‚çƒ\ƒtƒgƒL[ƒ{[ƒh‚ª•\Ž¦‚³‚ê‚Ä‚é‚Æ”»’f
-			// iƒ\ƒtƒgƒL[ƒ{[ƒh‚Í‚Ç‚ñ‚È‚à‚Ì‚Å‚àÅ’á100ƒsƒNƒZƒ‹‚ ‚é‚Æ‰¼’èj
+			// (a)-(b)-(c)>100ãƒ”ã‚¯ã‚»ãƒ«ã¨ãªã£ãŸã‚‰ã‚½ãƒ•ãƒˆã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãŒè¡¨ç¤ºã•ã‚Œã¦ã‚‹ã¨åˆ¤æ–­
+			// ï¼ˆã‚½ãƒ•ãƒˆã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã¯ã©ã‚“ãªã‚‚ã®ã§ã‚‚æœ€ä½Ž100ãƒ”ã‚¯ã‚»ãƒ«ã‚ã‚‹ã¨ä»®å®šï¼‰
 			int diff = (screenHeight - statusBarHeight) - viewHeight;
 			if (listener != null) {
 				listener.onSoftKeyShown(diff > 100);

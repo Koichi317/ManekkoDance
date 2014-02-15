@@ -24,13 +24,13 @@ import android.widget.TextView;
 
 public class PartnerActivity extends Activity {
 
-	// private String path = "mydata2.txt"; // file•Û‘¶
+	// private String path = "mydata2.txt"; // fileä¿å­˜
 	private String text_data;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// requestWindowFeature(Window.FEATURE_NO_TITLE); //ƒ^ƒCƒgƒ‹ƒo[”ñ•\¦
-		setTitle("‚¨è–{‰æ–Ê");
+		// requestWindowFeature(Window.FEATURE_NO_TITLE); //ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼éè¡¨ç¤º
+		setTitle("ãŠæ‰‹æœ¬ç”»é¢");
 		Timer.startTimer();
 		setContentView(R.layout.partner);
 		// doLoad();
@@ -105,18 +105,18 @@ public class PartnerActivity extends Activity {
 		private void executeCommands(ImageContainer images,
 				List<String> commands) {
 			Runnable runnable = new StringCommandExecutor(images, commands);
-			for (int i = 0; i < commands.size(); i++) { /* ‰ğÍ&Às */
-				handler.post(runnable); /* Œõ‚ç‚¹‚é */
+			for (int i = 0; i < commands.size(); i++) { /* è§£æ&å®Ÿè¡Œ */
+				handler.post(runnable); /* å…‰ã‚‰ã›ã‚‹ */
 
-				try { /* 1•b‘Ò‹@ */
+				try { /* 1ç§’å¾…æ©Ÿ */
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 
-				handler.post(runnable); /* Œõ‚ç‚¹‚é */
+				handler.post(runnable); /* å…‰ã‚‰ã›ã‚‹ */
 
-				try { /* 1•b‘Ò‹@ */
+				try { /* 1ç§’å¾…æ©Ÿ */
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -126,7 +126,7 @@ public class PartnerActivity extends Activity {
 
 	}
 
-	/******************** ƒtƒ@ƒCƒ‹•Û‘¶ doSave(View view) *************************/
+	/******************** ãƒ•ã‚¡ã‚¤ãƒ«ä¿å­˜ doSave(View view) *************************/
 	/*
 	 * @SuppressLint("WorldReadableFiles") public void doSave() { EditText
 	 * editText1 = (EditText) this.findViewById(R.id.editText1); Editable str =
@@ -138,7 +138,7 @@ public class PartnerActivity extends Activity {
 	 * e.printStackTrace(); } } }
 	 */
 
-	/******************** ƒtƒ@ƒCƒ‹ƒ[ƒh doLoad(View view) *************************/
+	/******************** ãƒ•ã‚¡ã‚¤ãƒ«ãƒ­ãƒ¼ãƒ‰ doLoad(View view) *************************/
 	/*
 	 * public void doLoad() { EditText editText1 = (EditText)
 	 * this.findViewById(R.id.editText1); FileInputStream input = null; try {
@@ -154,8 +154,8 @@ public class PartnerActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		super.onCreateOptionsMenu(menu);
-		MenuItem item1 = menu.add("•ÒW‰æ–Ê");
-		MenuItem item2 = menu.add("ƒ^ƒCƒgƒ‹‰æ–Ê‚Ö–ß‚é");
+		MenuItem item1 = menu.add("ç·¨é›†ç”»é¢");
+		MenuItem item2 = menu.add("ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã¸æˆ»ã‚‹");
 
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
@@ -204,7 +204,7 @@ public class PartnerActivity extends Activity {
 			ImageView iv = (ImageView) view;
 			iv.setImageDrawable(null);
 			// } else if(view instanceof(XXX)) {
-			// ‘¼‚É‚àDrawable‚ğg—p‚·‚é‘ÎÛ‚ª‚ ‚ê‚Î‚±‚±‚Å’†g‚ğnull‚É
+			// ä»–ã«ã‚‚Drawableã‚’ä½¿ç”¨ã™ã‚‹å¯¾è±¡ãŒã‚ã‚Œã°ã“ã“ã§ä¸­èº«ã‚’nullã«
 		}
 		view.setBackgroundDrawable(null);
 		if (view instanceof ViewGroup) {

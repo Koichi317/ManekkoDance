@@ -49,17 +49,17 @@ public class IconContainer {
 				R.drawable.icon_kokomade);
 		this.icon2Strings = new HashMap<Drawable, String>();
 
-		icon2Strings.put(leftHandUp, "¶˜r‚ğã‚°‚é");
-		icon2Strings.put(leftHandDown, "¶˜r‚ğ‰º‚°‚é");
-		icon2Strings.put(rightHandUp, "‰E˜r‚ğã‚°‚é");
-		icon2Strings.put(rightHandDown, "‰E˜r‚ğ‰º‚°‚é");
-		icon2Strings.put(leftFootUp, "¶‘«‚ğã‚°‚é");
-		icon2Strings.put(leftFootDown, "¶‘«‚ğ‰º‚°‚é");
-		icon2Strings.put(rightFootUp, "‰E‘«‚ğã‚°‚é");
-		icon2Strings.put(rightFootDown, "‰E‘«‚ğ‰º‚°‚é");
-		icon2Strings.put(iconJump, "ƒWƒƒƒ“ƒv‚·‚é");
+		icon2Strings.put(leftHandUp, "å·¦è…•ã‚’ä¸Šã’ã‚‹");
+		icon2Strings.put(leftHandDown, "å·¦è…•ã‚’ä¸‹ã’ã‚‹");
+		icon2Strings.put(rightHandUp, "å³è…•ã‚’ä¸Šã’ã‚‹");
+		icon2Strings.put(rightHandDown, "å³è…•ã‚’ä¸‹ã’ã‚‹");
+		icon2Strings.put(leftFootUp, "å·¦è¶³ã‚’ä¸Šã’ã‚‹");
+		icon2Strings.put(leftFootDown, "å·¦è¶³ã‚’ä¸‹ã’ã‚‹");
+		icon2Strings.put(rightFootUp, "å³è¶³ã‚’ä¸Šã’ã‚‹");
+		icon2Strings.put(rightFootDown, "å³è¶³ã‚’ä¸‹ã’ã‚‹");
+		icon2Strings.put(iconJump, "ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹");
 		icon2Strings.put(iconLoop, "loop");
-		icon2Strings.put(iconKokomade, "‚±‚±‚Ü‚Å");
+		icon2Strings.put(iconKokomade, "ã“ã“ã¾ã§");
 		// ...
 	}
 

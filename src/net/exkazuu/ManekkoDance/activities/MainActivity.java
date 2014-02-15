@@ -1,7 +1,7 @@
-// TodoƒŠƒXƒg
-/* ƒL[ƒ{[ƒh‚ğo‚µ‚½‚Ì‰æ‘œ’×‚ê‰ğÁ–@@http://d.hatena.ne.jp/Superdry/20110715/1310754502 */
-/* ƒtƒ‰ƒOƒƒ“ƒg‚É‚æ‚éTab‚ÌÀ‘• */
-/* ŠG•¶š‚ÌÀ‘• */
+// Todoãƒªã‚¹ãƒˆ
+/* ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã‚’å‡ºã—ãŸæ™‚ã®ç”»åƒæ½°ã‚Œè§£æ¶ˆæ³•ã€€http://d.hatena.ne.jp/Superdry/20110715/1310754502 */
+/* ãƒ•ãƒ©ã‚°ãƒ¡ãƒ³ãƒˆã«ã‚ˆã‚‹Tabã®å®Ÿè£… */
+/* çµµæ–‡å­—ã®å®Ÿè£… */
 
 package net.exkazuu.ManekkoDance.activities;
 
@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
 
 	private static final int TEXT_VIEW = 0;
 	private static final int IMAGE_VIEW = 1;
-	// private String path = "mydata.txt"; // file•Û‘¶
+	// private String path = "mydata.txt"; // fileä¿å­˜
 	private String lesson;
 	private String message;
 	private String text_data;
@@ -60,7 +60,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle("•ÒW‰æ–Ê");
+		setTitle("ç·¨é›†ç”»é¢");
 		setContentView(R.layout.main);
 
 		imgTextView = (ImageInEdit) findViewById(R.id.imageInEdit);
@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 		buttonGroup2 = (LinearLayout) findViewById(R.id.buttonGroup2);
 		iconList = (HorizontalScrollView) findViewById(R.id.iconList);
 
-		/********** Lesson data@‚Ì æ“¾ **************/
+		/********** Lesson dataã€€ã® å–å¾— **************/
 		Intent intent = getIntent();
 		lesson = intent.getStringExtra("lesson");
 		message = intent.getStringExtra("message");
@@ -80,18 +80,18 @@ public class MainActivity extends Activity {
 		Log.v("my_debug", "" + text_data);
 		textView.setText(text_data);
 
-		/******************* tab‚ÌÀ‘•‚ÆØ‚è‘Ö‚¦ *****************/
+		/******************* tabã®å®Ÿè£…ã¨åˆ‡ã‚Šæ›¿ãˆ *****************/
 
 		host = (TabHost) findViewById(R.id.tabhost);
 		host.setup();
 
 		TabSpec tab1 = host.newTabSpec("tab1");
-		tab1.setIndicator("•¶š");
+		tab1.setIndicator("æ–‡å­—");
 		tab1.setContent(R.id.tab1);
 		host.addTab(tab1);
 
 		TabSpec tab2 = host.newTabSpec("tab2");
-		tab2.setIndicator("ŠG•¶š");
+		tab2.setIndicator("çµµæ–‡å­—");
 		tab2.setContent(R.id.tab2);
 		host.addTab(tab2);
 
@@ -136,12 +136,12 @@ public class MainActivity extends Activity {
 
 		host.setCurrentTab(IMAGE_VIEW);
 
-		/********** ‰¹Šy **************/
+		/********** éŸ³æ¥½ **************/
 		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
-		// ƒQ[ƒ€‰¹Šy
-		// bgm1.start(); // BGMƒXƒ^[ƒg
+		// ã‚²ãƒ¼ãƒ éŸ³æ¥½
+		// bgm1.start(); // BGMã‚¹ã‚¿ãƒ¼ãƒˆ
 
-		// doLoad(); // ƒZ[ƒuƒf[ƒ^‚ğƒ[ƒh
+		// doLoad(); // ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ­ãƒ¼ãƒ‰
 
 		FrameLayout actionButton = (FrameLayout) this
 				.findViewById(R.id.frameLayout_piyo);
@@ -155,7 +155,7 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	/******************** \•¶‰ğÍ•Às *************************/
+	/******************** æ§‹æ–‡è§£æï¼†å®Ÿè¡Œ *************************/
 	public final class CommandExecutor implements Runnable {
 		private final Handler handler;
 
@@ -171,7 +171,7 @@ public class MainActivity extends Activity {
 			ImageView leftFoot1 = (ImageView) findViewById(R.id.playerLeftFoot1);
 			ImageView rightFoot1 = (ImageView) findViewById(R.id.playerRightFoot1);
 
-			String commandsText = textView.getText().toString(); // 1s‚¸‚Â”z—ñ‚Éû”[
+			String commandsText = textView.getText().toString(); // 1è¡Œãšã¤é…åˆ—ã«åç´
 			List<Integer> numberSorting = new ArrayList<Integer>();
 			List<String> commands = new ArrayList<String>();
 			StringCommandParser.parse(commandsText, numberSorting, commands);
@@ -184,10 +184,10 @@ public class MainActivity extends Activity {
 				List<Integer> numberSorting) {
 			Runnable runnable = new StringCommandExecutor(images,
 					expandedCommands, editText1, numberSorting);
-			for (int i = 0; i < expandedCommands.size(); i++) { /* ‰ğÍ&Às */
-				handler.post(runnable); /* Œõ‚ç‚¹‚é */
+			for (int i = 0; i < expandedCommands.size(); i++) { /* è§£æ&å®Ÿè¡Œ */
+				handler.post(runnable); /* å…‰ã‚‰ã›ã‚‹ */
 
-				try { /* 1•b‘Ò‹@ */
+				try { /* 1ç§’å¾…æ©Ÿ */
 					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -195,13 +195,13 @@ public class MainActivity extends Activity {
 
 				handler.post(runnable);
 
-				try { /* 1•b‘Ò‹@ */
+				try { /* 1ç§’å¾…æ©Ÿ */
 					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 
-				if (StringCommandExecutor.errorCheck) // for•¶‚©‚ç”²‚¯‚Ä‰æ‘œ‚ğ‰Šú‰»
+				if (StringCommandExecutor.errorCheck) // foræ–‡ã‹ã‚‰æŠœã‘ã¦ç”»åƒã‚’åˆæœŸåŒ–
 					break;
 			}
 
@@ -210,8 +210,8 @@ public class MainActivity extends Activity {
 					public void run() {
 						AlertDialog.Builder builder = new AlertDialog.Builder(
 								MainActivity.this);
-						builder.setTitle("ŠÔˆá‚Á‚½•¶‚ğ‘‚¢‚Ä‚¢‚é‚æ");
-						builder.setPositiveButton("‚à‚¤ˆê“xChallenge",
+						builder.setTitle("é–“é•ã£ãŸæ–‡ã‚’æ›¸ã„ã¦ã„ã‚‹ã‚ˆ");
+						builder.setPositiveButton("ã‚‚ã†ä¸€åº¦Challenge",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
@@ -236,13 +236,13 @@ public class MainActivity extends Activity {
 		@Override
 		public void onSoftKeyShown(boolean isShown) {
 			if (isShown) {
-				// ƒ\ƒtƒgƒL[ƒ{[ƒh‚ª•\¦‚³‚ê‚Ä‚¢‚éê‡
-				// postƒ{ƒ^ƒ“‚ğ”ñ•\¦‚É‚·‚é
+				// ã‚½ãƒ•ãƒˆã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãŒè¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹å ´åˆ
+				// postãƒœã‚¿ãƒ³ã‚’éè¡¨ç¤ºã«ã™ã‚‹
 				// fLayout.setVisibility(View.GONE);
 				buttonGroup2.setVisibility(View.GONE);
 				iconList.setVisibility(View.VISIBLE);
 			} else {
-				// ƒ\ƒtƒgƒL[ƒ{[ƒh‚ª•\¦‚³‚ê‚Ä‚È‚¯‚ê‚ÎA•\¦‚·‚é
+				// ã‚½ãƒ•ãƒˆã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãŒè¡¨ç¤ºã•ã‚Œã¦ãªã‘ã‚Œã°ã€è¡¨ç¤ºã™ã‚‹
 				// fLayout.setVisibility(View.VISIBLE);
 				buttonGroup2.setVisibility(View.VISIBLE);
 				iconList.setVisibility(View.GONE);
@@ -252,7 +252,7 @@ public class MainActivity extends Activity {
 	private TabHost host;
 	private static IconContainer iconContainer;
 
-	/******************** ƒ{ƒ^ƒ“(ŠG•¶š)‚Ìˆ— *************************/
+	/******************** ãƒœã‚¿ãƒ³(çµµæ–‡å­—)ã®å‡¦ç† *************************/
 	public void doActionLeftHandUp(View view) {
 		if (host.getCurrentTab() == IMAGE_VIEW) {
 			imgTextView.insertImage(iconContainer.getIconLeftHandUp());
@@ -261,7 +261,7 @@ public class MainActivity extends Activity {
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
 			editable.replace(Math.min(start, end), Math.max(start, end),
-					"¶˜r‚ğã‚°‚é");
+					"å·¦è…•ã‚’ä¸Šã’ã‚‹");
 		}
 	}
 
@@ -273,7 +273,7 @@ public class MainActivity extends Activity {
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
 			editable.replace(Math.min(start, end), Math.max(start, end),
-					"¶˜r‚ğ‰º‚°‚é");
+					"å·¦è…•ã‚’ä¸‹ã’ã‚‹");
 		}
 	}
 
@@ -285,7 +285,7 @@ public class MainActivity extends Activity {
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
 			editable.replace(Math.min(start, end), Math.max(start, end),
-					"‰E˜r‚ğã‚°‚é");
+					"å³è…•ã‚’ä¸Šã’ã‚‹");
 		}
 	}
 
@@ -297,7 +297,7 @@ public class MainActivity extends Activity {
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
 			editable.replace(Math.min(start, end), Math.max(start, end),
-					"‰E˜r‚ğ‰º‚°‚é");
+					"å³è…•ã‚’ä¸‹ã’ã‚‹");
 		}
 
 	}
@@ -310,7 +310,7 @@ public class MainActivity extends Activity {
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
 			editable.replace(Math.min(start, end), Math.max(start, end),
-					"¶‘«‚ğã‚°‚é");
+					"å·¦è¶³ã‚’ä¸Šã’ã‚‹");
 		}
 	}
 
@@ -322,7 +322,7 @@ public class MainActivity extends Activity {
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
 			editable.replace(Math.min(start, end), Math.max(start, end),
-					"¶‘«‚ğ‰º‚°‚é");
+					"å·¦è¶³ã‚’ä¸‹ã’ã‚‹");
 		}
 	}
 
@@ -334,7 +334,7 @@ public class MainActivity extends Activity {
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
 			editable.replace(Math.min(start, end), Math.max(start, end),
-					"‰E‘«‚ğã‚°‚é");
+					"å³è¶³ã‚’ä¸Šã’ã‚‹");
 		}
 	}
 
@@ -346,7 +346,7 @@ public class MainActivity extends Activity {
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
 			editable.replace(Math.min(start, end), Math.max(start, end),
-					"‰E‘«‚ğ‰º‚°‚é");
+					"å³è¶³ã‚’ä¸‹ã’ã‚‹");
 		}
 	}
 
@@ -358,7 +358,7 @@ public class MainActivity extends Activity {
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
 			editable.replace(Math.min(start, end), Math.max(start, end),
-					"ƒWƒƒƒ“ƒv‚·‚é");
+					"ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹");
 		}
 	}
 
@@ -380,7 +380,7 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "‚±‚±‚Ü‚Å");
+			editable.replace(Math.min(start, end), Math.max(start, end), "ã“ã“ã¾ã§");
 		}
 
 	}
@@ -402,7 +402,7 @@ public class MainActivity extends Activity {
 		rightFoot1.setVisibility(View.VISIBLE);
 	}
 
-	/******************** ƒtƒ@ƒCƒ‹•Û‘¶ doSave(View view) *************************/
+	/******************** ãƒ•ã‚¡ã‚¤ãƒ«ä¿å­˜ doSave(View view) *************************/
 	/*
 	 * @SuppressLint("WorldReadableFiles") public void doSave() { EditText
 	 * editText1 = (EditText) this.findViewById(R.id.editText1); Editable str =
@@ -414,7 +414,7 @@ public class MainActivity extends Activity {
 	 * e.printStackTrace(); } } }
 	 */
 
-	/******************** ƒtƒ@ƒCƒ‹ƒ[ƒh doLoad(View view) *************************/
+	/******************** ãƒ•ã‚¡ã‚¤ãƒ«ãƒ­ãƒ¼ãƒ‰ doLoad(View view) *************************/
 	/*
 	 * public void doLoad() { EditText editText1 = (EditText)
 	 * this.findViewById(R.id.editText1); FileInputStream input = null; try {
@@ -426,14 +426,14 @@ public class MainActivity extends Activity {
 	 * e.printStackTrace(); } } }
 	 */
 
-	/******************** ƒƒjƒ…[ì¬ *************************/
+	/******************** ãƒ¡ãƒ‹ãƒ¥ãƒ¼ä½œæˆ *************************/
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		super.onCreateOptionsMenu(menu);
-		MenuItem item1 = menu.add("ƒwƒ‹ƒv");
-		MenuItem item2 = menu.add("ƒNƒŠƒA");
-		MenuItem item3 = menu.add("ƒ^ƒCƒgƒ‹‰æ–Ê‚Ö–ß‚é");
+		MenuItem item1 = menu.add("ãƒ˜ãƒ«ãƒ—");
+		MenuItem item2 = menu.add("ã‚¯ãƒªã‚¢");
+		MenuItem item3 = menu.add("ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã¸æˆ»ã‚‹");
 
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
@@ -457,7 +457,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	/************************* ƒCƒ“ƒeƒ“ƒgi‰æ–Ê‘JˆÚj *****************************/
+	/************************* ã‚¤ãƒ³ãƒ†ãƒ³ãƒˆï¼ˆç”»é¢é·ç§»ï¼‰ *****************************/
 	public void changeActionScreen(View view) {
 		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 		bgm.start();
@@ -469,7 +469,7 @@ public class MainActivity extends Activity {
 		this.startActivity(intent);
 	}
 
-	public void changePartnerScreen(View view) { // ‚¨è–{‰æ–Ê‚Ö‘JˆÚ
+	public void changePartnerScreen(View view) { // ãŠæ‰‹æœ¬ç”»é¢ã¸é·ç§»
 		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 		bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
@@ -482,7 +482,7 @@ public class MainActivity extends Activity {
 
 	
 	
-	public void changeHelpScreen() { // ƒwƒ‹ƒv‰æ–Ê‚Ö‘JˆÚ
+	public void changeHelpScreen() { // ãƒ˜ãƒ«ãƒ—ç”»é¢ã¸é·ç§»
 	// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 	// bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
@@ -493,7 +493,7 @@ public class MainActivity extends Activity {
 		this.startActivity(intent);
 	}
 
-	public void changeHelpScreen(View view) { // ƒwƒ‹ƒv‰æ–Ê‚Ö‘JˆÚ
+	public void changeHelpScreen(View view) { // ãƒ˜ãƒ«ãƒ—ç”»é¢ã¸é·ç§»
 	// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 	// bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
@@ -523,7 +523,7 @@ public class MainActivity extends Activity {
 			ImageView iv = (ImageView) view;
 			iv.setImageDrawable(null);
 			// } else if(view instanceof(XXX)) {
-			// ‘¼‚É‚àDrawable‚ğg—p‚·‚é‘ÎÛ‚ª‚ ‚ê‚Î‚±‚±‚Å’†g‚ğnull‚É
+			// ä»–ã«ã‚‚Drawableã‚’ä½¿ç”¨ã™ã‚‹å¯¾è±¡ãŒã‚ã‚Œã°ã“ã“ã§ä¸­èº«ã‚’nullã«
 		}
 		view.setBackgroundDrawable(null);
 		if (view instanceof ViewGroup) {

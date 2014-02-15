@@ -20,15 +20,15 @@ import android.util.AttributeSet;
 import android.widget.EditText;
 
 /**
- * EditText“à‚É‰æ‘œ‚ğ”z’u‚Å‚«‚éƒJƒXƒ^ƒ€EditText
+ * EditTextå†…ã«ç”»åƒã‚’é…ç½®ã§ãã‚‹ã‚«ã‚¹ã‚¿ãƒ EditText
  */
 public class ImageInEdit extends EditText {
 
-	/** ƒeƒLƒXƒgƒTƒCƒY */
+	/** ãƒ†ã‚­ã‚¹ãƒˆã‚µã‚¤ã‚º */
 	private int mTextSize;
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	 * 
 	 * @param context
 	 *            Context
@@ -38,26 +38,26 @@ public class ImageInEdit extends EditText {
 	}
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	 * 
 	 * @param context
 	 *            Context
 	 * @param attrs
-	 *            ‘®«
+	 *            å±æ€§
 	 */
 	public ImageInEdit(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
 	/**
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	 * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	 * 
 	 * @param context
 	 *            Context
 	 * @param attrs
-	 *            ‘®«
+	 *            å±æ€§
 	 * @param defStyle
-	 *            ƒXƒ^ƒCƒ‹
+	 *            ã‚¹ã‚¿ã‚¤ãƒ«
 	 */
 	public ImageInEdit(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -73,12 +73,12 @@ public class ImageInEdit extends EditText {
 	}
 
 	/**
-	 * ƒŠƒ\[ƒXID‚©‚ç‰æ‘œ‚ğ‘}“ü
+	 * ãƒªã‚½ãƒ¼ã‚¹IDã‹ã‚‰ç”»åƒã‚’æŒ¿å…¥
 	 * 
 	 * @param context
 	 *            Context
 	 * @param id
-	 *            ƒŠƒ\[ƒXID
+	 *            ãƒªã‚½ãƒ¼ã‚¹ID
 	 */
 	public void insertResourceImage(Context context, int id) {
 		Drawable drawable = context.getResources().getDrawable(id);
@@ -86,12 +86,12 @@ public class ImageInEdit extends EditText {
 	}
 
 	/**
-	 * assets“à‚Ì‰æ‘œ‚ğ‘}“ü
+	 * assetså†…ã®ç”»åƒã‚’æŒ¿å…¥
 	 * 
 	 * @param context
 	 *            Context
 	 * @param path
-	 *            assets“àƒpƒX
+	 *            assetså†…ãƒ‘ã‚¹
 	 */
 	public void insertAssetsImage(Context context, String path) {
 		try {
@@ -104,7 +104,7 @@ public class ImageInEdit extends EditText {
 	}
 
 	/**
-	 * Drawabale‚©‚ç‰æ‘œ‚ğ‘}“ü
+	 * Drawabaleã‹ã‚‰ç”»åƒã‚’æŒ¿å…¥
 	 * 
 	 * @param drawable
 	 *            Drawable
@@ -132,19 +132,19 @@ public class ImageInEdit extends EditText {
 
 	public void replaceTextToImage(final IconContainer icon) {
 
-		String[] commands = new String[] { "¶˜r‚ğã‚°‚é", "¶˜r‚ğ‰º‚°‚é", "‰E˜r‚ğã‚°‚é",
-				"‰E˜r‚ğ‰º‚°‚é", "¶‘«‚ğã‚°‚é", "¶‘«‚ğ‰º‚°‚é", "‰E‘«‚ğã‚°‚é", "‰E‘«‚ğ‰º‚°‚é", "ƒWƒƒƒ“ƒv‚·‚é",
-				"loop", "‚±‚±‚Ü‚Å" };
+		String[] commands = new String[] { "å·¦è…•ã‚’ä¸Šã’ã‚‹", "å·¦è…•ã‚’ä¸‹ã’ã‚‹", "å³è…•ã‚’ä¸Šã’ã‚‹",
+				"å³è…•ã‚’ä¸‹ã’ã‚‹", "å·¦è¶³ã‚’ä¸Šã’ã‚‹", "å·¦è¶³ã‚’ä¸‹ã’ã‚‹", "å³è¶³ã‚’ä¸Šã’ã‚‹", "å³è¶³ã‚’ä¸‹ã’ã‚‹", "ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹",
+				"loop", "ã“ã“ã¾ã§" };
 
 		TreeMap<Integer, String> map = new TreeMap<Integer, String>();
-		ArrayList<Integer> start = new ArrayList<Integer>(); // ƒvƒƒOƒ‰ƒ€“I‚É
+		ArrayList<Integer> start = new ArrayList<Integer>(); // ãƒ—ãƒ­ã‚°ãƒ©ãƒ çš„ã«
 		ArrayList<Integer> end = new ArrayList<Integer>();
 
 		for (String command : commands) {
-			// command‚ÌˆÊ’u‚ğ’T‚·
+			// commandã®ä½ç½®ã‚’æ¢ã™
 			int i = -1;
 			while ((i = this.getText().toString().indexOf(command, i + 1)) >= 0) {
-				// ImageInEdit‚©‚ç•¶š‚ğ“Ç‚İæ‚èAcommand‚ÌˆÊ’u‚ğ’T‚·
+				// ImageInEditã‹ã‚‰æ–‡å­—ã‚’èª­ã¿å–ã‚Šã€commandã®ä½ç½®ã‚’æ¢ã™
 				map.put(i * -1, command);
 				start.add(i);
 				end.add(i + command.length());
@@ -158,27 +158,27 @@ public class ImageInEdit extends EditText {
 		for (Entry<Integer, String> indexAndStr : map.entrySet()) {
 			String command = indexAndStr.getValue();
 
-			if (command.equals("¶˜r‚ğã‚°‚é")) {
+			if (command.equals("å·¦è…•ã‚’ä¸Šã’ã‚‹")) {
 				setIcon(icon.getIconLeftHandUp(), start.get(i), end.get(i));
-			} else if (command.equals("¶˜r‚ğ‰º‚°‚é")) {
+			} else if (command.equals("å·¦è…•ã‚’ä¸‹ã’ã‚‹")) {
 				setIcon(icon.getIconLeftHandDown(), start.get(i), end.get(i));
-			} else if (command.equals("‰E˜r‚ğã‚°‚é")) {
+			} else if (command.equals("å³è…•ã‚’ä¸Šã’ã‚‹")) {
 				setIcon(icon.getIconRightHandUp(), start.get(i), end.get(i));
-			} else if (command.equals("‰E˜r‚ğ‰º‚°‚é")) {
+			} else if (command.equals("å³è…•ã‚’ä¸‹ã’ã‚‹")) {
 				setIcon(icon.getIconRightHandDown(), start.get(i), end.get(i));
-			} else if (command.equals("¶‘«‚ğã‚°‚é")) {
+			} else if (command.equals("å·¦è¶³ã‚’ä¸Šã’ã‚‹")) {
 				setIcon(icon.getIconLeftFootUp(), start.get(i), end.get(i));
-			} else if (command.equals("¶‘«‚ğ‰º‚°‚é")) {
+			} else if (command.equals("å·¦è¶³ã‚’ä¸‹ã’ã‚‹")) {
 				setIcon(icon.getIconLeftFootDown(), start.get(i), end.get(i));
-			} else if (command.equals("‰E‘«‚ğã‚°‚é")) {
+			} else if (command.equals("å³è¶³ã‚’ä¸Šã’ã‚‹")) {
 				setIcon(icon.getIconRightFootUp(), start.get(i), end.get(i));
-			} else if (command.equals("‰E‘«‚ğ‰º‚°‚é")) {
+			} else if (command.equals("å³è¶³ã‚’ä¸‹ã’ã‚‹")) {
 				setIcon(icon.getIconRightFootDown(), start.get(i), end.get(i));
-			} else if (command.equals("ƒWƒƒƒ“ƒv‚·‚é")) {
+			} else if (command.equals("ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹")) {
 				setIcon(icon.getIconJump(), start.get(i), end.get(i));
 			} else if (command.equals("loop")) {
 				setIcon(icon.getIconLoop(), start.get(i), end.get(i));
-			} else if (command.equals("‚±‚±‚Ü‚Å")) {
+			} else if (command.equals("ã“ã“ã¾ã§")) {
 				setIcon(icon.getIconKokomade(), start.get(i), end.get(i));
 			}
 			// Log.v("tag", start.get(i).toString());

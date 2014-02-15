@@ -13,7 +13,7 @@ public class InterconversionStringAndImage {
 
 	String convertStringToImage(String text1, ImageInEdit mImageEdit,
 			Context context) {
-		String[] commands = new String[] { "¶˜r‚ğã‚°‚é", "¶˜r‚ğ‰º‚°‚é"/* .. */};
+		String[] commands = new String[] { "å·¦è…•ã‚’ä¸Šã’ã‚‹", "å·¦è…•ã‚’ä¸‹ã’ã‚‹"/* .. */};
 
 		for (String line : commands /* fix it */) {
 			TreeMap<Integer, String> map = new TreeMap<Integer, String>();
@@ -27,11 +27,11 @@ public class InterconversionStringAndImage {
 			for (Entry<Integer, String> indexAndStr : map.entrySet()) {
 				String command = indexAndStr.getValue();
 
-				if (command.equals("¶˜r‚ğã‚°‚é")) {
+				if (command.equals("å·¦è…•ã‚’ä¸Šã’ã‚‹")) {
 
-				} else if (command.equals("¶˜r‚ğ‰º‚°‚é")) {
+				} else if (command.equals("å·¦è…•ã‚’ä¸‹ã’ã‚‹")) {
 
-				} else if (command.equals("‰E˜r‚ğã‚°‚é")) {
+				} else if (command.equals("å³è…•ã‚’ä¸Šã’ã‚‹")) {
 
 				}
 				// ...
@@ -39,44 +39,44 @@ public class InterconversionStringAndImage {
 
 		}
 
-		// •¶š‚©‚çŠG•¶š‚Ö‚Ì•ÏŠ·
-		// text1‚ªtab1‚ÌƒeƒLƒXƒgƒf[ƒ^‚ğæ“¾‚µAŠG•¶š‚É•ÏŠ·‚µ‚½ƒf[ƒ^‚ğ•Ô‚·
-		// text1 = text1.replaceAll("¶˜r‚ğã‚°‚é",
+		// æ–‡å­—ã‹ã‚‰çµµæ–‡å­—ã¸ã®å¤‰æ›
+		// text1ãŒtab1ã®ãƒ†ã‚­ã‚¹ãƒˆãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã—ã€çµµæ–‡å­—ã«å¤‰æ›ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’è¿”ã™
+		// text1 = text1.replaceAll("å·¦è…•ã‚’ä¸Šã’ã‚‹",
 		// mImageEdit.insertResourceImage(context,
 		// R.drawable.icon_left_hand_up));
-		// text1 = text1.replaceAll("¶˜r‚ğ‰º‚°‚é",
+		// text1 = text1.replaceAll("å·¦è…•ã‚’ä¸‹ã’ã‚‹",
 		// mImageEdit.insertResourceImage(context,
 		// R.drawable.icon_left_hand_down));
-		// text1 = text1.replaceAll("‰E˜r‚ğã‚°‚é",
+		// text1 = text1.replaceAll("å³è…•ã‚’ä¸Šã’ã‚‹",
 		// mImageEdit.insertResourceImage(context(),
 		// R.drawable.icon_right_hand_up));
-		// text1 = text1.replaceAll("‰E˜r‚ğ‰º‚°‚é",
+		// text1 = text1.replaceAll("å³è…•ã‚’ä¸‹ã’ã‚‹",
 		// mImageEdit.insertResourceImage(context(),
 		// R.drawable.icon_right_hand_down));
-		// text1 = text1.replaceAll("¶‘«‚ğã‚°‚é",
+		// text1 = text1.replaceAll("å·¦è¶³ã‚’ä¸Šã’ã‚‹",
 		// mImageEdit.insertResourceImage(context(),
 		// R.drawable.icon_left_foot_up));
-		// text1 = text1.replaceAll("¶‘«‚ğ‰º‚°‚é",
+		// text1 = text1.replaceAll("å·¦è¶³ã‚’ä¸‹ã’ã‚‹",
 		// mImageEdit.insertResourceImage(context(),
 		// R.drawable.icon_left_foot_down));
-		// text1 = text1.replaceAll("‰E‘«‚ğã‚°‚é",
+		// text1 = text1.replaceAll("å³è¶³ã‚’ä¸Šã’ã‚‹",
 		// mImageEdit.insertResourceImage(context(),
 		// R.drawable.icon_right_foot_up));
-		// text1 = text1.replaceAll("‰E‘«‚ğ‰º‚°‚é",
+		// text1 = text1.replaceAll("å³è¶³ã‚’ä¸‹ã’ã‚‹",
 		// mImageEdit.insertResourceImage(context(),
 		// R.drawable.icon_right_foot_down));
-		// text1 = text1.replaceAll("ƒWƒƒƒ“ƒv‚·‚é",
+		// text1 = text1.replaceAll("ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹",
 		// mImageEdit.insertResourceImage(context(), R.drawable.icon_jump));
 		// text1 = text1.replaceAll("loop",
 		// mImageEdit.insertResourceImage(context(), R.drawable.icon_loop));
-		// text1 = text1.replaceAll("‚±‚±‚Ü‚Å",
+		// text1 = text1.replaceAll("ã“ã“ã¾ã§",
 		// mImageEdit.insertResourceImage(context(), R.drawable.icon_kokomade));
 		return text1;
 	}
 
 	String convertImageToString(String text2) {
-		// ŠG•¶š‚©‚ç•¶š‚Ö‚Ì•ÏŠ·
-		// text2‚ªtab2‚ÌƒeƒLƒXƒgƒf[ƒ^‚ğæ“¾‚µA•¶š‚É•ÏŠ·‚µ‚½ƒf[ƒ^‚ğ•Ô‚·
+		// çµµæ–‡å­—ã‹ã‚‰æ–‡å­—ã¸ã®å¤‰æ›
+		// text2ãŒtab2ã®ãƒ†ã‚­ã‚¹ãƒˆãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã—ã€æ–‡å­—ã«å¤‰æ›ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’è¿”ã™
 		return text2;
 	}
 

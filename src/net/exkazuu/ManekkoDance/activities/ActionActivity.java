@@ -50,7 +50,7 @@ public class ActionActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle("Às‰æ–Ê");
+		setTitle("å®Ÿè¡Œç”»é¢");
 		setContentView(R.layout.action_screen);
 		// doLoad();
 
@@ -127,16 +127,16 @@ public class ActionActivity extends Activity {
 			answer.compare();
 			answer.loopCheck(message, playerEditText);
 			Log.v("tag", answer.show());
-			// ‰ğÍ&Às
+			// è§£æ&å®Ÿè¡Œ
 			for (int i = 0; i < Math.max(playerCommands.size(),
 					partnerCommands.size()); i++) {
 
 				if (i < playerCommands.size())
-					handler.post(playerAction); /* Œõ‚ç‚¹‚é */
+					handler.post(playerAction); /* å…‰ã‚‰ã›ã‚‹ */
 				if (i < partnerCommands.size())
 					handler.post(partnerAction);
 
-				try { /* 1•b‘Ò‹@ */
+				try { /* 1ç§’å¾…æ©Ÿ */
 					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -146,7 +146,7 @@ public class ActionActivity extends Activity {
 					handler.post(playerAction);
 				if (i < partnerCommands.size())
 					handler.post(partnerAction);
-				try { /* 1•b‘Ò‹@ */
+				try { /* 1ç§’å¾…æ©Ÿ */
 					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -167,7 +167,7 @@ public class ActionActivity extends Activity {
 							// R.raw.perfect);
 							// bgm.start();
 							builder.setIcon(R.drawable.answer_ture);
-							builder.setNegativeButton("ƒ^ƒCƒgƒ‹‚Ö–ß‚é",
+							builder.setNegativeButton("ã‚¿ã‚¤ãƒˆãƒ«ã¸æˆ»ã‚‹",
 									new DialogInterface.OnClickListener() {
 										@Override
 										public void onClick(
@@ -184,7 +184,7 @@ public class ActionActivity extends Activity {
 										}
 									});
 
-							builder.setPositiveButton("‚à‚¤ˆê“xChallenge",
+							builder.setPositiveButton("ã‚‚ã†ä¸€åº¦Challenge",
 									new DialogInterface.OnClickListener() {
 										public void onClick(
 												DialogInterface dialog,
@@ -203,7 +203,7 @@ public class ActionActivity extends Activity {
 
 							builder.setIcon(R.drawable.answer_ture);
 							Timer.stopTimer();
-							builder.setNegativeButton("Ÿ‚ÌLesson‚Éi‚Ş",
+							builder.setNegativeButton("æ¬¡ã®Lessonã«é€²ã‚€",
 									new DialogInterface.OnClickListener() {
 										@Override
 										public void onClick(
@@ -248,7 +248,7 @@ public class ActionActivity extends Activity {
 
 							);
 
-							builder.setPositiveButton("‚à‚¤ˆê“xChallenge",
+							builder.setPositiveButton("ã‚‚ã†ä¸€åº¦Challenge",
 									new DialogInterface.OnClickListener() {
 										public void onClick(
 												DialogInterface dialog,
@@ -267,7 +267,7 @@ public class ActionActivity extends Activity {
 						// R.raw.fail);
 						// bgm.start();
 						builder.setIcon(R.drawable.answer_false);
-						builder.setNegativeButton("Lesson‚ğ‘I‘ğ‚µ’¼‚·",
+						builder.setNegativeButton("Lessonã‚’é¸æŠã—ç›´ã™",
 								new DialogInterface.OnClickListener() {
 									@Override
 									public void onClick(DialogInterface dialog,
@@ -279,7 +279,7 @@ public class ActionActivity extends Activity {
 									}
 								});
 
-						builder.setPositiveButton("‚à‚¤ˆê“xChallenge",
+						builder.setPositiveButton("ã‚‚ã†ä¸€åº¦Challenge",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
@@ -349,8 +349,8 @@ public class ActionActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		super.onCreateOptionsMenu(menu);
-		MenuItem item1 = menu.add("•ÒW‰æ–Ê‚Ö–ß‚é");
-		MenuItem item2 = menu.add("ƒ^ƒCƒgƒ‹‚Ö–ß‚é");
+		MenuItem item1 = menu.add("ç·¨é›†ç”»é¢ã¸æˆ»ã‚‹");
+		MenuItem item2 = menu.add("ã‚¿ã‚¤ãƒˆãƒ«ã¸æˆ»ã‚‹");
 
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
@@ -407,7 +407,7 @@ public class ActionActivity extends Activity {
 		this.startActivity(intent);
 	}
 
-	public void changeHelpScreen(View view) { // ƒwƒ‹ƒv‰æ–Ê‚Ö‘JˆÚ
+	public void changeHelpScreen(View view) { // ãƒ˜ãƒ«ãƒ—ç”»é¢ã¸é·ç§»
 		// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
 		// bgm.start();
 		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
@@ -431,7 +431,7 @@ public class ActionActivity extends Activity {
 			ImageView iv = (ImageView) view;
 			iv.setImageDrawable(null);
 			// } else if(view instanceof(XXX)) {
-			// ‘¼‚É‚àDrawable‚ğg—p‚·‚é‘ÎÛ‚ª‚ ‚ê‚Î‚±‚±‚Å’†g‚ğnull‚É
+			// ä»–ã«ã‚‚Drawableã‚’ä½¿ç”¨ã™ã‚‹å¯¾è±¡ãŒã‚ã‚Œã°ã“ã“ã§ä¸­èº«ã‚’nullã«
 		}
 		view.setBackgroundDrawable(null);
 		if (view instanceof ViewGroup) {

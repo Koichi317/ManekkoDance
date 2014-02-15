@@ -17,7 +17,7 @@ public class TitleActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); // ƒ^ƒCƒgƒ‹ƒo[”ñ•\Ž¦
+		requestWindowFeature(Window.FEATURE_NO_TITLE); // ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼éžè¡¨ç¤º
 		setContentView(R.layout.title_screen);
 	}
 
@@ -56,7 +56,7 @@ public class TitleActivity extends Activity {
 			ImageView iv = (ImageView) view;
 			iv.setImageDrawable(null);
 			// } else if(view instanceof(XXX)) {
-			// ‘¼‚É‚àDrawable‚ðŽg—p‚·‚é‘ÎÛ‚ª‚ ‚ê‚Î‚±‚±‚Å’†g‚ðnull‚É
+			// ä»–ã«ã‚‚Drawableã‚’ä½¿ç”¨ã™ã‚‹å¯¾è±¡ãŒã‚ã‚Œã°ã“ã“ã§ä¸­èº«ã‚’nullã«
 		}
 		view.setBackgroundDrawable(null);
 		if (view instanceof ViewGroup) {

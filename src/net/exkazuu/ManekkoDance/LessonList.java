@@ -17,31 +17,31 @@ public class LessonList extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle("Lesson‘I‘ğ‰æ–Ê");
-		List<String> lessonList = new ArrayList<String>(); // List‚Ìì¬•’Ç‰Á
+		setTitle("Lessoné¸æŠç”»é¢");
+		List<String> lessonList = new ArrayList<String>(); // Listã®ä½œæˆï¼†è¿½åŠ 
 		lessonList.add("Lesson1");
 		lessonList.add("Lesson2");
 		lessonList.add("Lesson3");
 
-		// lessonList.add("Lesson‚P Šî–{“®ì1");
-		// lessonList.add("Lesson‚Q Šî–{“®ì2");
-		// lessonList.add("Lesson‚R Šî–{“®ì•œK");
-		// lessonList.add("Lesson‚S ‰—p“®ì1");
-		// lessonList.add("Lesson‚T ‰—p“®ì2");
-		// lessonList.add("Lesson‚U ‰—p“®ì3");
-		// lessonList.add("Lesson‚V ŒJ‚è•Ô‚µ1");
-		// lessonList.add("Lesson‚W ŒJ‚è•Ô‚µ2");
-		// lessonList.add("Lesson‚X ŒJ‚è•Ô‚µ3");
-		// lessonList.add("Lesson‚P‚O ŒJ‚è•Ô‚µ4");
-		// lessonList.add("Lesson‚P‚P ‚¨‚Ü‚¯1");
-		// lessonList.add("Lesson‚P‚Q ‚¨‚Ü‚¯2");
-		// lessonList.add("Lesson‚P‚R ‚¨‚Ü‚¯3");
+		// lessonList.add("Lessonï¼‘ åŸºæœ¬å‹•ä½œ1");
+		// lessonList.add("Lessonï¼’ åŸºæœ¬å‹•ä½œ2");
+		// lessonList.add("Lessonï¼“ åŸºæœ¬å‹•ä½œå¾©ç¿’");
+		// lessonList.add("Lessonï¼” å¿œç”¨å‹•ä½œ1");
+		// lessonList.add("Lessonï¼• å¿œç”¨å‹•ä½œ2");
+		// lessonList.add("Lessonï¼– å¿œç”¨å‹•ä½œ3");
+		// lessonList.add("Lessonï¼— ç¹°ã‚Šè¿”ã—1");
+		// lessonList.add("Lessonï¼˜ ç¹°ã‚Šè¿”ã—2");
+		// lessonList.add("Lessonï¼™ ç¹°ã‚Šè¿”ã—3");
+		// lessonList.add("Lessonï¼‘ï¼ ç¹°ã‚Šè¿”ã—4");
+		// lessonList.add("Lessonï¼‘ï¼‘ ãŠã¾ã‘1");
+		// lessonList.add("Lessonï¼‘ï¼’ ãŠã¾ã‘2");
+		// lessonList.add("Lessonï¼‘ï¼“ ãŠã¾ã‘3");
 		arrayadapter = new MySpecialAdapter(this,
 				android.R.layout.simple_list_item_1, lessonList);
 		this.setListAdapter(arrayadapter);
 	}
 
-	/************ List‚ª‘I‘ğ‚³‚ê‚½‚Ì“®ì **************/
+	/************ ListãŒé¸æŠã•ã‚ŒãŸæ™‚ã®å‹•ä½œ **************/
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		/*
 		 * SharedPreferences sp = PreferenceManager
@@ -55,7 +55,7 @@ public class LessonList extends ListActivity {
 				net.exkazuu.ManekkoDance.activities.PartnerActivity.class);
 		
 		String answer = LessonData.getLessonData(position + 1);
-		intent.putExtra("lesson", answer); // ‚¨è–{‚Ì“š‚¦
+		intent.putExtra("lesson", answer); // ãŠæ‰‹æœ¬ã®ç­”ãˆ
 		intent.putExtra("message", "" + (position + 1));
 		this.startActivity(intent);
 		// TODO: Deal with exceptions

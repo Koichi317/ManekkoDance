@@ -11,50 +11,50 @@ public class AnswerCheck {
 	static boolean[][] partnerAnswer;
 	public boolean judge;
 
-	public AnswerCheck(List<String> playerCommands, List<String> partnerCommands) { // ƒvƒŒƒCƒ„[‚Æ‚¨è–{‚Ìg—p‚³‚ê‚Ä‚¢‚é–½—ß‚ğƒtƒ‰ƒO‚Æ‚µ‚ÄŠÇ—
+	public AnswerCheck(List<String> playerCommands, List<String> partnerCommands) { // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ãŠæ‰‹æœ¬ã®ä½¿ç”¨ã•ã‚Œã¦ã„ã‚‹å‘½ä»¤ã‚’ãƒ•ãƒ©ã‚°ã¨ã—ã¦ç®¡ç†
 
 		playerAnswer = new boolean[9][playerCommands.size()];
 		partnerAnswer = new boolean[9][partnerCommands.size()];
 
 		for (int i = 0; i < playerCommands.size(); i++) {
-			if (playerCommands.get(i).indexOf("¶˜r‚ğã‚°‚é") != -1)
+			if (playerCommands.get(i).indexOf("å·¦è…•ã‚’ä¸Šã’ã‚‹") != -1)
 				playerAnswer[0][i] = true;
-			if (playerCommands.get(i).indexOf("¶˜r‚ğ‰º‚°‚é") != -1)
+			if (playerCommands.get(i).indexOf("å·¦è…•ã‚’ä¸‹ã’ã‚‹") != -1)
 				playerAnswer[1][i] = true;
-			if (playerCommands.get(i).indexOf("‰E˜r‚ğã‚°‚é") != -1)
+			if (playerCommands.get(i).indexOf("å³è…•ã‚’ä¸Šã’ã‚‹") != -1)
 				playerAnswer[2][i] = true;
-			if (playerCommands.get(i).indexOf("‰E˜r‚ğ‰º‚°‚é") != -1)
+			if (playerCommands.get(i).indexOf("å³è…•ã‚’ä¸‹ã’ã‚‹") != -1)
 				playerAnswer[3][i] = true;
-			if (playerCommands.get(i).indexOf("¶‘«‚ğã‚°‚é") != -1)
+			if (playerCommands.get(i).indexOf("å·¦è¶³ã‚’ä¸Šã’ã‚‹") != -1)
 				playerAnswer[4][i] = true;
-			if (playerCommands.get(i).indexOf("¶‘«‚ğ‰º‚°‚é") != -1)
+			if (playerCommands.get(i).indexOf("å·¦è¶³ã‚’ä¸‹ã’ã‚‹") != -1)
 				playerAnswer[5][i] = true;
-			if (playerCommands.get(i).indexOf("‰E‘«‚ğã‚°‚é") != -1)
+			if (playerCommands.get(i).indexOf("å³è¶³ã‚’ä¸Šã’ã‚‹") != -1)
 				playerAnswer[6][i] = true;
-			if (playerCommands.get(i).indexOf("‰E‘«‚ğ‰º‚°‚é") != -1)
+			if (playerCommands.get(i).indexOf("å³è¶³ã‚’ä¸‹ã’ã‚‹") != -1)
 				playerAnswer[7][i] = true;
-			if (playerCommands.get(i).indexOf("ƒWƒƒƒ“ƒv‚·‚é") != -1)
+			if (playerCommands.get(i).indexOf("ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹") != -1)
 				playerAnswer[8][i] = true;
 		}
 
 		for (int i = 0; i < partnerCommands.size(); i++) {
-			if (partnerCommands.get(i).indexOf("¶˜r‚ğã‚°‚é") != -1)
+			if (partnerCommands.get(i).indexOf("å·¦è…•ã‚’ä¸Šã’ã‚‹") != -1)
 				partnerAnswer[0][i] = true;
-			if (partnerCommands.get(i).indexOf("¶˜r‚ğ‰º‚°‚é") != -1)
+			if (partnerCommands.get(i).indexOf("å·¦è…•ã‚’ä¸‹ã’ã‚‹") != -1)
 				partnerAnswer[1][i] = true;
-			if (partnerCommands.get(i).indexOf("‰E˜r‚ğã‚°‚é") != -1)
+			if (partnerCommands.get(i).indexOf("å³è…•ã‚’ä¸Šã’ã‚‹") != -1)
 				partnerAnswer[2][i] = true;
-			if (partnerCommands.get(i).indexOf("‰E˜r‚ğ‰º‚°‚é") != -1)
+			if (partnerCommands.get(i).indexOf("å³è…•ã‚’ä¸‹ã’ã‚‹") != -1)
 				partnerAnswer[3][i] = true;
-			if (partnerCommands.get(i).indexOf("¶‘«‚ğã‚°‚é") != -1)
+			if (partnerCommands.get(i).indexOf("å·¦è¶³ã‚’ä¸Šã’ã‚‹") != -1)
 				partnerAnswer[4][i] = true;
-			if (partnerCommands.get(i).indexOf("¶‘«‚ğ‰º‚°‚é") != -1)
+			if (partnerCommands.get(i).indexOf("å·¦è¶³ã‚’ä¸‹ã’ã‚‹") != -1)
 				partnerAnswer[5][i] = true;
-			if (partnerCommands.get(i).indexOf("‰E‘«‚ğã‚°‚é") != -1)
+			if (partnerCommands.get(i).indexOf("å³è¶³ã‚’ä¸Šã’ã‚‹") != -1)
 				partnerAnswer[6][i] = true;
-			if (partnerCommands.get(i).indexOf("‰E‘«‚ğ‰º‚°‚é") != -1)
+			if (partnerCommands.get(i).indexOf("å³è¶³ã‚’ä¸‹ã’ã‚‹") != -1)
 				partnerAnswer[7][i] = true;
-			if (partnerCommands.get(i).indexOf("ƒWƒƒƒ“ƒv‚·‚é") != -1)
+			if (partnerCommands.get(i).indexOf("ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹") != -1)
 				partnerAnswer[8][i] = true;
 		}
 
@@ -72,7 +72,7 @@ public class AnswerCheck {
 					if (playerAnswer[j][i] == partnerAnswer[j][i]) {
 						// Log.v("i", String.valueOf(i));
 						// Log.v("j", String.valueOf(j));
-						// continue; // ‚¨è–{‚ÌŠes‚Ì–½—ß‚ªƒvƒŒƒCƒ„[‚Ì“¯‚¶s‚É‚ ‚é‚©‚Ç‚¤‚©
+						// continue; // ãŠæ‰‹æœ¬ã®å„è¡Œã®å‘½ä»¤ãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åŒã˜è¡Œã«ã‚ã‚‹ã‹ã©ã†ã‹
 
 					} else {
 						judge = false;
@@ -104,6 +104,6 @@ public class AnswerCheck {
 
 	public String show() {
 		// TODO Auto-generated method stub
-		return (judge == true) ? "³‰ğ‚Å‚·I" : "•s³‰ğ‚Å‚·EEE";
+		return (judge == true) ? "æ­£è§£ã§ã™ï¼" : "ä¸æ­£è§£ã§ã™ãƒ»ãƒ»ãƒ»";
 	}
 }

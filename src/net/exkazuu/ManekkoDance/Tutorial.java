@@ -16,7 +16,7 @@ public class Tutorial extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
+		requestWindowFeature(Window.FEATURE_NO_TITLE); // 繧ｿ繧､繝医Ν繝舌�ｼ髱櫁｡ｨ遉ｺ
 		setContentView(R.layout.tutorial);
 
 		viewflipper = (ViewFlipper) this.findViewById(R.id.flipper);

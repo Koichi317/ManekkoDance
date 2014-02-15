@@ -2,19 +2,19 @@ package net.exkazuu.ManekkoDance;
 
 public class LessonData {
 	private static String[] _answers = {
-			"¶˜r‚ðã‚°‚é\n¶˜r‚ð‰º‚°‚é\n‰E˜r‚ðã‚°‚é\n‰E˜r‚ð‰º‚°‚é",
-			"loop3\n¶˜r‚ðã‚°‚é\n¶˜r‚ð‰º‚°‚é\n‰E˜r‚ðã‚°‚é\n‰E˜r‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å\nƒWƒƒƒ“ƒv‚·‚é",
-			"loop2\n¶˜r‚ðã‚°‚é\n¶˜r‚ð‰º‚°‚é\n‰E‘«‚ðã‚°‚é\n‰E‘«‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å\nƒWƒƒƒ“ƒv‚·‚é\nloop2\n¶‘«‚ðã‚°‚é\n¶‘«‚ð‰º‚°‚é\n‰E˜r‚ðã‚°‚é\n‰E˜r‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å",
-			"¶˜r‚ðã‚°‚é ‰E˜r‚ðã‚°‚é\n¶˜r‚ð‰º‚°‚é\n‰E˜r‚ð‰º‚°‚é\n¶˜r‚ðã‚°‚é\n‰E˜r‚ðã‚°‚é\n¶˜r‚ð‰º‚°‚é ‰E˜r‚ð‰º‚°‚é",
-			"¶˜r‚ðã‚°‚é ‰E‘«‚ðã‚°‚é\n¶˜r‚ð‰º‚°‚é ‰E‘«‚ð‰º‚°‚é\n‰E˜r‚ðã‚°‚é ¶‘«‚ðã‚°‚é\n‰E˜r‚ð‰º‚°‚é ¶‘«‚ð‰º‚°‚é",
-			"¶˜r‚ðã‚°‚é ‰E˜r‚ðã‚°‚é\n¶˜r‚ð‰º‚°‚é ‰E˜r‚ð‰º‚°‚é\n¶˜r‚ðã‚°‚é ¶‘«‚ðã‚°‚é\n ‰E˜r‚ðã‚°‚é\n ¶‘«‚ð‰º‚°‚é\n¶˜r‚ð‰º‚°‚é ‰E˜r‚ð‰º‚°‚é\nƒWƒƒƒ“ƒv‚·‚é",
-			"loop3\n¶‘«‚ðã‚°‚é\n¶‘«‚ð‰º‚°‚é\n‰E‘«‚ðã‚°‚é\n‰E‘«‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å",
-			"loop3\n¶‘«‚ðã‚°‚é\n¶‘«‚ð‰º‚°‚é\n‰E‘«‚ðã‚°‚é\n‰E‘«‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å",
-			"loop3\n¶‘«‚ðã‚°‚é\n¶‘«‚ð‰º‚°‚é\n‰E‘«‚ðã‚°‚é\n‰E‘«‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å\n loop2\n¶˜r‚ðã‚°‚é ‰E˜r‚ðã‚°‚é\n ¶˜r‚ð‰º‚°‚é ‰E˜r‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å",
-			"loop3\n loop2\n ¶˜r‚ðã‚°‚é ‰E˜r‚ðã‚°‚é\n¶˜r‚ð‰º‚°‚é ‰E˜r‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å\nƒWƒƒƒ“ƒv‚·‚é\n‚±‚±‚Ü‚Å",
-			"loop2\n¶˜r‚ðã‚°‚é\n¶˜r‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å",
-			"loop2\n¶˜r‚ðã‚°‚é\n¶˜r‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å\nloop2\n‰E˜r‚ðã‚°‚é\n‰E˜r‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å",
-			"loop2\nloop2\n¶˜r‚ðã‚°‚é\n¶˜r‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å\n‰E˜r‚ðã‚°‚é\n‰E˜r‚ð‰º‚°‚é\n‚±‚±‚Ü‚Å", };
+			"å·¦è…•ã‚’ä¸Šã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹\nå³è…•ã‚’ä¸Šã’ã‚‹\nå³è…•ã‚’ä¸‹ã’ã‚‹",
+			"loop3\nå·¦è…•ã‚’ä¸Šã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹\nå³è…•ã‚’ä¸Šã’ã‚‹\nå³è…•ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§\nã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹",
+			"loop2\nå·¦è…•ã‚’ä¸Šã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹\nå³è¶³ã‚’ä¸Šã’ã‚‹\nå³è¶³ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§\nã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹\nloop2\nå·¦è¶³ã‚’ä¸Šã’ã‚‹\nå·¦è¶³ã‚’ä¸‹ã’ã‚‹\nå³è…•ã‚’ä¸Šã’ã‚‹\nå³è…•ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§",
+			"å·¦è…•ã‚’ä¸Šã’ã‚‹ å³è…•ã‚’ä¸Šã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹\nå³è…•ã‚’ä¸‹ã’ã‚‹\nå·¦è…•ã‚’ä¸Šã’ã‚‹\nå³è…•ã‚’ä¸Šã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹ å³è…•ã‚’ä¸‹ã’ã‚‹",
+			"å·¦è…•ã‚’ä¸Šã’ã‚‹ å³è¶³ã‚’ä¸Šã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹ å³è¶³ã‚’ä¸‹ã’ã‚‹\nå³è…•ã‚’ä¸Šã’ã‚‹ å·¦è¶³ã‚’ä¸Šã’ã‚‹\nå³è…•ã‚’ä¸‹ã’ã‚‹ å·¦è¶³ã‚’ä¸‹ã’ã‚‹",
+			"å·¦è…•ã‚’ä¸Šã’ã‚‹ å³è…•ã‚’ä¸Šã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹ å³è…•ã‚’ä¸‹ã’ã‚‹\nå·¦è…•ã‚’ä¸Šã’ã‚‹ å·¦è¶³ã‚’ä¸Šã’ã‚‹\n å³è…•ã‚’ä¸Šã’ã‚‹\n å·¦è¶³ã‚’ä¸‹ã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹ å³è…•ã‚’ä¸‹ã’ã‚‹\nã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹",
+			"loop3\nå·¦è¶³ã‚’ä¸Šã’ã‚‹\nå·¦è¶³ã‚’ä¸‹ã’ã‚‹\nå³è¶³ã‚’ä¸Šã’ã‚‹\nå³è¶³ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§",
+			"loop3\nå·¦è¶³ã‚’ä¸Šã’ã‚‹\nå·¦è¶³ã‚’ä¸‹ã’ã‚‹\nå³è¶³ã‚’ä¸Šã’ã‚‹\nå³è¶³ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§",
+			"loop3\nå·¦è¶³ã‚’ä¸Šã’ã‚‹\nå·¦è¶³ã‚’ä¸‹ã’ã‚‹\nå³è¶³ã‚’ä¸Šã’ã‚‹\nå³è¶³ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§\n loop2\nå·¦è…•ã‚’ä¸Šã’ã‚‹ å³è…•ã‚’ä¸Šã’ã‚‹\n å·¦è…•ã‚’ä¸‹ã’ã‚‹ å³è…•ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§",
+			"loop3\n loop2\n å·¦è…•ã‚’ä¸Šã’ã‚‹ å³è…•ã‚’ä¸Šã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹ å³è…•ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§\nã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹\nã“ã“ã¾ã§",
+			"loop2\nå·¦è…•ã‚’ä¸Šã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§",
+			"loop2\nå·¦è…•ã‚’ä¸Šã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§\nloop2\nå³è…•ã‚’ä¸Šã’ã‚‹\nå³è…•ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§",
+			"loop2\nloop2\nå·¦è…•ã‚’ä¸Šã’ã‚‹\nå·¦è…•ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§\nå³è…•ã‚’ä¸Šã’ã‚‹\nå³è…•ã‚’ä¸‹ã’ã‚‹\nã“ã“ã¾ã§", };
 
 	public static String getLessonData(int lessonNumber) {
 		if (!(1 <= lessonNumber && lessonNumber <= _answers.length)) {
