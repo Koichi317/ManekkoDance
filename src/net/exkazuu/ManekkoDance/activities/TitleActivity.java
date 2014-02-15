@@ -19,7 +19,6 @@ public class TitleActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
 		setContentView(R.layout.title_screen);
-
 	}
 
 	public void doActionTitle(View view) {

@@ -1,15 +1,31 @@
 package net.exkazuu.ManekkoDance;
 
+import java.io.IOException;
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
 import jp.eclipcebook.R;
 
+import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 public class StringCommandExecutor implements Runnable {
+	String arg = "";
 
 	private static class Input {
 		boolean ç∂òrÇè„Ç∞ÇÈ;
@@ -178,6 +194,7 @@ public class StringCommandExecutor implements Runnable {
 				return;
 			}
 
+			// String arg = "";
 			if (input.ç∂òrÇè„Ç∞ÇÈ) { // ç∂òrÇè„Ç∞ÇÈ
 				if (player)
 					images.getLeftHand1().setImageResource(
@@ -187,6 +204,7 @@ public class StringCommandExecutor implements Runnable {
 							R.drawable.cocco_left_hand_up2);
 				state.isLeftHandUp = true; // ç∂òrÇè„Ç∞ÇƒÇ¢ÇÈ(1:true)
 				state.isLeftHandDown = false; // ç∂òrÇâ∫Ç∞ÇƒÇ¢ÇÈ(0:false)
+				arg += "lau";
 			}
 
 			if (input.ç∂òrÇâ∫Ç∞ÇÈ) {
@@ -198,6 +216,7 @@ public class StringCommandExecutor implements Runnable {
 							R.drawable.cocco_left_hand_up2);
 				state.isLeftHandUp = false;
 				state.isLeftHandDown = true;
+				arg = arg.replace("lau", "");
 			}
 
 			if (input.âEòrÇè„Ç∞ÇÈ) {
@@ -209,6 +228,7 @@ public class StringCommandExecutor implements Runnable {
 							R.drawable.cocco_right_hand_up2);
 				state.isRightHandUp = true;
 				state.isRightHandDown = false;
+				arg += "rau";
 			}
 
 			if (input.âEòrÇâ∫Ç∞ÇÈ) {
@@ -220,6 +240,7 @@ public class StringCommandExecutor implements Runnable {
 							R.drawable.cocco_right_hand_up2);
 				state.isRightHandUp = false;
 				state.isRightHandDown = true;
+				arg = arg.replace("rau", "");
 			}
 
 			if (input.ç∂ë´Çè„Ç∞ÇÈ) {
@@ -231,6 +252,7 @@ public class StringCommandExecutor implements Runnable {
 							R.drawable.cocco_left_foot_up2);
 				state.isLeftFootUp = true;
 				state.isLeftFootDown = false;
+				arg += "llu";
 			}
 
 			if (input.ç∂ë´Çâ∫Ç∞ÇÈ) {
@@ -242,6 +264,7 @@ public class StringCommandExecutor implements Runnable {
 							R.drawable.cocco_left_foot_up2);
 				state.isLeftFootUp = false;
 				state.isLeftFootDown = true;
+				arg = arg.replace("llu", "");
 			}
 
 			if (input.âEë´Çè„Ç∞ÇÈ) {
@@ -253,6 +276,7 @@ public class StringCommandExecutor implements Runnable {
 							R.drawable.cocco_right_foot_up2);
 				state.isRightFootUp = true;
 				state.isRightFootDown = false;
+				arg += "rlu";
 			}
 
 			if (input.âEë´Çâ∫Ç∞ÇÈ) {
@@ -264,6 +288,7 @@ public class StringCommandExecutor implements Runnable {
 							R.drawable.cocco_right_foot_up2);
 				state.isRightFootUp = false;
 				state.isRightFootDown = true;
+				arg = arg.replace("rlu", "");
 			}
 
 			if (input.ÉWÉÉÉìÉvÇ∑ÇÈ) {
@@ -275,6 +300,13 @@ public class StringCommandExecutor implements Runnable {
 					images.getBasic().setImageResource(R.drawable.piyo_jump2);
 				if (!player)
 					images.getBasic().setImageResource(R.drawable.cocco_jump2);
+				arg += "jump";
+			} else {
+				arg = arg.replace("jump", "");
+			}
+
+			if (player) {
+				commandBear(arg);
 			}
 			addLineIndex = false;
 
@@ -367,6 +399,11 @@ public class StringCommandExecutor implements Runnable {
 		}
 	}
 
+	public static void commandBear(String arg) {
+		PostTask posttask = new PostTask(arg);
+		posttask.execute();
+	}
+
 	public void errorImage(ImageContainer images) {
 		if (addLineIndex) {
 			images.getBasic().setImageResource(R.drawable.korobu_1);
@@ -379,5 +416,51 @@ public class StringCommandExecutor implements Runnable {
 			addLineIndex = true;
 		}
 
+	}
+}
+
+class PostTask extends AsyncTask<Void, String, Boolean> {
+
+	private String arg;
+
+	PostTask(String arg) {
+		this.arg = arg;
+	}
+
+	@Override
+	protected Boolean doInBackground(Void... params) {
+		boolean result = false;
+
+		// All your code goes in here
+		try {
+			// URLéwíË
+			HttpClient client = new DefaultHttpClient();
+			HttpPost post = new HttpPost("http://192.168.91.200:3000/form");
+			// BODYÇ…ìoò^ÅAê›íË
+			ArrayList<NameValuePair> value = new ArrayList<NameValuePair>();
+			value.add(new BasicNameValuePair("input1", arg));
+
+			String body = null;
+			try {
+				post.setEntity(new UrlEncodedFormEntity(value, "UTF-8"));
+				// ÉäÉNÉGÉXÉgëóêM
+				HttpResponse response = client.execute(post);
+				// éÊìæ
+				HttpEntity entity = response.getEntity();
+				body = EntityUtils.toString(entity, "UTF-8");
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+			client.getConnectionManager().shutdown();
+		} catch (Exception e2) {
+			System.out.println(e2);
+		}
+		// If you want to do something on the UI use progress update
+
+		publishProgress("progress");
+		return result;
+	}
+
+	protected void onProgressUpdate(String... progress) {
 	}
 }
