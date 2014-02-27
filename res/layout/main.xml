@@ -230,6 +230,14 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_kokomade" />
 
+	        <Button
+	            android:id="@+id/button6"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+	            android:onClick="changeActionScreen"
+                android:scaleType="fitXY"
+	            android:text="@string/action" />
+            
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -247,14 +255,6 @@
             android:layout_weight="1"
             android:onClick="changePartnerScreen"
             android:text="@string/look_answer_button2" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="changeActionScreen"
-            android:text="@string/action" />
     </LinearLayout>
 
 </net.exkazuu.ManekkoDance.DetectableSoftKeyLayout>

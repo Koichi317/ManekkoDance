@@ -25,7 +25,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class StringCommandExecutor implements Runnable {
-	String arg = "";
+	private String arg = "";
 
 	private static class Input {
 		boolean 左腕を上げる;
@@ -194,101 +194,108 @@ public class StringCommandExecutor implements Runnable {
 				return;
 			}
 
-			// String arg = "";
 			if (input.左腕を上げる) { // 左腕を上げる
-				if (player)
+				if (player) {
 					images.getLeftHand1().setImageResource(
 							R.drawable.piyo_left_hand_up2);
+					arg += "lau";
+				}
 				if (!player)
 					images.getLeftHand1().setImageResource(
 							R.drawable.cocco_left_hand_up2);
 				state.isLeftHandUp = true; // 左腕を上げている(1:true)
 				state.isLeftHandDown = false; // 左腕を下げている(0:false)
-				arg += "lau";
 			}
 
 			if (input.左腕を下げる) {
-				if (player)
+				if (player) {
 					images.getLeftHand1().setImageResource(
 							R.drawable.piyo_left_hand_up2);
+					arg = arg.replace("lau", "");
+				}
 				if (!player)
 					images.getLeftHand1().setImageResource(
 							R.drawable.cocco_left_hand_up2);
 				state.isLeftHandUp = false;
 				state.isLeftHandDown = true;
-				arg = arg.replace("lau", "");
 			}
 
 			if (input.右腕を上げる) {
-				if (player)
+				if (player) {
 					images.getRightHand1().setImageResource(
 							R.drawable.piyo_right_hand_up2);
+					arg += "rau";
+				}
 				if (!player)
 					images.getRightHand1().setImageResource(
 							R.drawable.cocco_right_hand_up2);
 				state.isRightHandUp = true;
 				state.isRightHandDown = false;
-				arg += "rau";
 			}
 
 			if (input.右腕を下げる) {
-				if (player)
+				if (player) {
 					images.getRightHand1().setImageResource(
 							R.drawable.piyo_right_hand_up2);
+					arg = arg.replace("rau", "");
+				}
 				if (!player)
 					images.getRightHand1().setImageResource(
 							R.drawable.cocco_right_hand_up2);
 				state.isRightHandUp = false;
 				state.isRightHandDown = true;
-				arg = arg.replace("rau", "");
 			}
 
 			if (input.左足を上げる) {
-				if (player)
+				if (player) {
 					images.getLeftFoot1().setImageResource(
 							R.drawable.piyo_left_foot_up2);
+					arg += "llu";
+				}
 				if (!player)
 					images.getLeftFoot1().setImageResource(
 							R.drawable.cocco_left_foot_up2);
 				state.isLeftFootUp = true;
 				state.isLeftFootDown = false;
-				arg += "llu";
 			}
 
 			if (input.左足を下げる) {
-				if (player)
+				if (player) {
 					images.getLeftFoot1().setImageResource(
 							R.drawable.piyo_left_foot_up2);
+					arg = arg.replace("llu", "");
+				}
 				if (!player)
 					images.getLeftFoot1().setImageResource(
 							R.drawable.cocco_left_foot_up2);
 				state.isLeftFootUp = false;
 				state.isLeftFootDown = true;
-				arg = arg.replace("llu", "");
 			}
 
 			if (input.右足を上げる) {
-				if (player)
+				if (player) {
 					images.getRightFoot1().setImageResource(
 							R.drawable.piyo_right_foot_up2);
+					arg += "rlu";
+				}
 				if (!player)
 					images.getRightFoot1().setImageResource(
 							R.drawable.cocco_right_foot_up2);
 				state.isRightFootUp = true;
 				state.isRightFootDown = false;
-				arg += "rlu";
 			}
 
 			if (input.右足を下げる) {
-				if (player)
+				if (player) {
 					images.getRightFoot1().setImageResource(
 							R.drawable.piyo_right_foot_up2);
+					arg = arg.replace("rlu", "");
+				}
 				if (!player)
 					images.getRightFoot1().setImageResource(
 							R.drawable.cocco_right_foot_up2);
 				state.isRightFootUp = false;
 				state.isRightFootDown = true;
-				arg = arg.replace("rlu", "");
 			}
 
 			if (input.ジャンプする) {
@@ -296,13 +303,16 @@ public class StringCommandExecutor implements Runnable {
 				images.getRightHand1().setVisibility(View.INVISIBLE);
 				images.getLeftFoot1().setVisibility(View.INVISIBLE);
 				images.getRightFoot1().setVisibility(View.INVISIBLE);
-				if (player)
+				if (player) {
 					images.getBasic().setImageResource(R.drawable.piyo_jump2);
+					arg += "jump";
+				}
 				if (!player)
 					images.getBasic().setImageResource(R.drawable.cocco_jump2);
-				arg += "jump";
 			} else {
-				arg = arg.replace("jump", "");
+				if (player) {
+					arg = arg.replace("jump", "");
+				}
 			}
 
 			if (player) {
@@ -435,10 +445,11 @@ class PostTask extends AsyncTask<Void, String, Boolean> {
 		try {
 			// URL指定
 			HttpClient client = new DefaultHttpClient();
-			HttpPost post = new HttpPost("http://192.168.91.97:3000/form");
+			HttpPost post = new HttpPost("http://192.168.91.98:3000/form");
 			// BODYに登録、設定
 			ArrayList<NameValuePair> value = new ArrayList<NameValuePair>();
 			value.add(new BasicNameValuePair("input1", arg));
+			System.out.println("Send: " + arg);
 
 			String body = null;
 			try {
