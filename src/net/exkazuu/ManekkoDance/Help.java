@@ -14,7 +14,11 @@ public class Help extends Activity {
 	private String text_data;
 	private String message;
 	private int pageNumber;
-	private String page;
+	private final String page = " / 8";
+
+	int[] helpImageResources = { R.drawable.tutorial1, R.drawable.tutorial2,
+			R.drawable.tutorial3, R.drawable.tutorial4, R.drawable.tutorial5,
+			R.drawable.helptext1, R.drawable.helptext2, R.drawable.helptext3 };
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,7 +29,6 @@ public class Help extends Activity {
 		message = intent.getStringExtra("message");
 		text_data = intent.getStringExtra("text_data");
 		pageNumber = 1;
-		page = " / 8";
 		ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
 		helpImage.setImageResource(R.drawable.tutorial1);
 		EditText pageText = (EditText) findViewById(R.id.page);
@@ -36,76 +39,14 @@ public class Help extends Activity {
 		if (pageNumber == 8)
 			pageNumber = 0;
 		pageNumber++;
-
-		ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
-		EditText pageText = (EditText) findViewById(R.id.page);
-		pageText.setText(String.valueOf(pageNumber) + page);
-
-		switch (pageNumber) {
-		case 1:
-			helpImage.setImageResource(R.drawable.tutorial1);
-			break;
-		case 2:
-			helpImage.setImageResource(R.drawable.tutorial2);
-			break;
-		case 3:
-			helpImage.setImageResource(R.drawable.tutorial3);
-			break;
-		case 4:
-			helpImage.setImageResource(R.drawable.tutorial4);
-			break;
-		case 5:
-			helpImage.setImageResource(R.drawable.tutorial5);
-			break;
-		case 6:
-			helpImage.setImageResource(R.drawable.helptext1);
-			break;
-		case 7:
-			helpImage.setImageResource(R.drawable.helptext2);
-			break;
-		case 8:
-			helpImage.setImageResource(R.drawable.helptext3);
-			break;
-		}
-
+		setHelpImage();
 	}
 
 	public void prev(View view) {
 		if (pageNumber == 1)
 			pageNumber = 9;
 		pageNumber--;
-
-		ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
-		EditText pageText = (EditText) findViewById(R.id.page);
-		pageText.setText(String.valueOf(pageNumber) + page);
-
-		switch (pageNumber) {
-		case 1:
-			helpImage.setImageResource(R.drawable.tutorial1);
-			break;
-		case 2:
-			helpImage.setImageResource(R.drawable.tutorial2);
-			break;
-		case 3:
-			helpImage.setImageResource(R.drawable.tutorial3);
-			break;
-		case 4:
-			helpImage.setImageResource(R.drawable.tutorial4);
-			break;
-		case 5:
-			helpImage.setImageResource(R.drawable.tutorial5);
-			break;
-		case 6:
-			helpImage.setImageResource(R.drawable.helptext1);
-			break;
-		case 7:
-			helpImage.setImageResource(R.drawable.helptext2);
-			break;
-		case 8:
-			helpImage.setImageResource(R.drawable.helptext3);
-			break;
-		}
-
+		setHelpImage();
 	}
 
 	public void changeScreen(View view) {
@@ -114,5 +55,12 @@ public class Help extends Activity {
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", text_data);
 		finish();
+	}
+
+	public void setHelpImage() {
+		ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
+		EditText pageText = (EditText) findViewById(R.id.page);
+		pageText.setText(String.valueOf(pageNumber) + page);
+		helpImage.setImageResource(helpImageResources[pageNumber - 1]);
 	}
 }
