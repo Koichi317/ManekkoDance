@@ -3,39 +3,39 @@ package net.exkazuu.ManekkoDance;
 import android.widget.ImageView;
 
 public class ImageContainer {
-	private ImageView leftHand1;
-	private ImageView rightHand1;
+	private ImageView leftHand;
+	private ImageView rightHand;
 	private ImageView basic;
-	private ImageView leftFoot1;
-	private ImageView rightFoot1;
+	private ImageView leftFoot;
+	private ImageView rightFoot;
 
-	public ImageContainer(ImageView leftHand1, ImageView rightHand1,
-			ImageView basic, ImageView leftFoot1, ImageView rightFoot1) {
-		this.leftHand1 = leftHand1;
-		this.rightHand1 = rightHand1;
+	public ImageContainer(ImageView leftHand, ImageView rightHand,
+			ImageView basic, ImageView leftFoot, ImageView rightFoot) {
+		this.leftHand = leftHand;
+		this.rightHand = rightHand;
 		this.basic = basic;
-		this.leftFoot1 = leftFoot1;
-		this.rightFoot1 = rightFoot1;
+		this.leftFoot = leftFoot;
+		this.rightFoot = rightFoot;
 	}
 
-	public ImageView getLeftHand1() {
-		return leftHand1;
+	public ImageView getLeftHand() {
+		return leftHand;
 	}
 
-	public ImageView getRightHand1() {
-		return rightHand1;
+	public ImageView getRightHand() {
+		return rightHand;
 	}
 
 	public ImageView getBasic() {
 		return basic;
 	}
 
-	public ImageView getLeftFoot1() {
-		return leftFoot1;
+	public ImageView getLeftFoot() {
+		return leftFoot;
 	}
 
-	public ImageView getRightFoot1() {
-		return rightFoot1;
+	public ImageView getRightFoot() {
+		return rightFoot;
 	}
 
 }

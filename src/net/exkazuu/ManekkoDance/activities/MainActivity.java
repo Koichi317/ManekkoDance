@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 		// imgTextView.buildLayer();
 		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.root);
 		DSKLayout.setListener(listner);
-		fLayout = (FrameLayout) findViewById(R.id.frameLayout_piyo);
+		fLayout = (FrameLayout) findViewById(R.id.frameLayoutPiyo);
 		buttonGroup2 = (LinearLayout) findViewById(R.id.buttonGroup2);
 		iconList = (HorizontalScrollView) findViewById(R.id.iconList);
 
@@ -143,16 +143,18 @@ public class MainActivity extends Activity {
 
 		// doLoad(); // セーブデータをロード
 
-		FrameLayout actionButton = (FrameLayout) this
-				.findViewById(R.id.frameLayout_piyo);
-		actionButton.setOnClickListener(new View.OnClickListener() {
+		View.OnClickListener piyoOnClickListener = new View.OnClickListener() {
 			public void onClick(View v) {
 				host.setCurrentTab(TEXT_VIEW);
 				final Handler handler = new Handler();
 				Thread trd = new Thread(new CommandExecutor(handler));
 				trd.start();
 			}
-		});
+		};
+		this.findViewById(R.id.frameLayoutPiyo).setOnClickListener(
+				piyoOnClickListener);
+		this.findViewById(R.id.frameLayoutPiyo2).setOnClickListener(
+				piyoOnClickListener);
 	}
 
 	/******************** 構文解析＆実行 *************************/
@@ -165,27 +167,39 @@ public class MainActivity extends Activity {
 
 		public void run() {
 			textView = (TextView) findViewById(R.id.editText1);
-			ImageView leftHand1 = (ImageView) findViewById(R.id.playerLeftHand1);
-			ImageView rightHand1 = (ImageView) findViewById(R.id.playerRightHand1);
-			ImageView basic = (ImageView) findViewById(R.id.playerBasic);
-			ImageView leftFoot1 = (ImageView) findViewById(R.id.playerLeftFoot1);
-			ImageView rightFoot1 = (ImageView) findViewById(R.id.playerRightFoot1);
+			ImageContainer leftImages = new ImageContainer(
+					(ImageView) findViewById(R.id.playerLeftHand1),
+					(ImageView) findViewById(R.id.playerRightHand1),
+					(ImageView) findViewById(R.id.playerBasic1),
+					(ImageView) findViewById(R.id.playerLeftFoot1),
+					(ImageView) findViewById(R.id.playerRightFoot1));
+			ImageContainer rightImages = new ImageContainer(
+					(ImageView) findViewById(R.id.playerLeftHand2),
+					(ImageView) findViewById(R.id.playerRightHand2),
+					(ImageView) findViewById(R.id.playerBasic2),
+					(ImageView) findViewById(R.id.playerLeftFoot2),
+					(ImageView) findViewById(R.id.playerRightFoot2));
 
 			String commandsText = textView.getText().toString(); // 1行ずつ配列に収納
 			List<Integer> numberSorting = new ArrayList<Integer>();
 			List<String> commands = new ArrayList<String>();
-			StringCommandParser.parse(commandsText, numberSorting, commands);
-			executeCommands(new ImageContainer(leftHand1, rightHand1, basic,
-					leftFoot1, rightFoot1), commands, textView, numberSorting);
+			StringCommandParser.parse(commandsText, numberSorting, commands, true);
+			executeCommands(leftImages, rightImages, commands, textView,
+					numberSorting);
 		}
 
-		private void executeCommands(ImageContainer images,
-				List<String> expandedCommands, TextView editText1,
-				List<Integer> numberSorting) {
-			Runnable runnable = new StringCommandExecutor(images,
-					expandedCommands, editText1, numberSorting);
+		private void executeCommands(ImageContainer leftImages,
+				ImageContainer rightImages, List<String> expandedCommands,
+				TextView editText1, List<Integer> numberSorting) {
+			Runnable leftRunnable = new StringCommandExecutor(leftImages,
+					expandedCommands, editText1, numberSorting,
+					getApplicationContext(), true);
+			Runnable rightRunnable = new StringCommandExecutor(rightImages,
+					expandedCommands, editText1, numberSorting,
+					getApplicationContext(), false);
 			for (int i = 0; i < expandedCommands.size(); i++) { /* 解析&実行 */
-				handler.post(runnable); /* 光らせる */
+				handler.post(leftRunnable); /* 光らせる */
+				handler.post(rightRunnable); /* 光らせる */
 
 				try { /* 1秒待機 */
 					Thread.sleep(300);
@@ -193,7 +207,8 @@ public class MainActivity extends Activity {
 					e.printStackTrace();
 				}
 
-				handler.post(runnable);
+				handler.post(leftRunnable);
+				handler.post(rightRunnable);
 
 				try { /* 1秒待機 */
 					Thread.sleep(300);
@@ -388,7 +403,7 @@ public class MainActivity extends Activity {
 	public void initializeImage() {
 		ImageView leftHand1 = (ImageView) findViewById(R.id.playerLeftHand1);
 		ImageView rightHand1 = (ImageView) findViewById(R.id.playerRightHand1);
-		ImageView basic = (ImageView) findViewById(R.id.playerBasic);
+		ImageView basic = (ImageView) findViewById(R.id.playerBasic1);
 		ImageView leftFoot1 = (ImageView) findViewById(R.id.playerLeftFoot1);
 		ImageView rightFoot1 = (ImageView) findViewById(R.id.playerRightFoot1);
 		leftHand1.setImageResource(R.drawable.piyo_left_hand_up1);
@@ -459,10 +474,11 @@ public class MainActivity extends Activity {
 
 	/************************* インテント（画面遷移） *****************************/
 	public void changeActionScreen(View view) {
-		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-		bgm.start();
+		// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+		// bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.activities.ActionActivity.class);
+		Intent intent = new Intent(this,
+				net.exkazuu.ManekkoDance.activities.ActionActivity.class);
 		intent.putExtra("text_data", textView.getText().toString());
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
@@ -470,21 +486,18 @@ public class MainActivity extends Activity {
 	}
 
 	public void changePartnerScreen(View view) { // お手本画面へ遷移
-		bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-		bgm.start();
+	// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+	// bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.activities.PartnerActivity.class);
+		Intent intent = new Intent(this,
+				net.exkazuu.ManekkoDance.activities.PartnerActivity.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		intent.putExtra("text_data", textView.getText().toString());
 		this.startActivity(intent);
 	}
 
-	
-	
 	public void changeHelpScreen() { // ヘルプ画面へ遷移
-	// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-	// bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
 		intent.putExtra("lesson", lesson);
@@ -494,8 +507,6 @@ public class MainActivity extends Activity {
 	}
 
 	public void changeHelpScreen(View view) { // ヘルプ画面へ遷移
-	// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-	// bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
 		intent.putExtra("lesson", lesson);
@@ -505,7 +516,8 @@ public class MainActivity extends Activity {
 	}
 
 	private void changeTitleScreen() {
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.activities.TitleActivity.class);
+		Intent intent = new Intent(this,
+				net.exkazuu.ManekkoDance.activities.TitleActivity.class);
 		this.startActivity(intent);
 	}
 

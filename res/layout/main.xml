@@ -85,10 +85,10 @@
             android:src="@drawable/help" />
 
         <FrameLayout
-            android:id="@+id/frameLayout_piyo"
+            android:id="@+id/frameLayoutPiyo"
             android:layout_width="136dp"
             android:layout_height="139dp"
-            android:layout_gravity="bottom|right" >
+            android:layout_gravity="bottom|center" >
 
             <ImageView
                 android:id="@+id/playerLeftHand1"
@@ -107,7 +107,7 @@
                 android:visibility="visible" />
 
             <ImageView
-                android:id="@+id/playerBasic"
+                android:id="@+id/playerBasic1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_area"
@@ -128,6 +128,53 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_area"
                 android:src="@drawable/piyo_right_foot_up1"
+                android:visibility="visible" />
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/frameLayoutPiyo2"
+            android:layout_width="136dp"
+            android:layout_height="139dp"
+            android:layout_gravity="bottom|right" >
+
+            <ImageView
+                android:id="@+id/playerLeftHand2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/image_area"
+                android:src="@drawable/alt_piyo_left_hand_up1"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/playerRightHand2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/image_area"
+                android:src="@drawable/alt_piyo_right_hand_up1"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/playerBasic2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/image_area"
+                android:src="@drawable/alt_piyo_basic"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/playerLeftFoot2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/image_area"
+                android:src="@drawable/alt_piyo_left_foot_up1"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/playerRightFoot2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/image_area"
+                android:src="@drawable/alt_piyo_right_foot_up1"
                 android:visibility="visible" />
         </FrameLayout>
     </FrameLayout>

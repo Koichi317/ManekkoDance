@@ -35,7 +35,6 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/image_area"
             android:visibility="visible" />
-
     </FrameLayout>
 
     <Button
@@ -80,7 +79,7 @@
                 android:visibility="visible" />
 
             <ImageView
-                android:id="@+id/playerBasic"
+                android:id="@+id/playerBasic1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/player"
@@ -110,12 +109,50 @@
             android:layout_weight="1.0" >
 
             <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|right"
-                android:onClick="changeHelpScreen"
-                android:src="@drawable/help" />
+                android:id="@+id/playerLeftHand2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/left_hand_up"
+                android:src="@drawable/piyo_left_hand_up1"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/playerRightHand2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/right_hand_up"
+                android:src="@drawable/piyo_right_hand_up1"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/playerBasic2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/player"
+                android:src="@drawable/piyo_basic"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/playerLeftFoot2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/left_foot_up"
+                android:src="@drawable/piyo_left_foot_up1"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/playerRightFoot2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/right_foot_up"
+                android:src="@drawable/piyo_right_foot_up1"
+                android:visibility="visible" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0" >
 
             <ImageView
                 android:id="@+id/partnerLeftHand1"
@@ -134,7 +171,7 @@
                 android:visibility="visible" />
 
             <ImageView
-                android:id="@+id/partnerBasic"
+                android:id="@+id/partnerBasic1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/partner_screen"
@@ -156,7 +193,60 @@
                 android:contentDescription="@string/right_foot_up"
                 android:src="@drawable/cocco_right_foot_up1"
                 android:visibility="visible" />
+        </FrameLayout>
 
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:onClick="changeHelpScreen"
+                android:src="@drawable/help" />
+
+            <ImageView
+                android:id="@+id/partnerLeftHand2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/left_hand_up"
+                android:src="@drawable/cocco_left_hand_up1"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/partnerRightHand2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/right_hand_up"
+                android:src="@drawable/cocco_right_hand_up1"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/partnerBasic2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/partner_screen"
+                android:src="@drawable/cocco_basic"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/partnerLeftFoot2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/left_foot_up"
+                android:src="@drawable/cocco_left_foot_up1"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/partnerRightFoot2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/right_foot_up"
+                android:src="@drawable/cocco_right_foot_up1"
+                android:visibility="visible" />
         </FrameLayout>
     </LinearLayout>
 
@@ -180,7 +270,6 @@
             android:layout_weight="1"
             android:onClick="changeMainScreen"
             android:text="@string/player_screen" />
-
     </LinearLayout>
 
 </LinearLayout>

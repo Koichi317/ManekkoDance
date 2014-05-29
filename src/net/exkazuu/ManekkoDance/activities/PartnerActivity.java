@@ -89,14 +89,14 @@ public class PartnerActivity extends Activity {
 			TextView editText1 = (TextView) findViewById(R.id.editText1);
 			ImageView leftHand1 = (ImageView) findViewById(R.id.partnerLeftHand1);
 			ImageView rightHand1 = (ImageView) findViewById(R.id.partnerRightHand1);
-			ImageView basic = (ImageView) findViewById(R.id.partnerBasic);
+			ImageView basic = (ImageView) findViewById(R.id.partnerBasic1);
 			ImageView leftFoot1 = (ImageView) findViewById(R.id.partnerLeftFoot1);
 			ImageView rightFoot1 = (ImageView) findViewById(R.id.partnerRightFoot1);
 			String commandsText = editText1.getText().toString();
 			List<Integer> numberSorting = new ArrayList<Integer>();
 			List<String> commands = new ArrayList<String>();
 
-			StringCommandParser.parse(commandsText, numberSorting, commands);
+			StringCommandParser.parse(commandsText, numberSorting, commands, true);
 
 			executeCommands(new ImageContainer(leftHand1, rightHand1, basic,
 					leftFoot1, rightFoot1), commands);

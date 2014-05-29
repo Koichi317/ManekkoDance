@@ -17,7 +17,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import jp.eclipcebook.R;
-
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -26,6 +27,10 @@ import android.widget.TextView;
 
 public class StringCommandExecutor implements Runnable {
 	private String arg = "";
+
+	private enum CharacterType {
+		PiyoLeft, PiyoRight, Coco,
+	}
 
 	private static class Input {
 		boolean 左腕を上げる;
@@ -82,10 +87,11 @@ public class StringCommandExecutor implements Runnable {
 	private List<Integer> playerNumberSorting;
 	private String[] playerCommandsText;
 	private int colorPosition;
-	private boolean player; // true:player false:partner
+	private CharacterType charaType;
 	public static boolean errorCheck;
 	private Input input;
 	private State state;
+	private Context context;
 
 	/**** コンストラクタ ****/
 	// お手本
@@ -96,14 +102,15 @@ public class StringCommandExecutor implements Runnable {
 		this.addLineIndex = true;
 		input = new Input();
 		state = new State();
-		player = false;
+		charaType = CharacterType.Coco;
 		errorCheck = false;
 	}
 
 	// プレイヤー
 	public StringCommandExecutor(ImageContainer images,
 			List<String> stringArray, TextView textView,
-			List<Integer> playerNumberSorting) {
+			List<Integer> playerNumberSorting, Context context, boolean isLeft) {
+		this.context = context;
 		this.images = images;
 		this.expandedCommands = stringArray;
 		this.lineIndex = 0;
@@ -113,7 +120,7 @@ public class StringCommandExecutor implements Runnable {
 		this.textView = textView;
 		this.playerNumberSorting = playerNumberSorting;
 		colorPosition = 0;
-		player = true;
+		charaType = isLeft ? CharacterType.PiyoLeft : CharacterType.PiyoRight;
 		errorCheck = false;
 	}
 
@@ -121,7 +128,7 @@ public class StringCommandExecutor implements Runnable {
 	public void run() {
 		if (addLineIndex) {
 
-			if (player) { // 実行中の文字列を赤くする
+			if (charaType == CharacterType.PiyoLeft) { // 実行中の文字列を赤くする
 				colorPosition = playerNumberSorting.get(lineIndex);
 				playerCommandsText = textView.getText().toString().split("\n");
 				textView.getEditableText().clear();
@@ -195,133 +202,195 @@ public class StringCommandExecutor implements Runnable {
 			}
 
 			if (input.左腕を上げる) { // 左腕を上げる
-				if (player) {
-					images.getLeftHand1().setImageResource(
+				switch (charaType) {
+				case Coco:
+					images.getLeftHand().setImageResource(
+							R.drawable.cocco_left_hand_up2);
+					break;
+				case PiyoLeft:
+					images.getLeftHand().setImageResource(
 							R.drawable.piyo_left_hand_up2);
 					arg += "lau";
+					break;
+				case PiyoRight:
+					images.getLeftHand().setImageResource(
+							R.drawable.piyo_left_hand_up2);
+					break;
 				}
-				if (!player)
-					images.getLeftHand1().setImageResource(
-							R.drawable.cocco_left_hand_up2);
 				state.isLeftHandUp = true; // 左腕を上げている(1:true)
 				state.isLeftHandDown = false; // 左腕を下げている(0:false)
 			}
 
 			if (input.左腕を下げる) {
-				if (player) {
-					images.getLeftHand1().setImageResource(
+				switch (charaType) {
+				case Coco:
+					images.getLeftHand().setImageResource(
+							R.drawable.cocco_left_hand_up2);
+					break;
+				case PiyoLeft:
+					images.getLeftHand().setImageResource(
 							R.drawable.piyo_left_hand_up2);
 					arg = arg.replace("lau", "");
+					break;
+				case PiyoRight:
+					images.getLeftHand().setImageResource(
+							R.drawable.piyo_left_hand_up2);
+					break;
 				}
-				if (!player)
-					images.getLeftHand1().setImageResource(
-							R.drawable.cocco_left_hand_up2);
 				state.isLeftHandUp = false;
 				state.isLeftHandDown = true;
 			}
 
 			if (input.右腕を上げる) {
-				if (player) {
-					images.getRightHand1().setImageResource(
+				switch (charaType) {
+				case Coco:
+					images.getRightHand().setImageResource(
+							R.drawable.cocco_right_hand_up2);
+					break;
+				case PiyoLeft:
+					images.getRightHand().setImageResource(
 							R.drawable.piyo_right_hand_up2);
 					arg += "rau";
+					break;
+				case PiyoRight:
+					images.getRightHand().setImageResource(
+							R.drawable.piyo_right_hand_up2);
+					break;
 				}
-				if (!player)
-					images.getRightHand1().setImageResource(
-							R.drawable.cocco_right_hand_up2);
 				state.isRightHandUp = true;
 				state.isRightHandDown = false;
 			}
 
 			if (input.右腕を下げる) {
-				if (player) {
-					images.getRightHand1().setImageResource(
+				switch (charaType) {
+				case Coco:
+					images.getRightHand().setImageResource(
+							R.drawable.cocco_right_hand_up2);
+					break;
+				case PiyoLeft:
+					images.getRightHand().setImageResource(
 							R.drawable.piyo_right_hand_up2);
 					arg = arg.replace("rau", "");
+					break;
+				case PiyoRight:
+					images.getRightHand().setImageResource(
+							R.drawable.piyo_right_hand_up2);
+					break;
 				}
-				if (!player)
-					images.getRightHand1().setImageResource(
-							R.drawable.cocco_right_hand_up2);
 				state.isRightHandUp = false;
 				state.isRightHandDown = true;
 			}
 
 			if (input.左足を上げる) {
-				if (player) {
-					images.getLeftFoot1().setImageResource(
+				switch (charaType) {
+				case Coco:
+					images.getLeftFoot().setImageResource(
+							R.drawable.cocco_left_foot_up2);
+					break;
+				case PiyoLeft:
+					images.getLeftFoot().setImageResource(
 							R.drawable.piyo_left_foot_up2);
 					arg += "llu";
+					break;
+				case PiyoRight:
+					images.getLeftFoot().setImageResource(
+							R.drawable.piyo_left_foot_up2);
+					break;
 				}
-				if (!player)
-					images.getLeftFoot1().setImageResource(
-							R.drawable.cocco_left_foot_up2);
 				state.isLeftFootUp = true;
 				state.isLeftFootDown = false;
 			}
 
 			if (input.左足を下げる) {
-				if (player) {
-					images.getLeftFoot1().setImageResource(
+				switch (charaType) {
+				case Coco:
+					images.getLeftFoot().setImageResource(
+							R.drawable.cocco_left_foot_up2);
+					break;
+				case PiyoLeft:
+					images.getLeftFoot().setImageResource(
 							R.drawable.piyo_left_foot_up2);
 					arg = arg.replace("llu", "");
+					break;
+				case PiyoRight:
+					images.getLeftFoot().setImageResource(
+							R.drawable.piyo_left_foot_up2);
+					break;
 				}
-				if (!player)
-					images.getLeftFoot1().setImageResource(
-							R.drawable.cocco_left_foot_up2);
 				state.isLeftFootUp = false;
 				state.isLeftFootDown = true;
 			}
 
 			if (input.右足を上げる) {
-				if (player) {
-					images.getRightFoot1().setImageResource(
+				switch (charaType) {
+				case Coco:
+					images.getRightFoot().setImageResource(
+							R.drawable.cocco_right_foot_up2);
+					break;
+				case PiyoLeft:
+					images.getRightFoot().setImageResource(
 							R.drawable.piyo_right_foot_up2);
 					arg += "rlu";
+					break;
+				case PiyoRight:
+					images.getRightFoot().setImageResource(
+							R.drawable.piyo_right_foot_up2);
+					break;
 				}
-				if (!player)
-					images.getRightFoot1().setImageResource(
-							R.drawable.cocco_right_foot_up2);
 				state.isRightFootUp = true;
 				state.isRightFootDown = false;
 			}
 
 			if (input.右足を下げる) {
-				if (player) {
-					images.getRightFoot1().setImageResource(
+				switch (charaType) {
+				case Coco:
+					images.getRightFoot().setImageResource(
+							R.drawable.cocco_right_foot_up2);
+					break;
+				case PiyoLeft:
+					images.getRightFoot().setImageResource(
 							R.drawable.piyo_right_foot_up2);
 					arg = arg.replace("rlu", "");
+					break;
+				case PiyoRight:
+					images.getRightFoot().setImageResource(
+							R.drawable.piyo_right_foot_up2);
+					break;
 				}
-				if (!player)
-					images.getRightFoot1().setImageResource(
-							R.drawable.cocco_right_foot_up2);
 				state.isRightFootUp = false;
 				state.isRightFootDown = true;
 			}
 
 			if (input.ジャンプする) {
-				images.getLeftHand1().setVisibility(View.INVISIBLE);
-				images.getRightHand1().setVisibility(View.INVISIBLE);
-				images.getLeftFoot1().setVisibility(View.INVISIBLE);
-				images.getRightFoot1().setVisibility(View.INVISIBLE);
-				if (player) {
+				images.getLeftHand().setVisibility(View.INVISIBLE);
+				images.getRightHand().setVisibility(View.INVISIBLE);
+				images.getLeftFoot().setVisibility(View.INVISIBLE);
+				images.getRightFoot().setVisibility(View.INVISIBLE);
+				switch (charaType) {
+				case Coco:
+					images.getBasic().setImageResource(R.drawable.cocco_jump2);
+					break;
+				case PiyoLeft:
 					images.getBasic().setImageResource(R.drawable.piyo_jump2);
 					arg += "jump";
+					break;
+				case PiyoRight:
+					images.getBasic().setImageResource(R.drawable.piyo_jump2);
+					break;
 				}
-				if (!player)
-					images.getBasic().setImageResource(R.drawable.cocco_jump2);
 			} else {
-				if (player) {
+				if (charaType == CharacterType.PiyoLeft) {
 					arg = arg.replace("jump", "");
 				}
 			}
-
-			if (player) {
+			
+			if (charaType == CharacterType.PiyoLeft) {
 				commandBear(arg);
 			}
 			addLineIndex = false;
 
 		} else {
-			if (player) {
+			if (charaType != CharacterType.Coco) {
 				if (errorCheck) {
 					errorImage(images);
 					addLineIndex = true;
@@ -330,83 +399,133 @@ public class StringCommandExecutor implements Runnable {
 			}
 
 			if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1) {
-				if (player)
-					images.getLeftHand1().setImageResource(
-							R.drawable.piyo_left_hand_up3);
-				if (!player)
-					images.getLeftHand1().setImageResource(
-							R.drawable.cocco_left_hand_up3);
+				switch (charaType) {
+				case Coco:
+					images.getLeftHand().setImageResource(R.drawable.cocco_left_hand_up3);
+					break;
+				case PiyoLeft:
+					images.getLeftHand().setImageResource(R.drawable.piyo_left_hand_up3);
+					break;
+				case PiyoRight:
+					images.getLeftHand().setImageResource(R.drawable.piyo_left_hand_up3);
+					break;
+				}
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1) {
-				if (player)
-					images.getLeftHand1().setImageResource(
-							R.drawable.piyo_left_hand_up1);
-				if (!player)
-					images.getLeftHand1().setImageResource(
-							R.drawable.cocco_left_hand_up1);
+				switch (charaType) {
+				case Coco:
+					images.getLeftHand().setImageResource(R.drawable.cocco_left_hand_up1);
+					break;
+				case PiyoLeft:
+					images.getLeftHand().setImageResource(R.drawable.piyo_left_hand_up1);
+					break;
+				case PiyoRight:
+					images.getLeftHand().setImageResource(R.drawable.piyo_left_hand_up1);
+					break;
+				}
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
-				if (player)
-					images.getRightHand1().setImageResource(
-							R.drawable.piyo_right_hand_up3);
-				if (!player)
-					images.getRightHand1().setImageResource(
-							R.drawable.cocco_right_hand_up3);
+				switch (charaType) {
+				case Coco:
+					images.getRightHand().setImageResource(R.drawable.cocco_right_hand_up3);
+					break;
+				case PiyoLeft:
+					images.getRightHand().setImageResource(R.drawable.piyo_right_hand_up3);
+					break;
+				case PiyoRight:
+					images.getRightHand().setImageResource(R.drawable.piyo_right_hand_up3);
+					break;
+				}
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1) {
-				if (player)
-					images.getRightHand1().setImageResource(
-							R.drawable.piyo_right_hand_up1);
-				if (!player)
-					images.getRightHand1().setImageResource(
-							R.drawable.cocco_right_hand_up1);
+				switch (charaType) {
+				case Coco:
+					images.getRightHand().setImageResource(R.drawable.cocco_right_hand_up1);
+					break;
+				case PiyoLeft:
+					images.getRightHand().setImageResource(R.drawable.piyo_right_hand_up1);
+					break;
+				case PiyoRight:
+					images.getRightHand().setImageResource(R.drawable.piyo_right_hand_up1);
+					break;
+				}
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1) {
-				if (player)
-					images.getLeftFoot1().setImageResource(
-							R.drawable.piyo_left_foot_up3);
-				if (!player)
-					images.getLeftFoot1().setImageResource(
-							R.drawable.cocco_left_foot_up3);
+				switch (charaType) {
+				case Coco:
+					images.getLeftFoot().setImageResource(R.drawable.cocco_left_foot_up3);
+					break;
+				case PiyoLeft:
+					images.getLeftFoot().setImageResource(R.drawable.piyo_left_foot_up3);
+					break;
+				case PiyoRight:
+					images.getLeftFoot().setImageResource(R.drawable.piyo_left_foot_up3);
+					break;
+				}
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1) {
-				if (player)
-					images.getLeftFoot1().setImageResource(
-							R.drawable.piyo_left_foot_up1);
-				if (!player)
-					images.getLeftFoot1().setImageResource(
-							R.drawable.cocco_left_foot_up1);
+				switch (charaType) {
+				case Coco:
+					images.getLeftFoot().setImageResource(R.drawable.cocco_left_foot_up1);
+					break;
+				case PiyoLeft:
+					images.getLeftFoot().setImageResource(R.drawable.piyo_left_foot_up1);
+					break;
+				case PiyoRight:
+					images.getLeftFoot().setImageResource(R.drawable.piyo_left_foot_up1);
+					break;
+				}
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1) {
-				if (player)
-					images.getRightFoot1().setImageResource(
-							R.drawable.piyo_right_foot_up3);
-				if (!player)
-					images.getRightFoot1().setImageResource(
-							R.drawable.cocco_right_foot_up3);
+				switch (charaType) {
+				case Coco:
+					images.getRightFoot().setImageResource(R.drawable.cocco_right_foot_up3);
+					break;
+				case PiyoLeft:
+					images.getRightFoot().setImageResource(R.drawable.piyo_right_foot_up3);
+					break;
+				case PiyoRight:
+					images.getRightFoot().setImageResource(R.drawable.piyo_right_foot_up3);
+					break;
+				}
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1) {
-				if (player)
-					images.getRightFoot1().setImageResource(
-							R.drawable.piyo_right_foot_up1);
-				if (!player)
-					images.getRightFoot1().setImageResource(
-							R.drawable.cocco_right_foot_up1);
+				switch (charaType) {
+				case Coco:
+					images.getRightFoot().setImageResource(R.drawable.cocco_right_foot_up1);
+					break;
+				case PiyoLeft:
+					images.getRightFoot().setImageResource(R.drawable.piyo_right_foot_up1);
+					break;
+				case PiyoRight:
+					images.getRightFoot().setImageResource(R.drawable.piyo_right_foot_up1);
+					break;
+				}
 			}
 			if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1) {
-				if (player)
-					images.getBasic().setImageResource(R.drawable.piyo_basic);
-				if (!player)
+				switch (charaType) {
+				case Coco:
 					images.getBasic().setImageResource(R.drawable.cocco_basic);
-				images.getLeftHand1().setVisibility(View.VISIBLE);
-				images.getRightHand1().setVisibility(View.VISIBLE);
-				images.getLeftFoot1().setVisibility(View.VISIBLE);
-				images.getRightFoot1().setVisibility(View.VISIBLE);
+					break;
+				case PiyoLeft:
+					images.getBasic().setImageResource(R.drawable.piyo_basic);
+					break;
+				case PiyoRight:
+					images.getBasic().setImageResource(R.drawable.piyo_basic);
+					break;
+				}
+				images.getLeftHand().setVisibility(View.VISIBLE);
+				images.getRightHand().setVisibility(View.VISIBLE);
+				images.getLeftFoot().setVisibility(View.VISIBLE);
+				images.getRightFoot().setVisibility(View.VISIBLE);
 			}
 
 			lineIndex++;
 			addLineIndex = true;
 		}
+	}
+	
+	private void handleDanbo() {
 	}
 
 	public static void commandBear(String arg) {
@@ -417,10 +536,10 @@ public class StringCommandExecutor implements Runnable {
 	public void errorImage(ImageContainer images) {
 		if (addLineIndex) {
 			images.getBasic().setImageResource(R.drawable.korobu_1);
-			images.getLeftHand1().setVisibility(View.INVISIBLE);
-			images.getRightHand1().setVisibility(View.INVISIBLE);
-			images.getLeftFoot1().setVisibility(View.INVISIBLE);
-			images.getRightFoot1().setVisibility(View.INVISIBLE);
+			images.getLeftHand().setVisibility(View.INVISIBLE);
+			images.getRightHand().setVisibility(View.INVISIBLE);
+			images.getLeftFoot().setVisibility(View.INVISIBLE);
+			images.getRightFoot().setVisibility(View.INVISIBLE);
 		} else {
 			images.getBasic().setImageResource(R.drawable.korobu_3);
 			addLineIndex = true;

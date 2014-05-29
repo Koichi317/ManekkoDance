@@ -85,42 +85,40 @@ public class ActionActivity extends Activity {
 		}
 
 		public void run() {
-			ImageView playerImage1 = (ImageView) findViewById(R.id.playerLeftHand1);
-			ImageView playerImage4 = (ImageView) findViewById(R.id.playerRightHand1);
-			ImageView playerImage7 = (ImageView) findViewById(R.id.playerBasic);
-			ImageView playerImage8 = (ImageView) findViewById(R.id.playerLeftFoot1);
-			ImageView playerImage11 = (ImageView) findViewById(R.id.playerRightFoot1);
-
-			ImageView partnerImage1 = (ImageView) findViewById(R.id.partnerLeftHand1);
-			ImageView partnerImage4 = (ImageView) findViewById(R.id.partnerRightHand1);
-			ImageView partnerImage7 = (ImageView) findViewById(R.id.partnerBasic);
-			ImageView partnerImage8 = (ImageView) findViewById(R.id.partnerLeftFoot1);
-			ImageView partnerImage11 = (ImageView) findViewById(R.id.partnerRightFoot1);
-
 			TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 			TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
 
 			String playerCommandsText = playerEditText.getText().toString();
 			String partnerCommandsText = partnerEditText.getText().toString();
-			List<Integer> playerNumberSorting = new ArrayList<Integer>();
-			List<String> playerCommands = new ArrayList<String>();
-			List<Integer> partnerNumberSorting = new ArrayList<Integer>();
-			List<String> partnerCommands = new ArrayList<String>();
 
 			final AnswerCheck answer;
 
+			List<Integer> playerNumberSorting = new ArrayList<Integer>();
+			List<String> playerCommands = new ArrayList<String>();
 			StringCommandParser.parse(playerCommandsText, playerNumberSorting,
-					playerCommands);
-			StringCommandParser.parse(partnerCommandsText,
-					partnerNumberSorting, partnerCommands);
+					playerCommands, true);
 
-			Runnable playerAction = new StringCommandExecutor(
-					new ImageContainer(playerImage1, playerImage4,
-							playerImage7, playerImage8, playerImage11),
-					playerCommands, playerEditText, playerNumberSorting);
+			List<Integer> partnerNumberSorting = new ArrayList<Integer>();
+			List<String> partnerCommands = new ArrayList<String>();
+			StringCommandParser.parse(partnerCommandsText,
+					partnerNumberSorting, partnerCommands, true);
+
+			ImageContainer images = new ImageContainer(
+					(ImageView) findViewById(R.id.playerLeftHand1),
+					(ImageView) findViewById(R.id.playerRightHand1),
+					(ImageView) findViewById(R.id.playerBasic1),
+					(ImageView) findViewById(R.id.playerLeftFoot1),
+					(ImageView) findViewById(R.id.playerRightFoot1));
+			Runnable leftPlayerAction = new StringCommandExecutor(images,
+					playerCommands, playerEditText, playerNumberSorting,
+					getApplicationContext(), true);
 			Runnable partnerAction = new StringCommandExecutor(
-					new ImageContainer(partnerImage1, partnerImage4,
-							partnerImage7, partnerImage8, partnerImage11),
+					new ImageContainer(
+							(ImageView) findViewById(R.id.partnerLeftHand1),
+							(ImageView) findViewById(R.id.partnerRightHand1),
+							(ImageView) findViewById(R.id.partnerBasic1),
+							(ImageView) findViewById(R.id.partnerLeftFoot1),
+							(ImageView) findViewById(R.id.partnerRightFoot1)),
 					partnerCommands);
 
 			answer = new AnswerCheck(playerCommands, partnerCommands);
@@ -132,7 +130,7 @@ public class ActionActivity extends Activity {
 					partnerCommands.size()); i++) {
 
 				if (i < playerCommands.size())
-					handler.post(playerAction); /* 光らせる */
+					handler.post(leftPlayerAction); /* 光らせる */
 				if (i < partnerCommands.size())
 					handler.post(partnerAction);
 
@@ -143,7 +141,7 @@ public class ActionActivity extends Activity {
 				}
 
 				if (i < playerCommands.size())
-					handler.post(playerAction);
+					handler.post(leftPlayerAction);
 				if (i < partnerCommands.size())
 					handler.post(partnerAction);
 				try { /* 1秒待機 */
