@@ -87,26 +87,70 @@ class IfStatement implements Statement {
 	}
 
 	public void createExpandedCommands(List<String> result, boolean isLeft) {
+		int maxSize = getMaxSize(isLeft);
+
 		if (isLeftCondition == isLeft) {
+			int tmpSize = result.size();
 			for (Statement statement : trueStatements) {
 				statement.createExpandedCommands(result, isLeft);
 			}
+			tmpSize = result.size() - tmpSize;
+			for (int i = tmpSize; i < maxSize; i++) {
+				result.add("");
+			}
 		} else {
+			int tmpSize = result.size();
 			for (Statement statement : falseStatements) {
 				statement.createExpandedCommands(result, isLeft);
+			}
+			tmpSize = result.size() - tmpSize;
+			for (int i = tmpSize; i < maxSize; i++) {
+				result.add("");
 			}
 		}
 	}
 
+	private int getMaxSize(boolean isLeft) {
+		ArrayList<String> tmp1 = new ArrayList<String>();
+		ArrayList<String> tmp2 = new ArrayList<String>();
+		for (Statement statement : trueStatements) {
+			statement.createExpandedCommands(tmp1, isLeft);
+		}
+		for (Statement statement : falseStatements) {
+			statement.createExpandedCommands(tmp2, isLeft);
+		}
+		int maxSize = Math.max(tmp1.size(), tmp2.size());
+		return maxSize;
+	}
+
 	@Override
 	public void createExpandedLineNumbers(List<Integer> result, boolean isLeft) {
+		int maxSize = getMaxSize(isLeft);
 		if (isLeftCondition == isLeft) {
+			int tmpSize = result.size();
 			for (Statement statement : trueStatements) {
 				statement.createExpandedLineNumbers(result, isLeft);
 			}
+			int lastNumber = 0;
+			if (result.size() > 0) {
+				lastNumber = result.get(result.size() - 1);
+			}
+			tmpSize = result.size() - tmpSize;
+			for (int i = tmpSize; i < maxSize; i++) {
+				result.add(lastNumber);
+			}
 		} else {
+			int tmpSize = result.size();
 			for (Statement statement : falseStatements) {
 				statement.createExpandedLineNumbers(result, isLeft);
+			}
+			int lastNumber = 0;
+			if (result.size() > 0) {
+				lastNumber = result.get(result.size() - 1);
+			}
+			tmpSize = result.size() - tmpSize;
+			for (int i = tmpSize; i < maxSize; i++) {
+				result.add(lastNumber);
 			}
 		}
 	}
@@ -152,7 +196,7 @@ public class StringCommandParser {
 	}
 
 	public static void parse(String commandsText,
-			List<Integer> expandedLineNumbers, List<String> expandedCommands,
+			List<String> expandedCommands, List<Integer> expandedLineNumbers,
 			boolean isLeft) {
 		String[] commands = commandsText.split("\n"); // 1行毎に配列に格納
 		List<String> originalCommand = new ArrayList<String>(
@@ -177,7 +221,7 @@ public class StringCommandParser {
 		for (int i = 0; i < originalCommands.size(); i++) {
 			if (originalCommands.get(i) == null) {
 				continue;
-			} else if (originalCommands.get(i).contains("もし")) {
+			} else if (originalCommands.get(i).contains("もしも")) {
 				IfStatement ifStatement = new IfStatement(
 						readCondition(originalCommands.get(i)));
 				parseStateStack.peek().addStatement(ifStatement);
@@ -187,14 +231,19 @@ public class StringCommandParser {
 				if (state.type == StateType.If) {
 					state.type = StateType.Else;
 				}
-			} else if (originalCommands.get(i).contains("loop")) {
+			} else if (originalCommands.get(i).contains("くりかえし")) {
 				LoopStatement loopStatement = new LoopStatement(
 						readCount(originalCommands.get(i)));
 				parseStateStack.peek().addStatement(loopStatement);
 				parseStateStack.push(new ParseState(StateType.Loop,
 						loopStatement));
+			} else if (originalCommands.get(i).contains("もしおわり")) {
+				if (parseStateStack.peek().type == StateType.If
+						|| parseStateStack.peek().type == StateType.Else) {
+					parseStateStack.pop();
+				}
 			} else if (originalCommands.get(i).contains("ここまで")) {
-				if (parseStateStack.size() > 1) {
+				if (parseStateStack.peek().type == StateType.Loop) {
 					parseStateStack.pop();
 				}
 			} else {
@@ -220,6 +269,6 @@ public class StringCommandParser {
 	}
 
 	private static boolean readCondition(String conditionString) {
-		return conditionString.contains("茶");
+		return !conditionString.contains("茶");
 	}
 }

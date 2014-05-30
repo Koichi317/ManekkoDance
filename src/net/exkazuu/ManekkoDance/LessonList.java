@@ -22,6 +22,9 @@ public class LessonList extends ListActivity {
 		lessonList.add("Lesson1");
 		lessonList.add("Lesson2");
 		lessonList.add("Lesson3");
+		lessonList.add("Lesson4");
+		lessonList.add("Lesson5");
+		lessonList.add("Lesson6");
 
 		// lessonList.add("Lesson１ 基本動作1");
 		// lessonList.add("Lesson２ 基本動作2");

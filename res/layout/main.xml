@@ -277,6 +277,46 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_kokomade" />
 
+            <ImageButton
+                android:id="@+id/imageButton12"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionIf"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_if" />
+
+            <ImageButton
+                android:id="@+id/imageButton13"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionElse"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_else" />
+
+            <ImageButton
+                android:id="@+id/imageButton14"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionIfEnd"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_if_kokomade" />
+
+            <ImageButton
+                android:id="@+id/imageButton15"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionYellow"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_yellow" />
+            
+            <ImageButton
+                android:id="@+id/imageButton16"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionOrange"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_orange" />
+            
 	        <Button
 	            android:id="@+id/button6"
                 android:layout_width="100dp"

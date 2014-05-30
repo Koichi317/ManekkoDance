@@ -16,7 +16,6 @@ import net.exkazuu.ManekkoDance.ImageInEdit;
 import net.exkazuu.ManekkoDance.StringCommandExecutor;
 import net.exkazuu.ManekkoDance.StringCommandParser;
 import net.exkazuu.ManekkoDance.DetectableSoftKeyLayout.OnSoftKeyShownListener;
-
 import jp.eclipcebook.R;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -79,6 +78,8 @@ public class MainActivity extends Activity {
 		textView = (TextView) findViewById(R.id.editText1);
 		Log.v("my_debug", "" + text_data);
 		textView.setText(text_data);
+		imgTextView.setText(textView.getText().toString());
+		imgTextView.replaceTextToImage(iconContainer);
 
 		/******************* tabの実装と切り替え *****************/
 
@@ -181,28 +182,36 @@ public class MainActivity extends Activity {
 					(ImageView) findViewById(R.id.playerRightFoot2));
 
 			String commandsText = textView.getText().toString(); // 1行ずつ配列に収納
-			List<Integer> numberSorting = new ArrayList<Integer>();
-			List<String> commands = new ArrayList<String>();
-			StringCommandParser.parse(commandsText, numberSorting, commands, true);
-			executeCommands(leftImages, rightImages, commands, textView,
-					numberSorting);
+			List<String> leftCommands = new ArrayList<String>();
+			List<Integer> leftNumbers = new ArrayList<Integer>();
+			StringCommandParser.parse(commandsText, leftCommands, leftNumbers,
+					true);
+
+			List<String> rightCommands = new ArrayList<String>();
+			List<Integer> rightNumbers = new ArrayList<Integer>();
+			StringCommandParser.parse(commandsText, rightCommands,
+					rightNumbers, false);
+
+			executeCommands(leftImages, rightImages, leftCommands,
+					rightCommands, leftNumbers, rightNumbers, textView);
 		}
 
 		private void executeCommands(ImageContainer leftImages,
-				ImageContainer rightImages, List<String> expandedCommands,
-				TextView editText1, List<Integer> numberSorting) {
+				ImageContainer rightImages, List<String> leftCommands,
+				List<String> rightCommands, List<Integer> leftNumbers,
+				List<Integer> rightNumbers, TextView textView) {
 			Runnable leftRunnable = new StringCommandExecutor(leftImages,
-					expandedCommands, editText1, numberSorting,
+					leftCommands, textView, leftNumbers,
 					getApplicationContext(), true);
 			Runnable rightRunnable = new StringCommandExecutor(rightImages,
-					expandedCommands, editText1, numberSorting,
+					rightCommands, textView, rightNumbers,
 					getApplicationContext(), false);
-			for (int i = 0; i < expandedCommands.size(); i++) { /* 解析&実行 */
+			for (int i = 0; i < leftCommands.size(); i++) { /* 解析&実行 */
 				handler.post(leftRunnable); /* 光らせる */
 				handler.post(rightRunnable); /* 光らせる */
 
 				try { /* 1秒待機 */
-					Thread.sleep(300);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -211,7 +220,7 @@ public class MainActivity extends Activity {
 				handler.post(rightRunnable);
 
 				try { /* 1秒待機 */
-					Thread.sleep(300);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -384,20 +393,74 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "loop");
+			editable.replace(Math.min(start, end), Math.max(start, end), "くりかえし");
 		}
 	}
 
 	public void doActionKoko(View view) {
 		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconKokomade());
+			imgTextView.insertImage(iconContainer.getIconLoopEnd());
 		} else {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
 			editable.replace(Math.min(start, end), Math.max(start, end), "ここまで");
 		}
+	}
 
+	public void doActionIf(View view) {
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconIf());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "もしも");
+		}
+	}
+
+	public void doActionElse(View view) {
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconElse());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "もしくは");
+		}
+	}
+
+	public void doActionIfEnd(View view) {
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconIfEnd());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "もしおわり");
+		}
+	}
+
+	public void doActionYellow(View view) {
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconYellow());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "黄色");
+		}
+	}
+
+	public void doActionOrange(View view) {
+		if (host.getCurrentTab() == IMAGE_VIEW) {
+			imgTextView.insertImage(iconContainer.getIconOrange());
+		} else {
+			int start = textView.getSelectionStart();
+			int end = textView.getSelectionEnd();
+			Editable editable = (Editable) textView.getText();
+			editable.replace(Math.min(start, end), Math.max(start, end), "茶色");
+		}
 	}
 
 	public void initializeImage() {
@@ -486,8 +549,8 @@ public class MainActivity extends Activity {
 	}
 
 	public void changePartnerScreen(View view) { // お手本画面へ遷移
-	// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-	// bgm.start();
+		// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
+		// bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this,
 				net.exkazuu.ManekkoDance.activities.PartnerActivity.class);

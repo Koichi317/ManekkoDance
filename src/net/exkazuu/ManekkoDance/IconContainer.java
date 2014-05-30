@@ -20,7 +20,12 @@ public class IconContainer {
 	private Drawable rightFootDown;
 	private Drawable iconJump;
 	private Drawable iconLoop;
-	private Drawable iconKokomade;
+	private Drawable iconLoopEnd;
+	private Drawable iconIf;
+	private Drawable iconElse;
+	private Drawable iconIfEnd;
+	private Drawable iconYellow;
+	private Drawable iconOrange;
 	private HashMap<Drawable, String> icon2Strings;
 
 	public IconContainer(Context context) {
@@ -45,8 +50,17 @@ public class IconContainer {
 				.getDrawable(R.drawable.icon_jump);
 		this.iconLoop = context.getResources()
 				.getDrawable(R.drawable.icon_loop);
-		this.iconKokomade = context.getResources().getDrawable(
+		this.iconLoopEnd = context.getResources().getDrawable(
 				R.drawable.icon_kokomade);
+		this.iconIf = context.getResources().getDrawable(R.drawable.icon_if);
+		this.iconElse = context.getResources()
+				.getDrawable(R.drawable.icon_else);
+		this.iconIfEnd = context.getResources().getDrawable(
+				R.drawable.icon_if_kokomade);
+		this.iconYellow = context.getResources().getDrawable(
+				R.drawable.icon_yellow);
+		this.iconOrange = context.getResources().getDrawable(
+				R.drawable.icon_orange);
 		this.icon2Strings = new HashMap<Drawable, String>();
 
 		icon2Strings.put(leftHandUp, "左腕を上げる");
@@ -58,8 +72,13 @@ public class IconContainer {
 		icon2Strings.put(rightFootUp, "右足を上げる");
 		icon2Strings.put(rightFootDown, "右足を下げる");
 		icon2Strings.put(iconJump, "ジャンプする");
-		icon2Strings.put(iconLoop, "loop");
-		icon2Strings.put(iconKokomade, "ここまで");
+		icon2Strings.put(iconLoop, "くりかえし");
+		icon2Strings.put(iconLoopEnd, "ここまで");
+		icon2Strings.put(iconIf, "もしも");
+		icon2Strings.put(iconElse, "もしくは");
+		icon2Strings.put(iconIfEnd, "もしおわり");
+		icon2Strings.put(iconYellow, "黄色");
+		icon2Strings.put(iconOrange, "茶色");
 		// ...
 	}
 
@@ -112,8 +131,28 @@ public class IconContainer {
 		return iconLoop;
 	}
 
-	public Drawable getIconKokomade() {
-		return iconKokomade;
+	public Drawable getIconLoopEnd() {
+		return iconLoopEnd;
+	}
+
+	public Drawable getIconIf() {
+		return iconIf;
+	}
+
+	public Drawable getIconElse() {
+		return iconElse;
+	}
+
+	public Drawable getIconIfEnd() {
+		return iconIfEnd;
+	}
+
+	public Drawable getIconYellow() {
+		return iconYellow;
+	}
+
+	public Drawable getIconOrange() {
+		return iconOrange;
 	}
 
 }

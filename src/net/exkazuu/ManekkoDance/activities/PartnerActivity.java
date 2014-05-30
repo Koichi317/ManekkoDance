@@ -86,38 +86,56 @@ public class PartnerActivity extends Activity {
 		}
 
 		public void run() {
-			TextView editText1 = (TextView) findViewById(R.id.editText1);
-			ImageView leftHand1 = (ImageView) findViewById(R.id.partnerLeftHand1);
-			ImageView rightHand1 = (ImageView) findViewById(R.id.partnerRightHand1);
-			ImageView basic = (ImageView) findViewById(R.id.partnerBasic1);
-			ImageView leftFoot1 = (ImageView) findViewById(R.id.partnerLeftFoot1);
-			ImageView rightFoot1 = (ImageView) findViewById(R.id.partnerRightFoot1);
-			String commandsText = editText1.getText().toString();
-			List<Integer> numberSorting = new ArrayList<Integer>();
-			List<String> commands = new ArrayList<String>();
+			String commandsText = ((TextView) findViewById(R.id.editText1))
+					.getText().toString();
+			List<String> leftCommands = new ArrayList<String>();
+			List<Integer> leftNumbers = new ArrayList<Integer>();
+			StringCommandParser.parse(commandsText, leftCommands, leftNumbers,
+					true);
 
-			StringCommandParser.parse(commandsText, numberSorting, commands, true);
+			List<String> rightCommands = new ArrayList<String>();
+			List<Integer> rightNumbers = new ArrayList<Integer>();
+			StringCommandParser.parse(commandsText, rightCommands,
+					rightNumbers, false);
 
-			executeCommands(new ImageContainer(leftHand1, rightHand1, basic,
-					leftFoot1, rightFoot1), commands);
+			ImageContainer leftImages = new ImageContainer(
+					(ImageView) findViewById(R.id.partnerLeftHand1),
+					(ImageView) findViewById(R.id.partnerRightHand1),
+					(ImageView) findViewById(R.id.partnerBasic1),
+					(ImageView) findViewById(R.id.partnerLeftFoot1),
+					(ImageView) findViewById(R.id.partnerRightFoot1));
+			ImageContainer rightImages = new ImageContainer(
+					(ImageView) findViewById(R.id.partnerLeftHand2),
+					(ImageView) findViewById(R.id.partnerRightHand2),
+					(ImageView) findViewById(R.id.partnerBasic2),
+					(ImageView) findViewById(R.id.partnerLeftFoot2),
+					(ImageView) findViewById(R.id.partnerRightFoot2));
+			executeCommands(leftImages, rightImages, leftCommands,
+					rightCommands);
 		}
 
-		private void executeCommands(ImageContainer images,
-				List<String> commands) {
-			Runnable runnable = new StringCommandExecutor(images, commands);
-			for (int i = 0; i < commands.size(); i++) { /* 解析&実行 */
-				handler.post(runnable); /* 光らせる */
+		private void executeCommands(ImageContainer leftImages,
+				ImageContainer rightImages, List<String> leftCommands,
+				List<String> rightCommands) {
+			Runnable leftRunnable = new StringCommandExecutor(leftImages,
+					leftCommands, true);
+			Runnable rightRunnable = new StringCommandExecutor(rightImages,
+					rightCommands, false);
+			for (int i = 0; i < leftCommands.size(); i++) { /* 解析&実行 */
+				handler.post(leftRunnable); /* 光らせる */
+				handler.post(rightRunnable); /* 光らせる */
 
 				try { /* 1秒待機 */
-					Thread.sleep(250);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 
-				handler.post(runnable); /* 光らせる */
+				handler.post(leftRunnable);
+				handler.post(rightRunnable);
 
 				try { /* 1秒待機 */
-					Thread.sleep(250);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

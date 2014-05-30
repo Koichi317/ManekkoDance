@@ -113,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/left_hand_up"
-                android:src="@drawable/piyo_left_hand_up1"
+                android:src="@drawable/alt_piyo_left_hand_up1"
                 android:visibility="visible" />
 
             <ImageView
@@ -121,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/right_hand_up"
-                android:src="@drawable/piyo_right_hand_up1"
+                android:src="@drawable/alt_piyo_right_hand_up1"
                 android:visibility="visible" />
 
             <ImageView
@@ -129,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/player"
-                android:src="@drawable/piyo_basic"
+                android:src="@drawable/alt_piyo_basic"
                 android:visibility="visible" />
 
             <ImageView
@@ -137,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/left_foot_up"
-                android:src="@drawable/piyo_left_foot_up1"
+                android:src="@drawable/alt_piyo_left_foot_up1"
                 android:visibility="visible" />
 
             <ImageView
@@ -145,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/right_foot_up"
-                android:src="@drawable/piyo_right_foot_up1"
+                android:src="@drawable/alt_piyo_right_foot_up1"
                 android:visibility="visible" />
         </FrameLayout>
 
@@ -213,7 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/left_hand_up"
-                android:src="@drawable/cocco_left_hand_up1"
+                android:src="@drawable/alt_cocco_left_hand_up1"
                 android:visibility="visible" />
 
             <ImageView
@@ -221,7 +221,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/right_hand_up"
-                android:src="@drawable/cocco_right_hand_up1"
+                android:src="@drawable/alt_cocco_right_hand_up1"
                 android:visibility="visible" />
 
             <ImageView
@@ -229,7 +229,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/partner_screen"
-                android:src="@drawable/cocco_basic"
+                android:src="@drawable/alt_cocco_basic"
                 android:visibility="visible" />
 
             <ImageView
@@ -237,7 +237,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/left_foot_up"
-                android:src="@drawable/cocco_left_foot_up1"
+                android:src="@drawable/alt_cocco_left_foot_up1"
                 android:visibility="visible" />
 
             <ImageView
@@ -245,7 +245,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/right_foot_up"
-                android:src="@drawable/cocco_right_foot_up1"
+                android:src="@drawable/alt_cocco_right_foot_up1"
                 android:visibility="visible" />
         </FrameLayout>
     </LinearLayout>

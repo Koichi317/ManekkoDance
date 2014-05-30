@@ -61,7 +61,6 @@ public class AnswerCheck {
 	}
 
 	public void compare() {
-		// TODO Auto-generated method stub
 		judge = true;
 		Log.v("compare1", String.valueOf(judge));
 		if (playerAnswer[0].length != partnerAnswer[0].length) {
@@ -90,7 +89,7 @@ public class AnswerCheck {
 		int count = 0;
 		if (!(loopNum >= 8))
 			return;
-		while ((i = playerCommand.indexOf("loop", i + 1)) >= 0)
+		while ((i = playerCommand.indexOf("くりかえし", i + 1)) >= 0)
 			count++;
 		if (loopNum == 8 || loopNum == 11) {
 			if (count != 1)

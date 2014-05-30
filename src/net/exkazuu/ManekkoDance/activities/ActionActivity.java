@@ -91,61 +91,103 @@ public class ActionActivity extends Activity {
 			String playerCommandsText = playerEditText.getText().toString();
 			String partnerCommandsText = partnerEditText.getText().toString();
 
-			final AnswerCheck answer;
+			List<String> leftPlayerCommands = new ArrayList<String>();
+			List<Integer> leftPlayerNumbers = new ArrayList<Integer>();
+			StringCommandParser.parse(playerCommandsText, leftPlayerCommands,
+					leftPlayerNumbers, true);
 
-			List<Integer> playerNumberSorting = new ArrayList<Integer>();
-			List<String> playerCommands = new ArrayList<String>();
-			StringCommandParser.parse(playerCommandsText, playerNumberSorting,
-					playerCommands, true);
+			List<String> rightPlayerCommands = new ArrayList<String>();
+			List<Integer> rightPlayerNumbers = new ArrayList<Integer>();
+			StringCommandParser.parse(playerCommandsText, rightPlayerCommands,
+					rightPlayerNumbers, false);
 
-			List<Integer> partnerNumberSorting = new ArrayList<Integer>();
-			List<String> partnerCommands = new ArrayList<String>();
+			List<Integer> leftPartnerNumbers = new ArrayList<Integer>();
+			List<String> leftPartnerCommands = new ArrayList<String>();
+			StringCommandParser.parse(partnerCommandsText, leftPartnerCommands,
+					leftPartnerNumbers, true);
+
+			List<Integer> rightPartnerNumbers = new ArrayList<Integer>();
+			List<String> rightPartnerCommands = new ArrayList<String>();
 			StringCommandParser.parse(partnerCommandsText,
-					partnerNumberSorting, partnerCommands, true);
+					rightPartnerCommands, rightPartnerNumbers, false);
 
-			ImageContainer images = new ImageContainer(
-					(ImageView) findViewById(R.id.playerLeftHand1),
-					(ImageView) findViewById(R.id.playerRightHand1),
-					(ImageView) findViewById(R.id.playerBasic1),
-					(ImageView) findViewById(R.id.playerLeftFoot1),
-					(ImageView) findViewById(R.id.playerRightFoot1));
-			Runnable leftPlayerAction = new StringCommandExecutor(images,
-					playerCommands, playerEditText, playerNumberSorting,
+			Runnable leftPlayerAction = new StringCommandExecutor(
+					new ImageContainer(
+							(ImageView) findViewById(R.id.playerLeftHand1),
+							(ImageView) findViewById(R.id.playerRightHand1),
+							(ImageView) findViewById(R.id.playerBasic1),
+							(ImageView) findViewById(R.id.playerLeftFoot1),
+							(ImageView) findViewById(R.id.playerRightFoot1)),
+					leftPlayerCommands, playerEditText, leftPlayerNumbers,
 					getApplicationContext(), true);
-			Runnable partnerAction = new StringCommandExecutor(
+
+			Runnable rightPlayerAction = new StringCommandExecutor(
+					new ImageContainer(
+							(ImageView) findViewById(R.id.playerLeftHand2),
+							(ImageView) findViewById(R.id.playerRightHand2),
+							(ImageView) findViewById(R.id.playerBasic2),
+							(ImageView) findViewById(R.id.playerLeftFoot2),
+							(ImageView) findViewById(R.id.playerRightFoot2)),
+					rightPlayerCommands, playerEditText, rightPlayerNumbers,
+					getApplicationContext(), true);
+
+			Runnable leftPartnerAction = new StringCommandExecutor(
 					new ImageContainer(
 							(ImageView) findViewById(R.id.partnerLeftHand1),
 							(ImageView) findViewById(R.id.partnerRightHand1),
 							(ImageView) findViewById(R.id.partnerBasic1),
 							(ImageView) findViewById(R.id.partnerLeftFoot1),
 							(ImageView) findViewById(R.id.partnerRightFoot1)),
-					partnerCommands);
+					leftPartnerCommands, true);
 
-			answer = new AnswerCheck(playerCommands, partnerCommands);
+			Runnable rightPartnerAction = new StringCommandExecutor(
+					new ImageContainer(
+							(ImageView) findViewById(R.id.partnerLeftHand2),
+							(ImageView) findViewById(R.id.partnerRightHand2),
+							(ImageView) findViewById(R.id.partnerBasic2),
+							(ImageView) findViewById(R.id.partnerLeftFoot2),
+							(ImageView) findViewById(R.id.partnerRightFoot2)),
+					rightPartnerCommands, false);
+
+			final AnswerCheck answer = new AnswerCheck(leftPlayerCommands,
+					leftPartnerCommands);
 			answer.compare();
-			answer.loopCheck(message, playerEditText);
+			final AnswerCheck answer2 = new AnswerCheck(rightPlayerCommands,
+					rightPartnerCommands);
+			answer2.compare();
+			// answer.loopCheck(message, playerEditText);
 			Log.v("tag", answer.show());
-			// 解析&実行
-			for (int i = 0; i < Math.max(playerCommands.size(),
-					partnerCommands.size()); i++) {
 
-				if (i < playerCommands.size())
-					handler.post(leftPlayerAction); /* 光らせる */
-				if (i < partnerCommands.size())
-					handler.post(partnerAction);
+			// 解析&実行
+			int maxSize = Math.max(leftPlayerCommands.size(),
+					leftPartnerCommands.size());
+			for (int i = 0; i < maxSize; i++) {
+
+				if (i < leftPlayerCommands.size()) {
+					handler.post(leftPlayerAction);
+					handler.post(rightPlayerAction);
+				}
+				if (i < leftPartnerCommands.size()) {
+					handler.post(leftPartnerAction);
+					handler.post(rightPartnerAction);
+				}
 
 				try { /* 1秒待機 */
-					Thread.sleep(300);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 
-				if (i < playerCommands.size())
+				if (i < leftPlayerCommands.size()) {
 					handler.post(leftPlayerAction);
-				if (i < partnerCommands.size())
-					handler.post(partnerAction);
+					handler.post(rightPlayerAction);
+				}
+				if (i < leftPartnerCommands.size()) {
+					handler.post(leftPartnerAction);
+					handler.post(rightPartnerAction);
+				}
 				try { /* 1秒待機 */
-					Thread.sleep(300);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -158,7 +200,7 @@ public class ActionActivity extends Activity {
 					AlertDialog.Builder builder = new AlertDialog.Builder(
 							ActionActivity.this);
 					builder.setTitle(" ");
-					if (answer.judge) {
+					if (answer.judge && answer2.judge) {
 
 						if (Integer.parseInt(message) == 10) {
 							// bgm = MediaPlayer.create(getApplicationContext(),

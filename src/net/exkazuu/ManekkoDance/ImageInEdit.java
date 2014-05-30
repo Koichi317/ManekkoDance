@@ -134,7 +134,7 @@ public class ImageInEdit extends EditText {
 
 		String[] commands = new String[] { "左腕を上げる", "左腕を下げる", "右腕を上げる",
 				"右腕を下げる", "左足を上げる", "左足を下げる", "右足を上げる", "右足を下げる", "ジャンプする",
-				"loop", "ここまで" };
+				"くりかえし", "ここまで", "もしも", "もしくは", "もしおわり", "黄色", "茶色"  };
 
 		TreeMap<Integer, String> map = new TreeMap<Integer, String>();
 		ArrayList<Integer> start = new ArrayList<Integer>(); // プログラム的に
@@ -176,10 +176,20 @@ public class ImageInEdit extends EditText {
 				setIcon(icon.getIconRightFootDown(), start.get(i), end.get(i));
 			} else if (command.equals("ジャンプする")) {
 				setIcon(icon.getIconJump(), start.get(i), end.get(i));
-			} else if (command.equals("loop")) {
+			} else if (command.equals("くりかえし")) {
 				setIcon(icon.getIconLoop(), start.get(i), end.get(i));
 			} else if (command.equals("ここまで")) {
-				setIcon(icon.getIconKokomade(), start.get(i), end.get(i));
+				setIcon(icon.getIconLoopEnd(), start.get(i), end.get(i));
+			} else if (command.equals("もしも")) {
+				setIcon(icon.getIconIf(), start.get(i), end.get(i));
+			} else if (command.equals("もしくは")) {
+				setIcon(icon.getIconElse(), start.get(i), end.get(i));
+			} else if (command.equals("もしおわり")) {
+				setIcon(icon.getIconIfEnd(), start.get(i), end.get(i));
+			} else if (command.equals("黄色")) {
+				setIcon(icon.getIconYellow(), start.get(i), end.get(i));
+			} else if (command.equals("茶色")) {
+				setIcon(icon.getIconOrange(), start.get(i), end.get(i));
 			}
 			// Log.v("tag", start.get(i).toString());
 			// Log.v("tag", end.get(i).toString());
