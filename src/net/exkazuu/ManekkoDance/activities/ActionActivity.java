@@ -30,8 +30,13 @@ public class ActionActivity extends Activity {
 
 	private String lesson;
 	private String message;
-	private String text_data;
+	private String textData;
 	public boolean answerCheckEnd = false;
+
+	private ImageContainer piyoLeftImages;
+	private ImageContainer piyoRightImages;
+	private ImageContainer coccoLeftImages;
+	private ImageContainer coccoRightImages;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,32 +49,33 @@ public class ActionActivity extends Activity {
 		Intent intent = getIntent();
 		lesson = intent.getStringExtra("lesson");
 		message = intent.getStringExtra("message");
-		text_data = intent.getStringExtra("text_data");
-		String playerCommandsText = text_data;
+		textData = intent.getStringExtra("text_data");
+		String playerCommandsText = textData;
 		String partnerCommandsText = lesson;
 
 		playerEditText.setText(playerCommandsText);
 		partnerEditText.setText(partnerCommandsText);
 
 		Button btn1 = (Button) this.findViewById(R.id.button1);
-		final ActionActivity activity = this;
 		btn1.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				final Handler handler = new Handler();
-				Thread trd = new Thread(new CommandExecutor(handler, activity));
+				Thread trd = new Thread(new CommandExecutor(handler));
 				trd.start();
 			}
 		});
 
+		piyoLeftImages = ImageContainer.createPiyoLeft(this);
+		piyoRightImages = ImageContainer.createPiyoRight(this);
+		coccoLeftImages = ImageContainer.createCoccoLeft(this);
+		coccoRightImages = ImageContainer.createCoccoRight(this);
 	}
 
 	public final class CommandExecutor implements Runnable {
 		private final Handler handler;
-		private Activity activity;
 
-		private CommandExecutor(Handler handler, Activity activity) {
+		private CommandExecutor(Handler handler) {
 			this.handler = handler;
-			this.activity = activity;
 		}
 
 		public void run() {
@@ -98,15 +104,6 @@ public class ActionActivity extends Activity {
 			List<String> rightPartnerCommands = new ArrayList<String>();
 			StringCommandParser.parse(partnerCommandsText,
 					rightPartnerCommands, rightPartnerNumbers, false);
-
-			ImageContainer piyoLeftImages = ImageContainer
-					.createPiyoLeft(activity);
-			ImageContainer piyoRightImages = ImageContainer
-					.createPiyoRight(activity);
-			ImageContainer coccoLeftImages = ImageContainer
-					.createCoccoLeft(activity);
-			ImageContainer coccoRightImages = ImageContainer
-					.createCoccoRight(activity);
 
 			Runnable leftPlayerAction = new StringCommandExecutor(
 					piyoLeftImages, leftPlayerCommands, playerEditText,
@@ -348,7 +345,7 @@ public class ActionActivity extends Activity {
 		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
-		intent.putExtra("text_data", text_data);
+		intent.putExtra("text_data", textData);
 		this.startActivity(intent);
 	}
 

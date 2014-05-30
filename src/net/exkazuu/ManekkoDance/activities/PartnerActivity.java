@@ -23,7 +23,9 @@ import android.widget.TextView;
 
 public class PartnerActivity extends Activity {
 
-	private String text_data;
+	private String textData;
+	private ImageContainer leftImages;
+	private ImageContainer rightImages;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,7 +39,7 @@ public class PartnerActivity extends Activity {
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("lesson");
 		String message = intent.getStringExtra("message");
-		text_data = intent.getStringExtra("text_data");
+		textData = intent.getStringExtra("text_data");
 		editText1.setText(data);
 		editText2.setText(message);
 		if (message.equals("1")) {
@@ -65,23 +67,23 @@ public class PartnerActivity extends Activity {
 		}
 
 		Button btn5 = (Button) this.findViewById(R.id.button5);
-		final PartnerActivity activity = this;
 		btn5.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				final Handler handler = new Handler();
-				Thread trd = new Thread(new CommandExecutor(handler, activity));
+				Thread trd = new Thread(new CommandExecutor(handler));
 				trd.start();
 			}
 		});
+
+		leftImages = ImageContainer.createCoccoLeft(this);
+		rightImages = ImageContainer.createCoccoRight(this);
 	}
 
 	private final class CommandExecutor implements Runnable {
 		private final Handler handler;
-		private Activity activity;
 
-		private CommandExecutor(Handler handler, Activity activity) {
+		private CommandExecutor(Handler handler) {
 			this.handler = handler;
-			this.activity = activity;
 		}
 
 		public void run() {
@@ -97,10 +99,6 @@ public class PartnerActivity extends Activity {
 			StringCommandParser.parse(commandsText, rightCommands,
 					rightNumbers, false);
 
-			ImageContainer leftImages = ImageContainer
-					.createCoccoLeft(activity);
-			ImageContainer rightImages = ImageContainer
-					.createCoccoRight(activity);
 			executeCommands(leftImages, rightImages, leftCommands,
 					rightCommands);
 		}
@@ -165,7 +163,7 @@ public class PartnerActivity extends Activity {
 		TextView editText2 = (TextView) findViewById(R.id.editText2);
 		intent.putExtra("lesson", editText1.getText().toString());
 		intent.putExtra("message", editText2.getText().toString());
-		intent.putExtra("text_data", text_data);
+		intent.putExtra("text_data", textData);
 		this.startActivity(intent);
 	}
 
