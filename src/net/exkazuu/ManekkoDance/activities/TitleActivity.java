@@ -1,7 +1,5 @@
 package net.exkazuu.ManekkoDance.activities;
 
-import net.exkazuu.ManekkoDance.Help;
-import net.exkazuu.ManekkoDance.LessonList;
 import jp.eclipcebook.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -27,18 +25,13 @@ public class TitleActivity extends Activity {
 	}
 
 	public void doActionFromTheBeginning(View view) {
-		// MediaPlayer bgm = MediaPlayer.create(getApplicationContext(),
-		// R.raw.titlecall);
-		// bgm.start();
 		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
 		this.startActivity(intent);
 	}
 
 	public void doActionContinue(View view) {
-		// MediaPlayer bgm = MediaPlayer.create(getApplicationContext(),
-		// R.raw.titlecall);
-		// bgm.start();
-		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.LessonList.class);
+		Intent intent = new Intent(this,
+				net.exkazuu.ManekkoDance.LessonList.class);
 		this.startActivity(intent);
 	}
 

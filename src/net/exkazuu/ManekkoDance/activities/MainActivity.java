@@ -8,20 +8,17 @@ package net.exkazuu.ManekkoDance.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.eclipcebook.R;
 import net.exkazuu.ManekkoDance.DetectableSoftKeyLayout;
-import net.exkazuu.ManekkoDance.Help;
 import net.exkazuu.ManekkoDance.IconContainer;
 import net.exkazuu.ManekkoDance.ImageContainer;
 import net.exkazuu.ManekkoDance.ImageInEdit;
 import net.exkazuu.ManekkoDance.StringCommandExecutor;
 import net.exkazuu.ManekkoDance.StringCommandParser;
-import net.exkazuu.ManekkoDance.DetectableSoftKeyLayout.OnSoftKeyShownListener;
-import jp.eclipcebook.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -30,7 +27,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -43,7 +39,6 @@ public class MainActivity extends Activity {
 
 	private static final int TEXT_VIEW = 0;
 	private static final int IMAGE_VIEW = 1;
-	// private String path = "mydata.txt"; // file保存
 	private String lesson;
 	private String message;
 	private String text_data;
@@ -51,10 +46,11 @@ public class MainActivity extends Activity {
 	private TextView textView;
 	private ImageInEdit imgTextView;
 	private DetectableSoftKeyLayout DSKLayout;
-	private FrameLayout fLayout;
 	private LinearLayout buttonGroup2;
 	private HorizontalScrollView iconList;
-	private MediaPlayer bgm;
+
+	private ImageContainer leftImages;
+	private ImageContainer rightImages;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,9 +62,11 @@ public class MainActivity extends Activity {
 		// imgTextView.buildLayer();
 		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.root);
 		DSKLayout.setListener(listner);
-		fLayout = (FrameLayout) findViewById(R.id.frameLayoutPiyo);
 		buttonGroup2 = (LinearLayout) findViewById(R.id.buttonGroup2);
 		iconList = (HorizontalScrollView) findViewById(R.id.iconList);
+
+		leftImages = ImageContainer.createPiyoLeft(this);
+		rightImages = ImageContainer.createPiyoRight(this);
 
 		/********** Lesson data　の 取得 **************/
 		Intent intent = getIntent();
@@ -102,13 +100,6 @@ public class MainActivity extends Activity {
 
 		final MainActivity mainActivity = this;
 
-		// imgTextView.setOnSystemUiVisibilityChangeListener(new
-		// OnSystemUiVisibilityChangeListener() {
-		// public void onSystemUiVisibilityChange(int visibility) {
-		// Log.v("my_debug", "onSystemUiVisibilityChange: " + visibility);
-		// }
-		// });
-
 		host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 			public void onTabChanged(String tabId) {
 				Log.v("my_debug", "onTabChanged" + tabId);
@@ -138,12 +129,6 @@ public class MainActivity extends Activity {
 		host.setCurrentTab(IMAGE_VIEW);
 
 		/********** 音楽 **************/
-		// MediaPlayer bgm1 = MediaPlayer.create(this, R.raw.ikusei_gamen); //
-		// ゲーム音楽
-		// bgm1.start(); // BGMスタート
-
-		// doLoad(); // セーブデータをロード
-
 		View.OnClickListener piyoOnClickListener = new View.OnClickListener() {
 			public void onClick(View v) {
 				host.setCurrentTab(TEXT_VIEW);
@@ -168,18 +153,6 @@ public class MainActivity extends Activity {
 
 		public void run() {
 			textView = (TextView) findViewById(R.id.editText1);
-			ImageContainer leftImages = new ImageContainer(
-					(ImageView) findViewById(R.id.playerLeftHand1),
-					(ImageView) findViewById(R.id.playerRightHand1),
-					(ImageView) findViewById(R.id.playerBasic1),
-					(ImageView) findViewById(R.id.playerLeftFoot1),
-					(ImageView) findViewById(R.id.playerRightFoot1));
-			ImageContainer rightImages = new ImageContainer(
-					(ImageView) findViewById(R.id.playerLeftHand2),
-					(ImageView) findViewById(R.id.playerRightHand2),
-					(ImageView) findViewById(R.id.playerBasic2),
-					(ImageView) findViewById(R.id.playerLeftFoot2),
-					(ImageView) findViewById(R.id.playerRightFoot2));
 
 			String commandsText = textView.getText().toString(); // 1行ずつ配列に収納
 			List<String> leftCommands = new ArrayList<String>();
@@ -262,12 +235,10 @@ public class MainActivity extends Activity {
 			if (isShown) {
 				// ソフトキーボードが表示されている場合
 				// postボタンを非表示にする
-				// fLayout.setVisibility(View.GONE);
 				buttonGroup2.setVisibility(View.GONE);
 				iconList.setVisibility(View.VISIBLE);
 			} else {
 				// ソフトキーボードが表示されてなければ、表示する
-				// fLayout.setVisibility(View.VISIBLE);
 				buttonGroup2.setVisibility(View.VISIBLE);
 				iconList.setVisibility(View.GONE);
 			}
@@ -393,7 +364,8 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "くりかえし");
+			editable.replace(Math.min(start, end), Math.max(start, end),
+					"くりかえし");
 		}
 	}
 
@@ -437,7 +409,8 @@ public class MainActivity extends Activity {
 			int start = textView.getSelectionStart();
 			int end = textView.getSelectionEnd();
 			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "もしおわり");
+			editable.replace(Math.min(start, end), Math.max(start, end),
+					"もしおわり");
 		}
 	}
 
@@ -464,45 +437,9 @@ public class MainActivity extends Activity {
 	}
 
 	public void initializeImage() {
-		ImageView leftHand1 = (ImageView) findViewById(R.id.playerLeftHand1);
-		ImageView rightHand1 = (ImageView) findViewById(R.id.playerRightHand1);
-		ImageView basic = (ImageView) findViewById(R.id.playerBasic1);
-		ImageView leftFoot1 = (ImageView) findViewById(R.id.playerLeftFoot1);
-		ImageView rightFoot1 = (ImageView) findViewById(R.id.playerRightFoot1);
-		leftHand1.setImageResource(R.drawable.piyo_left_hand_up1);
-		rightHand1.setImageResource(R.drawable.piyo_right_hand_up1);
-		basic.setImageResource(R.drawable.piyo_basic);
-		leftFoot1.setImageResource(R.drawable.piyo_left_foot_up1);
-		rightFoot1.setImageResource(R.drawable.piyo_right_foot_up1);
-		leftHand1.setVisibility(View.VISIBLE);
-		rightHand1.setVisibility(View.VISIBLE);
-		leftFoot1.setVisibility(View.VISIBLE);
-		rightFoot1.setVisibility(View.VISIBLE);
+		leftImages = ImageContainer.createPiyoLeft(this);
+		rightImages = ImageContainer.createPiyoRight(this);
 	}
-
-	/******************** ファイル保存 doSave(View view) *************************/
-	/*
-	 * @SuppressLint("WorldReadableFiles") public void doSave() { EditText
-	 * editText1 = (EditText) this.findViewById(R.id.editText1); Editable str =
-	 * editText1.getText(); FileOutputStream output = null; try { output =
-	 * this.openFileOutput(path, Context.MODE_WORLD_READABLE);
-	 * output.write(str.toString().getBytes()); } catch (FileNotFoundException
-	 * e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace();
-	 * } finally { try { output.close(); } catch (Exception e) {
-	 * e.printStackTrace(); } } }
-	 */
-
-	/******************** ファイルロード doLoad(View view) *************************/
-	/*
-	 * public void doLoad() { EditText editText1 = (EditText)
-	 * this.findViewById(R.id.editText1); FileInputStream input = null; try {
-	 * input = this.openFileInput(path); byte[] buffer = new byte[1000];
-	 * input.read(buffer); String s = new String(buffer).trim();
-	 * editText1.setText(s); } catch (FileNotFoundException e) {
-	 * e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-	 * finally { try { input.close(); } catch (Exception e) {
-	 * e.printStackTrace(); } } }
-	 */
 
 	/******************** メニュー作成 *************************/
 	@Override
@@ -537,8 +474,6 @@ public class MainActivity extends Activity {
 
 	/************************* インテント（画面遷移） *****************************/
 	public void changeActionScreen(View view) {
-		// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-		// bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this,
 				net.exkazuu.ManekkoDance.activities.ActionActivity.class);
@@ -549,8 +484,6 @@ public class MainActivity extends Activity {
 	}
 
 	public void changePartnerScreen(View view) { // お手本画面へ遷移
-		// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-		// bgm.start();
 		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this,
 				net.exkazuu.ManekkoDance.activities.PartnerActivity.class);

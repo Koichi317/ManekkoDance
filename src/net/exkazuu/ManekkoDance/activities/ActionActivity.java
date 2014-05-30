@@ -1,52 +1,37 @@
 package net.exkazuu.ManekkoDance.activities;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.eclipcebook.R;
 import net.exkazuu.ManekkoDance.AnswerCheck;
-import net.exkazuu.ManekkoDance.Help;
 import net.exkazuu.ManekkoDance.ImageContainer;
 import net.exkazuu.ManekkoDance.LessonData;
-import net.exkazuu.ManekkoDance.LessonList;
 import net.exkazuu.ManekkoDance.StringCommandExecutor;
 import net.exkazuu.ManekkoDance.StringCommandParser;
 import net.exkazuu.ManekkoDance.Timer;
-
-import jp.eclipcebook.R;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//import android.media.MediaPlayer;
-
 public class ActionActivity extends Activity {
 
-	private String path = "mydata2.txt";
 	private String lesson;
 	private String message;
 	private String text_data;
 	public boolean answerCheckEnd = false;
-
-	// private MediaPlayer bgm;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,10 +52,11 @@ public class ActionActivity extends Activity {
 		partnerEditText.setText(partnerCommandsText);
 
 		Button btn1 = (Button) this.findViewById(R.id.button1);
+		final ActionActivity activity = this;
 		btn1.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				final Handler handler = new Handler();
-				Thread trd = new Thread(new CommandExecutor(handler));
+				Thread trd = new Thread(new CommandExecutor(handler, activity));
 				trd.start();
 			}
 		});
@@ -79,9 +65,11 @@ public class ActionActivity extends Activity {
 
 	public final class CommandExecutor implements Runnable {
 		private final Handler handler;
+		private Activity activity;
 
-		private CommandExecutor(Handler handler) {
+		private CommandExecutor(Handler handler, Activity activity) {
 			this.handler = handler;
+			this.activity = activity;
 		}
 
 		public void run() {
@@ -111,43 +99,28 @@ public class ActionActivity extends Activity {
 			StringCommandParser.parse(partnerCommandsText,
 					rightPartnerCommands, rightPartnerNumbers, false);
 
+			ImageContainer piyoLeftImages = ImageContainer
+					.createPiyoLeft(activity);
+			ImageContainer piyoRightImages = ImageContainer
+					.createPiyoRight(activity);
+			ImageContainer coccoLeftImages = ImageContainer
+					.createCoccoLeft(activity);
+			ImageContainer coccoRightImages = ImageContainer
+					.createCoccoRight(activity);
+
 			Runnable leftPlayerAction = new StringCommandExecutor(
-					new ImageContainer(
-							(ImageView) findViewById(R.id.playerLeftHand1),
-							(ImageView) findViewById(R.id.playerRightHand1),
-							(ImageView) findViewById(R.id.playerBasic1),
-							(ImageView) findViewById(R.id.playerLeftFoot1),
-							(ImageView) findViewById(R.id.playerRightFoot1)),
-					leftPlayerCommands, playerEditText, leftPlayerNumbers,
-					getApplicationContext(), true);
+					piyoLeftImages, leftPlayerCommands, playerEditText,
+					leftPlayerNumbers, getApplicationContext(), true);
 
 			Runnable rightPlayerAction = new StringCommandExecutor(
-					new ImageContainer(
-							(ImageView) findViewById(R.id.playerLeftHand2),
-							(ImageView) findViewById(R.id.playerRightHand2),
-							(ImageView) findViewById(R.id.playerBasic2),
-							(ImageView) findViewById(R.id.playerLeftFoot2),
-							(ImageView) findViewById(R.id.playerRightFoot2)),
-					rightPlayerCommands, playerEditText, rightPlayerNumbers,
-					getApplicationContext(), true);
+					piyoRightImages, rightPlayerCommands, playerEditText,
+					rightPlayerNumbers, getApplicationContext(), true);
 
 			Runnable leftPartnerAction = new StringCommandExecutor(
-					new ImageContainer(
-							(ImageView) findViewById(R.id.partnerLeftHand1),
-							(ImageView) findViewById(R.id.partnerRightHand1),
-							(ImageView) findViewById(R.id.partnerBasic1),
-							(ImageView) findViewById(R.id.partnerLeftFoot1),
-							(ImageView) findViewById(R.id.partnerRightFoot1)),
-					leftPartnerCommands, true);
+					coccoLeftImages, leftPartnerCommands, true);
 
 			Runnable rightPartnerAction = new StringCommandExecutor(
-					new ImageContainer(
-							(ImageView) findViewById(R.id.partnerLeftHand2),
-							(ImageView) findViewById(R.id.partnerRightHand2),
-							(ImageView) findViewById(R.id.partnerBasic2),
-							(ImageView) findViewById(R.id.partnerLeftFoot2),
-							(ImageView) findViewById(R.id.partnerRightFoot2)),
-					rightPartnerCommands, false);
+					coccoRightImages, rightPartnerCommands, false);
 
 			final AnswerCheck answer = new AnswerCheck(leftPlayerCommands,
 					leftPartnerCommands);
@@ -203,9 +176,6 @@ public class ActionActivity extends Activity {
 					if (answer.judge && answer2.judge) {
 
 						if (Integer.parseInt(message) == 10) {
-							// bgm = MediaPlayer.create(getApplicationContext(),
-							// R.raw.perfect);
-							// bgm.start();
 							builder.setIcon(R.drawable.answer_ture);
 							builder.setNegativeButton("タイトルへ戻る",
 									new DialogInterface.OnClickListener() {
@@ -213,10 +183,6 @@ public class ActionActivity extends Activity {
 										public void onClick(
 												DialogInterface dialog,
 												int which) {
-											// bgm =
-											// MediaPlayer.create(getApplicationContext(),
-											// R.raw.select);
-											// bgm.start();
 											Intent intent = new Intent(
 													getApplication(),
 													net.exkazuu.ManekkoDance.activities.TitleActivity.class);
@@ -229,18 +195,10 @@ public class ActionActivity extends Activity {
 										public void onClick(
 												DialogInterface dialog,
 												int which) {
-											// bgm =
-											// MediaPlayer.create(getApplicationContext(),
-											// R.raw.select);
-											// bgm.start();
 											changeMainScreen();
 										}
 									});
 						} else {
-							// bgm = MediaPlayer.create(getApplicationContext(),
-							// R.raw.good_answer);
-							// bgm.start();
-
 							builder.setIcon(R.drawable.answer_ture);
 							Timer.stopTimer();
 							builder.setNegativeButton("次のLessonに進む",
@@ -249,10 +207,6 @@ public class ActionActivity extends Activity {
 										public void onClick(
 												DialogInterface dialog,
 												int which) {
-											// bgm =
-											// MediaPlayer.create(getApplicationContext(),
-											// R.raw.select);
-											// bgm.start();
 											int nextLessonNumber = Integer
 													.parseInt(message) + 1;
 											if (nextLessonNumber <= 3) {
@@ -293,19 +247,12 @@ public class ActionActivity extends Activity {
 										public void onClick(
 												DialogInterface dialog,
 												int which) {
-											// bgm =
-											// MediaPlayer.create(getApplicationContext(),
-											// R.raw.select);
-											// bgm.start();
 											changeMainScreen();
 										}
 									});
 						}
 
 					} else {
-						// bgm = MediaPlayer.create(getApplicationContext(),
-						// R.raw.fail);
-						// bgm.start();
 						builder.setIcon(R.drawable.answer_false);
 						builder.setNegativeButton("Lessonを選択し直す",
 								new DialogInterface.OnClickListener() {
@@ -323,10 +270,6 @@ public class ActionActivity extends Activity {
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
-										// bgm =
-										// MediaPlayer.create(getApplicationContext(),
-										// R.raw.select);
-										// bgm.start();
 										changeMainScreen();
 									}
 								});
@@ -339,51 +282,6 @@ public class ActionActivity extends Activity {
 		}
 
 	}
-
-	@SuppressLint("WorldReadableFiles")
-	public void doSave() {
-		EditText editText2 = (EditText) this
-				.findViewById(R.id.editTextActionScreen2);
-		Editable str = editText2.getText();
-		FileOutputStream output = null;
-		try {
-			output = this.openFileOutput(path, Context.MODE_WORLD_READABLE);
-			output.write(str.toString().getBytes());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				output.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	// public void doLoad() {
-	// EditText editText2 = (EditText)
-	// this.findViewById(R.id.editTextActionScreen2);
-	// FileInputStream input = null;
-	// try {
-	// input = this.openFileInput(path);
-	// byte[] buffer = new byte[1000];
-	// input.read(buffer);
-	// String s = new String(buffer).trim();
-	// editText2.setText(s);
-	// } catch (FileNotFoundException e) {
-	// e.printStackTrace();
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// } finally {
-	// try {
-	// input.close();
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -400,7 +298,6 @@ public class ActionActivity extends Activity {
 		});
 		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				doSave();
 				changeTitleScreen();
 				return false;
 			}
@@ -448,8 +345,6 @@ public class ActionActivity extends Activity {
 	}
 
 	public void changeHelpScreen(View view) { // ヘルプ画面へ遷移
-		// bgm = MediaPlayer.create(getApplicationContext(), R.raw.select);
-		// bgm.start();
 		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);

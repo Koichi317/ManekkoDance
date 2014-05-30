@@ -3,12 +3,11 @@ package net.exkazuu.ManekkoDance.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.eclipcebook.R;
 import net.exkazuu.ManekkoDance.ImageContainer;
 import net.exkazuu.ManekkoDance.StringCommandExecutor;
 import net.exkazuu.ManekkoDance.StringCommandParser;
 import net.exkazuu.ManekkoDance.Timer;
-
-import jp.eclipcebook.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,16 +23,13 @@ import android.widget.TextView;
 
 public class PartnerActivity extends Activity {
 
-	// private String path = "mydata2.txt"; // file保存
 	private String text_data;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// requestWindowFeature(Window.FEATURE_NO_TITLE); //タイトルバー非表示
 		setTitle("お手本画面");
 		Timer.startTimer();
 		setContentView(R.layout.partner);
-		// doLoad();
 
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		TextView editText2 = (TextView) findViewById(R.id.editText2);
@@ -69,10 +65,11 @@ public class PartnerActivity extends Activity {
 		}
 
 		Button btn5 = (Button) this.findViewById(R.id.button5);
+		final PartnerActivity activity = this;
 		btn5.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				final Handler handler = new Handler();
-				Thread trd = new Thread(new CommandExecutor(handler));
+				Thread trd = new Thread(new CommandExecutor(handler, activity));
 				trd.start();
 			}
 		});
@@ -80,9 +77,11 @@ public class PartnerActivity extends Activity {
 
 	private final class CommandExecutor implements Runnable {
 		private final Handler handler;
+		private Activity activity;
 
-		private CommandExecutor(Handler handler) {
+		private CommandExecutor(Handler handler, Activity activity) {
 			this.handler = handler;
+			this.activity = activity;
 		}
 
 		public void run() {
@@ -98,18 +97,10 @@ public class PartnerActivity extends Activity {
 			StringCommandParser.parse(commandsText, rightCommands,
 					rightNumbers, false);
 
-			ImageContainer leftImages = new ImageContainer(
-					(ImageView) findViewById(R.id.partnerLeftHand1),
-					(ImageView) findViewById(R.id.partnerRightHand1),
-					(ImageView) findViewById(R.id.partnerBasic1),
-					(ImageView) findViewById(R.id.partnerLeftFoot1),
-					(ImageView) findViewById(R.id.partnerRightFoot1));
-			ImageContainer rightImages = new ImageContainer(
-					(ImageView) findViewById(R.id.partnerLeftHand2),
-					(ImageView) findViewById(R.id.partnerRightHand2),
-					(ImageView) findViewById(R.id.partnerBasic2),
-					(ImageView) findViewById(R.id.partnerLeftFoot2),
-					(ImageView) findViewById(R.id.partnerRightFoot2));
+			ImageContainer leftImages = ImageContainer
+					.createCoccoLeft(activity);
+			ImageContainer rightImages = ImageContainer
+					.createCoccoRight(activity);
 			executeCommands(leftImages, rightImages, leftCommands,
 					rightCommands);
 		}
@@ -143,30 +134,6 @@ public class PartnerActivity extends Activity {
 		}
 
 	}
-
-	/******************** ファイル保存 doSave(View view) *************************/
-	/*
-	 * @SuppressLint("WorldReadableFiles") public void doSave() { EditText
-	 * editText1 = (EditText) this.findViewById(R.id.editText1); Editable str =
-	 * editText1.getText(); FileOutputStream output = null; try { output =
-	 * this.openFileOutput(path, Context.MODE_WORLD_READABLE);
-	 * output.write(str.toString().getBytes()); } catch (FileNotFoundException
-	 * e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace();
-	 * } finally { try { output.close(); } catch (Exception e) {
-	 * e.printStackTrace(); } } }
-	 */
-
-	/******************** ファイルロード doLoad(View view) *************************/
-	/*
-	 * public void doLoad() { EditText editText1 = (EditText)
-	 * this.findViewById(R.id.editText1); FileInputStream input = null; try {
-	 * input = this.openFileInput(path); byte[] buffer = new byte[1000];
-	 * input.read(buffer); String s = new String(buffer).trim();
-	 * editText1.setText(s); } catch (FileNotFoundException e) {
-	 * e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-	 * finally { try { input.close(); } catch (Exception e) {
-	 * e.printStackTrace(); } } }
-	 */
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

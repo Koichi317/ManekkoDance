@@ -1,7 +1,7 @@
 package net.exkazuu.ManekkoDance;
 
 public class LessonData {
-	private static String[] _answers = { "左腕を上げる\n左腕を下げる\n右腕を上げる\n右腕を下げる",
+	private static String[] _answers = { "左腕を上げる右腕を上げる\n左腕を下げる\n右腕を下げる",
 			"左腕を上げる\n左腕を下げる\n右腕を上げる\n右腕を下げる\n左腕を上げる\n左腕を下げる\n右腕を上げる\n右腕を下げる",
 			"くりかえし2\n左腕を上げる\n左腕を下げる\n右腕を上げる\n右腕を下げる\nここまで",
 			"くりかえし2\nくりかえし2\n左腕を上げる\n左腕を下げる\nここまで\n右腕を上げる\n右腕を下げる\nここまで",

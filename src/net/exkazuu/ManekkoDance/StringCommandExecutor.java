@@ -28,7 +28,7 @@ public class StringCommandExecutor implements Runnable {
 	private String arg = "";
 
 	private enum CharacterType {
-		PiyoLeft, PiyoRight, CocoLeft, CocoRight,
+		PiyoLeft, PiyoRight, CoccoLeft, CoccoRight,
 	}
 
 	private static class Input {
@@ -103,7 +103,7 @@ public class StringCommandExecutor implements Runnable {
 		this.addLineIndex = true;
 		input = new Input();
 		state = new State();
-		charaType = isLeft ? CharacterType.CocoLeft : CharacterType.CocoRight;
+		charaType = isLeft ? CharacterType.CoccoLeft : CharacterType.CoccoRight;
 		errorCheck = false;
 	}
 
@@ -204,11 +204,11 @@ public class StringCommandExecutor implements Runnable {
 
 			if (input.左腕を上げる) { // 左腕を上げる
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getLeftHand().setImageResource(
 							R.drawable.cocco_left_hand_up2);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getLeftHand().setImageResource(
 							R.drawable.alt_cocco_left_hand_up2);
 					break;
@@ -228,11 +228,11 @@ public class StringCommandExecutor implements Runnable {
 
 			if (input.左腕を下げる) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getLeftHand().setImageResource(
 							R.drawable.cocco_left_hand_up2);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getLeftHand().setImageResource(
 							R.drawable.alt_cocco_left_hand_up2);
 					break;
@@ -252,11 +252,11 @@ public class StringCommandExecutor implements Runnable {
 
 			if (input.右腕を上げる) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getRightHand().setImageResource(
 							R.drawable.cocco_right_hand_up2);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getRightHand().setImageResource(
 							R.drawable.alt_cocco_right_hand_up2);
 					break;
@@ -276,11 +276,11 @@ public class StringCommandExecutor implements Runnable {
 
 			if (input.右腕を下げる) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getRightHand().setImageResource(
 							R.drawable.cocco_right_hand_up2);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getRightHand().setImageResource(
 							R.drawable.alt_cocco_right_hand_up2);
 					break;
@@ -300,11 +300,11 @@ public class StringCommandExecutor implements Runnable {
 
 			if (input.左足を上げる) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getLeftFoot().setImageResource(
 							R.drawable.cocco_left_foot_up2);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getLeftFoot().setImageResource(
 							R.drawable.alt_cocco_left_foot_up2);
 					break;
@@ -324,11 +324,11 @@ public class StringCommandExecutor implements Runnable {
 
 			if (input.左足を下げる) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getLeftFoot().setImageResource(
 							R.drawable.cocco_left_foot_up2);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getLeftFoot().setImageResource(
 							R.drawable.alt_cocco_left_foot_up2);
 					break;
@@ -348,11 +348,11 @@ public class StringCommandExecutor implements Runnable {
 
 			if (input.右足を上げる) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getRightFoot().setImageResource(
 							R.drawable.cocco_right_foot_up2);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getRightFoot().setImageResource(
 							R.drawable.alt_cocco_right_foot_up2);
 					break;
@@ -372,11 +372,11 @@ public class StringCommandExecutor implements Runnable {
 
 			if (input.右足を下げる) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getRightFoot().setImageResource(
 							R.drawable.cocco_right_foot_up2);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getRightFoot().setImageResource(
 							R.drawable.alt_cocco_right_foot_up2);
 					break;
@@ -400,10 +400,10 @@ public class StringCommandExecutor implements Runnable {
 				images.getLeftFoot().setVisibility(View.INVISIBLE);
 				images.getRightFoot().setVisibility(View.INVISIBLE);
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getBasic().setImageResource(R.drawable.cocco_jump2);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getBasic().setImageResource(
 							R.drawable.alt_cocco_jump2);
 					break;
@@ -440,11 +440,11 @@ public class StringCommandExecutor implements Runnable {
 
 			if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getLeftHand().setImageResource(
 							R.drawable.cocco_left_hand_up3);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getLeftHand().setImageResource(
 							R.drawable.alt_cocco_left_hand_up3);
 					break;
@@ -460,11 +460,11 @@ public class StringCommandExecutor implements Runnable {
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getLeftHand().setImageResource(
 							R.drawable.cocco_left_hand_up1);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getLeftHand().setImageResource(
 							R.drawable.alt_cocco_left_hand_up1);
 					break;
@@ -480,11 +480,11 @@ public class StringCommandExecutor implements Runnable {
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getRightHand().setImageResource(
 							R.drawable.cocco_right_hand_up3);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getRightHand().setImageResource(
 							R.drawable.alt_cocco_right_hand_up3);
 					break;
@@ -500,11 +500,11 @@ public class StringCommandExecutor implements Runnable {
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getRightHand().setImageResource(
 							R.drawable.cocco_right_hand_up1);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getRightHand().setImageResource(
 							R.drawable.alt_cocco_right_hand_up1);
 					break;
@@ -520,11 +520,11 @@ public class StringCommandExecutor implements Runnable {
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getLeftFoot().setImageResource(
 							R.drawable.cocco_left_foot_up3);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getLeftFoot().setImageResource(
 							R.drawable.alt_cocco_left_foot_up3);
 					break;
@@ -540,11 +540,11 @@ public class StringCommandExecutor implements Runnable {
 			}
 			if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getLeftFoot().setImageResource(
 							R.drawable.cocco_left_foot_up1);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getLeftFoot().setImageResource(
 							R.drawable.alt_cocco_left_foot_up1);
 					break;
@@ -560,11 +560,11 @@ public class StringCommandExecutor implements Runnable {
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getRightFoot().setImageResource(
 							R.drawable.cocco_right_foot_up3);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getRightFoot().setImageResource(
 							R.drawable.alt_cocco_right_foot_up3);
 					break;
@@ -580,11 +580,11 @@ public class StringCommandExecutor implements Runnable {
 			}
 			if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getRightFoot().setImageResource(
 							R.drawable.cocco_right_foot_up1);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getRightFoot().setImageResource(
 							R.drawable.alt_cocco_right_foot_up1);
 					break;
@@ -600,10 +600,10 @@ public class StringCommandExecutor implements Runnable {
 			}
 			if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1) {
 				switch (charaType) {
-				case CocoLeft:
+				case CoccoLeft:
 					images.getBasic().setImageResource(R.drawable.cocco_basic);
 					break;
-				case CocoRight:
+				case CoccoRight:
 					images.getBasic().setImageResource(
 							R.drawable.alt_cocco_basic);
 					break;
@@ -645,8 +645,6 @@ public class StringCommandExecutor implements Runnable {
 				bgm = MediaPlayer.create(context, R.raw.danbo_ru);
 			}
 		}
-		
-		//bgm = MediaPlayer.create(context, R.raw.danbo_c);
 		bgm.start();
 	}
 
