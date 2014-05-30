@@ -646,7 +646,7 @@ public class StringCommandExecutor implements Runnable {
 			}
 		}
 		
-		bgm = MediaPlayer.create(context, R.raw.danbo_c);
+		//bgm = MediaPlayer.create(context, R.raw.danbo_c);
 		bgm.start();
 	}
 
