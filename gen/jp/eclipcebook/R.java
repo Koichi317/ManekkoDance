@@ -143,6 +143,7 @@ public final class R {
         public static final int tutorial3=0x7f02007d;
         public static final int tutorial4=0x7f02007e;
         public static final int tutorial5=0x7f02007f;
+        public static final int tutorial6=0x7f020080;
     }
     public static final class id {
         public static final int actionRoot=0x7f090000;
