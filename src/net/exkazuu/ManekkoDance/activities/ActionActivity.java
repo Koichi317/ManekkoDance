@@ -6,7 +6,6 @@ import java.util.List;
 import jp.eclipcebook.R;
 import net.exkazuu.ManekkoDance.AnswerCheck;
 import net.exkazuu.ManekkoDance.ImageContainer;
-import net.exkazuu.ManekkoDance.ImageInEdit;
 import net.exkazuu.ManekkoDance.Lessons;
 import net.exkazuu.ManekkoDance.Timer;
 import net.exkazuu.ManekkoDance.command.StringCommandExecutor;
@@ -17,8 +16,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +38,17 @@ public class ActionActivity extends Activity {
 	private ImageContainer coccoLeftImages;
 	private ImageContainer coccoRightImages;
 
+	private Thread thread;
+	private CommandExecutor commandExecutor;
+
+	@Override
+	protected void onPause() {
+		if (commandExecutor != null) {
+			commandExecutor.died = true;
+		}
+	};
+	
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle("実行画面");
@@ -60,10 +68,14 @@ public class ActionActivity extends Activity {
 
 		Button btn1 = (Button) this.findViewById(R.id.button1);
 		btn1.setOnClickListener(new View.OnClickListener() {
+
 			public void onClick(View v) {
 				final Handler handler = new Handler();
-				Thread trd = new Thread(new CommandExecutor(handler));
-				trd.start();
+				if (thread == null || !thread.isAlive()) {
+					commandExecutor = new CommandExecutor(handler);
+					thread = new Thread(commandExecutor);
+					thread.start();
+				}
 			}
 		});
 
@@ -75,9 +87,11 @@ public class ActionActivity extends Activity {
 
 	public final class CommandExecutor implements Runnable {
 		private final Handler handler;
+		private boolean died;
 
 		private CommandExecutor(Handler handler) {
 			this.handler = handler;
+			this.died = false;
 		}
 
 		public void run() {
@@ -127,13 +141,12 @@ public class ActionActivity extends Activity {
 			final AnswerCheck answer2 = new AnswerCheck(rightPlayerCommands,
 					rightPartnerCommands);
 			answer2.compare();
-			// answer.loopCheck(message, playerEditText);
 			Log.v("tag", answer.show());
 
 			// 解析&実行
 			int maxSize = Math.max(leftPlayerCommands.size(),
 					leftPartnerCommands.size());
-			for (int i = 0; i < maxSize; i++) {
+			for (int i = 0; !died && i < maxSize; i++) {
 				if (i < leftPlayerCommands.size()) {
 					handler.post(leftPlayerExecutor);
 					handler.post(rightPlayerExecutor);
@@ -162,7 +175,8 @@ public class ActionActivity extends Activity {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if (leftPlayerExecutor.existsError() || rightPlayerExecutor.existsError())  {
+				if (leftPlayerExecutor.existsError()
+						|| rightPlayerExecutor.existsError()) {
 					break;
 				}
 			}
@@ -376,5 +390,4 @@ public class ActionActivity extends Activity {
 			}
 		}
 	}
-
 }

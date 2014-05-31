@@ -13,12 +13,14 @@ import net.exkazuu.ManekkoDance.DetectableSoftKeyLayout;
 import net.exkazuu.ManekkoDance.IconContainer;
 import net.exkazuu.ManekkoDance.ImageContainer;
 import net.exkazuu.ManekkoDance.ImageInEdit;
+import net.exkazuu.ManekkoDance.Lessons;
 import net.exkazuu.ManekkoDance.command.StringCommandExecutor;
 import net.exkazuu.ManekkoDance.command.StringCommandParser;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -28,10 +30,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
@@ -47,11 +49,20 @@ public class MainActivity extends Activity {
 	private TextView textView;
 	private ImageInEdit imgTextView;
 	private DetectableSoftKeyLayout DSKLayout;
-	private LinearLayout buttonGroup2;
 	private HorizontalScrollView iconList;
 
 	private ImageContainer leftImages;
 	private ImageContainer rightImages;
+
+	private Thread thread;
+	private CommandExecutor commandExecutor;
+
+	@Override
+	protected void onPause() {
+		if (commandExecutor != null) {
+			commandExecutor.died = true;
+		}
+	};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +74,6 @@ public class MainActivity extends Activity {
 		// imgTextView.buildLayer();
 		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.root);
 		DSKLayout.setListener(listner);
-		buttonGroup2 = (LinearLayout) findViewById(R.id.buttonGroup2);
 		iconList = (HorizontalScrollView) findViewById(R.id.iconList);
 
 		leftImages = ImageContainer.createPiyoLeft(this);
@@ -131,27 +141,41 @@ public class MainActivity extends Activity {
 
 		/********** 音楽 **************/
 		View.OnClickListener piyoOnClickListener = new View.OnClickListener() {
+
 			public void onClick(View v) {
 				host.setCurrentTab(TEXT_VIEW);
 				final Handler handler = new Handler();
-				Thread trd = new Thread(new CommandExecutor(handler));
-				trd.start();
+				if (thread == null || !thread.isAlive()) {
+					commandExecutor = new CommandExecutor(handler);
+					thread = new Thread(commandExecutor);
+					thread.start();
+				}
 			}
 		};
 		this.findViewById(R.id.frameLayoutPiyo).setOnClickListener(
 				piyoOnClickListener);
 		this.findViewById(R.id.frameLayoutPiyo2).setOnClickListener(
 				piyoOnClickListener);
-		
 
 		final Activity activity = this;
+		final int limitation = Lessons.getLimitation(Integer.parseInt(message));
+		final Button btnJudge = (Button) findViewById(R.id.btnJudge);
+
 		imgTextView.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
 					int arg3) {
 				int count = StringCommandParser.countNewLines(arg0);
-				((TextView) activity.findViewById(R.id.tvCount2)).setText(count
-						+ " : ");
+				TextView tvCount = (TextView) activity
+						.findViewById(R.id.tvCount2);
+				tvCount.setText(count + "行 (" + limitation + "行以内で書こう！)");
+				boolean preCheck = count <= limitation;
+				btnJudge.setEnabled(preCheck);
+				if (preCheck) {
+					tvCount.setTextColor(Color.BLACK);
+				} else {
+					tvCount.setTextColor(Color.RED);
+				}
 			}
 
 			@Override
@@ -163,15 +187,43 @@ public class MainActivity extends Activity {
 			public void afterTextChanged(Editable arg0) {
 			}
 		});
-		
+
+		textView.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				int count = StringCommandParser.countNewLines(arg0);
+				TextView tvCount = (TextView) activity
+						.findViewById(R.id.tvCount1);
+				tvCount.setText(count + "行 (" + limitation + "行以内で書こう！)");
+				boolean preCheck = count <= limitation;
+				btnJudge.setEnabled(preCheck);
+				if (preCheck) {
+					tvCount.setTextColor(Color.BLACK);
+				} else {
+					tvCount.setTextColor(Color.RED);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1,
+					int arg2, int arg3) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+			}
+		});
 	}
 
 	/******************** 構文解析＆実行 *************************/
 	public final class CommandExecutor implements Runnable {
 		private final Handler handler;
+		private boolean died;
 
 		private CommandExecutor(Handler handler) {
 			this.handler = handler;
+			this.died = false;
 		}
 
 		public void run() {
@@ -202,12 +254,12 @@ public class MainActivity extends Activity {
 			StringCommandExecutor rightRunnable = new StringCommandExecutor(
 					rightImages, rightCommands, textView, rightNumbers,
 					getApplicationContext(), false);
-			for (int i = 0; i < leftCommands.size(); i++) { /* 解析&実行 */
+			for (int i = 0; !died && i < leftCommands.size(); i++) { /* 解析&実行 */
 				handler.post(leftRunnable); /* 光らせる */
 				handler.post(rightRunnable); /* 光らせる */
 
 				try { /* 1秒待機 */
-					Thread.sleep(500);
+					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -216,7 +268,7 @@ public class MainActivity extends Activity {
 				handler.post(rightRunnable);
 
 				try { /* 1秒待機 */
-					Thread.sleep(500);
+					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -258,11 +310,9 @@ public class MainActivity extends Activity {
 			if (isShown) {
 				// ソフトキーボードが表示されている場合
 				// postボタンを非表示にする
-				buttonGroup2.setVisibility(View.GONE);
 				iconList.setVisibility(View.VISIBLE);
 			} else {
 				// ソフトキーボードが表示されてなければ、表示する
-				buttonGroup2.setVisibility(View.VISIBLE);
 				iconList.setVisibility(View.GONE);
 			}
 		}

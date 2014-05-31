@@ -26,6 +26,15 @@ public class PartnerActivity extends Activity {
 	private String textData;
 	private ImageContainer leftImages;
 	private ImageContainer rightImages;
+	private Thread thread;
+	private CommandExecutor commandExecutor;
+
+	@Override
+	protected void onPause() {
+		if (commandExecutor != null) {
+			commandExecutor.died = true;
+		}
+	};
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,11 +76,17 @@ public class PartnerActivity extends Activity {
 		}
 
 		Button btn5 = (Button) this.findViewById(R.id.button5);
+
+		final PartnerActivity activity = this;
 		btn5.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				leftImages = ImageContainer.createCoccoLeft(activity);
+				rightImages = ImageContainer.createCoccoRight(activity);
 				final Handler handler = new Handler();
-				Thread trd = new Thread(new CommandExecutor(handler));
-				trd.start();
+				if (thread == null || !thread.isAlive()) {
+					thread = new Thread(new CommandExecutor(handler));
+					thread.start();
+				}
 			}
 		});
 
@@ -81,9 +96,11 @@ public class PartnerActivity extends Activity {
 
 	private final class CommandExecutor implements Runnable {
 		private final Handler handler;
+		private boolean died;
 
 		private CommandExecutor(Handler handler) {
 			this.handler = handler;
+			this.died = false;
 		}
 
 		public void run() {
@@ -110,12 +127,12 @@ public class PartnerActivity extends Activity {
 					leftCommands, true);
 			Runnable rightRunnable = new StringCommandExecutor(rightImages,
 					rightCommands, false);
-			for (int i = 0; i < leftCommands.size(); i++) { /* 解析&実行 */
+			for (int i = 0; !this.died && i < leftCommands.size(); i++) { /* 解析&実行 */
 				handler.post(leftRunnable); /* 光らせる */
 				handler.post(rightRunnable); /* 光らせる */
 
 				try { /* 1秒待機 */
-					Thread.sleep(500);
+					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -124,13 +141,12 @@ public class PartnerActivity extends Activity {
 				handler.post(rightRunnable);
 
 				try { /* 1秒待機 */
-					Thread.sleep(500);
+					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-
 	}
 
 	@Override
