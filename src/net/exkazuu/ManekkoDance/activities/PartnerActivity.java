@@ -31,6 +31,7 @@ public class PartnerActivity extends Activity {
 
 	@Override
 	protected void onPause() {
+		super.onPause();
 		if (commandExecutor != null) {
 			commandExecutor.died = true;
 		}
