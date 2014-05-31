@@ -3,7 +3,6 @@ package net.exkazuu.ManekkoDance;
 import java.util.List;
 
 import android.util.Log;
-import android.widget.TextView;
 
 public class AnswerCheck {
 
@@ -82,27 +81,7 @@ public class AnswerCheck {
 		}
 	}
 
-	public void loopCheck(String message, TextView textView) {
-		int loopNum = Integer.parseInt(message);
-		String playerCommand = textView.getText().toString();
-		int i = -1;
-		int count = 0;
-		if (!(loopNum >= 8))
-			return;
-		while ((i = playerCommand.indexOf("くりかえし", i + 1)) >= 0)
-			count++;
-		if (loopNum == 8 || loopNum == 11) {
-			if (count != 1)
-				judge = false;
-		} else if (loopNum == 9 || loopNum == 10 || loopNum == 12
-				|| loopNum == 13) {
-			if (count != 2)
-				judge = false;
-		}
-	}
-
 	public String show() {
-		// TODO Auto-generated method stub
 		return (judge == true) ? "正解です！" : "不正解です・・・";
 	}
 }

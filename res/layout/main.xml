@@ -39,7 +39,7 @@
                         android:layout_height="match_parent"
                         android:focusable="true" >
 
-                        <FrameLayout
+                        <RelativeLayout
                             android:id="@+id/tab1_frameLayout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" >
@@ -62,9 +62,10 @@
                                 android:id="@+id/tvCount1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Small Text"
-                                android:textAppearance="?android:attr/textAppearanceSmall" />
-                        </FrameLayout>
+                                android:layout_alignParentRight="true"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textSize="24sp" />
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -73,7 +74,7 @@
                         android:layout_height="match_parent"
                         android:focusable="true" >
 
-                        <FrameLayout
+                        <RelativeLayout
                             android:id="@+id/tab2_frameLayout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" >
@@ -94,9 +95,10 @@
                                 android:id="@+id/tvCount2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Small Text"
-                                android:textAppearance="?android:attr/textAppearanceSmall" />
-                        </FrameLayout>
+                                android:layout_alignParentRight="true"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textSize="24sp" />
+                        </RelativeLayout>
                     </LinearLayout>
                 </FrameLayout>
             </LinearLayout>
@@ -248,46 +250,6 @@
                 android:src="@drawable/icon_right_hand_down" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionLeftFootUp"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_left_foot_up" />
-
-            <ImageButton
-                android:id="@+id/imageButton6"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionLeftFootDown"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_left_foot_down" />
-
-            <ImageButton
-                android:id="@+id/imageButton7"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionRightFootUp"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_right_foot_up" />
-
-            <ImageButton
-                android:id="@+id/imageButton8"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionRightFootDown"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_right_foot_down" />
-
-            <ImageButton
-                android:id="@+id/imageButton9"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionJump"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_jump" />
-
-            <ImageButton
                 android:id="@+id/imageButton10"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -342,6 +304,46 @@
                 android:onClick="doActionOrange"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_orange" />
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionLeftFootUp"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_left_foot_up" />
+
+            <ImageButton
+                android:id="@+id/imageButton6"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionLeftFootDown"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_left_foot_down" />
+
+            <ImageButton
+                android:id="@+id/imageButton7"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionRightFootUp"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_right_foot_up" />
+
+            <ImageButton
+                android:id="@+id/imageButton8"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionRightFootDown"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_right_foot_down" />
+
+            <ImageButton
+                android:id="@+id/imageButton9"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="doActionJump"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_jump" />
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -349,11 +351,10 @@
         android:id="@+id/buttonGroup2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ffffff81"
-        android:visibility="gone" >
+        android:background="#ffffff81" >
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnPartner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -361,7 +362,7 @@
             android:text="@string/look_answer_button2" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/btnJudge"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

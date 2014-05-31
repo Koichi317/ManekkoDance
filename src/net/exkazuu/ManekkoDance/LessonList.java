@@ -3,10 +3,8 @@ package net.exkazuu.ManekkoDance;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.eclipcebook.R;
 import android.app.ListActivity;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -50,13 +48,9 @@ public class LessonList extends ListActivity {
 		 * SharedPreferences sp = PreferenceManager
 		 * .getDefaultSharedPreferences(getApplication());
 		 */
-		MediaPlayer bgm = MediaPlayer
-				.create(getApplicationContext(), R.raw.get);
-		bgm.start();
-
 		Intent intent = new Intent(this,
 				net.exkazuu.ManekkoDance.activities.PartnerActivity.class);
-		
+
 		String answer = Lessons.getAnswer(position + 1);
 		intent.putExtra("lesson", answer); // お手本の答え
 		intent.putExtra("message", "" + (position + 1));
