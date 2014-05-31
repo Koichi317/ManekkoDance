@@ -1,10 +1,11 @@
-package net.exkazuu.ManekkoDance;
+package net.exkazuu.ManekkoDance.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import jp.eclipcebook.R;
+import net.exkazuu.ManekkoDance.ImageContainer;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -78,6 +79,8 @@ public class StringCommandExecutor implements Runnable {
 	}
 
 	/**** フィールド ****/
+	private boolean errored;
+
 	private List<String> expandedCommands;
 	private int lineIndex;
 	private boolean addLineIndex;
@@ -87,11 +90,14 @@ public class StringCommandExecutor implements Runnable {
 	private String[] playerCommandsText;
 	private int colorPosition;
 	private CharacterType charaType;
-	public static boolean errorCheck;
 	private Input input;
 	private State state;
 	private Context context;
 	private MediaPlayer bgm;
+
+	public boolean existsError() {
+		return errored;
+	}
 
 	/**** コンストラクタ ****/
 	// お手本
@@ -104,7 +110,7 @@ public class StringCommandExecutor implements Runnable {
 		input = new Input();
 		state = new State();
 		charaType = isLeft ? CharacterType.CoccoLeft : CharacterType.CoccoRight;
-		errorCheck = false;
+		errored = false;
 	}
 
 	// プレイヤー
@@ -122,7 +128,7 @@ public class StringCommandExecutor implements Runnable {
 		this.playerNumberSorting = playerNumberSorting;
 		colorPosition = 0;
 		charaType = isLeft ? CharacterType.PiyoLeft : CharacterType.PiyoRight;
-		errorCheck = false;
+		errored = false;
 	}
 
 	@Override
@@ -178,7 +184,7 @@ public class StringCommandExecutor implements Runnable {
 					|| (input.ジャンプする && (input.左腕を上げる || input.左腕を下げる
 							|| input.右腕を上げる || input.右腕を下げる || input.左足を上げる
 							|| input.左足を下げる || input.右足を上げる || input.右足を下げる))) {
-				errorCheck = true;
+				errored = true;
 				Log.v("tag", "error");
 				errorImage(images);
 				addLineIndex = false;
@@ -196,7 +202,7 @@ public class StringCommandExecutor implements Runnable {
 					|| (input.右足を下げる && state.isRightFootDown)
 					|| (input.ジャンプする && (state.isLeftHandUp
 							|| state.isRightHandUp || state.isLeftFootUp || state.isRightFootUp))) {
-				errorCheck = true;
+				errored = true;
 				errorImage(images);
 				addLineIndex = false;
 				return;
@@ -431,7 +437,7 @@ public class StringCommandExecutor implements Runnable {
 		} else {
 			if (charaType == CharacterType.PiyoLeft
 					|| charaType == CharacterType.PiyoRight) {
-				if (errorCheck) {
+				if (errored) {
 					errorImage(images);
 					addLineIndex = true;
 					return;
@@ -637,8 +643,7 @@ public class StringCommandExecutor implements Runnable {
 			} else {
 				bgm = MediaPlayer.create(context, R.raw.danbo_lu);
 			}
-		}
-		else if (state.isLeftHandDown) {
+		} else if (state.isLeftHandDown) {
 			if (state.isRightHandDown) {
 				bgm = MediaPlayer.create(context, R.raw.danbo_c);
 			} else {

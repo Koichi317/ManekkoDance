@@ -57,7 +57,7 @@ public class LessonList extends ListActivity {
 		Intent intent = new Intent(this,
 				net.exkazuu.ManekkoDance.activities.PartnerActivity.class);
 		
-		String answer = LessonData.getLessonData(position + 1);
+		String answer = Lessons.getAnswer(position + 1);
 		intent.putExtra("lesson", answer); // お手本の答え
 		intent.putExtra("message", "" + (position + 1));
 		this.startActivity(intent);

@@ -39,19 +39,32 @@
                         android:layout_height="match_parent"
                         android:focusable="true" >
 
-                        <EditText
-                            android:id="@+id/editText1"
+                        <FrameLayout
+                            android:id="@+id/tab1_frameLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="#ffffff"
-                            android:ems="10"
-                            android:fitsSystemWindows="true"
-                            android:gravity="center_vertical|top"
-                            android:hint="@string/hint_text"
-                            android:inputType="textMultiLine"
-                            android:textColor="#000000"
-                            android:visibility="visible" />
+                            android:layout_height="match_parent" >
+
+                            <EditText
+                                android:id="@+id/editText1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="#ffffff"
+                                android:ems="10"
+                                android:fitsSystemWindows="true"
+                                android:gravity="center_vertical|top"
+                                android:hint="@string/hint_text"
+                                android:inputType="textMultiLine"
+                                android:textColor="#000000"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/tvCount1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Small Text"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </FrameLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -60,17 +73,30 @@
                         android:layout_height="match_parent"
                         android:focusable="true" >
 
-                        <net.exkazuu.ManekkoDance.ImageInEdit
-                            android:id="@+id/imageInEdit"
+                        <FrameLayout
+                            android:id="@+id/tab2_frameLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="#E5FFE5"
-                            android:ems="10"
-                            android:fitsSystemWindows="true"
-                            android:gravity="center_vertical|top"
-                            android:inputType="textMultiLine"
-                            android:textColor="#000000"
-                            android:visibility="visible" />
+                            android:layout_height="match_parent" >
+
+                            <net.exkazuu.ManekkoDance.ImageInEdit
+                                android:id="@+id/imageInEdit"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#E5FFE5"
+                                android:ems="10"
+                                android:fitsSystemWindows="true"
+                                android:gravity="center_vertical|top"
+                                android:inputType="textMultiLine"
+                                android:textColor="#000000"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/tvCount2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Small Text"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </FrameLayout>
                     </LinearLayout>
                 </FrameLayout>
             </LinearLayout>
@@ -130,7 +156,7 @@
                 android:src="@drawable/piyo_right_foot_up1"
                 android:visibility="visible" />
         </FrameLayout>
-        
+
         <FrameLayout
             android:id="@+id/frameLayoutPiyo2"
             android:layout_width="136dp"
@@ -308,7 +334,7 @@
                 android:onClick="doActionYellow"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_yellow" />
-            
+
             <ImageButton
                 android:id="@+id/imageButton16"
                 android:layout_width="50dp"
@@ -316,15 +342,6 @@
                 android:onClick="doActionOrange"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_orange" />
-            
-	        <Button
-	            android:id="@+id/button6"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-	            android:onClick="changeActionScreen"
-                android:scaleType="fitXY"
-	            android:text="@string/action" />
-            
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -342,6 +359,14 @@
             android:layout_weight="1"
             android:onClick="changePartnerScreen"
             android:text="@string/look_answer_button2" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="changeActionScreen"
+            android:text="@string/action" />
     </LinearLayout>
 
 </net.exkazuu.ManekkoDance.DetectableSoftKeyLayout>

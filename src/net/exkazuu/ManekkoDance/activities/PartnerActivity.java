@@ -5,9 +5,9 @@ import java.util.List;
 
 import jp.eclipcebook.R;
 import net.exkazuu.ManekkoDance.ImageContainer;
-import net.exkazuu.ManekkoDance.StringCommandExecutor;
-import net.exkazuu.ManekkoDance.StringCommandParser;
 import net.exkazuu.ManekkoDance.Timer;
+import net.exkazuu.ManekkoDance.command.StringCommandExecutor;
+import net.exkazuu.ManekkoDance.command.StringCommandParser;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

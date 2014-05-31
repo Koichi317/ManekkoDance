@@ -6,16 +6,19 @@ import java.util.List;
 import jp.eclipcebook.R;
 import net.exkazuu.ManekkoDance.AnswerCheck;
 import net.exkazuu.ManekkoDance.ImageContainer;
-import net.exkazuu.ManekkoDance.LessonData;
-import net.exkazuu.ManekkoDance.StringCommandExecutor;
-import net.exkazuu.ManekkoDance.StringCommandParser;
+import net.exkazuu.ManekkoDance.ImageInEdit;
+import net.exkazuu.ManekkoDance.Lessons;
 import net.exkazuu.ManekkoDance.Timer;
+import net.exkazuu.ManekkoDance.command.StringCommandExecutor;
+import net.exkazuu.ManekkoDance.command.StringCommandParser;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,7 +45,6 @@ public class ActionActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setTitle("実行画面");
 		setContentView(R.layout.action_screen);
-		// doLoad();
 
 		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
 		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
@@ -105,18 +107,18 @@ public class ActionActivity extends Activity {
 			StringCommandParser.parse(partnerCommandsText,
 					rightPartnerCommands, rightPartnerNumbers, false);
 
-			Runnable leftPlayerAction = new StringCommandExecutor(
+			StringCommandExecutor leftPlayerExecutor = new StringCommandExecutor(
 					piyoLeftImages, leftPlayerCommands, playerEditText,
 					leftPlayerNumbers, getApplicationContext(), true);
 
-			Runnable rightPlayerAction = new StringCommandExecutor(
+			StringCommandExecutor rightPlayerExecutor = new StringCommandExecutor(
 					piyoRightImages, rightPlayerCommands, playerEditText,
-					rightPlayerNumbers, getApplicationContext(), true);
+					rightPlayerNumbers, getApplicationContext(), false);
 
-			Runnable leftPartnerAction = new StringCommandExecutor(
+			StringCommandExecutor leftPartnerExecutor = new StringCommandExecutor(
 					coccoLeftImages, leftPartnerCommands, true);
 
-			Runnable rightPartnerAction = new StringCommandExecutor(
+			StringCommandExecutor rightPartnerExecutor = new StringCommandExecutor(
 					coccoRightImages, rightPartnerCommands, false);
 
 			final AnswerCheck answer = new AnswerCheck(leftPlayerCommands,
@@ -132,14 +134,13 @@ public class ActionActivity extends Activity {
 			int maxSize = Math.max(leftPlayerCommands.size(),
 					leftPartnerCommands.size());
 			for (int i = 0; i < maxSize; i++) {
-
 				if (i < leftPlayerCommands.size()) {
-					handler.post(leftPlayerAction);
-					handler.post(rightPlayerAction);
+					handler.post(leftPlayerExecutor);
+					handler.post(rightPlayerExecutor);
 				}
 				if (i < leftPartnerCommands.size()) {
-					handler.post(leftPartnerAction);
-					handler.post(rightPartnerAction);
+					handler.post(leftPartnerExecutor);
+					handler.post(rightPartnerExecutor);
 				}
 
 				try { /* 1秒待機 */
@@ -149,20 +150,21 @@ public class ActionActivity extends Activity {
 				}
 
 				if (i < leftPlayerCommands.size()) {
-					handler.post(leftPlayerAction);
-					handler.post(rightPlayerAction);
+					handler.post(leftPlayerExecutor);
+					handler.post(rightPlayerExecutor);
 				}
 				if (i < leftPartnerCommands.size()) {
-					handler.post(leftPartnerAction);
-					handler.post(rightPartnerAction);
+					handler.post(leftPartnerExecutor);
+					handler.post(rightPartnerExecutor);
 				}
 				try { /* 1秒待機 */
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if (StringCommandExecutor.errorCheck)
+				if (leftPlayerExecutor.existsError() || rightPlayerExecutor.existsError())  {
 					break;
+				}
 			}
 
 			handler.post(new Runnable() {
@@ -214,8 +216,8 @@ public class ActionActivity extends Activity {
 														.valueOf(nextLessonNumber);
 												intent.putExtra("message",
 														message);
-												String str = LessonData
-														.getLessonData(nextLessonNumber);
+												String str = Lessons
+														.getAnswer(nextLessonNumber);
 												lesson = str;
 												intent.putExtra("lesson",
 														lesson);

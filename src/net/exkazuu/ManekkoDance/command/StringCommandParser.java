@@ -1,4 +1,4 @@
-package net.exkazuu.ManekkoDance;
+package net.exkazuu.ManekkoDance.command;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -193,6 +193,17 @@ public class StringCommandParser {
 
 	private StringCommandParser() {
 
+	}
+
+	public static int countNewLines(CharSequence seq) {
+		String text = seq.toString().trim();
+		int count = 1;
+		for (int i = 0; i < text.length(); i++) {
+			if (text.charAt(i) == '\n') {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	public static void parse(String commandsText,

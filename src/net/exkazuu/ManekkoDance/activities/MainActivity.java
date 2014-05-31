@@ -13,8 +13,8 @@ import net.exkazuu.ManekkoDance.DetectableSoftKeyLayout;
 import net.exkazuu.ManekkoDance.IconContainer;
 import net.exkazuu.ManekkoDance.ImageContainer;
 import net.exkazuu.ManekkoDance.ImageInEdit;
-import net.exkazuu.ManekkoDance.StringCommandExecutor;
-import net.exkazuu.ManekkoDance.StringCommandParser;
+import net.exkazuu.ManekkoDance.command.StringCommandExecutor;
+import net.exkazuu.ManekkoDance.command.StringCommandParser;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -141,6 +142,28 @@ public class MainActivity extends Activity {
 				piyoOnClickListener);
 		this.findViewById(R.id.frameLayoutPiyo2).setOnClickListener(
 				piyoOnClickListener);
+		
+
+		final Activity activity = this;
+		imgTextView.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				int count = StringCommandParser.countNewLines(arg0);
+				((TextView) activity.findViewById(R.id.tvCount2)).setText(count
+						+ " : ");
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1,
+					int arg2, int arg3) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+			}
+		});
+		
 	}
 
 	/******************** 構文解析＆実行 *************************/
@@ -173,11 +196,11 @@ public class MainActivity extends Activity {
 				ImageContainer rightImages, List<String> leftCommands,
 				List<String> rightCommands, List<Integer> leftNumbers,
 				List<Integer> rightNumbers, TextView textView) {
-			Runnable leftRunnable = new StringCommandExecutor(leftImages,
-					leftCommands, textView, leftNumbers,
+			StringCommandExecutor leftRunnable = new StringCommandExecutor(
+					leftImages, leftCommands, textView, leftNumbers,
 					getApplicationContext(), true);
-			Runnable rightRunnable = new StringCommandExecutor(rightImages,
-					rightCommands, textView, rightNumbers,
+			StringCommandExecutor rightRunnable = new StringCommandExecutor(
+					rightImages, rightCommands, textView, rightNumbers,
 					getApplicationContext(), false);
 			for (int i = 0; i < leftCommands.size(); i++) { /* 解析&実行 */
 				handler.post(leftRunnable); /* 光らせる */
@@ -198,33 +221,33 @@ public class MainActivity extends Activity {
 					e.printStackTrace();
 				}
 
-				if (StringCommandExecutor.errorCheck) // for文から抜けて画像を初期化
-					break;
+				// for文から抜けて画像を初期化
+				if (leftRunnable.existsError() || rightRunnable.existsError()) {
+					handler.post(new Runnable() {
+						public void run() {
+							AlertDialog.Builder builder = new AlertDialog.Builder(
+									MainActivity.this);
+							builder.setTitle("間違った文を書いているよ");
+							builder.setPositiveButton("もう一度Challenge",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											initializeImage();
+										}
+									});
+							builder.show();
+						}
+					});
+					return;
+				}
 			}
 
-			if (StringCommandExecutor.errorCheck) {
-				handler.post(new Runnable() {
-					public void run() {
-						AlertDialog.Builder builder = new AlertDialog.Builder(
-								MainActivity.this);
-						builder.setTitle("間違った文を書いているよ");
-						builder.setPositiveButton("もう一度Challenge",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int which) {
-										initializeImage();
-									}
-								});
-						builder.show();
-					}
-				});
-			} else {
-				handler.post(new Runnable() {
-					public void run() {
-						initializeImage();
-					}
-				});
-			}
+			handler.post(new Runnable() {
+				public void run() {
+					initializeImage();
+				}
+			});
 		}
 
 	}
