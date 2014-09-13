@@ -696,7 +696,7 @@ class PostTask extends AsyncTask<Void, String, Boolean> {
 		try {
 			// URL指定
 			HttpClient client = new DefaultHttpClient();
-			HttpPost post = new HttpPost("http://192.168.91.103:3000/form");
+			HttpPost post = new HttpPost("http://192.168.91.99:3000/form");
 			// BODYに登録、設定
 			ArrayList<NameValuePair> value = new ArrayList<NameValuePair>();
 			value.add(new BasicNameValuePair("input1", arg));

@@ -85,3 +85,4 @@ public class AnswerCheck {
 		return (judge == true) ? "正解です！" : "不正解です・・・";
 	}
 }
+
