@@ -40,8 +40,8 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	private static final int TEXT_VIEW = 0;
-	private static final int IMAGE_VIEW = 1;
+	private static final int TEXT_VIEW = 1;
+	private static final int IMAGE_VIEW = 0;
 	private String lesson;
 	private String message;
 	private String text_data;
@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 		setTitle("編集画面");
 		setContentView(R.layout.main);
 
-		imgTextView = (ImageInEdit) findViewById(R.id.imageInEdit);
+		imgTextView= (ImageInEdit) findViewById(R.id.editText1); //imageInEdit);
 		// imgTextView.buildLayer();
 		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.root);
 		DSKLayout.setListener(listner);
@@ -97,15 +97,15 @@ public class MainActivity extends Activity {
 		host.setup();
 
 		TabSpec tab1 = host.newTabSpec("tab1");
-		tab1.setIndicator("文字");
+		tab1.setIndicator("絵文字");
 		tab1.setContent(R.id.tab1);
 		host.addTab(tab1);
 
-		TabSpec tab2 = host.newTabSpec("tab2");
+/*		TabSpec tab2 = host.newTabSpec("tab2");
 		tab2.setIndicator("絵文字");
 		tab2.setContent(R.id.tab2);
 		host.addTab(tab2);
-
+*/
 		if (iconContainer == null) {
 			iconContainer = new IconContainer(getApplication());
 		}
@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
 							});
 						}
 					}).start();
-				} else if (tabId == "tab1") {
+				} else if (tabId == "tab1") { //
 					textView.setText(imgTextView
 							.getTextFromImage(iconContainer));
 				}
@@ -144,7 +144,7 @@ public class MainActivity extends Activity {
 		View.OnClickListener piyoOnClickListener = new View.OnClickListener() {
 
 			public void onClick(View v) {
-				host.setCurrentTab(TEXT_VIEW);
+				host.setCurrentTab(IMAGE_VIEW);
 				final Handler handler = new Handler();
 				if (thread == null || !thread.isAlive()) {
 					commandExecutor = new CommandExecutor(handler);
@@ -168,7 +168,7 @@ public class MainActivity extends Activity {
 					int arg3) {
 				int count = StringCommandParser.countNewLines(arg0);
 				TextView tvCount = (TextView) activity
-						.findViewById(R.id.tvCount2);
+						.findViewById(R.id.tvCount1); //
 				tvCount.setText(count + "行 (" + limitation + "行以内で書こう！)");
 				boolean preCheck = count <= limitation;
 				btnJudge.setEnabled(preCheck);
@@ -195,7 +195,7 @@ public class MainActivity extends Activity {
 					int arg3) {
 				int count = StringCommandParser.countNewLines(arg0);
 				TextView tvCount = (TextView) activity
-						.findViewById(R.id.tvCount1);
+						.findViewById(R.id.tvCount1); 
 				tvCount.setText(count + "行 (" + limitation + "行以内で書こう！)");
 				boolean preCheck = count <= limitation;
 				btnJudge.setEnabled(preCheck);
@@ -551,7 +551,7 @@ public class MainActivity extends Activity {
 		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this,
 				net.exkazuu.ManekkoDance.activities.ActionActivity.class);
-		intent.putExtra("text_data", textView.getText().toString());
+		intent.putExtra("text_data", imgTextView.getTextFromImage(iconContainer));
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		this.startActivity(intent);

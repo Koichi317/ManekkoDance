@@ -5,7 +5,9 @@ import java.util.List;
 
 import jp.eclipcebook.R;
 import net.exkazuu.ManekkoDance.AnswerCheck;
+import net.exkazuu.ManekkoDance.IconContainer;
 import net.exkazuu.ManekkoDance.ImageContainer;
+import net.exkazuu.ManekkoDance.ImageInEdit;
 import net.exkazuu.ManekkoDance.Lessons;
 import net.exkazuu.ManekkoDance.Timer;
 import net.exkazuu.ManekkoDance.command.StringCommandExecutor;
@@ -55,7 +57,7 @@ public class ActionActivity extends Activity {
 		setTitle("実行画面");
 		setContentView(R.layout.action_screen);
 
-		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
+		ImageInEdit playerEditText = (ImageInEdit) findViewById(R.id.editTextActionScreen1);
 		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
 		Intent intent = getIntent();
 		lesson = intent.getStringExtra("lesson");
@@ -64,7 +66,7 @@ public class ActionActivity extends Activity {
 		String playerCommandsText = textData;
 		String partnerCommandsText = lesson;
 
-		playerEditText.setText(playerCommandsText);
+		playerEditText.replaceTextToImage(new IconContainer(this));
 		partnerEditText.setText(partnerCommandsText);
 
 		Button btn1 = (Button) this.findViewById(R.id.button1);
