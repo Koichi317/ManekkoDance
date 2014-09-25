@@ -33,6 +33,7 @@ public class ActionActivity extends Activity {
 	private String lesson;
 	private String message;
 	private String textData;
+	//private String textData;
 	public boolean answerCheckEnd = false;
 
 	private ImageContainer piyoLeftImages;
@@ -66,7 +67,14 @@ public class ActionActivity extends Activity {
 		String playerCommandsText = textData;
 		String partnerCommandsText = lesson;
 
-		playerEditText.replaceTextToImage(new IconContainer(this));
+		if (IconContainer == null) {
+			IconContainer = new IconContainer(getApplication());
+		}
+
+		playerEditText.setText(playerCommandsText);
+		playerEditText.replaceTextToImage(IconContainer);
+		playerEditText.getTextFromImage(IconContainer);
+		playerEditText.insertImage(IconContainer.getIconLeftHandUp());
 		partnerEditText.setText(partnerCommandsText);
 
 		Button btn1 = (Button) this.findViewById(R.id.button1);
@@ -87,6 +95,7 @@ public class ActionActivity extends Activity {
 		coccoLeftImages = ImageContainer.createCoccoLeft(this);
 		coccoRightImages = ImageContainer.createCoccoRight(this);
 	}
+	private static IconContainer IconContainer;
 
 	public final class CommandExecutor implements Runnable {
 		private final Handler handler;
@@ -393,4 +402,6 @@ public class ActionActivity extends Activity {
 			}
 		}
 	}
+
+
 }
