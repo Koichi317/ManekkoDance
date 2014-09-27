@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,26 +46,36 @@ public class PartnerActivity extends Activity {
 
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		TextView editText2 = (TextView) findViewById(R.id.editText2);
+		
 		ImageView messageImageView1 = (ImageView) findViewById(R.id.imageView2);
+		
+		FrameLayout alt_cocco = (FrameLayout) findViewById(R.id.alt_cocco);
+		FrameLayout cocco = (FrameLayout) findViewById(R.id.cocco);
+		
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("lesson");
 		String message = intent.getStringExtra("message");
 		textData = intent.getStringExtra("text_data");
 		editText1.setText(data);
 		editText2.setText(message);
+		
 		if (message.equals("1")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message1);
+			alt_cocco.setVisibility(View.GONE);
 		} else if (message.equals("2")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message2);
+			alt_cocco.setVisibility(View.GONE);
 		} else if (message.equals("3")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message3);
+			alt_cocco.setVisibility(View.GONE);
 		} else if (message.equals("4")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message4);
+			alt_cocco.setVisibility(View.GONE);
 		} else if (message.equals("5")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message5);
 		} else if (message.equals("6")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message6);
-		} else if (message.equals("7")) {
+		} /*else if (message.equals("7")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message7);
 		} else if (message.equals("8")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message8);
@@ -74,7 +85,7 @@ public class PartnerActivity extends Activity {
 			messageImageView1.setImageResource(R.drawable.lesson_message10);
 		} else {
 			messageImageView1.setImageResource(R.drawable.lesson_message11);
-		}
+		}*/
 
 		Button btn5 = (Button) this.findViewById(R.id.button5);
 

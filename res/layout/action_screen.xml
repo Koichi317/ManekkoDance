@@ -55,12 +55,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.0" >
+        android:layout_weight="2.0" 
+        android:id="@+id/hantei">
 
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1.0" >
+            android:layout_weight="1.0" 
+            android:id="@+id/piyo"
+            >
 
             <ImageView
                 android:id="@+id/playerLeftHand1"
@@ -106,8 +109,10 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1.0" >
-
+            android:layout_weight="1.0" 
+            android:id="@+id/alt_piyo"
+             >
+            
             <ImageView
                 android:id="@+id/playerLeftHand2"
                 android:layout_width="match_parent"
@@ -152,7 +157,8 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1.0" >
+            android:layout_weight="1.0" 
+           >
 
             <ImageView
                 android:id="@+id/partnerLeftHand1"
@@ -198,7 +204,9 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1.0" >
+            android:layout_weight="1.0"
+            android:id="@+id/alt_cocco"
+             >
 
             <ImageView
                 android:id="@+id/imageView1"
