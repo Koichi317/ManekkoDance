@@ -53,11 +53,13 @@
         android:visibility="invisible" />
 
     <LinearLayout
+        android:id="@+id/hantei"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2.0" >
 
         <FrameLayout
+            android:id="@+id/piyo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0" >
@@ -104,6 +106,7 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/alt_piyo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0" >
@@ -196,6 +199,7 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/alt_cocco"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0" >

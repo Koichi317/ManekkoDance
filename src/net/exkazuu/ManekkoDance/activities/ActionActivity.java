@@ -66,7 +66,7 @@ public class ActionActivity extends Activity {
 		String playerCommandsText = textData;
 		String partnerCommandsText = lesson;
 
-		playerEditText.replaceTextToImage(new IconContainer(this));
+		playerEditText.setText(playerCommandsText);
 		partnerEditText.setText(partnerCommandsText);
 
 		Button btn1 = (Button) this.findViewById(R.id.button1);
