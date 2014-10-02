@@ -156,11 +156,12 @@ public final class R {
         public static final int button3=0x7f09001f;
         public static final int button5=0x7f090044;
         public static final int buttonGroup2=0x7f09003e;
+        public static final int cocco=0x7f090045;
         public static final int editText1=0x7f090028;
         public static final int editText2=0x7f090042;
         public static final int editTextActionScreen1=0x7f090001;
         public static final int editTextActionScreen2=0x7f090004;
-        public static final int flipper=0x7f090047;
+        public static final int flipper=0x7f090048;
         public static final int frameLayout2=0x7f090024;
         public static final int frameLayoutPiyo=0x7f09002b;
         public static final int frameLayoutPiyo2=0x7f09002c;
@@ -187,7 +188,7 @@ public final class R {
         public static final int imageView1=0x7f090018;
         public static final int imageView2=0x7f090043;
         public static final int imageView3=0x7f090002;
-        public static final int menu_settings=0x7f09004d;
+        public static final int menu_settings=0x7f09004e;
         public static final int page=0x7f090022;
         public static final int partnerBasic1=0x7f090014;
         public static final int partnerBasic2=0x7f09001b;
@@ -216,14 +217,14 @@ public final class R {
         public static final int tab1_frameLayout=0x7f090027;
         public static final int tabhost=0x7f090025;
         public static final int tableRow1=0x7f090021;
-        public static final int titleButton=0x7f090046;
-        public static final int titleRoot=0x7f090045;
+        public static final int titleButton=0x7f090047;
+        public static final int titleRoot=0x7f090046;
         public static final int tvCount1=0x7f090029;
-        public static final int view1=0x7f090048;
-        public static final int view2=0x7f090049;
-        public static final int view3=0x7f09004a;
-        public static final int view4=0x7f09004b;
-        public static final int view5=0x7f09004c;
+        public static final int view1=0x7f090049;
+        public static final int view2=0x7f09004a;
+        public static final int view3=0x7f09004b;
+        public static final int view4=0x7f09004c;
+        public static final int view5=0x7f09004d;
     }
     public static final class layout {
         public static final int action_screen=0x7f030000;
