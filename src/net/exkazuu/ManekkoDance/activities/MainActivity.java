@@ -90,8 +90,10 @@ public class MainActivity extends Activity {
 		Log.v("my_debug", "" + text_data);
 		textView.setText(text_data);
 		imgTextView.setText(textView.getText().toString());
-		imgTextView.replaceTextToImage(iconContainer);
+		if (text_data != null) {
 
+			imgTextView.replaceTextToImage(iconContainer);
+		}
 		if (message.equals("3")) {
 			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
 			btn1.setVisibility(View.VISIBLE);
@@ -273,9 +275,11 @@ public class MainActivity extends Activity {
 		}
 
 		public void run() {
-			textView = (TextView) findViewById(R.id.editText1);
 
-			String commandsText = textView.getText().toString(); // 1行ずつ配列に収納
+			textView = (TextView) findViewById(R.id.editText1);
+			String commandsText = textView.getText().toString();
+			// (imgTextView.getTextFromImage(iconContainer)); // 1行ずつ配列に収納
+
 			List<String> leftCommands = new ArrayList<String>();
 			List<Integer> leftNumbers = new ArrayList<Integer>();
 			StringCommandParser.parse(commandsText, leftCommands, leftNumbers,

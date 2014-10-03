@@ -222,7 +222,8 @@ public class ActionActivity extends Activity {
 										public void onClick(
 												DialogInterface dialog,
 												int which) {
-											changeMainScreen();
+										//(changeMainScreen();
+											ActionActivity.this.finish();
 										}
 									});
 						} else {
@@ -274,7 +275,8 @@ public class ActionActivity extends Activity {
 										public void onClick(
 												DialogInterface dialog,
 												int which) {
-											changeMainScreen();
+											//changeMainScreen();
+											ActionActivity.this.finish();
 										}
 									});
 						}
@@ -297,7 +299,8 @@ public class ActionActivity extends Activity {
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
-										changeMainScreen();
+										//changeMainScreen();
+										ActionActivity.this.finish();
 									}
 								});
 					}
@@ -314,12 +317,13 @@ public class ActionActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		super.onCreateOptionsMenu(menu);
-		MenuItem item1 = menu.add("編集画面へ戻る");
+		MenuItem item1 = menu.add("画面へ戻る");
 		MenuItem item2 = menu.add("タイトルへ戻る");
 
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				changeMainScreen();
+				//changeMainScreen();
+				ActionActivity.this.finish();
 				return false;
 			}
 		});
@@ -333,26 +337,10 @@ public class ActionActivity extends Activity {
 	}
 
 	public void changeMainScreen(View view) {
-		Intent intent = new Intent(this,
-				net.exkazuu.ManekkoDance.activities.MainActivity.class);
-		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
-		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
-		intent.putExtra("text_data", playerEditText.getText().toString());
-		intent.putExtra("lesson", partnerEditText.getText().toString());
-		intent.putExtra("message", message);
-		this.startActivity(intent);
+		finish();
 	}
 
-	private void changeMainScreen() {
-		Intent intent = new Intent(this,
-				net.exkazuu.ManekkoDance.activities.MainActivity.class);
-		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
-		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
-		intent.putExtra("text_data", playerEditText.getText().toString());
-		intent.putExtra("lesson", partnerEditText.getText().toString());
-		intent.putExtra("message", message);
-		this.startActivity(intent);
-	}
+	
 
 	public void changePartnerScreen(View view) {
 		Intent intent = new Intent(this,
