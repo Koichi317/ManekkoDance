@@ -53,17 +53,16 @@
         android:visibility="invisible" />
 
     <LinearLayout
+        android:id="@+id/hantei"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.0" 
-        android:id="@+id/hantei">
+        android:layout_weight="2.0" >
 
         <FrameLayout
+            android:id="@+id/piyo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1.0" 
-            android:id="@+id/piyo"
-            >
+            android:layout_weight="1.0" >
 
             <ImageView
                 android:id="@+id/playerLeftHand1"
@@ -107,12 +106,11 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/alt_piyo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1.0" 
-            android:id="@+id/alt_piyo"
-             >
-            
+            android:layout_weight="1.0" >
+
             <ImageView
                 android:id="@+id/playerLeftHand2"
                 android:layout_width="match_parent"
@@ -157,8 +155,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1.0" 
-           >
+            android:layout_weight="1.0" >
 
             <ImageView
                 android:id="@+id/partnerLeftHand1"
@@ -202,11 +199,10 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/alt_cocco"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:id="@+id/alt_cocco"
-             >
+            android:layout_weight="1.0" >
 
             <ImageView
                 android:id="@+id/imageView1"

@@ -46,19 +46,15 @@ public class PartnerActivity extends Activity {
 
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		TextView editText2 = (TextView) findViewById(R.id.editText2);
-		
 		ImageView messageImageView1 = (ImageView) findViewById(R.id.imageView2);
-		
 		FrameLayout alt_cocco = (FrameLayout) findViewById(R.id.alt_cocco);
 		FrameLayout cocco = (FrameLayout) findViewById(R.id.cocco);
-		
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("lesson");
 		String message = intent.getStringExtra("message");
 		textData = intent.getStringExtra("text_data");
 		editText1.setText(data);
 		editText2.setText(message);
-		
 		if (message.equals("1")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message1);
 			alt_cocco.setVisibility(View.GONE);
