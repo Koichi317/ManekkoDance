@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" >
 
-                   <LinearLayout
+                    <LinearLayout
                         android:id="@+id/tab1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -66,9 +66,10 @@
                                 android:textAppearance="?android:attr/textAppearanceSmall"
                                 android:textSize="24sp" />
                         </RelativeLayout>
-                    </LinearLayout> 
+                    </LinearLayout>
 
-     <!--               <LinearLayout
+                    <!--
+                        <LinearLayout
                         android:id="@+id/tab2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -99,7 +100,8 @@
                                 android:textAppearance="?android:attr/textAppearanceSmall"
                                 android:textSize="24sp" />
                         </RelativeLayout>
-                    </LinearLayout> -->  
+                    </LinearLayout>
+                    -->
                 </FrameLayout>
             </LinearLayout>
         </TabHost>
@@ -164,47 +166,42 @@
             android:layout_width="136dp"
             android:layout_height="139dp"
             android:layout_gravity="bottom|right"
-            android:visibility="gone">
+            android:visibility="gone" >
 
             <ImageView
                 android:id="@+id/playerLeftHand2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_area"
-                android:src="@drawable/alt_piyo_left_hand_up1"
-                 />
+                android:src="@drawable/alt_piyo_left_hand_up1" />
 
             <ImageView
                 android:id="@+id/playerRightHand2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_area"
-                android:src="@drawable/alt_piyo_right_hand_up1"
-                 />
+                android:src="@drawable/alt_piyo_right_hand_up1" />
 
             <ImageView
                 android:id="@+id/playerBasic2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_area"
-                android:src="@drawable/alt_piyo_basic"
-                 />
+                android:src="@drawable/alt_piyo_basic" />
 
             <ImageView
                 android:id="@+id/playerLeftFoot2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_area"
-                android:src="@drawable/alt_piyo_left_foot_up1"
-                 />
+                android:src="@drawable/alt_piyo_left_foot_up1" />
 
             <ImageView
                 android:id="@+id/playerRightFoot2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/image_area"
-                android:src="@drawable/alt_piyo_right_foot_up1"
-                />
+                android:src="@drawable/alt_piyo_right_foot_up1" />
         </FrameLayout>
     </FrameLayout>
 
@@ -224,8 +221,7 @@
                 android:layout_height="50dp"
                 android:onClick="doActionLeftHandUp"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_left_hand_up" 
-                />
+                android:src="@drawable/icon_left_hand_up" />
 
             <ImageButton
                 android:id="@+id/imageButton2"
@@ -268,7 +264,6 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_kokomade"
                 android:visibility="gone" />
-                 />
 
             <ImageButton
                 android:id="@+id/imageButton12"
@@ -277,7 +272,7 @@
                 android:onClick="doActionIf"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_if"
-			    android:visibility="gone" />
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/imageButton13"
@@ -286,8 +281,7 @@
                 android:onClick="doActionElse"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_else"
-			    android:visibility="gone"                
-                 />
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/imageButton14"
@@ -296,8 +290,7 @@
                 android:onClick="doActionIfEnd"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_if_kokomade"
-			    android:visibility="gone"                
-                 />
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/imageButton15"
@@ -305,9 +298,8 @@
                 android:layout_height="50dp"
                 android:onClick="doActionYellow"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_yellow" 
-			    android:visibility="gone"                
-                />
+                android:src="@drawable/icon_yellow"
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/imageButton16"
@@ -315,9 +307,8 @@
                 android:layout_height="50dp"
                 android:onClick="doActionOrange"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_orange" 
-			    android:visibility="gone"                
-                />
+                android:src="@drawable/icon_orange"
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/imageButton5"
@@ -326,8 +317,7 @@
                 android:onClick="doActionLeftFootUp"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_left_foot_up"
-			    android:visibility="gone"                
-                 />
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/imageButton6"
@@ -336,8 +326,7 @@
                 android:onClick="doActionLeftFootDown"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_left_foot_down"
-			    android:visibility="gone"                
-                 />
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/imageButton7"
@@ -346,8 +335,7 @@
                 android:onClick="doActionRightFootUp"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_right_foot_up"
-			    android:visibility="gone"                
-                 />
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/imageButton8"
@@ -356,8 +344,7 @@
                 android:onClick="doActionRightFootDown"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_right_foot_down"
-			    android:visibility="gone"                
-                 />
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/imageButton9"
@@ -365,9 +352,8 @@
                 android:layout_height="50dp"
                 android:onClick="doActionJump"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_jump" 
-			    android:visibility="gone"                
-                />
+                android:src="@drawable/icon_jump"
+                android:visibility="gone" />
         </LinearLayout>
     </HorizontalScrollView>
 

@@ -91,51 +91,52 @@ public class MainActivity extends Activity {
 		textView.setText(text_data);
 		imgTextView.setText(textView.getText().toString());
 		imgTextView.replaceTextToImage(iconContainer);
-        
-		if(message.equals("3")){
-		ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
-		btn1.setVisibility(View.VISIBLE);
-		ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
-		btn2.setVisibility(View.VISIBLE);
+
+		if (message.equals("3")) {
+			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
+			btn1.setVisibility(View.VISIBLE);
+			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
+			btn2.setVisibility(View.VISIBLE);
 		}
-		if(message.equals("4")){
-		ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
-		btn1.setVisibility(View.VISIBLE);
-		ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
-		btn2.setVisibility(View.VISIBLE);
+		if (message.equals("4")) {
+			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
+			btn1.setVisibility(View.VISIBLE);
+			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
+			btn2.setVisibility(View.VISIBLE);
 		}
-		if(message.equals("5")){
-		ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton12);
-		btn1.setVisibility(View.VISIBLE);
-		ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton13);
-		btn2.setVisibility(View.VISIBLE);
-		ImageButton btn3 = (ImageButton) findViewById(R.id.imageButton14);
-		btn3.setVisibility(View.VISIBLE);	
-		ImageButton btn4 = (ImageButton) findViewById(R.id.imageButton15);
-		btn4.setVisibility(View.VISIBLE);
-		ImageButton btn5 = (ImageButton) findViewById(R.id.imageButton16);
-		btn5.setVisibility(View.VISIBLE);
-		FrameLayout piyo2 = (FrameLayout) findViewById(R.id.frameLayoutPiyo2);
-		piyo2.setVisibility(View.VISIBLE);
+		if (message.equals("5")) {
+			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton12);
+			btn1.setVisibility(View.VISIBLE);
+			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton13);
+			btn2.setVisibility(View.VISIBLE);
+			ImageButton btn3 = (ImageButton) findViewById(R.id.imageButton14);
+			btn3.setVisibility(View.VISIBLE);
+			ImageButton btn4 = (ImageButton) findViewById(R.id.imageButton15);
+			btn4.setVisibility(View.VISIBLE);
+			ImageButton btn5 = (ImageButton) findViewById(R.id.imageButton16);
+			btn5.setVisibility(View.VISIBLE);
+			FrameLayout piyo2 = (FrameLayout) findViewById(R.id.frameLayoutPiyo2);
+			piyo2.setVisibility(View.VISIBLE);
 		}
-		if(message.equals("6")){
-		ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
-		btn1.setVisibility(View.VISIBLE);
-		ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
-		btn2.setVisibility(View.VISIBLE);			
-		ImageButton btn3 = (ImageButton) findViewById(R.id.imageButton12);
-		btn3.setVisibility(View.VISIBLE);
-		ImageButton btn4 = (ImageButton) findViewById(R.id.imageButton13);
-		btn4.setVisibility(View.VISIBLE);
-		ImageButton btn5 = (ImageButton) findViewById(R.id.imageButton14);
-		btn5.setVisibility(View.VISIBLE);	
-		ImageButton btn6 = (ImageButton) findViewById(R.id.imageButton15);
-		btn6.setVisibility(View.VISIBLE);
-		ImageButton btn7 = (ImageButton) findViewById(R.id.imageButton16);
-		btn7.setVisibility(View.VISIBLE);	
-		FrameLayout piyo2 = (FrameLayout) findViewById(R.id.frameLayoutPiyo2);
-		piyo2.setVisibility(View.VISIBLE);
-		}		
+		if (message.equals("6")) {
+			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
+			btn1.setVisibility(View.VISIBLE);
+			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
+			btn2.setVisibility(View.VISIBLE);
+			ImageButton btn3 = (ImageButton) findViewById(R.id.imageButton12);
+			btn3.setVisibility(View.VISIBLE);
+			ImageButton btn4 = (ImageButton) findViewById(R.id.imageButton13);
+			btn4.setVisibility(View.VISIBLE);
+			ImageButton btn5 = (ImageButton) findViewById(R.id.imageButton14);
+			btn5.setVisibility(View.VISIBLE);
+			ImageButton btn6 = (ImageButton) findViewById(R.id.imageButton15);
+			btn6.setVisibility(View.VISIBLE);
+			ImageButton btn7 = (ImageButton) findViewById(R.id.imageButton16);
+			btn7.setVisibility(View.VISIBLE);
+			FrameLayout piyo2 = (FrameLayout) findViewById(R.id.frameLayoutPiyo2);
+			piyo2.setVisibility(View.VISIBLE);
+		}
+
 		/******************* tabの実装と切り替え *****************/
 
 		host = (TabHost) findViewById(R.id.tabhost);
