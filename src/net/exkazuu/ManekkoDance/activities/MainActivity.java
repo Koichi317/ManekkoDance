@@ -188,22 +188,22 @@ public class MainActivity extends Activity {
 		host.setCurrentTab(IMAGE_VIEW);
 
 		/********** 音楽 **************/
-		View.OnClickListener piyoOnClickListener = new View.OnClickListener() {
-
-			public void onClick(View v) {
-				host.setCurrentTab(IMAGE_VIEW);
-				final Handler handler = new Handler();
-				if (thread == null || !thread.isAlive()) {
-					commandExecutor = new CommandExecutor(handler);
-					thread = new Thread(commandExecutor);
-					thread.start();
-				}
-			}
-		};
-		this.findViewById(R.id.frameLayoutPiyo).setOnClickListener(
-				piyoOnClickListener);
-		this.findViewById(R.id.frameLayoutPiyo2).setOnClickListener(
-				piyoOnClickListener);
+//		View.OnClickListener piyoOnClickListener = new View.OnClickListener() {
+//
+//			public void onClick(View v) {
+//				host.setCurrentTab(IMAGE_VIEW);
+//				final Handler handler = new Handler();
+//				if (thread == null || !thread.isAlive()) {
+//					commandExecutor = new CommandExecutor(handler);
+//					thread = new Thread(commandExecutor);
+//					thread.start();
+//				}
+//			}
+//		};
+//		this.findViewById(R.id.frameLayoutPiyo).setOnClickListener(
+//				piyoOnClickListener);
+//		this.findViewById(R.id.frameLayoutPiyo2).setOnClickListener(
+//				piyoOnClickListener);
 
 		final Activity activity = this;
 		final int limitation = Lessons.getLimitation(Integer.parseInt(message));
