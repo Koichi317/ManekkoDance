@@ -48,7 +48,6 @@ public class MainActivity extends Activity {
 	private String text_data;
 
 	private TextView textView;
-	private ImageInEdit imgTextView;
 	private DetectableSoftKeyLayout DSKLayout;
 	private HorizontalScrollView iconList;
 
@@ -72,10 +71,6 @@ public class MainActivity extends Activity {
 		setTitle("編集画面");
 		setContentView(R.layout.main);
 
-		imgTextView = (ImageInEdit) findViewById(R.id.editText1); // imageInEdit);
-		// imgTextView.buildLayer();
-		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.root);
-		DSKLayout.setListener(listner);
 		iconList = (HorizontalScrollView) findViewById(R.id.iconList);
 
 		leftImages = ImageContainer.createPiyoLeft(this);
@@ -86,57 +81,21 @@ public class MainActivity extends Activity {
 		lesson = intent.getStringExtra("lesson");
 		message = intent.getStringExtra("message");
 		text_data = intent.getStringExtra("text_data");
-		textView = (TextView) findViewById(R.id.editText1);
 		Log.v("my_debug", "" + text_data);
-		textView.setText(text_data);
-		imgTextView.setText(textView.getText().toString());
 		if (text_data != null) {
 
-			imgTextView.replaceTextToImage(iconContainer);
 		}
 		if (message.equals("3")) {
-			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
-			btn1.setVisibility(View.VISIBLE);
-			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
-			btn2.setVisibility(View.VISIBLE);
+
 		}
 		if (message.equals("4")) {
-			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
-			btn1.setVisibility(View.VISIBLE);
-			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
-			btn2.setVisibility(View.VISIBLE);
+
 		}
 		if (message.equals("5")) {
-			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton12);
-			btn1.setVisibility(View.VISIBLE);
-			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton13);
-			btn2.setVisibility(View.VISIBLE);
-			ImageButton btn3 = (ImageButton) findViewById(R.id.imageButton14);
-			btn3.setVisibility(View.VISIBLE);
-			ImageButton btn4 = (ImageButton) findViewById(R.id.imageButton15);
-			btn4.setVisibility(View.VISIBLE);
-			ImageButton btn5 = (ImageButton) findViewById(R.id.imageButton16);
-			btn5.setVisibility(View.VISIBLE);
-			FrameLayout piyo2 = (FrameLayout) findViewById(R.id.frameLayoutPiyo2);
-			piyo2.setVisibility(View.VISIBLE);
+
 		}
 		if (message.equals("6")) {
-			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
-			btn1.setVisibility(View.VISIBLE);
-			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
-			btn2.setVisibility(View.VISIBLE);
-			ImageButton btn3 = (ImageButton) findViewById(R.id.imageButton12);
-			btn3.setVisibility(View.VISIBLE);
-			ImageButton btn4 = (ImageButton) findViewById(R.id.imageButton13);
-			btn4.setVisibility(View.VISIBLE);
-			ImageButton btn5 = (ImageButton) findViewById(R.id.imageButton14);
-			btn5.setVisibility(View.VISIBLE);
-			ImageButton btn6 = (ImageButton) findViewById(R.id.imageButton15);
-			btn6.setVisibility(View.VISIBLE);
-			ImageButton btn7 = (ImageButton) findViewById(R.id.imageButton16);
-			btn7.setVisibility(View.VISIBLE);
-			FrameLayout piyo2 = (FrameLayout) findViewById(R.id.frameLayoutPiyo2);
-			piyo2.setVisibility(View.VISIBLE);
+
 		}
 
 		/******************* tabの実装と切り替え *****************/
@@ -170,17 +129,13 @@ public class MainActivity extends Activity {
 							mainActivity.runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
-									imgTextView.setText(textView.getText()
-											.toString());
-									imgTextView
-											.replaceTextToImage(iconContainer);
+
 								}
 							});
 						}
 					}).start();
 				} else if (tabId == "tab1") { //
-					textView.setText(imgTextView
-							.getTextFromImage(iconContainer));
+
 				}
 			}
 		});
@@ -209,59 +164,6 @@ public class MainActivity extends Activity {
 		final int limitation = Lessons.getLimitation(Integer.parseInt(message));
 		final Button btnJudge = (Button) findViewById(R.id.btnJudge);
 
-		imgTextView.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {
-				int count = StringCommandParser.countNewLines(arg0);
-				TextView tvCount = (TextView) activity
-						.findViewById(R.id.tvCount1); //
-				tvCount.setText(count + "行 (" + limitation + "行以内で書こう！)");
-				boolean preCheck = count <= limitation;
-				btnJudge.setEnabled(preCheck);
-				if (preCheck) {
-					tvCount.setTextColor(Color.BLACK);
-				} else {
-					tvCount.setTextColor(Color.RED);
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1,
-					int arg2, int arg3) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable arg0) {
-			}
-		});
-
-		textView.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {
-				int count = StringCommandParser.countNewLines(arg0);
-				TextView tvCount = (TextView) activity
-						.findViewById(R.id.tvCount1);
-				tvCount.setText(count + "行 (" + limitation + "行以内で書こう！)");
-				boolean preCheck = count <= limitation;
-				btnJudge.setEnabled(preCheck);
-				if (preCheck) {
-					tvCount.setTextColor(Color.BLACK);
-				} else {
-					tvCount.setTextColor(Color.RED);
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1,
-					int arg2, int arg3) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable arg0) {
-			}
-		});
 	}
 
 	/******************** 構文解析＆実行 *************************/
@@ -354,210 +256,9 @@ public class MainActivity extends Activity {
 
 	}
 
-	DetectableSoftKeyLayout.OnSoftKeyShownListener listner = new DetectableSoftKeyLayout.OnSoftKeyShownListener() {
-		@Override
-		public void onSoftKeyShown(boolean isShown) {
-			if (isShown) {
-				// ソフトキーボードが表示されている場合
-				// postボタンを非表示にする
-				iconList.setVisibility(View.VISIBLE);
-			} else {
-				// ソフトキーボードが表示されてなければ、表示する
-				iconList.setVisibility(View.GONE);
-			}
-		}
-	};
 	private TabHost host;
 	private static IconContainer iconContainer;
 
-	/******************** ボタン(絵文字)の処理 *************************/
-	public void doActionLeftHandUp(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconLeftHandUp());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end),
-					"左腕を上げる");
-		}
-	}
-
-	public void doActionLeftHandDown(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconLeftHandDown());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end),
-					"左腕を下げる");
-		}
-	}
-
-	public void doActionRightHandUp(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconRightHandUp());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end),
-					"右腕を上げる");
-		}
-	}
-
-	public void doActionRightHandDown(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconRightHandDown());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end),
-					"右腕を下げる");
-		}
-
-	}
-
-	public void doActionLeftFootUp(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconLeftFootUp());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end),
-					"左足を上げる");
-		}
-	}
-
-	public void doActionLeftFootDown(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconLeftFootDown());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end),
-					"左足を下げる");
-		}
-	}
-
-	public void doActionRightFootUp(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconRightFootUp());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end),
-					"右足を上げる");
-		}
-	}
-
-	public void doActionRightFootDown(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconRightFootDown());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end),
-					"右足を下げる");
-		}
-	}
-
-	public void doActionJump(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconJump());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end),
-					"ジャンプする");
-		}
-	}
-
-	public void doActionLoop(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconLoop());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end),
-					"くりかえし");
-		}
-	}
-
-	public void doActionKoko(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconLoopEnd());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "ここまで");
-		}
-	}
-
-	public void doActionIf(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconIf());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "もしも");
-		}
-	}
-
-	public void doActionElse(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconElse());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "もしくは");
-		}
-	}
-
-	public void doActionIfEnd(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconIfEnd());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end),
-					"もしおわり");
-		}
-	}
-
-	public void doActionYellow(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconYellow());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "黄色");
-		}
-	}
-
-	public void doActionOrange(View view) {
-		if (host.getCurrentTab() == IMAGE_VIEW) {
-			imgTextView.insertImage(iconContainer.getIconOrange());
-		} else {
-			int start = textView.getSelectionStart();
-			int end = textView.getSelectionEnd();
-			Editable editable = (Editable) textView.getText();
-			editable.replace(Math.min(start, end), Math.max(start, end), "茶色");
-		}
-	}
 
 	public void initializeImage() {
 		leftImages = ImageContainer.createPiyoLeft(this);
@@ -600,8 +301,6 @@ public class MainActivity extends Activity {
 		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this,
 				net.exkazuu.ManekkoDance.activities.ActionActivity.class);
-		intent.putExtra("text_data",
-				imgTextView.getTextFromImage(iconContainer));
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		this.startActivity(intent);
@@ -622,7 +321,6 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
-		intent.putExtra("text_data", textView.getText().toString());
 		this.startActivity(intent);
 	}
 
@@ -631,7 +329,6 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, net.exkazuu.ManekkoDance.Help.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
-		intent.putExtra("text_data", textView.getText().toString());
 		this.startActivity(intent);
 	}
 

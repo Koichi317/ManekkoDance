@@ -44,20 +44,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" >
 
-                            <net.exkazuu.ManekkoDance.ImageInEdit
-                                android:id="@+id/editText1"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:background="#ffffff"
-                                android:ems="10"
-                                android:fitsSystemWindows="true"
-                                android:gravity="center_vertical|top"
-                                android:hint="@string/hint_text"
-                                android:inputType="textMultiLine"
-                                android:textColor="#000000"
-                                android:visibility="visible" />
-
                             <TextView
                                 android:id="@+id/tvCount1"
                                 android:layout_width="wrap_content"
@@ -68,39 +54,6 @@
                         </RelativeLayout>
                     </LinearLayout>
 
-                    <!--
-                        <LinearLayout
-                        android:id="@+id/tab2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:focusable="true" >
-
-                        <RelativeLayout
-                            android:id="@+id/tab2_frameLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
-
-                            <net.exkazuu.ManekkoDance.ImageInEdit
-                                android:id="@+id/imageInEdit"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="#E5FFE5"
-                                android:ems="10"
-                                android:fitsSystemWindows="true"
-                                android:gravity="center_vertical|top"
-                                android:inputType="textMultiLine"
-                                android:textColor="#000000"
-                                android:visibility="visible" />
-
-                            <TextView
-                                android:id="@+id/tvCount2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:textSize="24sp" />
-                        </RelativeLayout>
-                    </LinearLayout>               -->
                 </FrameLayout>
             </LinearLayout>
         </TabHost>
@@ -208,152 +161,7 @@
         android:id="@+id/iconList"
         android:layout_width="match_parent"
         android:layout_height="50dp" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" >
-
-            <ImageButton
-                android:id="@+id/imageButton1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionLeftHandUp"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_left_hand_up" />
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionLeftHandDown"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_left_hand_down" />
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionRightHandUp"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_right_hand_up" />
-
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionRightHandDown"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_right_hand_down" />
-
-            <ImageButton
-                android:id="@+id/imageButton10"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionLoop"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_loop"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/imageButton11"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionKoko"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_kokomade"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/imageButton12"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionIf"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_if"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/imageButton13"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionElse"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_else"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/imageButton14"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionIfEnd"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_if_kokomade"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/imageButton15"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionYellow"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_yellow"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/imageButton16"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionOrange"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_orange"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionLeftFootUp"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_left_foot_up"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/imageButton6"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionLeftFootDown"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_left_foot_down"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/imageButton7"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionRightFootUp"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_right_foot_up"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/imageButton8"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionRightFootDown"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_right_foot_down"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/imageButton9"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:onClick="doActionJump"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_jump"
-                android:visibility="gone" />
-        </LinearLayout>
+ 
     </HorizontalScrollView>
 
     <LinearLayout
