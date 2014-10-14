@@ -61,7 +61,7 @@ public class DragAndDropActivity extends Activity {
 			}
 		}
 
-		TextView text = (TextView) findViewById(R.id.programs);
+		TextView text = (TextView) findViewById(R.id.tvCount1);
 		text.setText(program[0][0] + program[1][0] + program[2][0] + "\n"
 				+ program[0][1] + program[1][1] + program[2][1] + "\n"
 				+ program[0][2] + program[1][2] + program[2][2] + "\n"

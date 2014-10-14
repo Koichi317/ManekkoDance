@@ -54,6 +54,352 @@
                         </RelativeLayout>
                     </LinearLayout>
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="@dimen/activity_vertical_margin"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:paddingTop="@dimen/activity_vertical_margin"
+                        tools:context=".DragAndDropActivity" >
+
+                        <!-- アイコンたち -->
+
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:src="@drawable/icon_yellow" />
+
+                        <ImageView
+                            android:id="@+id/imageView8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_toRightOf="@id/imageView7"
+                            android:src="@drawable/icon_orange" />
+
+                        <ImageView
+                            android:id="@+id/imageView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_toRightOf="@id/imageView8"
+                            android:src="@drawable/icon_if" />
+
+                        <ImageView
+                            android:id="@+id/imageView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_toRightOf="@id/imageView9"
+                            android:src="@drawable/icon_else" />
+
+                        <ImageView
+                            android:id="@+id/imageView11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_toRightOf="@id/imageView10"
+                            android:src="@drawable/icon_if_kokomade" />
+
+                        <ImageView
+                            android:id="@+id/imageGomi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_toRightOf="@id/imageView11"
+                            android:src="@drawable/icon_jump" />
+
+                        <ImageView
+                            android:id="@+id/imageView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/imageView7"
+                            android:src="@drawable/icon_right_hand_up" />
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/imageView8"
+                            android:layout_toRightOf="@id/imageView1"
+                            android:src="@drawable/icon_right_hand_down" />
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/imageView9"
+                            android:layout_toRightOf="@id/imageView2"
+                            android:src="@drawable/icon_left_hand_up" />
+
+                        <ImageView
+                            android:id="@+id/imageView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/imageView10"
+                            android:layout_toRightOf="@id/imageView3"
+                            android:src="@drawable/icon_left_hand_down" />
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/imageView11"
+                            android:layout_toRightOf="@id/imageView4"
+                            android:src="@drawable/icon_loop" />
+
+                        <ImageView
+                            android:id="@+id/imageView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/imageGomi"
+                            android:layout_toRightOf="@id/imageView5"
+                            android:src="@drawable/icon_kokomade" />
+                        <!-- 背景のはてなたち -->
+                        <!-- 1行目 -->
+
+                        <ImageView
+                            android:id="@+id/image0_0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image1_0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/image0_0"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image2_0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/image1_0"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 2行目 -->
+
+                        <ImageView
+                            android:id="@+id/image0_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image0_0"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image1_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image1_0"
+                            android:layout_toRightOf="@id/image0_1"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image2_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image2_0"
+                            android:layout_toRightOf="@id/image1_1"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 3行目 -->
+
+                        <ImageView
+                            android:id="@+id/image0_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image0_1"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image1_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image1_1"
+                            android:layout_toRightOf="@id/image0_2"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image2_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image2_1"
+                            android:layout_toRightOf="@id/image1_2"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 4行目 -->
+
+                        <ImageView
+                            android:id="@+id/image0_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image0_2"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image1_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image1_2"
+                            android:layout_toRightOf="@id/image0_3"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image2_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image2_2"
+                            android:layout_toRightOf="@id/image1_3"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 5行目 -->
+
+                        <ImageView
+                            android:id="@+id/image0_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image0_3"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image1_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image1_3"
+                            android:layout_toRightOf="@id/image0_4"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image2_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image2_3"
+                            android:layout_toRightOf="@id/image1_4"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 6行目 -->
+
+                        <ImageView
+                            android:id="@+id/image0_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image0_4"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image1_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image1_4"
+                            android:layout_toRightOf="@id/image0_5"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image2_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image1_4"
+                            android:layout_toRightOf="@id/image1_5"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 7行目 -->
+
+                        <ImageView
+                            android:id="@+id/image0_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image0_5"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image1_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image1_5"
+                            android:layout_toRightOf="@id/image0_6"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image2_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image2_5"
+                            android:layout_toRightOf="@id/image1_6"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 8行目 -->
+
+                        <ImageView
+                            android:id="@+id/image0_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image0_6"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image1_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image1_6"
+                            android:layout_toRightOf="@id/image0_7"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image2_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image2_6"
+                            android:layout_toRightOf="@id/image1_7"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 9行目 -->
+
+                        <ImageView
+                            android:id="@+id/image0_8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image0_7"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image1_8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image1_7"
+                            android:layout_toRightOf="@id/image0_8"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/image2_8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/image2_7"
+                            android:layout_toRightOf="@id/image1_8"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                    </RelativeLayout>
                 </FrameLayout>
             </LinearLayout>
         </TabHost>
@@ -161,7 +507,6 @@
         android:id="@+id/iconList"
         android:layout_width="match_parent"
         android:layout_height="50dp" >
- 
     </HorizontalScrollView>
 
     <LinearLayout
@@ -186,5 +531,4 @@
             android:onClick="changeActionScreen"
             android:text="@string/action" />
     </LinearLayout>
-
 </net.exkazuu.ManekkoDance.DetectableSoftKeyLayout>
