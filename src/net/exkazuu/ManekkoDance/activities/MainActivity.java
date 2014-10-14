@@ -31,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -71,7 +72,7 @@ public class MainActivity extends Activity {
 		setTitle("編集画面");
 		setContentView(R.layout.main);
 
-		imgTextView= (ImageInEdit) findViewById(R.id.imageInEdit); //editText1);
+		imgTextView = (ImageInEdit) findViewById(R.id.editText1); // imageInEdit);
 		// imgTextView.buildLayer();
 		DSKLayout = (DetectableSoftKeyLayout) findViewById(R.id.root);
 		DSKLayout.setListener(listner);
@@ -89,7 +90,54 @@ public class MainActivity extends Activity {
 		Log.v("my_debug", "" + text_data);
 		textView.setText(text_data);
 		imgTextView.setText(textView.getText().toString());
-		imgTextView.replaceTextToImage(iconContainer);
+		if (text_data != null) {
+
+			imgTextView.replaceTextToImage(iconContainer);
+		}
+		if (message.equals("3")) {
+			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
+			btn1.setVisibility(View.VISIBLE);
+			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
+			btn2.setVisibility(View.VISIBLE);
+		}
+		if (message.equals("4")) {
+			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
+			btn1.setVisibility(View.VISIBLE);
+			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
+			btn2.setVisibility(View.VISIBLE);
+		}
+		if (message.equals("5")) {
+			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton12);
+			btn1.setVisibility(View.VISIBLE);
+			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton13);
+			btn2.setVisibility(View.VISIBLE);
+			ImageButton btn3 = (ImageButton) findViewById(R.id.imageButton14);
+			btn3.setVisibility(View.VISIBLE);
+			ImageButton btn4 = (ImageButton) findViewById(R.id.imageButton15);
+			btn4.setVisibility(View.VISIBLE);
+			ImageButton btn5 = (ImageButton) findViewById(R.id.imageButton16);
+			btn5.setVisibility(View.VISIBLE);
+			FrameLayout piyo2 = (FrameLayout) findViewById(R.id.frameLayoutPiyo2);
+			piyo2.setVisibility(View.VISIBLE);
+		}
+		if (message.equals("6")) {
+			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
+			btn1.setVisibility(View.VISIBLE);
+			ImageButton btn2 = (ImageButton) findViewById(R.id.imageButton11);
+			btn2.setVisibility(View.VISIBLE);
+			ImageButton btn3 = (ImageButton) findViewById(R.id.imageButton12);
+			btn3.setVisibility(View.VISIBLE);
+			ImageButton btn4 = (ImageButton) findViewById(R.id.imageButton13);
+			btn4.setVisibility(View.VISIBLE);
+			ImageButton btn5 = (ImageButton) findViewById(R.id.imageButton14);
+			btn5.setVisibility(View.VISIBLE);
+			ImageButton btn6 = (ImageButton) findViewById(R.id.imageButton15);
+			btn6.setVisibility(View.VISIBLE);
+			ImageButton btn7 = (ImageButton) findViewById(R.id.imageButton16);
+			btn7.setVisibility(View.VISIBLE);
+			FrameLayout piyo2 = (FrameLayout) findViewById(R.id.frameLayoutPiyo2);
+			piyo2.setVisibility(View.VISIBLE);
+		}
 
 		/******************* tabの実装と切り替え *****************/
 
@@ -101,11 +149,10 @@ public class MainActivity extends Activity {
 		tab1.setContent(R.id.tab1);
 		host.addTab(tab1);
 
-		TabSpec tab2 = host.newTabSpec("tab2");
-		tab2.setIndicator("絵文字");
-		tab2.setContent(R.id.tab2);
-		host.addTab(tab2);
-
+		/*
+		 * TabSpec tab2 = host.newTabSpec("tab2"); tab2.setIndicator("絵文字");
+		 * tab2.setContent(R.id.tab2); host.addTab(tab2);
+		 */
 		if (iconContainer == null) {
 			iconContainer = new IconContainer(getApplication());
 		}
@@ -140,22 +187,22 @@ public class MainActivity extends Activity {
 		host.setCurrentTab(IMAGE_VIEW);
 
 		/********** 音楽 **************/
-		View.OnClickListener piyoOnClickListener = new View.OnClickListener() {
-
-			public void onClick(View v) {
-				host.setCurrentTab(TEXT_VIEW);
-				final Handler handler = new Handler();
-				if (thread == null || !thread.isAlive()) {
-					commandExecutor = new CommandExecutor(handler);
-					thread = new Thread(commandExecutor);
-					thread.start();
-				}
-			}
-		};
-		this.findViewById(R.id.frameLayoutPiyo).setOnClickListener(
-				piyoOnClickListener);
-		this.findViewById(R.id.frameLayoutPiyo2).setOnClickListener(
-				piyoOnClickListener);
+//		View.OnClickListener piyoOnClickListener = new View.OnClickListener() {
+//
+//			public void onClick(View v) {
+//				host.setCurrentTab(IMAGE_VIEW);
+//				final Handler handler = new Handler();
+//				if (thread == null || !thread.isAlive()) {
+//					commandExecutor = new CommandExecutor(handler);
+//					thread = new Thread(commandExecutor);
+//					thread.start();
+//				}
+//			}
+//		};
+//		this.findViewById(R.id.frameLayoutPiyo).setOnClickListener(
+//				piyoOnClickListener);
+//		this.findViewById(R.id.frameLayoutPiyo2).setOnClickListener(
+//				piyoOnClickListener);
 
 		final Activity activity = this;
 		final int limitation = Lessons.getLimitation(Integer.parseInt(message));
@@ -194,7 +241,7 @@ public class MainActivity extends Activity {
 					int arg3) {
 				int count = StringCommandParser.countNewLines(arg0);
 				TextView tvCount = (TextView) activity
-						.findViewById(R.id.tvCount2); 
+						.findViewById(R.id.tvCount1);
 				tvCount.setText(count + "行 (" + limitation + "行以内で書こう！)");
 				boolean preCheck = count <= limitation;
 				btnJudge.setEnabled(preCheck);
@@ -227,9 +274,11 @@ public class MainActivity extends Activity {
 		}
 
 		public void run() {
-			textView = (TextView) findViewById(R.id.editText1);
 
-			String commandsText = textView.getText().toString(); // 1行ずつ配列に収納
+			textView = (TextView) findViewById(R.id.editText1);
+			String commandsText = textView.getText().toString();
+			// (imgTextView.getTextFromImage(iconContainer)); // 1行ずつ配列に収納
+
 			List<String> leftCommands = new ArrayList<String>();
 			List<Integer> leftNumbers = new ArrayList<Integer>();
 			StringCommandParser.parse(commandsText, leftCommands, leftNumbers,
@@ -550,7 +599,8 @@ public class MainActivity extends Activity {
 		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this,
 				net.exkazuu.ManekkoDance.activities.ActionActivity.class);
-		intent.putExtra("text_data", imgTextView.getTextFromImage(iconContainer));
+		intent.putExtra("text_data",
+				imgTextView.getTextFromImage(iconContainer));
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
 		this.startActivity(intent);
