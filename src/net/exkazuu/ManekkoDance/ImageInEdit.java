@@ -133,8 +133,11 @@ public class ImageInEdit extends EditText {
 	public void replaceTextToImage(final IconContainer icon) {
 
 		String[] commands = new String[] { "左腕を上げる", "左腕を下げる", "右腕を上げる",
-				"右腕を下げる", "左足を上げる", "左足を下げる", "右足を上げる", "右足を下げる", "ジャンプする",
-				"くりかえし", "ここまで", "もしも", "もしくは", "もしおわり", "黄色", "茶色"  };
+				"右腕を下げる", "くりかえし", "ここまで", "もしも", "もしくは", "もしおわり", "黄色", "茶色" };
+
+		// String[] commands = new String[] { "左腕を上げる", "左腕を下げる", "右腕を上げる",
+		// "右腕を下げる", "左足を上げる", "左足を下げる", "右足を上げる", "右足を下げる", "ジャンプする",
+		// "くりかえし", "ここまで", "もしも", "もしくは", "もしおわり", "黄色", "茶色" };
 
 		TreeMap<Integer, String> map = new TreeMap<Integer, String>();
 		ArrayList<Integer> start = new ArrayList<Integer>(); // プログラム的に

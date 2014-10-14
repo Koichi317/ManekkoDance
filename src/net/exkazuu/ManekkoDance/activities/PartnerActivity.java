@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,19 +47,15 @@ public class PartnerActivity extends Activity {
 
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		TextView editText2 = (TextView) findViewById(R.id.editText2);
-		
 		ImageView messageImageView1 = (ImageView) findViewById(R.id.imageView2);
-		
 		FrameLayout alt_cocco = (FrameLayout) findViewById(R.id.alt_cocco);
 		FrameLayout cocco = (FrameLayout) findViewById(R.id.cocco);
-		
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("lesson");
 		String message = intent.getStringExtra("message");
 		textData = intent.getStringExtra("text_data");
 		editText1.setText(data);
 		editText2.setText(message);
-		
 		if (message.equals("1")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message1);
 			alt_cocco.setVisibility(View.GONE);
@@ -192,7 +189,14 @@ public class PartnerActivity extends Activity {
 		intent.putExtra("lesson", editText1.getText().toString());
 		intent.putExtra("message", editText2.getText().toString());
 		intent.putExtra("text_data", textData);
-		this.startActivity(intent);
+		if (textData == null) {
+			// 最初にコード入力画面に遷移するとき
+			this.startActivity(intent);
+		} else {
+			// お手本確認に戻ってからコード入力画面に復帰する時
+			PartnerActivity.this.finish();
+		}
+//		this.startActivity(intent);
 	}
 
 	public void changeTitleScreen() {

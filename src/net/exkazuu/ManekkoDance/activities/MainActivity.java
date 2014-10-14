@@ -90,8 +90,10 @@ public class MainActivity extends Activity {
 		Log.v("my_debug", "" + text_data);
 		textView.setText(text_data);
 		imgTextView.setText(textView.getText().toString());
-		imgTextView.replaceTextToImage(iconContainer);
+		if (text_data != null) {
 
+			imgTextView.replaceTextToImage(iconContainer);
+		}
 		if (message.equals("3")) {
 			ImageButton btn1 = (ImageButton) findViewById(R.id.imageButton10);
 			btn1.setVisibility(View.VISIBLE);
@@ -186,22 +188,22 @@ public class MainActivity extends Activity {
 		host.setCurrentTab(IMAGE_VIEW);
 
 		/********** 音楽 **************/
-		View.OnClickListener piyoOnClickListener = new View.OnClickListener() {
-
-			public void onClick(View v) {
-				host.setCurrentTab(IMAGE_VIEW);
-				final Handler handler = new Handler();
-				if (thread == null || !thread.isAlive()) {
-					commandExecutor = new CommandExecutor(handler);
-					thread = new Thread(commandExecutor);
-					thread.start();
-				}
-			}
-		};
-		this.findViewById(R.id.frameLayoutPiyo).setOnClickListener(
-				piyoOnClickListener);
-		this.findViewById(R.id.frameLayoutPiyo2).setOnClickListener(
-				piyoOnClickListener);
+//		View.OnClickListener piyoOnClickListener = new View.OnClickListener() {
+//
+//			public void onClick(View v) {
+//				host.setCurrentTab(IMAGE_VIEW);
+//				final Handler handler = new Handler();
+//				if (thread == null || !thread.isAlive()) {
+//					commandExecutor = new CommandExecutor(handler);
+//					thread = new Thread(commandExecutor);
+//					thread.start();
+//				}
+//			}
+//		};
+//		this.findViewById(R.id.frameLayoutPiyo).setOnClickListener(
+//				piyoOnClickListener);
+//		this.findViewById(R.id.frameLayoutPiyo2).setOnClickListener(
+//				piyoOnClickListener);
 
 		final Activity activity = this;
 		final int limitation = Lessons.getLimitation(Integer.parseInt(message));
@@ -273,9 +275,11 @@ public class MainActivity extends Activity {
 		}
 
 		public void run() {
-			textView = (TextView) findViewById(R.id.editText1);
 
-			String commandsText = textView.getText().toString(); // 1行ずつ配列に収納
+			textView = (TextView) findViewById(R.id.editText1);
+			String commandsText = textView.getText().toString();
+			// (imgTextView.getTextFromImage(iconContainer)); // 1行ずつ配列に収納
+
 			List<String> leftCommands = new ArrayList<String>();
 			List<Integer> leftNumbers = new ArrayList<Integer>();
 			StringCommandParser.parse(commandsText, leftCommands, leftNumbers,

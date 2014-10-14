@@ -100,8 +100,7 @@
                                 android:textAppearance="?android:attr/textAppearanceSmall"
                                 android:textSize="24sp" />
                         </RelativeLayout>
-                    </LinearLayout>
-                    -->
+                    </LinearLayout>               -->
                 </FrameLayout>
             </LinearLayout>
         </TabHost>
@@ -118,7 +117,7 @@
             android:id="@+id/frameLayoutPiyo"
             android:layout_width="136dp"
             android:layout_height="139dp"
-            android:layout_gravity="bottom|center_horizontal" >
+            android:layout_gravity="bottom|center" >
 
             <ImageView
                 android:id="@+id/playerLeftHand1"

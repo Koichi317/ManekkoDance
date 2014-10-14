@@ -19,7 +19,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +27,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ActionActivity extends Activity {
@@ -53,7 +51,7 @@ public class ActionActivity extends Activity {
 			commandExecutor.died = true;
 		}
 	};
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -68,20 +66,15 @@ public class ActionActivity extends Activity {
 		textData = intent.getStringExtra("text_data");
 		String playerCommandsText = textData;
 		String partnerCommandsText = lesson;
-		FrameLayout alt_piyo =(FrameLayout)findViewById(R.id.alt_piyo);
-		FrameLayout alt_cocco =(FrameLayout)findViewById(R.id.alt_cocco);
-		FrameLayout piyo =(FrameLayout)findViewById(R.id.alt_piyo);
-		FrameLayout cocco =(FrameLayout)findViewById(R.id.alt_cocco);
-//		LinearLayout hantei = (LinearLayout)findViewById(R.id.hantei);
-//		setContentView(hantei);
-		
-		playerEditText.replaceTextToImage(new IconContainer(this));
+
+		FrameLayout alt_piyo = (FrameLayout) findViewById(R.id.alt_piyo);
+		FrameLayout alt_cocco = (FrameLayout) findViewById(R.id.alt_cocco);
+		FrameLayout piyo = (FrameLayout) findViewById(R.id.alt_piyo);
+		FrameLayout cocco = (FrameLayout) findViewById(R.id.alt_cocco);
+
+		playerEditText.setText(playerCommandsText);
 		partnerEditText.setText(partnerCommandsText);
 
-//		LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(-2, -2);
-//		layoutParams.gravity = Gravity.TOP; 
-//		layoutParams.setMargins(0, 1000, 0, 1000);
-		
 		Button btn1 = (Button) this.findViewById(R.id.button1);
 		btn1.setOnClickListener(new View.OnClickListener() {
 
@@ -99,14 +92,11 @@ public class ActionActivity extends Activity {
 		piyoRightImages = ImageContainer.createPiyoRight(this);
 		coccoLeftImages = ImageContainer.createCoccoLeft(this);
 		coccoRightImages = ImageContainer.createCoccoRight(this);
-		if(message.equals("1") || message.equals("2") || message.equals("3") || message.equals("4")){
+		if (message.equals("1") || message.equals("2") || message.equals("3")
+				|| message.equals("4")) {
 			alt_piyo.setVisibility(View.GONE);
 			alt_cocco.setVisibility(View.GONE);
-//			piyo.setLayoutParams(layoutParams);
-//			cocco.setLayoutParams(layoutParams);
-
 		}
-		
 	}
 
 	public final class CommandExecutor implements Runnable {
@@ -232,7 +222,8 @@ public class ActionActivity extends Activity {
 										public void onClick(
 												DialogInterface dialog,
 												int which) {
-											changeMainScreen();
+										//(changeMainScreen();
+											ActionActivity.this.finish();
 										}
 									});
 						} else {
@@ -284,7 +275,8 @@ public class ActionActivity extends Activity {
 										public void onClick(
 												DialogInterface dialog,
 												int which) {
-											changeMainScreen();
+											//changeMainScreen();
+											ActionActivity.this.finish();
 										}
 									});
 						}
@@ -307,7 +299,8 @@ public class ActionActivity extends Activity {
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int which) {
-										changeMainScreen();
+										//changeMainScreen();
+										ActionActivity.this.finish();
 									}
 								});
 					}
@@ -324,12 +317,13 @@ public class ActionActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		super.onCreateOptionsMenu(menu);
-		MenuItem item1 = menu.add("編集画面へ戻る");
+		MenuItem item1 = menu.add("画面へ戻る");
 		MenuItem item2 = menu.add("タイトルへ戻る");
 
 		item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				changeMainScreen();
+				//changeMainScreen();
+				ActionActivity.this.finish();
 				return false;
 			}
 		});
@@ -343,26 +337,10 @@ public class ActionActivity extends Activity {
 	}
 
 	public void changeMainScreen(View view) {
-		Intent intent = new Intent(this,
-				net.exkazuu.ManekkoDance.activities.MainActivity.class);
-		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
-		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
-		intent.putExtra("text_data", playerEditText.getText().toString());
-		intent.putExtra("lesson", partnerEditText.getText().toString());
-		intent.putExtra("message", message);
-		this.startActivity(intent);
+		finish();
 	}
 
-	private void changeMainScreen() {
-		Intent intent = new Intent(this,
-				net.exkazuu.ManekkoDance.activities.MainActivity.class);
-		TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
-		TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
-		intent.putExtra("text_data", playerEditText.getText().toString());
-		intent.putExtra("lesson", partnerEditText.getText().toString());
-		intent.putExtra("message", message);
-		this.startActivity(intent);
-	}
+	
 
 	public void changePartnerScreen(View view) {
 		Intent intent = new Intent(this,
