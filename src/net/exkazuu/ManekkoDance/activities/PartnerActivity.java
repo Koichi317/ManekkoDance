@@ -12,11 +12,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +48,8 @@ public class PartnerActivity extends Activity {
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		TextView editText2 = (TextView) findViewById(R.id.editText2);
 		ImageView messageImageView1 = (ImageView) findViewById(R.id.imageView2);
+		FrameLayout alt_cocco = (FrameLayout) findViewById(R.id.alt_cocco);
+		FrameLayout cocco = (FrameLayout) findViewById(R.id.cocco);
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("lesson");
 		String message = intent.getStringExtra("message");
@@ -54,17 +58,21 @@ public class PartnerActivity extends Activity {
 		editText2.setText(message);
 		if (message.equals("1")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message1);
+			alt_cocco.setVisibility(View.GONE);
 		} else if (message.equals("2")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message2);
+			alt_cocco.setVisibility(View.GONE);
 		} else if (message.equals("3")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message3);
+			alt_cocco.setVisibility(View.GONE);
 		} else if (message.equals("4")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message4);
+			alt_cocco.setVisibility(View.GONE);
 		} else if (message.equals("5")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message5);
 		} else if (message.equals("6")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message6);
-		} else if (message.equals("7")) {
+		} /*else if (message.equals("7")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message7);
 		} else if (message.equals("8")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message8);
@@ -74,7 +82,7 @@ public class PartnerActivity extends Activity {
 			messageImageView1.setImageResource(R.drawable.lesson_message10);
 		} else {
 			messageImageView1.setImageResource(R.drawable.lesson_message11);
-		}
+		}*/
 
 		Button btn5 = (Button) this.findViewById(R.id.button5);
 
@@ -175,13 +183,20 @@ public class PartnerActivity extends Activity {
 
 	public void changeMainScreen(View view) {
 		Intent intent = new Intent(getApplication(),
-				net.exkazuu.ManekkoDance.activities.MainActivity.class);
+				MainActivity.class);
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		TextView editText2 = (TextView) findViewById(R.id.editText2);
 		intent.putExtra("lesson", editText1.getText().toString());
 		intent.putExtra("message", editText2.getText().toString());
 		intent.putExtra("text_data", textData);
-		this.startActivity(intent);
+		if (textData == null) {
+			// 最初にコード入力画面に遷移するとき
+			this.startActivity(intent);
+		} else {
+			// お手本確認に戻ってからコード入力画面に復帰する時
+			PartnerActivity.this.finish();
+		}
+//		this.startActivity(intent);
 	}
 
 	public void changeTitleScreen() {
@@ -190,29 +205,4 @@ public class PartnerActivity extends Activity {
 		this.startActivity(intent);
 	}
 
-	protected void onDestroy() {
-		super.onDestroy();
-		cleanupView(findViewById(R.id.partnerRoot));
-		System.gc();
-	}
-
-	public static final void cleanupView(View view) {
-		if (view instanceof ImageButton) {
-			ImageButton ib = (ImageButton) view;
-			ib.setImageDrawable(null);
-		} else if (view instanceof ImageView) {
-			ImageView iv = (ImageView) view;
-			iv.setImageDrawable(null);
-			// } else if(view instanceof(XXX)) {
-			// 他にもDrawableを使用する対象があればここで中身をnullに
-		}
-		view.setBackgroundDrawable(null);
-		if (view instanceof ViewGroup) {
-			ViewGroup vg = (ViewGroup) view;
-			int size = vg.getChildCount();
-			for (int i = 0; i < size; i++) {
-				cleanupView(vg.getChildAt(i));
-			}
-		}
-	}
 }

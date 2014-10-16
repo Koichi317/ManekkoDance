@@ -19,7 +19,7 @@ public class Lessons {
 	// private static int[] _limitations = { 10, 10, 6, 8, 10, 10, }; // easy
 
 	private static int[] _limitations = { 10, 12, 10, 8, 10, 10, }; // hard
-
+	
 	public static String getAnswer(int lessonNumber) {
 		if (!(1 <= lessonNumber && lessonNumber <= _answers.length)) {
 			throw new IndexOutOfBoundsException("lessonNumber (" + lessonNumber

@@ -1,54 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/titleRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/titleRoot" >
+    android:background="@drawable/back_ground1" >
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/help_button"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/back_ground1"
-        android:contentDescription="@string/touch_to_start"
-        android:onClick="doActionTitle"
-        android:text="@string/touch_to_start" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
+        android:onClick="startLesson"
+        android:text="@string/Title_start_button"
+        android:textSize="24sp"
+        android:visibility="gone" />
 
-    <RelativeLayout
-        android:id="@+id/titleButton"
-        android:layout_width="match_parent"
-        android:layout_height="117dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/back_ground3"
-        android:contentDescription="@string/Enter"
-        android:visibility="invisible" >
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="48dp"
-            android:onClick="doActionContinue"
-            android:text="@string/Title_start_button"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:layout_above="@+id/button2"
-            android:layout_alignLeft="@+id/button2"
-            android:layout_marginBottom="22dp"
-            android:onClick="doActionFromTheBeginning"
-            android:text="@string/Title_how_to_play"
-            android:textSize="24sp" />
-
-    </RelativeLayout>
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_above="@id/help_button"
+        android:layout_alignLeft="@id/help_button"
+        android:layout_marginBottom="22dp"
+        android:onClick="viewHelp"
+        android:text="@string/Title_how_to_play"
+        android:textSize="24sp"
+        android:visibility="gone" />
 
 </RelativeLayout>

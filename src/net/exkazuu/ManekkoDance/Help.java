@@ -10,34 +10,26 @@ import android.widget.ImageView;
 
 public class Help extends Activity {
 
-	private String lesson;
-	private String text_data;
-	private String message;
 	private int pageNumber;
-	private final String page = " / 10";
+	private final String page = " / 6";
 
 	int[] helpImageResources = { R.drawable.tutorial1, R.drawable.tutorial2,
-			R.drawable.tutorial3, R.drawable.tutorial4, R.drawable.tutorial5,
-			R.drawable.tutorial6, R.drawable.helptext1, R.drawable.helptext2,
-			R.drawable.helptext3, R.drawable.helptext4 };
+			R.drawable.tutorial3, R.drawable.tutorial4, 
+			R.drawable.helptext1, R.drawable.helptext2 };
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.help);
 
-		Intent intent = getIntent();
-		lesson = intent.getStringExtra("lesson");
-		message = intent.getStringExtra("message");
-		text_data = intent.getStringExtra("text_data");
 		pageNumber = 1;
 		ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
 		helpImage.setImageResource(R.drawable.tutorial1);
 		EditText pageText = (EditText) findViewById(R.id.page);
-		pageText.setText("1 / 10");
+		pageText.setText("1 / 6");
 	}
 
 	public void next(View view) {
-		if (pageNumber == 10)
+		if (pageNumber == 6)
 			pageNumber = 0;
 		pageNumber++;
 		setHelpImage();
@@ -45,16 +37,12 @@ public class Help extends Activity {
 
 	public void prev(View view) {
 		if (pageNumber == 1)
-			pageNumber = 10;
+			pageNumber = 6;
 		pageNumber--;
 		setHelpImage();
 	}
 
 	public void changeScreen(View view) {
-		Intent intent = new Intent();
-		intent.putExtra("lesson", lesson);
-		intent.putExtra("message", message);
-		intent.putExtra("text_data", text_data);
 		finish();
 	}
 

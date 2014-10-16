@@ -24,7 +24,9 @@
             android:hint="@string/hint_player_source_cord"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:visibility="visible" >
+            android:visibility="visible"
+            android:fitsSystemWindows="true"
+            android:inputType="textMultiLine" >
 
             <requestFocus />
         </net.exkazuu.ManekkoDance.ImageInEdit>
