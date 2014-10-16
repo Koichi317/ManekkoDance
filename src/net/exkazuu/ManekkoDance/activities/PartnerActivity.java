@@ -205,29 +205,4 @@ public class PartnerActivity extends Activity {
 		this.startActivity(intent);
 	}
 
-	protected void onDestroy() {
-		super.onDestroy();
-		cleanupView(findViewById(R.id.partnerRoot));
-		System.gc();
-	}
-
-	public static final void cleanupView(View view) {
-		if (view instanceof ImageButton) {
-			ImageButton ib = (ImageButton) view;
-			ib.setImageDrawable(null);
-		} else if (view instanceof ImageView) {
-			ImageView iv = (ImageView) view;
-			iv.setImageDrawable(null);
-			// } else if(view instanceof(XXX)) {
-			// 他にもDrawableを使用する対象があればここで中身をnullに
-		}
-		view.setBackgroundDrawable(null);
-		if (view instanceof ViewGroup) {
-			ViewGroup vg = (ViewGroup) view;
-			int size = vg.getChildCount();
-			for (int i = 0; i < size; i++) {
-				cleanupView(vg.getChildAt(i));
-			}
-		}
-	}
 }

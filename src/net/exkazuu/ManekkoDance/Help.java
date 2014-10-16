@@ -10,9 +10,6 @@ import android.widget.ImageView;
 
 public class Help extends Activity {
 
-	private String lesson;
-	private String text_data;
-	private String message;
 	private int pageNumber;
 	private final String page = " / 6";
 
@@ -24,10 +21,6 @@ public class Help extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.help);
 
-		Intent intent = getIntent();
-		lesson = intent.getStringExtra("lesson");
-		message = intent.getStringExtra("message");
-		text_data = intent.getStringExtra("text_data");
 		pageNumber = 1;
 		ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
 		helpImage.setImageResource(R.drawable.tutorial1);
@@ -50,10 +43,6 @@ public class Help extends Activity {
 	}
 
 	public void changeScreen(View view) {
-		Intent intent = new Intent();
-		intent.putExtra("lesson", lesson);
-		intent.putExtra("message", message);
-		intent.putExtra("text_data", text_data);
 		finish();
 	}
 
