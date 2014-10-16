@@ -47,6 +47,10 @@
             android:name="net.exkazuu.ManekkoDance.Help"
             android:label="@string/help" >
         </activity>
+                <activity
+            android:name="net.exkazuu.ManekkoDance.activities.DragAndDropActivity"
+            android:label="@string/title_activity_action" >
+        </activity>
     </application>
 
 </manifest>

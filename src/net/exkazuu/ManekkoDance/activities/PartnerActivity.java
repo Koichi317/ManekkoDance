@@ -183,7 +183,7 @@ public class PartnerActivity extends Activity {
 
 	public void changeMainScreen(View view) {
 		Intent intent = new Intent(getApplication(),
-				net.exkazuu.ManekkoDance.activities.MainActivity.class);
+				MainActivity.class);
 		TextView editText1 = (TextView) findViewById(R.id.editText1);
 		TextView editText2 = (TextView) findViewById(R.id.editText2);
 		intent.putExtra("lesson", editText1.getText().toString());
