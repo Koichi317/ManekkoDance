@@ -86,7 +86,7 @@ public class DragViewListener implements OnTouchListener {
 					program[x_index][y_index] = "もしおわり";
 				} else if (view.getId() == R.id.imageGomi) {
 					cells[x_index][y_index].setImageResource(R.drawable.haikei);
-					program[x_index][y_index] = null;
+					program[x_index][y_index] = "";
 				}
 				// Log.v("program" + x_index + y_index,
 				// program[x_index][y_index]);

@@ -50,6 +50,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:visibility="invisible"
                                 android:textSize="24sp" />
                         </RelativeLayout>
                     </LinearLayout>
@@ -502,12 +503,6 @@
                 android:src="@drawable/alt_piyo_right_foot_up1" />
         </FrameLayout>
     </FrameLayout>
-
-    <HorizontalScrollView
-        android:id="@+id/iconList"
-        android:layout_width="match_parent"
-        android:layout_height="50dp" >
-    </HorizontalScrollView>
 
     <LinearLayout
         android:id="@+id/buttonGroup2"

@@ -41,13 +41,14 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	private static final int TEXT_VIEW = 0;
-	private static final int IMAGE_VIEW = 1;
+	private static final int TEXT_VIEW = 1;
+	private static final int IMAGE_VIEW = 0;
 	private String lesson;
 	private String message;
 	private String text_data;
 
 	private TextView textView;
+	private TextView text;
 	private DetectableSoftKeyLayout DSKLayout;
 	private HorizontalScrollView iconList;
 
@@ -56,6 +57,8 @@ public class MainActivity extends Activity {
 
 	private Thread thread;
 	private CommandExecutor commandExecutor;
+
+	public String[][] program = new String[3][9];
 
 	@Override
 	protected void onPause() {
@@ -71,8 +74,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setTitle("編集画面");
 		setContentView(R.layout.main);
-
-		iconList = (HorizontalScrollView) findViewById(R.id.iconList);
 
 		leftImages = ImageContainer.createPiyoLeft(this);
 		rightImages = ImageContainer.createPiyoRight(this);
@@ -109,14 +110,14 @@ public class MainActivity extends Activity {
 		cells[2][8] = (ImageView) findViewById(R.id.image2_8);
 
 		// 右側のテキストたち
-		String[][] program = new String[3][9];
+		// String[][] program = new String[3][9];
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 3; j++) {
-				program[j][i] = null;
+				program[j][i] = "";
 			}
 		}
 
-		TextView text = (TextView) findViewById(R.id.tvCount1);
+		text = (TextView) findViewById(R.id.tvCount1);
 		text.setText(program[0][0] + program[1][0] + program[2][0] + "\n"
 				+ program[0][1] + program[1][1] + program[2][1] + "\n"
 				+ program[0][2] + program[1][2] + program[2][2] + "\n"
@@ -142,6 +143,7 @@ public class MainActivity extends Activity {
 		ImageView dragView11 = (ImageView) findViewById(R.id.imageView11);
 		ImageView dragGomi = (ImageView) findViewById(R.id.imageGomi);
 
+		text_data = null;
 		DragViewListener listener1 = new DragViewListener(dragView1, cells,
 				program, text);
 		dragView1.setOnTouchListener(listener1);
@@ -178,6 +180,7 @@ public class MainActivity extends Activity {
 		DragViewListener listenerGomi = new DragViewListener(dragGomi, cells,
 				program, text);
 		dragGomi.setOnTouchListener(listenerGomi);
+
 		/********** Lesson data　の 取得 **************/
 		Intent intent = getIntent();
 		lesson = intent.getStringExtra("lesson");
@@ -206,7 +209,7 @@ public class MainActivity extends Activity {
 		host.setup();
 
 		TabSpec tab1 = host.newTabSpec("tab1");
-		tab1.setIndicator("文字");
+		tab1.setIndicator("絵文字");
 		tab1.setContent(R.id.tab1);
 		host.addTab(tab1);
 
@@ -237,7 +240,7 @@ public class MainActivity extends Activity {
 						}
 					}).start();
 				} else if (tabId == "tab1") { //
-					
+
 				}
 			}
 		});
@@ -283,6 +286,7 @@ public class MainActivity extends Activity {
 
 			textView = (TextView) findViewById(R.id.editText1);
 			String commandsText = textView.getText().toString();
+			textView.setText(text_data);
 			// (imgTextView.getTextFromImage(iconContainer)); // 1行ずつ配列に収納
 
 			List<String> leftCommands = new ArrayList<String>();
@@ -399,12 +403,14 @@ public class MainActivity extends Activity {
 	}
 
 	/************************* インテント（画面遷移） *****************************/
-	public void changeActionScreen(View view) {
+	public void changeActionScreen(View view) { // 判定画面への遷移
 		host.setCurrentTab(TEXT_VIEW);
 		Intent intent = new Intent(this,
 				net.exkazuu.ManekkoDance.activities.ActionActivity.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
+		text = (TextView) findViewById(R.id.tvCount1);
+		intent.putExtra("text_data", text.getText().toString());
 		this.startActivity(intent);
 	}
 
@@ -414,7 +420,6 @@ public class MainActivity extends Activity {
 				net.exkazuu.ManekkoDance.activities.PartnerActivity.class);
 		intent.putExtra("lesson", lesson);
 		intent.putExtra("message", message);
-		intent.putExtra("text_data", textView.getText().toString());
 		this.startActivity(intent);
 	}
 
@@ -438,6 +443,32 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this,
 				net.exkazuu.ManekkoDance.activities.TitleActivity.class);
 		this.startActivity(intent);
+	}
+
+	protected void onDestroy() {
+		super.onDestroy();
+		cleanupView(findViewById(R.id.root));
+		System.gc();
+	}
+
+	public static final void cleanupView(View view) {
+		if (view instanceof ImageButton) {
+			ImageButton ib = (ImageButton) view;
+			ib.setImageDrawable(null);
+		} else if (view instanceof ImageView) {
+			ImageView iv = (ImageView) view;
+			iv.setImageDrawable(null);
+			// } else if(view instanceof(XXX)) {
+			// 他にもDrawableを使用する対象があればここで中身をnullに
+		}
+		view.setBackgroundDrawable(null);
+		if (view instanceof ViewGroup) {
+			ViewGroup vg = (ViewGroup) view;
+			int size = vg.getChildCount();
+			for (int i = 0; i < size; i++) {
+				cleanupView(vg.getChildAt(i));
+			}
+		}
 	}
 
 }
