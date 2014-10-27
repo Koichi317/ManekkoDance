@@ -16,9 +16,6 @@ public class DragViewListener implements OnTouchListener {
     private ImageView[][] cells;
     private String[][] program;
     private TextView text;
-    private int[][] flag;
-    //private int a;
-    //private int b;
     private int oldx;
     private int oldy;
 
@@ -28,9 +25,6 @@ public class DragViewListener implements OnTouchListener {
         this.cells = cells;
         this.program = program;
         this.text = text;
-        this.flag = flag;
-        //this.a = a;
-        //this.b = b;
     }
 
     public boolean onTouch(View view, MotionEvent event) {

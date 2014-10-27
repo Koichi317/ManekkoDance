@@ -80,13 +80,6 @@ public class MainActivity extends Activity {
         leftImages = ImageContainer.createPiyoLeft(this);
         rightImages = ImageContainer.createPiyoRight(this);
 
-        /*int[][] flag = new int[4][9];
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 9; j++) {
-                flag[i][j] = 0;
-            }
-        }
-        flag[4][0] = 1;*/
         // 背景たち
         int[][] resb = new int[3][12];
         ImageView[][] cells = new ImageView[3][12];
@@ -95,9 +88,6 @@ public class MainActivity extends Activity {
             for (int j = 0; j < 12; j++) {
                 resb[i][j] = this.getResources().getIdentifier("image" + i + "_" + j, "id", this.getPackageName());
                 cells[i][j] = (ImageView) findViewById(resb[i][j]);
-                //backgroundlistener[i][j] = new DragViewListener(cells[i][j], cells,
-                        //program, text);
-                //cells[i][j].setOnTouchListener(backgroundlistener[i][j]);
             }
         }
 
@@ -152,19 +142,48 @@ public class MainActivity extends Activity {
         text_data = intent.getStringExtra("text_data");
         Log.v("my_debug", "" + text_data);
         if (text_data != null) {
-
+        }
+        if (message.equals("2")) {
+            for (int i = 0; i < 3; i++) {
+                cells[i][10].setVisibility(View.VISIBLE);
+                cells[i][11].setVisibility(View.VISIBLE);
+            }
         }
         if (message.equals("3")) {
-
+            for (int i = 4; i < 6; i++) {
+                dragView[0][i].setVisibility(View.VISIBLE);
+            }
+            for (int i = 0; i < 10; i++) {
+                dragView[1][i].setVisibility(View.VISIBLE);
+            }
         }
+
         if (message.equals("4")) {
+            for (int i = 4; i < 6; i++) {
+                dragView[0][i].setVisibility(View.VISIBLE);
+            }
+            for (int i = 0; i < 10; i++) {
+                dragView[1][i].setVisibility(View.VISIBLE);
+            }
+            for (int i = 0; i < 3; i++) {
+                cells[i][8].setVisibility(View.INVISIBLE);
+                cells[i][9].setVisibility(View.INVISIBLE);
+            }
 
         }
         if (message.equals("5")) {
+            for (int i = 6; i < 11; i++) {
+                dragView[0][i].setVisibility(View.VISIBLE);
+            }
 
         }
         if (message.equals("6")) {
-
+            for (int i = 4; i < 11; i++) {
+                dragView[0][i].setVisibility(View.VISIBLE);
+            }
+            for (int i = 0; i < 10; i++) {
+                dragView[1][i].setVisibility(View.VISIBLE);
+            }
         }
 
         /******************* tabの実装と切り替え *****************/
