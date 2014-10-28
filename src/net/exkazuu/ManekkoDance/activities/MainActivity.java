@@ -104,7 +104,7 @@ public class MainActivity extends Activity {
         // 背景たち
         int[][] resb = new int[3][12];
         ImageView[][] cells = new ImageView[3][12];
-        //DragViewListener[][] backgroundlistener = new DragViewListener[3][12];
+        DragViewListener[][] backgroundlistener = new DragViewListener[3][12];
         int[][] flag = new int[3][12];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 12; j++) {
@@ -115,9 +115,9 @@ public class MainActivity extends Activity {
             for (int j = 0; j < 12; j++) {
                 resb[i][j] = this.getResources().getIdentifier("image" + i + "_" + j, "id", this.getPackageName());
                 cells[i][j] = (ImageView) findViewById(resb[i][j]);
-                //backgroundlistener[i][j] = new DragViewListener(cells[i][j], cells,
-                //        program, text, flag);
-                //cells[i][j].setOnTouchListener(backgroundlistener[i][j]);
+                backgroundlistener[i][j] = new DragViewListener(cells[i][j], cells,
+                        program, text, flag, resb);
+                cells[i][j].setOnTouchListener(backgroundlistener[i][j]);
             }
         }
 
@@ -129,11 +129,11 @@ public class MainActivity extends Activity {
         ImageView[][] dragView = new ImageView[2][12];
         DragViewListener[][] listener = new DragViewListener[2][12];
         //アイコンたち(右腕を上げる系)
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 11; i++) {
             res[0][i] = this.getResources().getIdentifier("imageView" + (i + 1), "id", this.getPackageName());
             dragView[0][i] = (ImageView) findViewById(res[0][i]);
             listener[0][i] = new DragViewListener(dragView[0][i], cells,
-                    program, text, flag);
+                    program, text, flag, resb);
             dragView[0][i].setOnTouchListener(listener[0][i]);
         }
         //アイコンたち(数字達)
@@ -141,9 +141,18 @@ public class MainActivity extends Activity {
             res[1][i] = this.getResources().getIdentifier("imageView" + 0 + i, "id", this.getPackageName());
             dragView[1][i] = (ImageView) findViewById(res[1][i]);
             listener[1][i] = new DragViewListener(dragView[1][i], cells,
-                    program, text, flag);
+                    program, text, flag, resb);
             dragView[1][i].setOnTouchListener(listener[1][i]);
         }
+
+        //行番号たち
+        ImageView[] step = new ImageView[12];
+        int[] resS = new int[12];
+        for (int i = 0; i < 12; i++) {
+            resS[i] = this.getResources().getIdentifier("step" + (i+1), "id", this.getPackageName());
+            step[i] = (ImageView) findViewById(resS[i]);
+        }
+
         /********** Lesson data　の 取得 **************/
         Intent intent = getIntent();
         lesson = intent.getStringExtra("lesson");
@@ -153,9 +162,11 @@ public class MainActivity extends Activity {
         if (text_data != null) {
         }
         if (message.equals("2")) {
-            for (int i = 0; i < 3; i++) {
-                cells[i][10].setVisibility(View.VISIBLE);
-                cells[i][11].setVisibility(View.VISIBLE);
+            for (int j = 10; j < 12; j++) {
+                for (int i = 0; i < 3; i++) {
+                    cells[i][j].setVisibility(View.VISIBLE);
+                }
+                step[j].setVisibility(View.VISIBLE);
             }
         }
         if (message.equals("3")) {
@@ -174,11 +185,12 @@ public class MainActivity extends Activity {
             for (int i = 0; i < 10; i++) {
                 dragView[1][i].setVisibility(View.VISIBLE);
             }
-            for (int i = 0; i < 3; i++) {
-                cells[i][8].setVisibility(View.INVISIBLE);
-                cells[i][9].setVisibility(View.INVISIBLE);
+            for (int j = 8; j < 10; j++) {
+                for (int i = 0; i < 3; i++) {
+                    cells[i][j].setVisibility(View.INVISIBLE);
+                }
+                step[j].setVisibility(View.INVISIBLE);
             }
-
         }
         if (message.equals("5")) {
             for (int i = 6; i < 11; i++) {

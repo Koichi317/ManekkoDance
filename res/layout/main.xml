@@ -160,18 +160,10 @@
                             android:visibility="invisible" />
 
                         <ImageView
-                            android:id="@+id/imageView12"
-                            android:layout_width="61dip"
-                            android:layout_height="61dip"
-                            android:layout_toLeftOf="@id/imageView1"
-                            android:src="@drawable/dustbox" />
-
-                        <ImageView
                             android:id="@+id/imageView01"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
-                            android:layout_toLeftOf="@id/imageView2"
-                            android:layout_below="@id/imageView12"
+                            android:layout_toLeftOf="@id/imageView1"
                             android:src="@drawable/num1"
                             android:visibility="invisible" />
 
@@ -179,7 +171,7 @@
                             android:id="@+id/imageView02"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
-                            android:layout_toLeftOf="@id/imageView3"
+                            android:layout_toLeftOf="@id/imageView2"
                             android:layout_below="@id/imageView01"
                             android:src="@drawable/num2"
                             android:visibility="invisible" />
@@ -188,7 +180,7 @@
                             android:id="@+id/imageView03"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
-                            android:layout_toLeftOf="@id/imageView4"
+                            android:layout_toLeftOf="@id/imageView3"
                             android:layout_below="@id/imageView02"
                             android:src="@drawable/num3"
                             android:visibility="invisible" />
@@ -197,7 +189,7 @@
                             android:id="@+id/imageView04"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
-                            android:layout_toLeftOf="@id/imageView5"
+                            android:layout_toLeftOf="@id/imageView4"
                             android:layout_below="@id/imageView03"
                             android:src="@drawable/num4"
                             android:visibility="invisible" />
@@ -206,7 +198,7 @@
                             android:id="@+id/imageView05"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
-                            android:layout_toLeftOf="@id/imageView6"
+                            android:layout_toLeftOf="@id/imageView5"
                             android:layout_below="@id/imageView04"
                             android:src="@drawable/num5"
                             android:visibility="invisible" />
@@ -215,7 +207,7 @@
                             android:id="@+id/imageView06"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
-                            android:layout_toLeftOf="@id/imageView7"
+                            android:layout_toLeftOf="@id/imageView6"
                             android:layout_below="@id/imageView05"
                             android:src="@drawable/num6"
                             android:visibility="invisible" />
@@ -224,7 +216,7 @@
                             android:id="@+id/imageView07"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
-                            android:layout_toLeftOf="@id/imageView8"
+                            android:layout_toLeftOf="@id/imageView7"
                             android:layout_below="@id/imageView06"
                             android:src="@drawable/num7"
                             android:visibility="invisible" />
@@ -233,7 +225,7 @@
                             android:id="@+id/imageView08"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
-                            android:layout_toLeftOf="@id/imageView9"
+                            android:layout_toLeftOf="@id/imageView8"
                             android:layout_below="@id/imageView07"
                             android:src="@drawable/num8"
                             android:visibility="invisible" />
@@ -242,7 +234,7 @@
                             android:id="@+id/imageView09"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
-                            android:layout_toLeftOf="@id/imageView10"
+                            android:layout_toLeftOf="@id/imageView9"
                             android:layout_below="@id/imageView08"
                             android:src="@drawable/num9"
                             android:visibility="invisible" />
@@ -251,21 +243,108 @@
                             android:id="@+id/imageView00"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
-                            android:layout_toLeftOf="@id/imageView11"
+                            android:layout_toLeftOf="@id/imageView10"
                             android:layout_below="@id/imageView09"
                             android:src="@drawable/num0"
                             android:visibility="invisible" />
 
 
-                        <!-- 背景のはてなたち -->
+                        <!-- 背景たち -->
+                        <!-- 行番号 -->
+                        <ImageView
+                            android:id="@+id/step1"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:src="@drawable/num1" />
+
+                        <ImageView
+                            android:id="@+id/step2"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/step1"
+                            android:src="@drawable/num2"/>
+
+                        <ImageView
+                            android:id="@+id/step3"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/step2"
+                            android:src="@drawable/num3"/>
+
+                        <ImageView
+                            android:id="@+id/step4"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/step3"
+                            android:src="@drawable/num4"/>
+
+                        <ImageView
+                            android:id="@+id/step5"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/step4"
+                            android:src="@drawable/num5" />
+
+                        <ImageView
+                            android:id="@+id/step6"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/step5"
+                            android:src="@drawable/num6"/>
+
+                        <ImageView
+                            android:id="@+id/step7"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/step6"
+                            android:src="@drawable/num7"/>
+
+                        <ImageView
+                            android:id="@+id/step8"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/step7"
+                            android:src="@drawable/num8" />
+
+                        <ImageView
+                            android:id="@+id/step9"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/step8"
+                            android:src="@drawable/num9" />
+
+                        <ImageView
+                            android:id="@+id/step10"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/step9"
+                            android:src="@drawable/num0" />
+
+                        <ImageView
+                            android:id="@+id/step11"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/step10"
+                            android:src="@drawable/num1"
+                            android:visibility="invisible" />
+
+                        <ImageView
+                            android:id="@+id/step12"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/step11"
+                            android:src="@drawable/num2"
+                            android:visibility="invisible" />
+
                         <!-- 1行目 -->
 
                         <ImageView
                             android:id="@+id/image0_0"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step1"
                             android:scaleType="fitStart"
-                            android:src="@drawable/haikei"/>
+                            android:src="@drawable/haikei" />
 
                         <ImageView
                             android:id="@+id/image1_0"
@@ -273,7 +352,7 @@
                             android:layout_height="61dip"
                             android:layout_toRightOf="@id/image0_0"
                             android:scaleType="fitStart"
-                            android:src="@drawable/haikei"/>
+                            android:src="@drawable/haikei" />
 
                         <ImageView
                             android:id="@+id/image2_0"
@@ -281,13 +360,14 @@
                             android:layout_height="61dip"
                             android:layout_toRightOf="@id/image1_0"
                             android:scaleType="fitStart"
-                            android:src="@drawable/haikei"/>
+                            android:src="@drawable/haikei" />
                         <!-- 2行目 -->
 
                         <ImageView
                             android:id="@+id/image0_1"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step2"
                             android:layout_below="@id/image0_0"
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei" />
@@ -315,6 +395,7 @@
                             android:id="@+id/image0_2"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step3"
                             android:layout_below="@id/image0_1"
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei" />
@@ -342,6 +423,7 @@
                             android:id="@+id/image0_3"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step4"
                             android:layout_below="@id/image0_2"
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei" />
@@ -369,6 +451,7 @@
                             android:id="@+id/image0_4"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step5"
                             android:layout_below="@id/image0_3"
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei" />
@@ -396,6 +479,7 @@
                             android:id="@+id/image0_5"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step6"
                             android:layout_below="@id/image0_4"
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei" />
@@ -423,6 +507,7 @@
                             android:id="@+id/image0_6"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step7"
                             android:layout_below="@id/image0_5"
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei" />
@@ -450,6 +535,7 @@
                             android:id="@+id/image0_7"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step8"
                             android:layout_below="@id/image0_6"
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei" />
@@ -478,6 +564,7 @@
                             android:id="@+id/image0_8"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step9"
                             android:layout_below="@id/image0_7"
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei" />
@@ -506,6 +593,7 @@
                             android:id="@+id/image0_9"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step10"
                             android:layout_below="@id/image0_8"
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei" />
@@ -534,6 +622,7 @@
                             android:id="@+id/image0_10"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step11"
                             android:layout_below="@id/image0_9"
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei"
@@ -565,6 +654,7 @@
                             android:id="@+id/image0_11"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step12"
                             android:layout_below="@id/image0_10"
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei"
@@ -589,6 +679,15 @@
                             android:scaleType="fitStart"
                             android:src="@drawable/haikei"
                             android:visibility="invisible" />
+
+                        <ImageView
+                            android:id="@+id/imageView12"
+                            android:layout_width="122dip"
+                            android:layout_height="122dip"
+                            android:layout_below="@id/image2_9"
+                            android:layout_toRightOf="@id/image2_10"
+                            android:src="@drawable/dustbox" />
+
 
                     </RelativeLayout>
                 </FrameLayout>
