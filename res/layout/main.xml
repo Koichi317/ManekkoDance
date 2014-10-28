@@ -265,7 +265,7 @@
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:scaleType="fitStart"
-                            android:src="@drawable/haikei" />
+                            android:src="@drawable/haikei"/>
 
                         <ImageView
                             android:id="@+id/image1_0"
@@ -273,7 +273,7 @@
                             android:layout_height="61dip"
                             android:layout_toRightOf="@id/image0_0"
                             android:scaleType="fitStart"
-                            android:src="@drawable/haikei" />
+                            android:src="@drawable/haikei"/>
 
                         <ImageView
                             android:id="@+id/image2_0"
@@ -281,7 +281,7 @@
                             android:layout_height="61dip"
                             android:layout_toRightOf="@id/image1_0"
                             android:scaleType="fitStart"
-                            android:src="@drawable/haikei" />
+                            android:src="@drawable/haikei"/>
                         <!-- 2行目 -->
 
                         <ImageView

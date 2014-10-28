@@ -16,15 +16,17 @@ public class DragViewListener implements OnTouchListener {
     private ImageView[][] cells;
     private String[][] program;
     private TextView text;
+    private int flag[][];
     private int oldx;
     private int oldy;
 
     public DragViewListener(ImageView dragView, ImageView[][] cells,
-                            String[][] program, TextView text) {
+                            String[][] program, TextView text, int[][] flag) {
         this.dragView = dragView;
         this.cells = cells;
         this.program = program;
         this.text = text;
+        this.flag = flag;
     }
 
     public boolean onTouch(View view, MotionEvent event) {
@@ -40,20 +42,23 @@ public class DragViewListener implements OnTouchListener {
         int xx = x / cells[0][0].getWidth();
         int yy = y / cells[0][0].getHeight();
 
-        //if (flag[x_index][y_index] == 1) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:
-                //if (flag[a][b] == 1) {
                 dragView.layout(left, top, left + dragView.getWidth(), top
                         + dragView.getHeight());
-                //}
                 break;
             case MotionEvent.ACTION_UP:
-                //if (flag[a][b] != 1) {
-                //return false;
-                //}
-                if (0 <= x_index && x_index <= 2 && 0 <= y_index && y_index <= 9) {
+                if (0 <= x_index && x_index <= 2 && 0 <= y_index && y_index <= 12) {
+
+                    for (int i = 0; i < 2; i++) {
+                        if (x_index > 0) {
+                            if (program[x_index - 1][y_index] == "") {
+                                x_index--;
+                            }
+                        }
+                    }
                     if (view.getId() == R.id.imageView1) {
+                        cells[x_index][y_index].setVisibility(View.VISIBLE);
                         cells[x_index][y_index]
                                 .setImageResource(R.drawable.icon_right_hand_up);
                         program[x_index][y_index] = "右腕を上げる";
@@ -100,44 +105,46 @@ public class DragViewListener implements OnTouchListener {
                     } else if (view.getId() == R.id.imageView12) {
                         cells[x_index][y_index].setImageResource(R.drawable.haikei);
                         program[x_index][y_index] = "";
-                    } else if (view.getId() == R.id.imageView01) {
-                        cells[x_index][y_index].setImageResource(R.drawable.num1);
-                        program[x_index][y_index] = "1";
-                    } else if (view.getId() == R.id.imageView02) {
-                        cells[x_index][y_index].setImageResource(R.drawable.num2);
-                        program[x_index][y_index] = "2";
-                    } else if (view.getId() == R.id.imageView03) {
-                        cells[x_index][y_index].setImageResource(R.drawable.num3);
-                        program[x_index][y_index] = "3";
-                    } else if (view.getId() == R.id.imageView04) {
-                        cells[x_index][y_index].setImageResource(R.drawable.num4);
-                        program[x_index][y_index] = "4";
-                    } else if (view.getId() == R.id.imageView05) {
-                        cells[x_index][y_index].setImageResource(R.drawable.num5);
-                        program[x_index][y_index] = "5";
-                    } else if (view.getId() == R.id.imageView06) {
-                        cells[x_index][y_index].setImageResource(R.drawable.num6);
-                        program[x_index][y_index] = "6";
-                    } else if (view.getId() == R.id.imageView07) {
-                        cells[x_index][y_index].setImageResource(R.drawable.num7);
-                        program[x_index][y_index] = "7";
-                    } else if (view.getId() == R.id.imageView08) {
-                        cells[x_index][y_index].setImageResource(R.drawable.num8);
-                        program[x_index][y_index] = "8";
-                    } else if (view.getId() == R.id.imageView09) {
-                        cells[x_index][y_index].setImageResource(R.drawable.num9);
-                        program[x_index][y_index] = "9";
-                    } else if (view.getId() == R.id.imageView00) {
-                        cells[x_index][y_index].setImageResource(R.drawable.num0);
-                        program[x_index][y_index] = "0";
-
                     }
-                    // Log.v("program" + x_index + y_index,
-                    // program[x_index][y_index]);
-
-                } else {
-                    // 初期状態に戻しておきたい
+                } else if (view.getId() == R.id.imageView01) {
+                    cells[x_index][y_index].setImageResource(R.drawable.num1);
+                    program[x_index][y_index] = "1";
+                } else if (view.getId() == R.id.imageView02) {
+                    cells[x_index][y_index].setImageResource(R.drawable.num2);
+                    program[x_index][y_index] = "2";
+                } else if (view.getId() == R.id.imageView03) {
+                    cells[x_index][y_index].setImageResource(R.drawable.num3);
+                    program[x_index][y_index] = "3";
+                } else if (view.getId() == R.id.imageView04) {
+                    cells[x_index][y_index].setImageResource(R.drawable.num4);
+                    program[x_index][y_index] = "4";
+                } else if (view.getId() == R.id.imageView05) {
+                    cells[x_index][y_index].setImageResource(R.drawable.num5);
+                    program[x_index][y_index] = "5";
+                } else if (view.getId() == R.id.imageView06) {
+                    cells[x_index][y_index].setImageResource(R.drawable.num6);
+                    program[x_index][y_index] = "6";
+                } else if (view.getId() == R.id.imageView07) {
+                    cells[x_index][y_index].setImageResource(R.drawable.num7);
+                    program[x_index][y_index] = "7";
+                } else if (view.getId() == R.id.imageView08) {
+                    cells[x_index][y_index].setImageResource(R.drawable.num8);
+                    program[x_index][y_index] = "8";
+                } else if (view.getId() == R.id.imageView09) {
+                    cells[x_index][y_index].setImageResource(R.drawable.num9);
+                    program[x_index][y_index] = "9";
+                } else if (view.getId() == R.id.imageView00) {
+                    cells[x_index][y_index].setImageResource(R.drawable.num0);
+                    program[x_index][y_index] = "0";
                 }
+                // Log.v("program" + x_index + y_index,
+                // program[x_index][y_index]);
+
+               /*} else if (x_index == 7 && y_index == 0) {
+                    if(view.getId() == R.id.image0_0){
+                        cells[0][0].setVisibility(View.INVISIBLE);
+                    }*/
+
                 text.setText(program[0][0] + program[1][0] + program[2][0] + "\n"
                         + program[0][1] + program[1][1] + program[2][1] + "\n"
                         + program[0][2] + program[1][2] + program[2][2] + "\n"
@@ -154,7 +161,6 @@ public class DragViewListener implements OnTouchListener {
 
         oldx = x;
         oldy = y;
-        //}
         return true;
     }
 }
