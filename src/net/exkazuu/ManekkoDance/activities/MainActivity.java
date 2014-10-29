@@ -101,6 +101,19 @@ public class MainActivity extends Activity {
                 + program[0][10] + program[1][10] + program[2][10] + "\n"
                 + program[0][11] + program[1][11] + program[2][11] + "\n");
 
+        //記述可能部分
+        ImageView[][] canwrite = new ImageView[3][12];
+        int[][] resc = new int[3][12];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 12; j++) {
+                resc[i][j] = this.getResources().getIdentifier("canwrite" + i + "_" + j, "id", this.getPackageName());
+                canwrite[i][j] = (ImageView) findViewById(resc[i][j]);
+            }
+        }
+        for (int j = 0; j < 12; j++) {
+            canwrite[0][j].setImageResource(R.drawable.haikei2);
+        }
+
         // 背景たち
         int[][] resb = new int[3][12];
         ImageView[][] cells = new ImageView[3][12];
@@ -116,7 +129,7 @@ public class MainActivity extends Activity {
                 resb[i][j] = this.getResources().getIdentifier("image" + i + "_" + j, "id", this.getPackageName());
                 cells[i][j] = (ImageView) findViewById(resb[i][j]);
                 backgroundlistener[i][j] = new DragViewListener(cells[i][j], cells,
-                        program, text, flag, resb);
+                        program, text, flag, resb, canwrite);
                 cells[i][j].setOnTouchListener(backgroundlistener[i][j]);
             }
         }
@@ -133,7 +146,7 @@ public class MainActivity extends Activity {
             res[0][i] = this.getResources().getIdentifier("imageView" + (i + 1), "id", this.getPackageName());
             dragView[0][i] = (ImageView) findViewById(res[0][i]);
             listener[0][i] = new DragViewListener(dragView[0][i], cells,
-                    program, text, flag, resb);
+                    program, text, flag, resb, canwrite);
             dragView[0][i].setOnTouchListener(listener[0][i]);
         }
         //アイコンたち(数字達)
@@ -141,7 +154,7 @@ public class MainActivity extends Activity {
             res[1][i] = this.getResources().getIdentifier("imageView" + 0 + i, "id", this.getPackageName());
             dragView[1][i] = (ImageView) findViewById(res[1][i]);
             listener[1][i] = new DragViewListener(dragView[1][i], cells,
-                    program, text, flag, resb);
+                    program, text, flag, resb, canwrite);
             dragView[1][i].setOnTouchListener(listener[1][i]);
         }
 
@@ -149,7 +162,7 @@ public class MainActivity extends Activity {
         ImageView[] step = new ImageView[12];
         int[] resS = new int[12];
         for (int i = 0; i < 12; i++) {
-            resS[i] = this.getResources().getIdentifier("step" + (i+1), "id", this.getPackageName());
+            resS[i] = this.getResources().getIdentifier("step" + (i + 1), "id", this.getPackageName());
             step[i] = (ImageView) findViewById(resS[i]);
         }
 
@@ -165,6 +178,7 @@ public class MainActivity extends Activity {
             for (int j = 10; j < 12; j++) {
                 for (int i = 0; i < 3; i++) {
                     cells[i][j].setVisibility(View.VISIBLE);
+                    canwrite[i][j].setVisibility(View.VISIBLE);
                 }
                 step[j].setVisibility(View.VISIBLE);
             }
@@ -188,6 +202,7 @@ public class MainActivity extends Activity {
             for (int j = 8; j < 10; j++) {
                 for (int i = 0; i < 3; i++) {
                     cells[i][j].setVisibility(View.INVISIBLE);
+                    canwrite[i][j].setVisibility(View.INVISIBLE);
                 }
                 step[j].setVisibility(View.INVISIBLE);
             }

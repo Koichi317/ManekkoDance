@@ -688,6 +688,350 @@
                             android:layout_toRightOf="@id/image2_10"
                             android:src="@drawable/dustbox" />
 
+                        <!-- 記述可能な位置を教える -->
+                        <!-- 1行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_0"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step1"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_0"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/image0_0"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_0"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/image1_0"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 2行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_1"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step2"
+                            android:layout_below="@id/image0_0"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_1"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_0"
+                            android:layout_toRightOf="@id/image0_1"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_1"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image2_0"
+                            android:layout_toRightOf="@id/image1_1"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 3行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_2"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step3"
+                            android:layout_below="@id/image0_1"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_2"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_1"
+                            android:layout_toRightOf="@id/image0_2"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_2"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image2_1"
+                            android:layout_toRightOf="@id/image1_2"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 4行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_3"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step4"
+                            android:layout_below="@id/image0_2"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_3"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_2"
+                            android:layout_toRightOf="@id/image0_3"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_3"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image2_2"
+                            android:layout_toRightOf="@id/image1_3"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 5行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_4"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step5"
+                            android:layout_below="@id/image0_3"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_4"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_3"
+                            android:layout_toRightOf="@id/image0_4"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_4"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image2_3"
+                            android:layout_toRightOf="@id/image1_4"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 6行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_5"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step6"
+                            android:layout_below="@id/image0_4"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_5"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_4"
+                            android:layout_toRightOf="@id/image0_5"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_5"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_4"
+                            android:layout_toRightOf="@id/image1_5"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 7行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_6"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step7"
+                            android:layout_below="@id/image0_5"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_6"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_5"
+                            android:layout_toRightOf="@id/image0_6"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_6"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image2_5"
+                            android:layout_toRightOf="@id/image1_6"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+                        <!-- 8行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_7"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step8"
+                            android:layout_below="@id/image0_6"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_7"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_6"
+                            android:layout_toRightOf="@id/image0_7"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_7"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image2_6"
+                            android:layout_toRightOf="@id/image1_7"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <!-- 9行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_8"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step9"
+                            android:layout_below="@id/image0_7"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_8"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_7"
+                            android:layout_toRightOf="@id/image0_8"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_8"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image2_7"
+                            android:layout_toRightOf="@id/image1_8"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <!-- 10行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_9"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step10"
+                            android:layout_below="@id/image0_8"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_9"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_8"
+                            android:layout_toRightOf="@id/image0_9"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_9"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image2_8"
+                            android:layout_toRightOf="@id/image1_9"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei" />
+
+                        <!-- 11行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_10"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step11"
+                            android:layout_below="@id/image0_9"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei"
+                            android:visibility="invisible" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_10"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_9"
+                            android:layout_toRightOf="@id/image0_10"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei"
+                            android:visibility="invisible" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_10"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image2_9"
+                            android:layout_toRightOf="@id/image1_10"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei"
+                            android:visibility="invisible" />
+
+                        <!-- 12行目 -->
+
+                        <ImageView
+                            android:id="@+id/canwrite0_11"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_toRightOf="@id/step12"
+                            android:layout_below="@id/image0_10"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei"
+                            android:visibility="invisible" />
+
+                        <ImageView
+                            android:id="@+id/canwrite1_11"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image1_10"
+                            android:layout_toRightOf="@id/image0_11"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei"
+                            android:visibility="invisible" />
+
+                        <ImageView
+                            android:id="@+id/canwrite2_11"
+                            android:layout_width="61dip"
+                            android:layout_height="61dip"
+                            android:layout_below="@id/image2_10"
+                            android:layout_toRightOf="@id/image1_11"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/haikei"
+                            android:visibility="invisible" />
 
                     </RelativeLayout>
                 </FrameLayout>

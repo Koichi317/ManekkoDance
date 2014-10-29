@@ -18,17 +18,19 @@ public class DragViewListener implements OnTouchListener {
     private TextView text;
     private int flag[][];
     private int resb[][];
+    private ImageView[][] canwrite;
     private int oldx;
     private int oldy;
 
     public DragViewListener(ImageView dragView, ImageView[][] cells,
-                            String[][] program, TextView text, int[][] flag, int[][] resb) {
+                            String[][] program, TextView text, int[][] flag, int[][] resb, ImageView[][] canwrite) {
         this.dragView = dragView;
         this.cells = cells;
         this.program = program;
         this.text = text;
         this.flag = flag;
         this.resb = resb;
+        this.canwrite = canwrite;
     }
 
     public boolean onTouch(View view, MotionEvent event) {
@@ -183,6 +185,22 @@ public class DragViewListener implements OnTouchListener {
                         }
                     }
                 }
+                for (int j = 0; j < 12; j++) {
+                    int flag = 0;
+                    for (int i = 0; i < 3; i++) {
+                        if (program[i][j] == "") {
+                            if (flag == 0) {
+                                canwrite[i][j].setImageResource(R.drawable.haikei2);
+                                flag = 1;
+                            }else{
+                                canwrite[i][j].setImageResource(R.drawable.haikei);
+                            }
+                        } else {
+                            canwrite[i][j].setImageResource(R.drawable.haikei);
+                        }
+                    }
+                }
+
                 text.setText(program[0][0] + program[1][0] + program[2][0] + "\n"
                         + program[0][1] + program[1][1] + program[2][1] + "\n"
                         + program[0][2] + program[1][2] + program[2][2] + "\n"
