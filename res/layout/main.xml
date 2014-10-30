@@ -255,77 +255,77 @@
                             android:id="@+id/step1"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
-                            android:src="@drawable/num1" />
+                            android:src="@drawable/step1" />
 
                         <ImageView
                             android:id="@+id/step2"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:layout_below="@id/step1"
-                            android:src="@drawable/num2"/>
+                            android:src="@drawable/step2"/>
 
                         <ImageView
                             android:id="@+id/step3"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:layout_below="@id/step2"
-                            android:src="@drawable/num3"/>
+                            android:src="@drawable/step3"/>
 
                         <ImageView
                             android:id="@+id/step4"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:layout_below="@id/step3"
-                            android:src="@drawable/num4"/>
+                            android:src="@drawable/step4"/>
 
                         <ImageView
                             android:id="@+id/step5"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:layout_below="@id/step4"
-                            android:src="@drawable/num5" />
+                            android:src="@drawable/step5" />
 
                         <ImageView
                             android:id="@+id/step6"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:layout_below="@id/step5"
-                            android:src="@drawable/num6"/>
+                            android:src="@drawable/step6"/>
 
                         <ImageView
                             android:id="@+id/step7"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:layout_below="@id/step6"
-                            android:src="@drawable/num7"/>
+                            android:src="@drawable/step7"/>
 
                         <ImageView
                             android:id="@+id/step8"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:layout_below="@id/step7"
-                            android:src="@drawable/num8" />
+                            android:src="@drawable/step8" />
 
                         <ImageView
                             android:id="@+id/step9"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:layout_below="@id/step8"
-                            android:src="@drawable/num9" />
+                            android:src="@drawable/step9" />
 
                         <ImageView
                             android:id="@+id/step10"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:layout_below="@id/step9"
-                            android:src="@drawable/num0" />
+                            android:src="@drawable/step10" />
 
                         <ImageView
                             android:id="@+id/step11"
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:layout_below="@id/step10"
-                            android:src="@drawable/num1"
+                            android:src="@drawable/step11"
                             android:visibility="invisible" />
 
                         <ImageView
@@ -333,7 +333,7 @@
                             android:layout_width="61dip"
                             android:layout_height="61dip"
                             android:layout_below="@id/step11"
-                            android:src="@drawable/num2"
+                            android:src="@drawable/step12"
                             android:visibility="invisible" />
 
                         <!-- 1行目 -->

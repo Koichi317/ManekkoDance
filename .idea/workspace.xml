@@ -26,7 +26,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e310e8cd-5ccb-41a6-8857-9311cad171c0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/DragViewListener.java" afterPath="$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/DragViewListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/answer_false.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/answer_false.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-ldpi/answer_false.png" afterPath="$PROJECT_DIR$/res/drawable-ldpi/answer_false.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/answer_false.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/answer_false.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/answer_false.png" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/answer_false.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/haikei2.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/haikei2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-ldpi/haikei2.png" afterPath="$PROJECT_DIR$/res/drawable-ldpi/haikei2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/haikei2.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/haikei2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/haikei2.png" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/haikei2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/ActionActivity.java" afterPath="$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/ActionActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java" afterPath="$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -55,8 +63,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2771" max-vertical-offset="7599">
-              <caret line="255" column="0" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="5950" max-vertical-offset="7650">
+              <caret line="413" column="51" selection-start-line="413" selection-start-column="51" selection-end-line="413" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -65,8 +73,8 @@
       <file leaf-file-name="DragViewListener.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/DragViewListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3108108" vertical-offset="956" max-vertical-offset="3774">
-              <caret line="70" column="65" selection-start-line="70" selection-start-column="65" selection-end-line="70" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.64324325" vertical-offset="2907" max-vertical-offset="3774">
+              <caret line="192" column="46" selection-start-line="192" selection-start-column="46" selection-end-line="192" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -75,28 +83,36 @@
       <file leaf-file-name="ActionActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/ActionActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.193548" vertical-offset="3202" max-vertical-offset="5848">
-              <caret line="199" column="40" selection-start-line="199" selection-start-column="40" selection-end-line="199" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#10098#10099#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="3421" max-vertical-offset="5372">
+              <caret line="257" column="61" selection-start-line="257" selection-start-column="61" selection-end-line="257" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="547.4" vertical-offset="17935" max-vertical-offset="19958">
+              <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="action_screen.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/action_screen.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.7868853" vertical-offset="408" max-vertical-offset="4862">
-              <caret line="34" column="40" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
-              <folding>
-                <element signature="e#10872#10901#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
           <provider editor-type-id="android-designer">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="4862">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -114,9 +130,11 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/DragViewListener.java" />
+        <option value="$PROJECT_DIR$/res/layout/main.xml" />
+        <option value="$PROJECT_DIR$/res/layout/action_screen.xml" />
         <option value="$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/ActionActivity.java" />
       </list>
     </option>
   </component>
@@ -152,8 +170,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -262,13 +281,30 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ManekkoDance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ManekkoDance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -462,7 +498,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -478,7 +514,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32561985" sideWeight="0.54172766" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3371901" sideWeight="0.5783309" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3371901" sideWeight="0.5783309" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -518,6 +554,87 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7021" max-vertical-offset="8602">
+          <caret line="413" column="51" selection-start-line="413" selection-start-column="51" selection-end-line="413" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/DragViewListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1190" max-vertical-offset="3893">
+          <caret line="70" column="65" selection-start-line="70" selection-start-column="65" selection-end-line="70" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/ActionActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3506" max-vertical-offset="5610">
+          <caret line="254" column="70" selection-start-line="254" selection-start-column="70" selection-end-line="254" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1377" max-vertical-offset="19958">
+          <caret line="88" column="50" selection-start-line="88" selection-start-column="50" selection-end-line="88" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/action_screen.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="4862">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4335" max-vertical-offset="8585">
+          <caret line="255" column="0" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/DragViewListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="956" max-vertical-offset="3774">
+          <caret line="70" column="65" selection-start-line="70" selection-start-column="65" selection-end-line="70" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/ActionActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3383" max-vertical-offset="6426">
+          <caret line="199" column="40" selection-start-line="199" selection-start-column="40" selection-end-line="199" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/action_screen.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="4862">
+          <caret line="34" column="40" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2176" max-vertical-offset="7633">
           <caret line="165" column="45" selection-start-line="165" selection-start-column="45" selection-end-line="165" selection-end-column="45" />
           <folding />
@@ -528,7 +645,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="680">
           <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -541,31 +657,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="6906" max-vertical-offset="14110">
           <caret line="330" column="34" selection-start-line="330" selection-start-column="34" selection-end-line="330" selection-end-column="34" />
-          <folding>
-            <element signature="e#2586#2619#0" expanded="true" />
-            <element signature="e#2664#2699#0" expanded="true" />
-            <element signature="e#2745#2780#0" expanded="true" />
-            <element signature="e#2824#2857#0" expanded="true" />
-            <element signature="e#52001#52021#0" expanded="true" />
-            <element signature="e#52354#52374#0" expanded="true" />
-            <element signature="e#52704#52724#0" expanded="true" />
-            <element signature="e#53048#53068#0" expanded="true" />
-            <element signature="e#53401#53421#0" expanded="true" />
-            <element signature="e#54018#54038#0" expanded="true" />
-            <element signature="e#54375#54395#0" expanded="true" />
-            <element signature="e#54729#54749#0" expanded="true" />
-            <element signature="e#55077#55097#0" expanded="true" />
-            <element signature="e#55434#55454#0" expanded="true" />
-            <element signature="e#56058#56087#0" expanded="true" />
-            <element signature="e#56356#56372#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java">
@@ -580,7 +679,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="680">
           <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -593,31 +691,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="6906" max-vertical-offset="14110">
           <caret line="330" column="34" selection-start-line="330" selection-start-column="34" selection-end-line="330" selection-end-column="34" />
-          <folding>
-            <element signature="e#2586#2619#0" expanded="true" />
-            <element signature="e#2664#2699#0" expanded="true" />
-            <element signature="e#2745#2780#0" expanded="true" />
-            <element signature="e#2824#2857#0" expanded="true" />
-            <element signature="e#52001#52021#0" expanded="true" />
-            <element signature="e#52354#52374#0" expanded="true" />
-            <element signature="e#52704#52724#0" expanded="true" />
-            <element signature="e#53048#53068#0" expanded="true" />
-            <element signature="e#53401#53421#0" expanded="true" />
-            <element signature="e#54018#54038#0" expanded="true" />
-            <element signature="e#54375#54395#0" expanded="true" />
-            <element signature="e#54729#54749#0" expanded="true" />
-            <element signature="e#55077#55097#0" expanded="true" />
-            <element signature="e#55434#55454#0" expanded="true" />
-            <element signature="e#56058#56087#0" expanded="true" />
-            <element signature="e#56356#56372#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java">
@@ -637,31 +718,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4341" max-vertical-offset="12427">
           <caret line="263" column="54" selection-start-line="263" selection-start-column="54" selection-end-line="263" selection-end-column="54" />
-          <folding>
-            <element signature="e#2586#2619#0" expanded="true" />
-            <element signature="e#2664#2699#0" expanded="true" />
-            <element signature="e#2745#2780#0" expanded="true" />
-            <element signature="e#2824#2857#0" expanded="true" />
-            <element signature="e#52001#52021#0" expanded="true" />
-            <element signature="e#52354#52374#0" expanded="true" />
-            <element signature="e#52704#52724#0" expanded="true" />
-            <element signature="e#53048#53068#0" expanded="true" />
-            <element signature="e#53401#53421#0" expanded="true" />
-            <element signature="e#54018#54038#0" expanded="true" />
-            <element signature="e#54375#54395#0" expanded="true" />
-            <element signature="e#54729#54749#0" expanded="true" />
-            <element signature="e#55077#55097#0" expanded="true" />
-            <element signature="e#55434#55454#0" expanded="true" />
-            <element signature="e#56058#56087#0" expanded="true" />
-            <element signature="e#56356#56372#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java">
@@ -681,31 +745,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3852" max-vertical-offset="10574">
           <caret line="244" column="0" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
-          <folding>
-            <element signature="e#2586#2619#0" expanded="true" />
-            <element signature="e#2664#2699#0" expanded="true" />
-            <element signature="e#2745#2780#0" expanded="true" />
-            <element signature="e#2824#2857#0" expanded="true" />
-            <element signature="e#52001#52021#0" expanded="true" />
-            <element signature="e#52354#52374#0" expanded="true" />
-            <element signature="e#52704#52724#0" expanded="true" />
-            <element signature="e#53048#53068#0" expanded="true" />
-            <element signature="e#53401#53421#0" expanded="true" />
-            <element signature="e#54018#54038#0" expanded="true" />
-            <element signature="e#54375#54395#0" expanded="true" />
-            <element signature="e#54729#54749#0" expanded="true" />
-            <element signature="e#55077#55097#0" expanded="true" />
-            <element signature="e#55434#55454#0" expanded="true" />
-            <element signature="e#56058#56087#0" expanded="true" />
-            <element signature="e#56356#56372#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java">
@@ -725,42 +772,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3852" max-vertical-offset="10574">
-          <caret line="244" column="0" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
-          <folding>
-            <element signature="e#2586#2619#0" expanded="true" />
-            <element signature="e#2664#2699#0" expanded="true" />
-            <element signature="e#2745#2780#0" expanded="true" />
-            <element signature="e#2824#2857#0" expanded="true" />
-            <element signature="e#52001#52021#0" expanded="true" />
-            <element signature="e#52354#52374#0" expanded="true" />
-            <element signature="e#52704#52724#0" expanded="true" />
-            <element signature="e#53048#53068#0" expanded="true" />
-            <element signature="e#53401#53421#0" expanded="true" />
-            <element signature="e#54018#54038#0" expanded="true" />
-            <element signature="e#54375#54395#0" expanded="true" />
-            <element signature="e#54729#54749#0" expanded="true" />
-            <element signature="e#55077#55097#0" expanded="true" />
-            <element signature="e#55434#55454#0" expanded="true" />
-            <element signature="e#56058#56087#0" expanded="true" />
-            <element signature="e#56356#56372#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3852" max-vertical-offset="10574">
+          <caret line="244" column="0" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.044502" vertical-offset="6129" max-vertical-offset="6511">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.AndroidStudioBeta/system/compile-server/manekkodance_c1fc8773/targets/java-production/ManekkoDance/android/generated_sources/aapt/jp/eclipcebook/R.java">
@@ -781,14 +811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.047222223" vertical-offset="51" max-vertical-offset="1530">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7638889" vertical-offset="745" max-vertical-offset="1156">
-          <caret line="60" column="37" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -822,7 +844,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.109144546" vertical-offset="31" max-vertical-offset="782">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -830,7 +851,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.109144546" vertical-offset="31" max-vertical-offset="1462">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -838,7 +858,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.109144546" vertical-offset="31" max-vertical-offset="510">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -846,74 +865,70 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14285715" vertical-offset="289" max-vertical-offset="646">
           <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23303835" vertical-offset="397" max-vertical-offset="1156">
+          <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main_menu.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/action_screen.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="4862">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/ActionActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3421" max-vertical-offset="5372">
+          <caret line="257" column="61" selection-start-line="257" selection-start-column="61" selection-end-line="257" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="547.4" vertical-offset="17935" max-vertical-offset="19958">
+          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2771" max-vertical-offset="7599">
-          <caret line="255" column="0" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="7684">
+          <caret line="413" column="51" selection-start-line="413" selection-start-column="51" selection-end-line="413" selection-end-column="51" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="19566" max-vertical-offset="19958">
-          <caret line="1157" column="27" selection-start-line="1157" selection-start-column="26" selection-end-line="1157" selection-end-column="27" />
-          <folding>
-            <element signature="e#2586#2619#0" expanded="true" />
-            <element signature="e#2664#2699#0" expanded="true" />
-            <element signature="e#2745#2780#0" expanded="true" />
-            <element signature="e#2824#2857#0" expanded="true" />
-            <element signature="e#52001#52021#0" expanded="true" />
-            <element signature="e#52354#52374#0" expanded="true" />
-            <element signature="e#52704#52724#0" expanded="true" />
-            <element signature="e#53048#53068#0" expanded="true" />
-            <element signature="e#53401#53421#0" expanded="true" />
-            <element signature="e#54018#54038#0" expanded="true" />
-            <element signature="e#54375#54395#0" expanded="true" />
-            <element signature="e#54729#54749#0" expanded="true" />
-            <element signature="e#55077#55097#0" expanded="true" />
-            <element signature="e#55434#55454#0" expanded="true" />
-            <element signature="e#56058#56087#0" expanded="true" />
-            <element signature="e#56356#56372#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/action_screen.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.7868853" vertical-offset="408" max-vertical-offset="4862">
-          <caret line="34" column="40" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
-          <folding>
-            <element signature="e#10872#10901#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/ActionActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.193548" vertical-offset="3202" max-vertical-offset="5848">
-          <caret line="199" column="40" selection-start-line="199" selection-start-column="40" selection-end-line="199" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#10098#10099#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/exkazuu/ManekkoDance/activities/DragViewListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3108108" vertical-offset="956" max-vertical-offset="3774">
-          <caret line="70" column="65" selection-start-line="70" selection-start-column="65" selection-end-line="70" selection-end-column="65" />
+        <state vertical-scroll-proportion="0.64324325" vertical-offset="2907" max-vertical-offset="3774">
+          <caret line="192" column="46" selection-start-line="192" selection-start-column="46" selection-end-line="192" selection-end-column="46" />
           <folding />
         </state>
       </provider>

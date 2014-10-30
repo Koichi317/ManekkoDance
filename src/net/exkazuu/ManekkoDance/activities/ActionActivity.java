@@ -239,7 +239,7 @@ public class ActionActivity extends Activity {
 												int which) {
 											int nextLessonNumber = Integer
 													.parseInt(message) + 1;
-											if (nextLessonNumber <= 3) {
+											if (nextLessonNumber <= 6) {
 												Intent intent = new Intent(
 														getApplication(),
 														net.exkazuu.ManekkoDance.activities.PartnerActivity.class);
@@ -259,6 +259,7 @@ public class ActionActivity extends Activity {
 														net.exkazuu.ManekkoDance.LessonList.class);
 												startActivity(intent);
 											}
+                                            finish();
 										}
 									});
 

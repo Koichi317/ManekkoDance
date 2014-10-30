@@ -400,7 +400,7 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         super.onCreateOptionsMenu(menu);
         MenuItem item1 = menu.add("ヘルプ");
-        MenuItem item2 = menu.add("クリア");
+        //MenuItem item2 = menu.add("クリア");
         MenuItem item3 = menu.add("タイトル画面へ戻る");
 
         item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -409,15 +409,16 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
-        item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        /*item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 textView.getEditableText().clear();
                 return false;
             }
-        });
+        });*/
         item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 changeTitleScreen();
+                finish();
                 return false;
             }
         });
