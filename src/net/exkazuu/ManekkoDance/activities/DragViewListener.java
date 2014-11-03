@@ -19,11 +19,12 @@ public class DragViewListener implements OnTouchListener {
     private int flag[][];
     private int resb[][];
     private ImageView[][] canwrite;
+    private String lessonNumber;
     private int oldx;
     private int oldy;
 
     public DragViewListener(ImageView dragView, ImageView[][] cells,
-                            String[][] program, TextView text, int[][] flag, int[][] resb, ImageView[][] canwrite) {
+                            String[][] program, TextView text, int[][] flag, int[][] resb, ImageView[][] canwrite, String lessonNumber) {
         this.dragView = dragView;
         this.cells = cells;
         this.program = program;
@@ -31,6 +32,7 @@ public class DragViewListener implements OnTouchListener {
         this.flag = flag;
         this.resb = resb;
         this.canwrite = canwrite;
+        this.lessonNumber = lessonNumber;
     }
 
     public boolean onTouch(View view, MotionEvent event) {
@@ -136,6 +138,23 @@ public class DragViewListener implements OnTouchListener {
                         }
                     }
                 }
+
+                if (lessonNumber.equals("4")) {
+                    for (int i = 0; i < 3; i++) {
+                        for (int j = 8; j < 12; j++) {
+                            program[i][j] = "";
+                        }
+                    }
+                } else if (lessonNumber.equals("2")) {
+                } else {
+                    for (int i = 0; i < 3; i++) {
+                        for (int j = 10; j < 12; j++) {
+                            program[i][j] = "";
+                        }
+                    }
+                }
+
+                //アイコンに変更
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 12; j++) {
                         if (program[i][j] == "右腕を上げる") {
@@ -185,6 +204,8 @@ public class DragViewListener implements OnTouchListener {
                         }
                     }
                 }
+
+                //次の入力場所の表示
                 for (int j = 0; j < 12; j++) {
                     int flag = 0;
                     for (int i = 0; i < 3; i++) {
@@ -192,7 +213,7 @@ public class DragViewListener implements OnTouchListener {
                             if (flag == 0) {
                                 canwrite[i][j].setImageResource(R.drawable.haikei2);
                                 flag = 1;
-                            }else{
+                            } else {
                                 canwrite[i][j].setImageResource(R.drawable.haikei);
                             }
                         } else {

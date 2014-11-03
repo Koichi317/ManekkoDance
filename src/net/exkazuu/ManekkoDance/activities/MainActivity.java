@@ -115,6 +115,9 @@ public class MainActivity extends Activity {
         }
 
         // 背景たち
+        Intent intent = getIntent();
+        message = intent.getStringExtra("message");
+        String lessonNumber = message;
         int[][] resb = new int[3][12];
         ImageView[][] cells = new ImageView[3][12];
         DragViewListener[][] backgroundlistener = new DragViewListener[3][12];
@@ -129,7 +132,7 @@ public class MainActivity extends Activity {
                 resb[i][j] = this.getResources().getIdentifier("image" + i + "_" + j, "id", this.getPackageName());
                 cells[i][j] = (ImageView) findViewById(resb[i][j]);
                 backgroundlistener[i][j] = new DragViewListener(cells[i][j], cells,
-                        program, text, flag, resb, canwrite);
+                        program, text, flag, resb, canwrite, lessonNumber);
                 cells[i][j].setOnTouchListener(backgroundlistener[i][j]);
             }
         }
@@ -146,7 +149,7 @@ public class MainActivity extends Activity {
             res[0][i] = this.getResources().getIdentifier("imageView" + (i + 1), "id", this.getPackageName());
             dragView[0][i] = (ImageView) findViewById(res[0][i]);
             listener[0][i] = new DragViewListener(dragView[0][i], cells,
-                    program, text, flag, resb, canwrite);
+                    program, text, flag, resb, canwrite, lessonNumber);
             dragView[0][i].setOnTouchListener(listener[0][i]);
         }
         //アイコンたち(数字達)
@@ -154,7 +157,7 @@ public class MainActivity extends Activity {
             res[1][i] = this.getResources().getIdentifier("imageView" + 0 + i, "id", this.getPackageName());
             dragView[1][i] = (ImageView) findViewById(res[1][i]);
             listener[1][i] = new DragViewListener(dragView[1][i], cells,
-                    program, text, flag, resb, canwrite);
+                    program, text, flag, resb, canwrite, lessonNumber);
             dragView[1][i].setOnTouchListener(listener[1][i]);
         }
 
@@ -167,9 +170,9 @@ public class MainActivity extends Activity {
         }
 
         /********** Lesson data　の 取得 **************/
-        Intent intent = getIntent();
+       // Intent intent = getIntent();
         lesson = intent.getStringExtra("lesson");
-        message = intent.getStringExtra("message");
+       // message = intent.getStringExtra("message");
         text_data = intent.getStringExtra("text_data");
         Log.v("my_debug", "" + text_data);
         if (text_data != null) {
