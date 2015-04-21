@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.exkazuu.mimicdance" >
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".activities.TitleActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.LessonListActivity"
+            android:label="@string/title_activity_lesson_list" >
+        </activity>
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/title_activity_main"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name=".activities.PartnerActivity"
+            android:label="@string/title_activity_partner" >
+        </activity>
+        <activity
+            android:name=".activities.ActionActivity"
+            android:label="@string/title_activity_action" >
+        </activity>
+        <activity
+            android:name=".activities.TutorialActivity"
+            android:label="@string/title_tutorial" >
+        </activity>
+        <activity
+            android:name=".activities.HelpActivity"
+            android:label="@string/help" >
+        </activity>
+    </application>
+</manifest>
