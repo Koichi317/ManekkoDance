@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.exkazuu.mimicdance.AnswerCheck;
@@ -153,9 +156,22 @@ public class EvaluationActivity extends Activity {
             answer2.compare();
             Log.v("tag", answer.show());
 
+            Intent intent = getIntent();
+            message = intent.getStringExtra("message");
+
             // 解析&実行(白と黄)
             int maxSize = Math.max(leftPlayerCommands.size(),
                 leftPartnerCommands.size());
+            if (message.equals("5") || message.equals("6")) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView which_birds = (TextView) findViewById(R.id.yellow_or_orange);
+                        which_birds.setText("黄色いひよこの場合");
+                    }
+                });
+
+            }
             for (int i = 0; !died && i < maxSize; i++) {
                 if (i < leftPlayerCommands.size()) {
                     handler.post(leftPlayerExecutor);
@@ -186,69 +202,80 @@ public class EvaluationActivity extends Activity {
                 }
             }
 
-            //表示するキャラクターを変更
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    FrameLayout alt_piyo = (FrameLayout) findViewById(R.id.alt_piyo);
-                    FrameLayout alt_cocco = (FrameLayout) findViewById(R.id.alt_cocco);
-                    FrameLayout piyo = (FrameLayout) findViewById(R.id.piyo);
-                    FrameLayout cocco = (FrameLayout) findViewById(R.id.cocco);
+            if (message.equals("5") || message.equals("6")) {
+                //表示するキャラクターを変更
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView which_birds = (TextView) findViewById(R.id.yellow_or_orange);
+                        which_birds.setText("オレンジのひよこの場合");
 
-                    alt_piyo.setVisibility(View.VISIBLE);
-                    alt_cocco.setVisibility(View.VISIBLE);
-                    piyo.setVisibility(View.GONE);
-                    cocco.setVisibility(View.GONE);
+                        FrameLayout alt_piyo = (FrameLayout) findViewById(R.id.alt_piyo);
+                        FrameLayout alt_cocco = (FrameLayout) findViewById(R.id.alt_cocco);
+                        FrameLayout piyo = (FrameLayout) findViewById(R.id.piyo);
+                        FrameLayout cocco = (FrameLayout) findViewById(R.id.cocco);
 
-                }
-            });
+                        alt_piyo.setVisibility(View.VISIBLE);
+                        alt_cocco.setVisibility(View.VISIBLE);
+                        piyo.setVisibility(View.GONE);
+                        cocco.setVisibility(View.GONE);
+                    }
+                });
 
-            try { /* 2秒待機 */
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            //解析と実行(茶色と橙)
-            for (int i = 0; !died && i < maxSize; i++) {
-                if (i < leftPlayerCommands.size()) {
-                    handler.post(rightPlayerExecutor);
-                }
-                if (i < leftPartnerCommands.size()) {
-                    handler.post(rightPartnerExecutor);
-                }
-
-                try { /* 1秒待機 */
-                    Thread.sleep(500);
+                try { /* 2秒待機 */
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                if (i < leftPlayerCommands.size()) {
-                    handler.post(rightPlayerExecutor);
-                }
-                if (i < leftPartnerCommands.size()) {
-                    handler.post(rightPartnerExecutor);
-                }
-                try { /* 1秒待機 */
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (rightPlayerExecutor.existsError()) {
-                    break;
+                //解析と実行(茶色と橙)
+                for (int i = 0; !died && i < maxSize; i++) {
+                    if (i < leftPlayerCommands.size()) {
+                        handler.post(rightPlayerExecutor);
+                    }
+                    if (i < leftPartnerCommands.size()) {
+                        handler.post(rightPartnerExecutor);
+                    }
+
+                    try { /* 1秒待機 */
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (i < leftPlayerCommands.size()) {
+                        handler.post(rightPlayerExecutor);
+                    }
+                    if (i < leftPartnerCommands.size()) {
+                        handler.post(rightPartnerExecutor);
+                    }
+                    try { /* 1秒待機 */
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (rightPlayerExecutor.existsError()) {
+                        break;
+                    }
                 }
             }
 
             handler.post(new Runnable() {
                 public void run() {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(
-                        EvaluationActivity.this);
-                    builder.setTitle(" ");
+                    LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                    final View layout = inflater.inflate(R.layout.dialog, (ViewGroup) findViewById(R.id.alertdialog_layout));
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(EvaluationActivity.this);
+                    builder.setTitle("あなたの答えは…？");
+                    builder.setView(layout);
+                    ImageView true_ans = (ImageView) layout.findViewById(R.id.ans_true);
+                    ImageView false_ans = (ImageView) layout.findViewById(R.id.ans_false);
+
                     if (answer.judge && answer2.judge) {
+//                        builder.setIcon(R.drawable.answer_ture);
 
+                        false_ans.setVisibility(View.GONE);
                         if (Integer.parseInt(message) == 10) {
-                            builder.setIcon(R.drawable.answer_ture);
                             builder.setNegativeButton("タイトルへ戻る",
                                 new DialogInterface.OnClickListener() {
                                     @Override
@@ -272,7 +299,6 @@ public class EvaluationActivity extends Activity {
                                     }
                                 });
                         } else {
-                            builder.setIcon(R.drawable.answer_ture);
                             Timer.stopTimer();
                             builder.setNegativeButton("次のLessonに進む",
                                 new DialogInterface.OnClickListener() {
@@ -328,7 +354,8 @@ public class EvaluationActivity extends Activity {
                         }
 
                     } else {
-                        builder.setIcon(R.drawable.answer_false);
+//                        builder.setIcon(R.drawable.answer_false);
+                        true_ans.setVisibility(View.GONE);
                         builder.setNegativeButton("Lessonを選択し直す",
                             new DialogInterface.OnClickListener() {
                                 @Override
