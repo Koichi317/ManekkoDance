@@ -15,9 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import net.exkazuu.mimicdance.AnswerCheck;
-import net.exkazuu.mimicdance.IconContainer;
-import net.exkazuu.mimicdance.ImageContainer;
-import net.exkazuu.mimicdance.ImageInEdit;
+import net.exkazuu.mimicdance.CharacterImageViewSet;
 import net.exkazuu.mimicdance.Lessons;
 import net.exkazuu.mimicdance.R;
 import net.exkazuu.mimicdance.Timer;
@@ -27,18 +25,16 @@ import net.exkazuu.mimicdance.command.StringCommandParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActionActivity extends Activity {
+public class EvaluationActivity extends Activity {
 
     private String lesson;
     private String message;
     private String textData;
-    //private String textData;
-    public boolean answerCheckEnd = false;
 
-    private ImageContainer piyoLeftImages;
-    private ImageContainer piyoRightImages;
-    private ImageContainer coccoLeftImages;
-    private ImageContainer coccoRightImages;
+    private CharacterImageViewSet piyoLeftImages;
+    private CharacterImageViewSet piyoRightImages;
+    private CharacterImageViewSet coccoLeftImages;
+    private CharacterImageViewSet coccoRightImages;
 
     private Thread thread;
     private CommandExecutor commandExecutor;
@@ -51,15 +47,13 @@ public class ActionActivity extends Activity {
         }
     }
 
-    ;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("実行画面");
         setContentView(R.layout.action_screen);
 
-        ImageInEdit playerEditText = (ImageInEdit) findViewById(R.id.editTextActionScreen1);
+        TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
         TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
         Intent intent = getIntent();
         lesson = intent.getStringExtra("lesson");
@@ -89,10 +83,10 @@ public class ActionActivity extends Activity {
             }
         });
 
-        piyoLeftImages = ImageContainer.createPiyoLeft(this);
-        piyoRightImages = ImageContainer.createPiyoRight(this);
-        coccoLeftImages = ImageContainer.createCoccoLeft(this);
-        coccoRightImages = ImageContainer.createCoccoRight(this);
+        piyoLeftImages = CharacterImageViewSet.createPiyoLeft(this);
+        piyoRightImages = CharacterImageViewSet.createPiyoRight(this);
+        coccoLeftImages = CharacterImageViewSet.createCoccoLeft(this);
+        coccoRightImages = CharacterImageViewSet.createCoccoRight(this);
 /*
         if (message.equals("1") || message.equals("2") || message.equals("3")
 				|| message.equals("4")) {
@@ -102,8 +96,6 @@ public class ActionActivity extends Activity {
 */
 
     }
-
-    private static IconContainer IconContainer;
 
     public final class CommandExecutor implements Runnable {
         private final Handler handler;
@@ -155,11 +147,9 @@ public class ActionActivity extends Activity {
             StringCommandExecutor rightPartnerExecutor = new StringCommandExecutor(
                 coccoRightImages, rightPartnerCommands, false);
 
-            final AnswerCheck answer = new AnswerCheck(leftPlayerCommands,
-                leftPartnerCommands);
+            final AnswerCheck answer = new AnswerCheck(leftPlayerCommands, leftPartnerCommands);
             answer.compare();
-            final AnswerCheck answer2 = new AnswerCheck(rightPlayerCommands,
-                rightPartnerCommands);
+            final AnswerCheck answer2 = new AnswerCheck(rightPlayerCommands, rightPartnerCommands);
             answer2.compare();
             Log.v("tag", answer.show());
 
@@ -253,7 +243,7 @@ public class ActionActivity extends Activity {
             handler.post(new Runnable() {
                 public void run() {
                     AlertDialog.Builder builder = new AlertDialog.Builder(
-                        ActionActivity.this);
+                        EvaluationActivity.this);
                     builder.setTitle(" ");
                     if (answer.judge && answer2.judge) {
 
@@ -278,7 +268,7 @@ public class ActionActivity extends Activity {
                                         DialogInterface dialog,
                                         int which) {
                                         //(changeMainScreen();
-                                        ActionActivity.this.finish();
+                                        EvaluationActivity.this.finish();
                                     }
                                 });
                         } else {
@@ -332,7 +322,7 @@ public class ActionActivity extends Activity {
                                         DialogInterface dialog,
                                         int which) {
                                         //changeMainScreen();
-                                        ActionActivity.this.finish();
+                                        EvaluationActivity.this.finish();
                                     }
                                 });
                         }
@@ -356,7 +346,7 @@ public class ActionActivity extends Activity {
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
                                     //changeMainScreen();
-                                    ActionActivity.this.finish();
+                                    EvaluationActivity.this.finish();
                                 }
                             });
                     }
@@ -379,7 +369,7 @@ public class ActionActivity extends Activity {
         item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 //changeMainScreen();
-                ActionActivity.this.finish();
+                EvaluationActivity.this.finish();
                 return false;
             }
         });

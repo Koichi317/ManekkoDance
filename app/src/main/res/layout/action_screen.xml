@@ -12,7 +12,7 @@
     android:layout_weight="3.0"
     android:background="#ff81ff">
 
-    <net.exkazuu.mimicdance.ImageInEdit
+    <TextView
       android:id="@+id/editTextActionScreen1"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -29,7 +29,7 @@
       android:inputType="textMultiLine">
 
       <requestFocus />
-    </net.exkazuu.mimicdance.ImageInEdit>
+    </TextView>
 
     <ImageView
       android:id="@+id/imageView3"

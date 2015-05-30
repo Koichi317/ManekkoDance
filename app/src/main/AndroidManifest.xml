@@ -28,7 +28,7 @@
       android:name=".activities.PartnerActivity"
       android:label="@string/title_activity_partner"></activity>
     <activity
-      android:name=".activities.ActionActivity"
+      android:name=".activities.EvaluationActivity"
       android:label="@string/title_activity_action"></activity>
     <activity
       android:name=".activities.TutorialActivity"

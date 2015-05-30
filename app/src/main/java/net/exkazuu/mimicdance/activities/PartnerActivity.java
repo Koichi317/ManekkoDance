@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.exkazuu.mimicdance.ImageContainer;
+import net.exkazuu.mimicdance.CharacterImageViewSet;
 import net.exkazuu.mimicdance.R;
 import net.exkazuu.mimicdance.Timer;
 import net.exkazuu.mimicdance.command.StringCommandExecutor;
@@ -25,8 +25,8 @@ import java.util.List;
 public class PartnerActivity extends Activity {
 
     private String textData;
-    private ImageContainer leftImages;
-    private ImageContainer rightImages;
+    private CharacterImageViewSet leftImages;
+    private CharacterImageViewSet rightImages;
     private Thread thread;
     private CommandExecutor commandExecutor;
     private String problemNumber;
@@ -94,8 +94,8 @@ public class PartnerActivity extends Activity {
         final PartnerActivity activity = this;
         btn5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                leftImages = ImageContainer.createCoccoLeft(activity);
-                rightImages = ImageContainer.createCoccoRight(activity);
+                leftImages = CharacterImageViewSet.createCoccoLeft(activity);
+                rightImages = CharacterImageViewSet.createCoccoRight(activity);
                 final Handler handler = new Handler();
                 if (thread == null || !thread.isAlive()) {
                     thread = new Thread(new CommandExecutor(handler));
@@ -104,8 +104,8 @@ public class PartnerActivity extends Activity {
             }
         });
 
-        leftImages = ImageContainer.createCoccoLeft(this);
-        rightImages = ImageContainer.createCoccoRight(this);
+        leftImages = CharacterImageViewSet.createCoccoLeft(this);
+        rightImages = CharacterImageViewSet.createCoccoRight(this);
     }
 
     private final class CommandExecutor implements Runnable {
@@ -134,8 +134,8 @@ public class PartnerActivity extends Activity {
                 rightCommands);
         }
 
-        private void executeCommands(ImageContainer leftImages,
-                                     ImageContainer rightImages, List<String> leftCommands,
+        private void executeCommands(CharacterImageViewSet leftImages,
+                                     CharacterImageViewSet rightImages, List<String> leftCommands,
                                      List<String> rightCommands) {
             Runnable leftRunnable = new StringCommandExecutor(leftImages,
                 leftCommands, true);

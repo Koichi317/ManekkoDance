@@ -25,8 +25,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 import net.exkazuu.mimicdance.DetectableSoftKeyLayout;
-import net.exkazuu.mimicdance.IconContainer;
-import net.exkazuu.mimicdance.ImageContainer;
+import net.exkazuu.mimicdance.CharacterImageViewSet;
 import net.exkazuu.mimicdance.Lessons;
 import net.exkazuu.mimicdance.R;
 import net.exkazuu.mimicdance.command.StringCommandExecutor;
@@ -48,8 +47,8 @@ public class MainActivity extends Activity {
     private DetectableSoftKeyLayout DSKLayout;
     private HorizontalScrollView iconList;
 
-    private ImageContainer leftImages;
-    private ImageContainer rightImages;
+    private CharacterImageViewSet leftImages;
+    private CharacterImageViewSet rightImages;
 
     private Thread thread;
     private CommandExecutor commandExecutor;
@@ -71,8 +70,8 @@ public class MainActivity extends Activity {
         setTitle("編集画面");
         setContentView(R.layout.main);
 
-        leftImages = ImageContainer.createPiyoLeft(this);
-        rightImages = ImageContainer.createPiyoRight(this);
+        leftImages = CharacterImageViewSet.createPiyoLeft(this);
+        rightImages = CharacterImageViewSet.createPiyoRight(this);
 
         // 右側のテキストたち
         for (int i = 0; i < 12; i++) {
@@ -244,14 +243,6 @@ public class MainActivity extends Activity {
         tab1.setContent(R.id.tab1);
         host.addTab(tab1);
 
-		/*
-         * TabSpec tab2 = host.newTabSpec("tab2"); tab2.setIndicator("絵文字");
-		 * tab2.setContent(R.id.tab2); host.addTab(tab2);
-		 */
-        if (iconContainer == null) {
-            iconContainer = new IconContainer(getApplication());
-        }
-
         final MainActivity mainActivity = this;
 
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -336,8 +327,8 @@ public class MainActivity extends Activity {
                 rightCommands, leftNumbers, rightNumbers, textView);
         }
 
-        private void executeCommands(ImageContainer leftImages,
-                                     ImageContainer rightImages, List<String> leftCommands,
+        private void executeCommands(CharacterImageViewSet leftImages,
+                                     CharacterImageViewSet rightImages, List<String> leftCommands,
                                      List<String> rightCommands, List<Integer> leftNumbers,
                                      List<Integer> rightNumbers, TextView textView) {
             StringCommandExecutor leftRunnable = new StringCommandExecutor(
@@ -397,11 +388,10 @@ public class MainActivity extends Activity {
     }
 
     private TabHost host;
-    private static IconContainer iconContainer;
 
     public void initializeImage() {
-        leftImages = ImageContainer.createPiyoLeft(this);
-        rightImages = ImageContainer.createPiyoRight(this);
+        leftImages = CharacterImageViewSet.createPiyoLeft(this);
+        rightImages = CharacterImageViewSet.createPiyoRight(this);
     }
 
     /**
@@ -444,7 +434,7 @@ public class MainActivity extends Activity {
     public void changeActionScreen(View view) { // 判定画面への遷移
         host.setCurrentTab(TEXT_VIEW);
         Intent intent = new Intent(this,
-            net.exkazuu.mimicdance.activities.ActionActivity.class);
+            EvaluationActivity.class);
         intent.putExtra("lesson", lesson);
         intent.putExtra("message", message);
         text = (TextView) findViewById(R.id.tvCount1);

@@ -5,10 +5,9 @@ import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
-import net.exkazuu.mimicdance.ImageContainer;
+import net.exkazuu.mimicdance.CharacterImageViewSet;
 import net.exkazuu.mimicdance.R;
 
 import org.apache.http.HttpEntity;
@@ -26,613 +25,102 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringCommandExecutor implements Runnable {
-    private String arg = "";
+    private String bearCommand = "";
 
-    private enum CharacterType {
-        PiyoLeft, PiyoRight, CoccoLeft, CoccoRight,
-    }
-
-    private static class Input {
-        boolean 左腕を上げる;
-        boolean 左腕を下げる;
-        boolean 右腕を上げる;
-        boolean 右腕を下げる;
-        boolean 左足を上げる;
-        boolean 左足を下げる;
-        boolean 右足を上げる;
-        boolean 右足を下げる;
-        boolean ジャンプする;
-
-        private void inputReset() {
-            左腕を上げる = false;
-            左腕を下げる = false;
-            右腕を上げる = false;
-            右腕を下げる = false;
-            左足を上げる = false;
-            左足を下げる = false;
-            右足を上げる = false;
-            右足を下げる = false;
-            ジャンプする = false;
-        }
-    }
-
-    private static class State {
-        boolean isLeftHandUp;
-        boolean isLeftHandDown;
-        boolean isRightHandUp;
-        boolean isRightHandDown;
-        boolean isLeftFootUp;
-        boolean isLeftFootDown;
-        boolean isRightFootUp;
-        boolean isRightFootDown;
-
-        private State() {
-            isLeftHandUp = false;
-            isLeftHandDown = true;
-            isRightHandUp = false;
-            isRightHandDown = true;
-            isLeftFootUp = false;
-            isLeftFootDown = true;
-            isRightFootUp = false;
-            isRightFootDown = true;
-        }
-    }
 
     /**
      * * フィールド ***
      */
-    private boolean errored;
+    private boolean failed;
 
     private List<String> expandedCommands;
-    private int lineIndex;
-    private boolean addLineIndex;
-    private final ImageContainer images;
+    private int executionCount;
+    private final CharacterImageViewSet images;
     private TextView textView;
     private List<Integer> playerNumberSorting;
-    private String[] playerCommandsText;
-    private int colorPosition;
-    private CharacterType charaType;
-    private Input input;
-    private State state;
+    private final CharacterType charaType;
+    private Pose pose;
     private Context context;
     private MediaPlayer bgm;
+    private List<ActionType> actions;
 
     public boolean existsError() {
-        return errored;
+        return failed;
     }
 
     /**
      * * コンストラクタ ***
      */
     // お手本
-    public StringCommandExecutor(ImageContainer images,
+    public StringCommandExecutor(CharacterImageViewSet images,
                                  List<String> stringArray, boolean isLeft) {
         this.images = images;
         this.expandedCommands = stringArray;
-        this.lineIndex = 0;
-        this.addLineIndex = true;
-        input = new Input();
-        state = new State();
-        charaType = isLeft ? CharacterType.CoccoLeft : CharacterType.CoccoRight;
-        errored = false;
+        pose = new Pose();
+        charaType = isLeft ? CharacterType.Cocco : CharacterType.AltCocco;
+        failed = false;
     }
 
     // プレイヤー
-    public StringCommandExecutor(ImageContainer images,
+    public StringCommandExecutor(CharacterImageViewSet images,
                                  List<String> stringArray, TextView textView,
                                  List<Integer> playerNumberSorting, Context context, boolean isLeft) {
         this.context = context;
         this.images = images;
         this.expandedCommands = stringArray;
-        this.lineIndex = 0;
-        this.addLineIndex = true;
-        input = new Input();
-        state = new State();
+        pose = new Pose();
         this.textView = textView;
         this.playerNumberSorting = playerNumberSorting;
-        colorPosition = 0;
-        charaType = isLeft ? CharacterType.PiyoLeft : CharacterType.PiyoRight;
-        errored = false;
+        charaType = isLeft ? CharacterType.Piyo : CharacterType.AltPiyo;
+        failed = false;
     }
 
     @Override
     public void run() {
-        if (addLineIndex) {
-
-            if (charaType == CharacterType.PiyoLeft) { // 実行中の文字列を赤くする
-                colorPosition = playerNumberSorting.get(lineIndex);
-                playerCommandsText = textView.getText().toString().split("\n");
-                textView.getEditableText().clear();
-
-                for (int i = 0; i < playerCommandsText.length; i++) {
-
-                    if (colorPosition == i) {
-                        textView.append(Html.fromHtml("<font color=#ff0000>"
-                            + playerCommandsText[i] + "</font>"));
-                        textView.append("\n");
-                    } else {
-                        textView.append(playerCommandsText[i] + "\n");
-                    }
-                }
+        if ((executionCount & 1) == 0) {
+            if (charaType == CharacterType.Piyo || charaType == CharacterType.AltPiyo) {
+                highlightLine();
             }
 
-            input.inputReset(); // inputの初期化
-
-            // inputの取得
-            if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1)
-                input.左腕を上げる = true;
-            if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1)
-                input.左腕を下げる = true;
-            if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1)
-                input.右腕を上げる = true;
-            if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1)
-                input.右腕を下げる = true;
-            if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1)
-                input.左足を上げる = true;
-            if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1)
-                input.左足を下げる = true;
-            if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1)
-                input.右足を上げる = true;
-            if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1)
-                input.右足を下げる = true;
-            if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1)
-                input.ジャンプする = true;
+            actions = ActionType.parse(expandedCommands.get(executionCount / 2));
 
             // 無効な命令の並び（左腕を上げる&&左腕を下げる 等）
-            if ((input.左腕を上げる && input.左腕を下げる)
-                || (input.右腕を上げる && input.右腕を下げる)
-                || (input.左足を上げる && input.左足を下げる)
-                || (input.右足を上げる && input.右足を下げる)
-                || (input.左足を上げる && input.右足を上げる)
-                || (input.左足を下げる && input.右足を下げる)
-                || (input.ジャンプする && (input.左腕を上げる || input.左腕を下げる
-                || input.右腕を上げる || input.右腕を下げる || input.左足を上げる
-                || input.左足を下げる || input.右足を上げる || input.右足を下げる))) {
-                errored = true;
-                Log.v("tag", "error");
-                errorImage(images);
-                addLineIndex = false;
-                return;
-            }
-
-            // 無効な命令（左腕を上げている状態の時に"左腕を上げる" 等）
-            if ((input.左腕を上げる && state.isLeftHandUp)
-                || (input.左腕を下げる && state.isLeftHandDown)
-                || (input.右腕を上げる && state.isRightHandUp)
-                || (input.右腕を下げる && state.isRightHandDown)
-                || (input.左足を上げる && state.isLeftFootUp)
-                || (input.左足を下げる && state.isLeftFootDown)
-                || (input.右足を上げる && state.isRightFootUp)
-                || (input.右足を下げる && state.isRightFootDown)
-                || (input.ジャンプする && (state.isLeftHandUp
-                || state.isRightHandUp || state.isLeftFootUp || state.isRightFootUp))) {
-                errored = true;
-                errorImage(images);
-                addLineIndex = false;
-                return;
-            }
-
-            if (input.左腕を上げる) { // 左腕を上げる
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.cocco_left_hand_up2);
-                        break;
-                    case CoccoRight:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.alt_cocco_left_hand_up2);
-                        break;
-                    case PiyoLeft:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.piyo_left_hand_up2);
-                        arg += "lau";
-                        break;
-                    case PiyoRight:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.alt_piyo_left_hand_up2);
-                        break;
-                }
-                state.isLeftHandUp = true; // 左腕を上げている(1:true)
-                state.isLeftHandDown = false; // 左腕を下げている(0:false)
-            }
-
-            if (input.左腕を下げる) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.cocco_left_hand_up2);
-                        break;
-                    case CoccoRight:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.alt_cocco_left_hand_up2);
-                        break;
-                    case PiyoLeft:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.piyo_left_hand_up2);
-                        arg = arg.replace("lau", "");
-                        break;
-                    case PiyoRight:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.alt_piyo_left_hand_up2);
-                        break;
-                }
-                state.isLeftHandUp = false;
-                state.isLeftHandDown = true;
-            }
-
-            if (input.右腕を上げる) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getRightHand().setImageResource(
-                            R.drawable.cocco_right_hand_up2);
-                        break;
-                    case CoccoRight:
-                        images.getRightHand().setImageResource(
-                            R.drawable.alt_cocco_right_hand_up2);
-                        break;
-                    case PiyoLeft:
-                        images.getRightHand().setImageResource(
-                            R.drawable.piyo_right_hand_up2);
-                        arg += "rau";
-                        break;
-                    case PiyoRight:
-                        images.getRightHand().setImageResource(
-                            R.drawable.alt_piyo_right_hand_up2);
-                        break;
-                }
-                state.isRightHandUp = true;
-                state.isRightHandDown = false;
-            }
-
-            if (input.右腕を下げる) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getRightHand().setImageResource(
-                            R.drawable.cocco_right_hand_up2);
-                        break;
-                    case CoccoRight:
-                        images.getRightHand().setImageResource(
-                            R.drawable.alt_cocco_right_hand_up2);
-                        break;
-                    case PiyoLeft:
-                        images.getRightHand().setImageResource(
-                            R.drawable.piyo_right_hand_up2);
-                        arg = arg.replace("rau", "");
-                        break;
-                    case PiyoRight:
-                        images.getRightHand().setImageResource(
-                            R.drawable.alt_piyo_right_hand_up2);
-                        break;
-                }
-                state.isRightHandUp = false;
-                state.isRightHandDown = true;
-            }
-
-            if (input.左足を上げる) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.cocco_left_foot_up2);
-                        break;
-                    case CoccoRight:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.alt_cocco_left_foot_up2);
-                        break;
-                    case PiyoLeft:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.piyo_left_foot_up2);
-                        arg += "llu";
-                        break;
-                    case PiyoRight:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.alt_piyo_left_foot_up2);
-                        break;
-                }
-                state.isLeftFootUp = true;
-                state.isLeftFootDown = false;
-            }
-
-            if (input.左足を下げる) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.cocco_left_foot_up2);
-                        break;
-                    case CoccoRight:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.alt_cocco_left_foot_up2);
-                        break;
-                    case PiyoLeft:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.piyo_left_foot_up2);
-                        arg = arg.replace("llu", "");
-                        break;
-                    case PiyoRight:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.alt_piyo_left_foot_up2);
-                        break;
-                }
-                state.isLeftFootUp = false;
-                state.isLeftFootDown = true;
-            }
-
-            if (input.右足を上げる) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.cocco_right_foot_up2);
-                        break;
-                    case CoccoRight:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.alt_cocco_right_foot_up2);
-                        break;
-                    case PiyoLeft:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.piyo_right_foot_up2);
-                        arg += "rlu";
-                        break;
-                    case PiyoRight:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.alt_piyo_right_foot_up2);
-                        break;
-                }
-                state.isRightFootUp = true;
-                state.isRightFootDown = false;
-            }
-
-            if (input.右足を下げる) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.cocco_right_foot_up2);
-                        break;
-                    case CoccoRight:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.alt_cocco_right_foot_up2);
-                        break;
-                    case PiyoLeft:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.piyo_right_foot_up2);
-                        arg = arg.replace("rlu", "");
-                        break;
-                    case PiyoRight:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.alt_piyo_right_foot_up2);
-                        break;
-                }
-                state.isRightFootUp = false;
-                state.isRightFootDown = true;
-            }
-
-            if (input.ジャンプする) {
-                images.getLeftHand().setVisibility(View.INVISIBLE);
-                images.getRightHand().setVisibility(View.INVISIBLE);
-                images.getLeftFoot().setVisibility(View.INVISIBLE);
-                images.getRightFoot().setVisibility(View.INVISIBLE);
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getBasic().setImageResource(R.drawable.cocco_jump2);
-                        break;
-                    case CoccoRight:
-                        images.getBasic().setImageResource(
-                            R.drawable.alt_cocco_jump2);
-                        break;
-                    case PiyoLeft:
-                        images.getBasic().setImageResource(R.drawable.piyo_jump2);
-                        arg += "jump";
-                        break;
-                    case PiyoRight:
-                        images.getBasic().setImageResource(
-                            R.drawable.alt_piyo_jump2);
-                        break;
-                }
+            if (!ActionType.validate(actions) || !pose.validate(actions)) {
+                failed = true;
+                Log.v("tag", "failed");
+                images.changeToMovingErrorImage();
             } else {
-                if (charaType == CharacterType.PiyoLeft) {
-                    arg = arg.replace("jump", "");
+                pose.change(actions);
+                images.changeToMovingImages(actions);
+
+                if (charaType == CharacterType.Piyo) {
+                    handleDanbo();
+                    commandBear(actions);
                 }
             }
-
-            if (charaType == CharacterType.PiyoLeft) {
-                handleDanbo();
-                commandBear(arg);
-            }
-            addLineIndex = false;
-
         } else {
-            if (charaType == CharacterType.PiyoLeft
-                || charaType == CharacterType.PiyoRight) {
-                if (errored) {
-                    errorImage(images);
-                    addLineIndex = true;
-                    return;
-                }
+            if (failed && (charaType == CharacterType.Piyo || charaType == CharacterType.AltPiyo)) {
+                images.changeToMovedErrorImage();
+            } else {
+                images.changeToMovedImages(actions);
             }
+        }
+        executionCount++;
+    }
 
-            if (expandedCommands.get(lineIndex).indexOf("左腕を上げる") != -1) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.cocco_left_hand_up3);
-                        break;
-                    case CoccoRight:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.alt_cocco_left_hand_up3);
-                        break;
-                    case PiyoLeft:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.piyo_left_hand_up3);
-                        break;
-                    case PiyoRight:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.alt_piyo_left_hand_up3);
-                        break;
-                }
+    private void highlightLine() {
+        // 実行中の文字列を赤くする
+        int colorPosition = playerNumberSorting.get(executionCount / 2);
+        String[] lines = textView.getText().toString().split("\n");
+        textView.getEditableText().clear();
+        for (int i = 0; i < lines.length; i++) {
+            if (colorPosition == i) {
+                textView.append(
+                    Html.fromHtml("<font color=#ff0000>" + lines[i] + "</font>"));
+                textView.append("\n");
+            } else {
+                textView.append(lines[i] + "\n");
             }
-            if (expandedCommands.get(lineIndex).indexOf("左腕を下げる") != -1) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.cocco_left_hand_up1);
-                        break;
-                    case CoccoRight:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.alt_cocco_left_hand_up1);
-                        break;
-                    case PiyoLeft:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.piyo_left_hand_up1);
-                        break;
-                    case PiyoRight:
-                        images.getLeftHand().setImageResource(
-                            R.drawable.alt_piyo_left_hand_up1);
-                        break;
-                }
-            }
-            if (expandedCommands.get(lineIndex).indexOf("右腕を上げる") != -1) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getRightHand().setImageResource(
-                            R.drawable.cocco_right_hand_up3);
-                        break;
-                    case CoccoRight:
-                        images.getRightHand().setImageResource(
-                            R.drawable.alt_cocco_right_hand_up3);
-                        break;
-                    case PiyoLeft:
-                        images.getRightHand().setImageResource(
-                            R.drawable.piyo_right_hand_up3);
-                        break;
-                    case PiyoRight:
-                        images.getRightHand().setImageResource(
-                            R.drawable.alt_piyo_right_hand_up3);
-                        break;
-                }
-            }
-            if (expandedCommands.get(lineIndex).indexOf("右腕を下げる") != -1) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getRightHand().setImageResource(
-                            R.drawable.cocco_right_hand_up1);
-                        break;
-                    case CoccoRight:
-                        images.getRightHand().setImageResource(
-                            R.drawable.alt_cocco_right_hand_up1);
-                        break;
-                    case PiyoLeft:
-                        images.getRightHand().setImageResource(
-                            R.drawable.piyo_right_hand_up1);
-                        break;
-                    case PiyoRight:
-                        images.getRightHand().setImageResource(
-                            R.drawable.alt_piyo_right_hand_up1);
-                        break;
-                }
-            }
-            if (expandedCommands.get(lineIndex).indexOf("左足を上げる") != -1) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.cocco_left_foot_up3);
-                        break;
-                    case CoccoRight:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.alt_cocco_left_foot_up3);
-                        break;
-                    case PiyoLeft:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.piyo_left_foot_up3);
-                        break;
-                    case PiyoRight:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.alt_piyo_left_foot_up3);
-                        break;
-                }
-            }
-            if (expandedCommands.get(lineIndex).indexOf("左足を下げる") != -1) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.cocco_left_foot_up1);
-                        break;
-                    case CoccoRight:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.alt_cocco_left_foot_up1);
-                        break;
-                    case PiyoLeft:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.piyo_left_foot_up1);
-                        break;
-                    case PiyoRight:
-                        images.getLeftFoot().setImageResource(
-                            R.drawable.alt_piyo_left_foot_up1);
-                        break;
-                }
-            }
-            if (expandedCommands.get(lineIndex).indexOf("右足を上げる") != -1) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.cocco_right_foot_up3);
-                        break;
-                    case CoccoRight:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.alt_cocco_right_foot_up3);
-                        break;
-                    case PiyoLeft:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.piyo_right_foot_up3);
-                        break;
-                    case PiyoRight:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.alt_piyo_right_foot_up3);
-                        break;
-                }
-            }
-            if (expandedCommands.get(lineIndex).indexOf("右足を下げる") != -1) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.cocco_right_foot_up1);
-                        break;
-                    case CoccoRight:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.alt_cocco_right_foot_up1);
-                        break;
-                    case PiyoLeft:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.piyo_right_foot_up1);
-                        break;
-                    case PiyoRight:
-                        images.getRightFoot().setImageResource(
-                            R.drawable.alt_piyo_right_foot_up1);
-                        break;
-                }
-            }
-            if (expandedCommands.get(lineIndex).indexOf("ジャンプする") != -1) {
-                switch (charaType) {
-                    case CoccoLeft:
-                        images.getBasic().setImageResource(R.drawable.cocco_basic);
-                        break;
-                    case CoccoRight:
-                        images.getBasic().setImageResource(
-                            R.drawable.alt_cocco_basic);
-                        break;
-                    case PiyoLeft:
-                        images.getBasic().setImageResource(R.drawable.piyo_basic);
-                        break;
-                    case PiyoRight:
-                        images.getBasic().setImageResource(
-                            R.drawable.alt_piyo_basic);
-                        break;
-                }
-                images.getLeftHand().setVisibility(View.VISIBLE);
-                images.getRightHand().setVisibility(View.VISIBLE);
-                images.getLeftFoot().setVisibility(View.VISIBLE);
-                images.getRightFoot().setVisibility(View.VISIBLE);
-            }
-
-            lineIndex++;
-            addLineIndex = true;
         }
     }
 
@@ -641,47 +129,53 @@ public class StringCommandExecutor implements Runnable {
             bgm.stop();
         }
 
-        if (state.isLeftHandUp) {
-            if (state.isRightHandUp) {
+        if (pose.isLeftHandUp()) {
+            if (pose.isRightHandUp()) {
                 bgm = MediaPlayer.create(context, R.raw.danbo_luru);
             } else {
                 bgm = MediaPlayer.create(context, R.raw.danbo_lu);
             }
-        } else if (state.isLeftHandDown) {
-            if (state.isRightHandDown) {
-                bgm = MediaPlayer.create(context, R.raw.danbo_c);
-            } else {
+        } else {
+            if (pose.isRightHandUp()) {
                 bgm = MediaPlayer.create(context, R.raw.danbo_ru);
+            } else {
+                bgm = MediaPlayer.create(context, R.raw.danbo_c);
             }
         }
         bgm.start();
     }
 
-    public static void commandBear(String arg) {
-        PostTask posttask = new PostTask(arg);
+    public void commandBear(List<ActionType> actions) {
+        if (actions.contains(ActionType.LeftHandDown)) {
+            bearCommand += "lau";
+        } else if (actions.contains(ActionType.LeftHandUp)) {
+            bearCommand = bearCommand.replace("lau", "");
+        }
+        if (actions.contains(ActionType.RightHandDown)) {
+            bearCommand += "rau";
+        } else if (actions.contains(ActionType.RightHandUp)) {
+            bearCommand = bearCommand.replace("rau", "");
+        }
+        if (actions.contains(ActionType.LeftFootDown)) {
+            bearCommand += "llu";
+        } else if (actions.contains(ActionType.LeftFootUp)) {
+            bearCommand = bearCommand.replace("llu", "");
+        }
+        if (actions.contains(ActionType.RightFootDown)) {
+            bearCommand += "rlu";
+        } else if (actions.contains(ActionType.RightFootUp)) {
+            bearCommand = bearCommand.replace("rlu", "");
+        }
+        if (actions.contains(ActionType.Jump)) {
+            bearCommand += "jump";
+        } else {
+            bearCommand = bearCommand.replace("jump", "");
+        }
+
+        PostTask posttask = new PostTask(bearCommand);
         posttask.execute();
     }
 
-    public void errorImage(ImageContainer images) {
-        if (addLineIndex) {
-            if (charaType == CharacterType.PiyoLeft) {
-                images.getBasic().setImageResource(R.drawable.korobu_1);
-            } else {
-                images.getBasic().setImageResource(R.drawable.alt_korobu_1);
-            }
-            images.getLeftHand().setVisibility(View.INVISIBLE);
-            images.getRightHand().setVisibility(View.INVISIBLE);
-            images.getLeftFoot().setVisibility(View.INVISIBLE);
-            images.getRightFoot().setVisibility(View.INVISIBLE);
-        } else {
-            if (charaType == CharacterType.PiyoLeft) {
-                images.getBasic().setImageResource(R.drawable.korobu_3);
-            } else {
-                images.getBasic().setImageResource(R.drawable.alt_korobu_3);
-            }
-            addLineIndex = true;
-        }
-    }
 }
 
 class PostTask extends AsyncTask<Void, String, Boolean> {
