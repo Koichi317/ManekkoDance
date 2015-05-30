@@ -26,42 +26,41 @@ public class StringCommandParser {
     }
 
     private static void expandCommands(List<String> originalLines, List<Integer> originalLineNumbers,
-                                       List<String> expandedCommands, List<Integer> expandedLineNumbers, boolean isLeft) {
-        Stack<ParseState> parseStateStack = new Stack<ParseState>();
+                                       List<String> expandedLines, List<Integer> expandedLineNumbers, boolean isLeft) {
+        Stack<ParseState> parseStateStack = new Stack<>();
         Block block = new Block();
         parseStateStack.push(new ParseState(StateType.Block, block));
 
         for (int i = 0; i < originalLines.size(); i++) {
             String line = originalLines.get(i);
+            ParseState lastState = parseStateStack.peek();
             if (line.contains("もしも")) {
                 IfStatement ifStatement = new IfStatement(readCondition(line));
-                parseStateStack.peek().addStatement(ifStatement);
+                lastState.addStatement(ifStatement);
                 parseStateStack.push(new ParseState(StateType.If, ifStatement));
             } else if (line.contains("もしくは")) {
-                ParseState state = parseStateStack.peek();
-                if (state.type == StateType.If) {
-                    state.type = StateType.Else;
+                if (lastState.type == StateType.If) {
+                    lastState.type = StateType.Else;
                 }
             } else if (line.contains("くりかえし")) {
                 LoopStatement loopStatement = new LoopStatement(readCount(line));
-                parseStateStack.peek().addStatement(loopStatement);
+                lastState.addStatement(loopStatement);
                 parseStateStack.push(new ParseState(StateType.Loop,
                     loopStatement));
             } else if (line.contains("もしおわり")) {
-                if (parseStateStack.peek().type == StateType.If
-                    || parseStateStack.peek().type == StateType.Else) {
+                if (lastState.type == StateType.If
+                    || lastState.type == StateType.Else) {
                     parseStateStack.pop();
                 }
             } else if (line.contains("ここまで")) {
-                if (parseStateStack.peek().type == StateType.Loop) {
+                if (lastState.type == StateType.Loop) {
                     parseStateStack.pop();
                 }
             } else {
-                Command command = new Command(line, originalLineNumbers.get(i));
-                parseStateStack.peek().addStatement(command);
+                lastState.addStatement(new Command(line, originalLineNumbers.get(i)));
             }
         }
-        block.createExpandedCommands(expandedCommands, isLeft);
+        block.createExpandedCommands(expandedLines, isLeft);
         block.createExpandedLineNumbers(expandedLineNumbers, isLeft);
     }
 
