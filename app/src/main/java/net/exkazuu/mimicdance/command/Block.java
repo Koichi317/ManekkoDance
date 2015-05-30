@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Block implements Statement {
-    public List<Statement> statements = new ArrayList<Statement>();
+    public List<Statement> statements = new ArrayList<>();
 
     public void createExpandedCommands(List<String> result, boolean isLeft) {
         for (Statement statement : statements) {

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 class IfStatement implements Statement {
-    public List<Statement> trueStatements = new ArrayList<Statement>();
-    public List<Statement> falseStatements = new ArrayList<Statement>();
+    public List<Statement> trueStatements = new ArrayList<>();
+    public List<Statement> falseStatements = new ArrayList<>();
     public boolean isLeftCondition;
 
     public IfStatement(boolean isLeftCondition) {
@@ -13,71 +13,57 @@ class IfStatement implements Statement {
     }
 
     public void createExpandedCommands(List<String> result, boolean isLeft) {
-        int maxSize = getMaxSize(isLeft);
-
+        List<Statement> statements, others;
         if (isLeftCondition == isLeft) {
-            int tmpSize = result.size();
-            for (Statement statement : trueStatements) {
-                statement.createExpandedCommands(result, isLeft);
-            }
-            tmpSize = result.size() - tmpSize;
-            for (int i = tmpSize; i < maxSize; i++) {
-                result.add("");
-            }
-        } else {
-            int tmpSize = result.size();
-            for (Statement statement : falseStatements) {
-                statement.createExpandedCommands(result, isLeft);
-            }
-            tmpSize = result.size() - tmpSize;
-            for (int i = tmpSize; i < maxSize; i++) {
-                result.add("");
-            }
+            statements = trueStatements;
+            others =  falseStatements;
         }
-    }
-
-    private int getMaxSize(boolean isLeft) {
-        ArrayList<String> tmp1 = new ArrayList<String>();
-        ArrayList<String> tmp2 = new ArrayList<String>();
-        for (Statement statement : trueStatements) {
-            statement.createExpandedCommands(tmp1, isLeft);
+        else {
+            statements = falseStatements;
+            others =  trueStatements;
         }
-        for (Statement statement : falseStatements) {
-            statement.createExpandedCommands(tmp2, isLeft);
+        int initialSize = result.size();
+        for (Statement statement : statements) {
+            statement.createExpandedCommands(result, isLeft);
         }
-        int maxSize = Math.max(tmp1.size(), tmp2.size());
-        return maxSize;
+        int otherSize = getOtherSize(others, isLeft);
+        for (int i = result.size() - initialSize; i < otherSize; i++) {
+            result.add("");
+        }
     }
 
     @Override
     public void createExpandedLineNumbers(List<Integer> result, boolean isLeft) {
-        int maxSize = getMaxSize(isLeft);
+        List<Statement> statements, others;
         if (isLeftCondition == isLeft) {
-            int tmpSize = result.size();
-            for (Statement statement : trueStatements) {
-                statement.createExpandedLineNumbers(result, isLeft);
-            }
-            int lastNumber = 0;
-            if (result.size() > 0) {
-                lastNumber = result.get(result.size() - 1);
-            }
-            tmpSize = result.size() - tmpSize;
-            for (int i = tmpSize; i < maxSize; i++) {
-                result.add(lastNumber);
-            }
-        } else {
-            int tmpSize = result.size();
-            for (Statement statement : falseStatements) {
-                statement.createExpandedLineNumbers(result, isLeft);
-            }
-            int lastNumber = 0;
-            if (result.size() > 0) {
-                lastNumber = result.get(result.size() - 1);
-            }
-            tmpSize = result.size() - tmpSize;
-            for (int i = tmpSize; i < maxSize; i++) {
-                result.add(lastNumber);
-            }
+            statements = trueStatements;
+            others =  falseStatements;
         }
+        else {
+            statements = falseStatements;
+            others =  trueStatements;
+        }
+        int initialSize = result.size();
+        for (Statement statement : statements) {
+            statement.createExpandedLineNumbers(result, isLeft);
+        }
+
+        int lastNumber = 0;
+        if (result.size() > 0) {
+            lastNumber = result.get(result.size() - 1);
+        }
+
+        int otherSize = getOtherSize(others, isLeft);
+        for (int i = result.size() -initialSize; i < otherSize; i++) {
+            result.add(lastNumber);
+        }
+    }
+
+    private int getOtherSize(List<Statement> others, boolean isLeft) {
+        List<String> ignoredResult = new ArrayList<>();
+        for (Statement statement : others) {
+            statement.createExpandedCommands(ignoredResult, isLeft);
+        }
+        return ignoredResult.size();
     }
 }
