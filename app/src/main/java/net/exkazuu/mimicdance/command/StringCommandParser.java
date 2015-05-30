@@ -48,37 +48,37 @@ public class StringCommandParser {
         parseStateStack.push(new ParseState(StateType.Block, block));
 
         for (int i = 0; i < originalCommands.size(); i++) {
-            if (originalCommands.get(i) == null) {
+            String strCommand = originalCommands.get(i);
+            if (strCommand == null) {
                 continue;
-            } else if (originalCommands.get(i).contains("もしも")) {
-                IfStatement ifStatement = new IfStatement(
-                    readCondition(originalCommands.get(i)));
-                parseStateStack.peek().addStatement(ifStatement);
+            }
+            ParseState peekStatement = parseStateStack.peek();
+            if (strCommand.contains("もしも")) {
+                IfStatement ifStatement = new IfStatement(readCondition(strCommand));
+                peekStatement.addStatement(ifStatement);
                 parseStateStack.push(new ParseState(StateType.If, ifStatement));
-            } else if (originalCommands.get(i).contains("もしくは")) {
-                ParseState state = parseStateStack.peek();
-                if (state.type == StateType.If) {
-                    state.type = StateType.Else;
+            } else if (strCommand.contains("もしくは")) {
+                if (peekStatement.type == StateType.If) {
+                    peekStatement.type = StateType.Else;
                 }
-            } else if (originalCommands.get(i).contains("くりかえし")) {
-                LoopStatement loopStatement = new LoopStatement(
-                    readCount(originalCommands.get(i)));
-                parseStateStack.peek().addStatement(loopStatement);
+            } else if (strCommand.contains("くりかえし")) {
+                LoopStatement loopStatement = new LoopStatement(readCount(strCommand));
+                peekStatement.addStatement(loopStatement);
                 parseStateStack.push(new ParseState(StateType.Loop,
                     loopStatement));
-            } else if (originalCommands.get(i).contains("もしおわり")) {
-                if (parseStateStack.peek().type == StateType.If
-                    || parseStateStack.peek().type == StateType.Else) {
+            } else if (strCommand.contains("もしおわり")) {
+                StateType peekType = peekStatement.type;
+                if (peekType == StateType.If || peekType == StateType.Else) {
                     parseStateStack.pop();
                 }
-            } else if (originalCommands.get(i).contains("ここまで")) {
-                if (parseStateStack.peek().type == StateType.Loop) {
+            } else if (strCommand.contains("ここまで")) {
+                if (peekStatement.type == StateType.Loop) {
                     parseStateStack.pop();
                 }
             } else {
-                Command command = new Command(originalCommands.get(i),
-                    originalLineNumbers.get(i));
-                parseStateStack.peek().addStatement(command);
+                Integer lineNumber = originalLineNumbers.get(i);
+                Command command = new Command(strCommand, lineNumber);
+                peekStatement.addStatement(command);
             }
         }
         block.createExpandedCommands(expandedCommands, isLeft);

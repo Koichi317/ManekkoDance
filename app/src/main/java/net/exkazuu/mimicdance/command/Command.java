@@ -7,7 +7,6 @@ class Command implements Statement {
     public int lineIndex;
 
     public Command(String content, int lineIndex) {
-        super();
         this.content = content;
         this.lineIndex = lineIndex;
     }
