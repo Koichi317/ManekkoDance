@@ -219,6 +219,21 @@ public class MainActivity extends Activity {
                 dragView[1][i].setVisibility(View.VISIBLE);
             }
         }
+        if (message.equals("7")) {
+            for (int j = 10; j < 12; j++) {
+                for (int i = 0; i < 3; i++) {
+                    cells[i][j].setVisibility(View.VISIBLE);
+                    canwrite[i][j].setVisibility(View.VISIBLE);
+                }
+                step[j].setVisibility(View.VISIBLE);
+            }
+            for (int i = 4; i < 11; i++) {
+                dragView[0][i].setVisibility(View.VISIBLE);
+            }
+            for (int i = 0; i < 10; i++) {
+                dragView[1][i].setVisibility(View.VISIBLE);
+            }
+        }
 
         /******************* tabの実装と切り替え *****************/
 

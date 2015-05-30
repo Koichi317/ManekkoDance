@@ -32,6 +32,9 @@ public class TitleActivity extends Activity {
 		helpButton.setVisibility(View.VISIBLE);
 		Button startButton = (Button) findViewById(R.id.start_button);
 		startButton.setVisibility(View.VISIBLE);
+		Button freeButton = (Button) findViewById(R.id.free_button);
+		//freeButton.setVisibility(View.VISIBLE);
+		freeButton.setVisibility(View.GONE);
 	}
 
 	public void viewHelp(View view) {
@@ -45,4 +48,9 @@ public class TitleActivity extends Activity {
 		this.startActivity(intent);
 	}
 
+	public void freePlay(View view) {
+		Intent intent = new Intent(this,
+				FreeActionActivity.class);
+		this.startActivity(intent);
+	}
 }

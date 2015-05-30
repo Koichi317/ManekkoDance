@@ -15,10 +15,11 @@ public class Lessons {
 			"くりかえし3\n左腕を上げる\n左腕を下げる\n右腕を上げる\n右腕を下げる\nここまで",
 			"くりかえし3\n左腕を上げる\n左腕を下げる\nここまで\nくりかえし3\n右腕を上げる\n右腕を下げる\nここまで",
 			"右腕を上げる\nもしも黄色\n右腕を下げる\nもしくは\n左腕を上げる\nもしおわり",
-			"くりかえし3\nもしも黄色\n右腕を上げる\n右腕を下げる\nもしくは\n左腕を上げる\n左腕を下げる\nもしおわり\nここまで", };
+			"くりかえし3\nもしも黄色\n右腕を上げる\n右腕を下げる\nもしくは\n左腕を上げる\n左腕を下げる\nもしおわり\nここまで",
+			"くりかえし2\nもしも黄色\n左腕を上げる\n左腕を下げる\nもしくは\n右腕を上げる\n右腕を下げる\nもしおわり\nここまで",};
 	// private static int[] _limitations = { 10, 10, 6, 8, 10, 10, }; // easy
 
-	private static int[] _limitations = { 10, 12, 10, 8, 10, 10, }; // hard
+	private static int[] _limitations = { 10, 12, 10, 8, 10, 10, 10}; // hard
 	
 	public static String getAnswer(int lessonNumber) {
 		if (!(1 <= lessonNumber && lessonNumber <= _answers.length)) {

@@ -43,6 +43,8 @@ public class DragViewListener implements OnTouchListener {
 
         int x_index = left / cells[0][0].getWidth();
         int y_index = top / cells[0][0].getHeight();
+        int test_x = cells[0][0].getWidth();
+        int test_y = cells[0][0].getHeight();
 
         int xx = x / cells[0][0].getWidth();
         int yy = y / cells[0][0].getHeight();
@@ -53,7 +55,7 @@ public class DragViewListener implements OnTouchListener {
                         + dragView.getHeight());
                 break;
             case MotionEvent.ACTION_UP:
-                x_index--;
+                if(x_index>0) x_index--;
                 if (0 <= x_index && x_index <= 2 && 0 <= y_index && y_index <= 11) {
                     if (view.getId() == R.id.imageView1) {
                         program[x_index][y_index] = "右腕を上げる";

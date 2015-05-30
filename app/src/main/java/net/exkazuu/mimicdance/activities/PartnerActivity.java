@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.exkazuu.mimicdance.ImageContainer;
@@ -28,6 +29,7 @@ public class PartnerActivity extends Activity {
     private ImageContainer rightImages;
     private Thread thread;
     private CommandExecutor commandExecutor;
+    private String problemNumber;
 
     @Override
     protected void onPause() {
@@ -37,7 +39,6 @@ public class PartnerActivity extends Activity {
         }
     }
 
-    ;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,31 +51,35 @@ public class PartnerActivity extends Activity {
         ImageView messageImageView1 = (ImageView) findViewById(R.id.imageView2);
         FrameLayout alt_cocco = (FrameLayout) findViewById(R.id.alt_cocco);
         FrameLayout cocco = (FrameLayout) findViewById(R.id.cocco);
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
+
         Intent intent = getIntent();
         String data = intent.getStringExtra("lesson");
-        String message = intent.getStringExtra("message");
+        problemNumber = intent.getStringExtra("message");
         textData = intent.getStringExtra("text_data");
         editText1.setText(data);
-        editText2.setText(message);
-        if (message.equals("1")) {
+        editText2.setText(problemNumber);
+        if (problemNumber.equals("1")) {
             messageImageView1.setImageResource(R.drawable.lesson_message1);
             alt_cocco.setVisibility(View.GONE);
-        } else if (message.equals("2")) {
+        } else if (problemNumber.equals("2")) {
             messageImageView1.setImageResource(R.drawable.lesson_message2);
             alt_cocco.setVisibility(View.GONE);
-        } else if (message.equals("3")) {
+        } else if (problemNumber.equals("3")) {
             messageImageView1.setImageResource(R.drawable.lesson_message3);
             alt_cocco.setVisibility(View.GONE);
-        } else if (message.equals("4")) {
+        } else if (problemNumber.equals("4")) {
             messageImageView1.setImageResource(R.drawable.lesson_message4);
             alt_cocco.setVisibility(View.GONE);
-        } else if (message.equals("5")) {
+        } else if (problemNumber.equals("5")) {
             messageImageView1.setImageResource(R.drawable.lesson_message5);
-        } else if (message.equals("6")) {
+        } else if (problemNumber.equals("6")) {
             messageImageView1.setImageResource(R.drawable.lesson_message6);
-        } /*else if (message.equals("7")) {
+        } else if (problemNumber.equals("7")) {
             messageImageView1.setImageResource(R.drawable.lesson_message7);
-		} else if (message.equals("8")) {
+            alt_cocco.setVisibility(View.GONE);
+		}/* else if (message.equals("8")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message8);
 		} else if (message.equals("9")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message9);
@@ -136,7 +141,24 @@ public class PartnerActivity extends Activity {
                     leftCommands, true);
             Runnable rightRunnable = new StringCommandExecutor(rightImages,
                     rightCommands, false);
+
             for (int i = 0; !this.died && i < leftCommands.size(); i++) { /* 解析&実行 */
+                //昼夜を表現する
+                /*
+                final boolean afternoon = i <= 1;
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
+                        if (problemNumber.equals("7")) {
+                            if (afternoon) layout.setBackgroundResource(R.drawable.yoru);
+                            else layout.setBackgroundResource(R.drawable.asa);
+                        }
+                    }
+                });
+                */
+
+                // 1コマ目を表示する（アニメーションは2コマから構成）
                 handler.post(leftRunnable); /* 光らせる */
                 handler.post(rightRunnable); /* 光らせる */
 
@@ -146,6 +168,7 @@ public class PartnerActivity extends Activity {
                     e.printStackTrace();
                 }
 
+                // 2コマ目を表示する（アニメーションは2コマから構成）
                 handler.post(leftRunnable);
                 handler.post(rightRunnable);
 

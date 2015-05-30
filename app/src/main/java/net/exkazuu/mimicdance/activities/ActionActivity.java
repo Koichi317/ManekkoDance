@@ -67,8 +67,8 @@ public class ActionActivity extends Activity {
 
 		FrameLayout alt_piyo = (FrameLayout) findViewById(R.id.alt_piyo);
 		FrameLayout alt_cocco = (FrameLayout) findViewById(R.id.alt_cocco);
-		FrameLayout piyo = (FrameLayout) findViewById(R.id.alt_piyo);
-		FrameLayout cocco = (FrameLayout) findViewById(R.id.alt_cocco);
+		alt_piyo.setVisibility(View.GONE);
+		alt_cocco.setVisibility(View.GONE);
 
 		playerEditText.setText(playerCommandsText);
 		partnerEditText.setText(partnerCommandsText);
@@ -90,11 +90,14 @@ public class ActionActivity extends Activity {
 		piyoRightImages = ImageContainer.createPiyoRight(this);
 		coccoLeftImages = ImageContainer.createCoccoLeft(this);
 		coccoRightImages = ImageContainer.createCoccoRight(this);
+/*
 		if (message.equals("1") || message.equals("2") || message.equals("3")
 				|| message.equals("4")) {
 			alt_piyo.setVisibility(View.GONE);
 			alt_cocco.setVisibility(View.GONE);
 		}
+*/
+
 	}
 	private static IconContainer IconContainer;
 
@@ -156,17 +159,15 @@ public class ActionActivity extends Activity {
 			answer2.compare();
 			Log.v("tag", answer.show());
 
-			// 解析&実行
+			// 解析&実行(白と黄)
 			int maxSize = Math.max(leftPlayerCommands.size(),
 					leftPartnerCommands.size());
 			for (int i = 0; !died && i < maxSize; i++) {
 				if (i < leftPlayerCommands.size()) {
 					handler.post(leftPlayerExecutor);
-					handler.post(rightPlayerExecutor);
 				}
 				if (i < leftPartnerCommands.size()) {
 					handler.post(leftPartnerExecutor);
-					handler.post(rightPartnerExecutor);
 				}
 
 				try { /* 1秒待機 */
@@ -177,10 +178,62 @@ public class ActionActivity extends Activity {
 
 				if (i < leftPlayerCommands.size()) {
 					handler.post(leftPlayerExecutor);
-					handler.post(rightPlayerExecutor);
 				}
 				if (i < leftPartnerCommands.size()) {
 					handler.post(leftPartnerExecutor);
+				}
+				try { /* 1秒待機 */
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				if (leftPlayerExecutor.existsError()) {
+					break;
+				}
+			}
+
+			//表示するキャラクターを変更
+			handler.post(new Runnable() {
+				@Override
+				public void run() {
+					FrameLayout alt_piyo = (FrameLayout) findViewById(R.id.alt_piyo);
+					FrameLayout alt_cocco = (FrameLayout) findViewById(R.id.alt_cocco);
+					FrameLayout piyo = (FrameLayout) findViewById(R.id.piyo);
+					FrameLayout cocco = (FrameLayout) findViewById(R.id.cocco);
+
+					alt_piyo.setVisibility(View.VISIBLE);
+					alt_cocco.setVisibility(View.VISIBLE);
+					piyo.setVisibility(View.GONE);
+					cocco.setVisibility(View.GONE);
+
+				}
+			});
+
+			try { /* 2秒待機 */
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			//解析と実行(茶色と橙)
+			for (int i = 0; !died && i < maxSize; i++) {
+				if (i < leftPlayerCommands.size()) {
+					handler.post(rightPlayerExecutor);
+				}
+				if (i < leftPartnerCommands.size()) {
+					handler.post(rightPartnerExecutor);
+				}
+
+				try { /* 1秒待機 */
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				if (i < leftPlayerCommands.size()) {
+					handler.post(rightPlayerExecutor);
+				}
+				if (i < leftPartnerCommands.size()) {
 					handler.post(rightPartnerExecutor);
 				}
 				try { /* 1秒待機 */
@@ -188,8 +241,7 @@ public class ActionActivity extends Activity {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if (leftPlayerExecutor.existsError()
-						|| rightPlayerExecutor.existsError()) {
+				if (rightPlayerExecutor.existsError()) {
 					break;
 				}
 			}
