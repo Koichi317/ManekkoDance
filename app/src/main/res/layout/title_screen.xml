@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/titleRoot"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/back_ground1" >
+  android:id="@+id/titleRoot"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/back_ground1">
 
-    <Button
-        android:id="@+id/help_button"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
-        android:onClick="startLesson"
-        android:text="@string/Title_start_button"
-        android:textSize="24sp"
-        android:visibility="gone" />
+  <Button
+    android:id="@+id/help_button"
+    android:layout_width="150dp"
+    android:layout_height="60dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="48dp"
+    android:onClick="startLesson"
+    android:text="@string/Title_start_button"
+    android:textSize="24sp"
+    android:visibility="gone" />
 
-    <Button
-        android:id="@+id/start_button"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_above="@id/help_button"
-        android:layout_alignLeft="@id/help_button"
-        android:layout_marginBottom="22dp"
-        android:onClick="viewHelp"
-        android:text="@string/Title_how_to_play"
-        android:textSize="24sp"
-        android:visibility="gone" />
+  <Button
+    android:id="@+id/start_button"
+    android:layout_width="150dp"
+    android:layout_height="60dp"
+    android:layout_above="@id/help_button"
+    android:layout_alignLeft="@id/help_button"
+    android:layout_marginBottom="22dp"
+    android:onClick="viewHelp"
+    android:text="@string/Title_how_to_play"
+    android:textSize="24sp"
+    android:visibility="gone" />
 
-    <Button
-        android:id="@+id/free_button"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_above="@id/start_button"
-        android:layout_alignLeft="@id/start_button"
-        android:layout_marginBottom="22dp"
-        android:onClick="freePlay"
-        android:text="@string/Title_free_play"
-        android:textSize="24sp"
-        android:visibility="gone" />
+  <Button
+    android:id="@+id/free_button"
+    android:layout_width="150dp"
+    android:layout_height="60dp"
+    android:layout_above="@id/start_button"
+    android:layout_alignLeft="@id/start_button"
+    android:layout_marginBottom="22dp"
+    android:onClick="freePlay"
+    android:text="@string/Title_free_play"
+    android:textSize="24sp"
+    android:visibility="gone" />
 
 </RelativeLayout>

@@ -5,18 +5,6 @@
 
 package net.exkazuu.mimicdance.activities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.exkazuu.mimicdance.R;
-
-import net.exkazuu.mimicdance.DetectableSoftKeyLayout;
-import net.exkazuu.mimicdance.IconContainer;
-import net.exkazuu.mimicdance.ImageContainer;
-import net.exkazuu.mimicdance.Lessons;
-import net.exkazuu.mimicdance.command.StringCommandExecutor;
-import net.exkazuu.mimicdance.command.StringCommandParser;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -35,6 +23,17 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+
+import net.exkazuu.mimicdance.DetectableSoftKeyLayout;
+import net.exkazuu.mimicdance.IconContainer;
+import net.exkazuu.mimicdance.ImageContainer;
+import net.exkazuu.mimicdance.Lessons;
+import net.exkazuu.mimicdance.R;
+import net.exkazuu.mimicdance.command.StringCommandExecutor;
+import net.exkazuu.mimicdance.command.StringCommandParser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -84,17 +83,17 @@ public class MainActivity extends Activity {
 
         text = (TextView) findViewById(R.id.tvCount1);
         text.setText(program[0][0] + program[1][0] + program[2][0] + "\n"
-                + program[0][1] + program[1][1] + program[2][1] + "\n"
-                + program[0][2] + program[1][2] + program[2][2] + "\n"
-                + program[0][3] + program[1][3] + program[2][3] + "\n"
-                + program[0][4] + program[1][4] + program[2][4] + "\n"
-                + program[0][5] + program[1][5] + program[2][5] + "\n"
-                + program[0][6] + program[1][6] + program[2][6] + "\n"
-                + program[0][7] + program[1][7] + program[2][7] + "\n"
-                + program[0][8] + program[1][8] + program[2][8] + "\n"
-                + program[0][9] + program[1][9] + program[2][9] + "\n"
-                + program[0][10] + program[1][10] + program[2][10] + "\n"
-                + program[0][11] + program[1][11] + program[2][11] + "\n");
+            + program[0][1] + program[1][1] + program[2][1] + "\n"
+            + program[0][2] + program[1][2] + program[2][2] + "\n"
+            + program[0][3] + program[1][3] + program[2][3] + "\n"
+            + program[0][4] + program[1][4] + program[2][4] + "\n"
+            + program[0][5] + program[1][5] + program[2][5] + "\n"
+            + program[0][6] + program[1][6] + program[2][6] + "\n"
+            + program[0][7] + program[1][7] + program[2][7] + "\n"
+            + program[0][8] + program[1][8] + program[2][8] + "\n"
+            + program[0][9] + program[1][9] + program[2][9] + "\n"
+            + program[0][10] + program[1][10] + program[2][10] + "\n"
+            + program[0][11] + program[1][11] + program[2][11] + "\n");
 
         //記述可能部分
         ImageView[][] canwrite = new ImageView[3][12];
@@ -127,7 +126,7 @@ public class MainActivity extends Activity {
                 resb[i][j] = this.getResources().getIdentifier("image" + i + "_" + j, "id", this.getPackageName());
                 cells[i][j] = (ImageView) findViewById(resb[i][j]);
                 backgroundlistener[i][j] = new DragViewListener(cells[i][j], cells,
-                        program, text, flag, resb, canwrite, lessonNumber);
+                    program, text, flag, resb, canwrite, lessonNumber);
                 cells[i][j].setOnTouchListener(backgroundlistener[i][j]);
             }
         }
@@ -144,7 +143,7 @@ public class MainActivity extends Activity {
             res[0][i] = this.getResources().getIdentifier("imageView" + (i + 1), "id", this.getPackageName());
             dragView[0][i] = (ImageView) findViewById(res[0][i]);
             listener[0][i] = new DragViewListener(dragView[0][i], cells,
-                    program, text, flag, resb, canwrite, lessonNumber);
+                program, text, flag, resb, canwrite, lessonNumber);
             dragView[0][i].setOnTouchListener(listener[0][i]);
         }
         //アイコンたち(数字達)
@@ -152,7 +151,7 @@ public class MainActivity extends Activity {
             res[1][i] = this.getResources().getIdentifier("imageView" + 0 + i, "id", this.getPackageName());
             dragView[1][i] = (ImageView) findViewById(res[1][i]);
             listener[1][i] = new DragViewListener(dragView[1][i], cells,
-                    program, text, flag, resb, canwrite, lessonNumber);
+                program, text, flag, resb, canwrite, lessonNumber);
             dragView[1][i].setOnTouchListener(listener[1][i]);
         }
 
@@ -165,9 +164,9 @@ public class MainActivity extends Activity {
         }
 
         /********** Lesson data　の 取得 **************/
-       // Intent intent = getIntent();
+        // Intent intent = getIntent();
         lesson = intent.getStringExtra("lesson");
-       // message = intent.getStringExtra("message");
+        // message = intent.getStringExtra("message");
         text_data = intent.getStringExtra("text_data");
         Log.v("my_debug", "" + text_data);
         if (text_data != null) {
@@ -326,15 +325,15 @@ public class MainActivity extends Activity {
             List<String> leftCommands = new ArrayList<String>();
             List<Integer> leftNumbers = new ArrayList<Integer>();
             StringCommandParser.parse(commandsText, leftCommands, leftNumbers,
-                    true);
+                true);
 
             List<String> rightCommands = new ArrayList<String>();
             List<Integer> rightNumbers = new ArrayList<Integer>();
             StringCommandParser.parse(commandsText, rightCommands,
-                    rightNumbers, false);
+                rightNumbers, false);
 
             executeCommands(leftImages, rightImages, leftCommands,
-                    rightCommands, leftNumbers, rightNumbers, textView);
+                rightCommands, leftNumbers, rightNumbers, textView);
         }
 
         private void executeCommands(ImageContainer leftImages,
@@ -342,11 +341,11 @@ public class MainActivity extends Activity {
                                      List<String> rightCommands, List<Integer> leftNumbers,
                                      List<Integer> rightNumbers, TextView textView) {
             StringCommandExecutor leftRunnable = new StringCommandExecutor(
-                    leftImages, leftCommands, textView, leftNumbers,
-                    getApplicationContext(), true);
+                leftImages, leftCommands, textView, leftNumbers,
+                getApplicationContext(), true);
             StringCommandExecutor rightRunnable = new StringCommandExecutor(
-                    rightImages, rightCommands, textView, rightNumbers,
-                    getApplicationContext(), false);
+                rightImages, rightCommands, textView, rightNumbers,
+                getApplicationContext(), false);
             for (int i = 0; !died && i < leftCommands.size(); i++) { // 解析&実行
                 handler.post(leftRunnable); // 光らせる
                 handler.post(rightRunnable); // 光らせる
@@ -371,16 +370,16 @@ public class MainActivity extends Activity {
                     handler.post(new Runnable() {
                         public void run() {
                             AlertDialog.Builder builder = new AlertDialog.Builder(
-                                    MainActivity.this);
+                                MainActivity.this);
                             builder.setTitle("間違った文を書いているよ");
                             builder.setPositiveButton("もう一度Challenge",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(
-                                                DialogInterface dialog,
-                                                int which) {
-                                            initializeImage();
-                                        }
-                                    });
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(
+                                        DialogInterface dialog,
+                                        int which) {
+                                        initializeImage();
+                                    }
+                                });
                             builder.show();
                         }
                     });
@@ -445,7 +444,7 @@ public class MainActivity extends Activity {
     public void changeActionScreen(View view) { // 判定画面への遷移
         host.setCurrentTab(TEXT_VIEW);
         Intent intent = new Intent(this,
-                net.exkazuu.mimicdance.activities.ActionActivity.class);
+            net.exkazuu.mimicdance.activities.ActionActivity.class);
         intent.putExtra("lesson", lesson);
         intent.putExtra("message", message);
         text = (TextView) findViewById(R.id.tvCount1);
@@ -456,7 +455,7 @@ public class MainActivity extends Activity {
     public void changePartnerScreen(View view) { // お手本画面へ遷移
         host.setCurrentTab(TEXT_VIEW);
         Intent intent = new Intent(this,
-                net.exkazuu.mimicdance.activities.PartnerActivity.class);
+            net.exkazuu.mimicdance.activities.PartnerActivity.class);
         intent.putExtra("lesson", lesson);
         intent.putExtra("message", message);
         this.startActivity(intent);
@@ -480,7 +479,7 @@ public class MainActivity extends Activity {
 
     private void changeTitleScreen() {
         Intent intent = new Intent(this,
-                net.exkazuu.mimicdance.activities.TitleActivity.class);
+            net.exkazuu.mimicdance.activities.TitleActivity.class);
         this.startActivity(intent);
     }
 

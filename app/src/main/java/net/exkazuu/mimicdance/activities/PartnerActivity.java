@@ -79,8 +79,8 @@ public class PartnerActivity extends Activity {
         } else if (problemNumber.equals("7")) {
             messageImageView1.setImageResource(R.drawable.lesson_message7);
             alt_cocco.setVisibility(View.GONE);
-		}/* else if (message.equals("8")) {
-			messageImageView1.setImageResource(R.drawable.lesson_message8);
+        }/* else if (message.equals("8")) {
+            messageImageView1.setImageResource(R.drawable.lesson_message8);
 		} else if (message.equals("9")) {
 			messageImageView1.setImageResource(R.drawable.lesson_message9);
 		} else if (message.equals("10")) {
@@ -119,28 +119,28 @@ public class PartnerActivity extends Activity {
 
         public void run() {
             String commandsText = ((TextView) findViewById(R.id.editText1))
-                    .getText().toString();
+                .getText().toString();
             List<String> leftCommands = new ArrayList<String>();
             List<Integer> leftNumbers = new ArrayList<Integer>();
             StringCommandParser.parse(commandsText, leftCommands, leftNumbers,
-                    true);
+                true);
 
             List<String> rightCommands = new ArrayList<String>();
             List<Integer> rightNumbers = new ArrayList<Integer>();
             StringCommandParser.parse(commandsText, rightCommands,
-                    rightNumbers, false);
+                rightNumbers, false);
 
             executeCommands(leftImages, rightImages, leftCommands,
-                    rightCommands);
+                rightCommands);
         }
 
         private void executeCommands(ImageContainer leftImages,
                                      ImageContainer rightImages, List<String> leftCommands,
                                      List<String> rightCommands) {
             Runnable leftRunnable = new StringCommandExecutor(leftImages,
-                    leftCommands, true);
+                leftCommands, true);
             Runnable rightRunnable = new StringCommandExecutor(rightImages,
-                    rightCommands, false);
+                rightCommands, false);
 
             for (int i = 0; !this.died && i < leftCommands.size(); i++) { /* 解析&実行 */
                 //昼夜を表現する
@@ -206,7 +206,7 @@ public class PartnerActivity extends Activity {
 
     public void changeMainScreen(View view) {
         Intent intent = new Intent(getApplication(),
-                MainActivity.class);
+            MainActivity.class);
         TextView editText1 = (TextView) findViewById(R.id.editText1);
         TextView editText2 = (TextView) findViewById(R.id.editText2);
         intent.putExtra("lesson", editText1.getText().toString());
@@ -224,7 +224,7 @@ public class PartnerActivity extends Activity {
 
     public void changeTitleScreen() {
         Intent intent = new Intent(getApplication(),
-                net.exkazuu.mimicdance.activities.TitleActivity.class);
+            net.exkazuu.mimicdance.activities.TitleActivity.class);
         this.startActivity(intent);
     }
 

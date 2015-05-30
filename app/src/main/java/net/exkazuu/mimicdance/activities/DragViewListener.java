@@ -2,13 +2,13 @@ package net.exkazuu.mimicdance.activities;
 
 //import android.util.Log;
 
-import net.exkazuu.mimicdance.R;
-
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.exkazuu.mimicdance.R;
 
 public class DragViewListener implements OnTouchListener {
     private ImageView dragView;
@@ -52,10 +52,10 @@ public class DragViewListener implements OnTouchListener {
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:
                 dragView.layout(left, top, left + dragView.getWidth(), top
-                        + dragView.getHeight());
+                    + dragView.getHeight());
                 break;
             case MotionEvent.ACTION_UP:
-                if(x_index>0) x_index--;
+                if (x_index > 0) x_index--;
                 if (0 <= x_index && x_index <= 2 && 0 <= y_index && y_index <= 11) {
                     if (view.getId() == R.id.imageView1) {
                         program[x_index][y_index] = "右腕を上げる";
@@ -224,17 +224,17 @@ public class DragViewListener implements OnTouchListener {
                 }
 
                 text.setText(program[0][0] + program[1][0] + program[2][0] + "\n"
-                        + program[0][1] + program[1][1] + program[2][1] + "\n"
-                        + program[0][2] + program[1][2] + program[2][2] + "\n"
-                        + program[0][3] + program[1][3] + program[2][3] + "\n"
-                        + program[0][4] + program[1][4] + program[2][4] + "\n"
-                        + program[0][5] + program[1][5] + program[2][5] + "\n"
-                        + program[0][6] + program[1][6] + program[2][6] + "\n"
-                        + program[0][7] + program[1][7] + program[2][7] + "\n"
-                        + program[0][8] + program[1][8] + program[2][8] + "\n"
-                        + program[0][9] + program[1][9] + program[2][9] + "\n"
-                        + program[0][10] + program[1][10] + program[2][10] + "\n"
-                        + program[0][11] + program[1][11] + program[2][11] + "\n");
+                    + program[0][1] + program[1][1] + program[2][1] + "\n"
+                    + program[0][2] + program[1][2] + program[2][2] + "\n"
+                    + program[0][3] + program[1][3] + program[2][3] + "\n"
+                    + program[0][4] + program[1][4] + program[2][4] + "\n"
+                    + program[0][5] + program[1][5] + program[2][5] + "\n"
+                    + program[0][6] + program[1][6] + program[2][6] + "\n"
+                    + program[0][7] + program[1][7] + program[2][7] + "\n"
+                    + program[0][8] + program[1][8] + program[2][8] + "\n"
+                    + program[0][9] + program[1][9] + program[2][9] + "\n"
+                    + program[0][10] + program[1][10] + program[2][10] + "\n"
+                    + program[0][11] + program[1][11] + program[2][11] + "\n");
         }
 
         oldx = x;
