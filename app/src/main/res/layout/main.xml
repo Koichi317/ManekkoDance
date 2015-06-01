@@ -1055,7 +1055,7 @@
       android:visibility="invisible">
 
       <ImageView
-        android:id="@+id/playerLeftHand1"
+        android:id="@+id/piyoLeftHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_area"
@@ -1063,7 +1063,7 @@
         android:visibility="invisible" />
 
       <ImageView
-        android:id="@+id/playerRightHand1"
+        android:id="@+id/piyoRightHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_area"
@@ -1071,7 +1071,7 @@
         android:visibility="invisible" />
 
       <ImageView
-        android:id="@+id/playerBasic1"
+        android:id="@+id/piyoBody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_area"
@@ -1079,7 +1079,7 @@
         android:visibility="invisible" />
 
       <ImageView
-        android:id="@+id/playerLeftFoot1"
+        android:id="@+id/piyoLeftFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_area"
@@ -1087,7 +1087,7 @@
         android:visibility="invisible" />
 
       <ImageView
-        android:id="@+id/playerRightFoot1"
+        android:id="@+id/piyoRightFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_area"
@@ -1103,7 +1103,7 @@
       android:visibility="gone">
 
       <ImageView
-        android:id="@+id/playerLeftHand2"
+        android:id="@+id/altPiyoLeftHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_area"
@@ -1111,7 +1111,7 @@
         android:visibility="invisible" />
 
       <ImageView
-        android:id="@+id/playerRightHand2"
+        android:id="@+id/altPiyoRightHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_area"
@@ -1119,7 +1119,7 @@
         android:visibility="invisible" />
 
       <ImageView
-        android:id="@+id/playerBasic2"
+        android:id="@+id/altPiyoBody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_area"
@@ -1127,7 +1127,7 @@
         android:visibility="invisible" />
 
       <ImageView
-        android:id="@+id/playerLeftFoot2"
+        android:id="@+id/altPiyoLeftFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_area"
@@ -1135,7 +1135,7 @@
         android:visibility="invisible" />
 
       <ImageView
-        android:id="@+id/playerRightFoot2"
+        android:id="@+id/altPiyoRightFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/image_area"

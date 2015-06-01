@@ -74,7 +74,7 @@
       android:layout_weight="1.0">
 
       <ImageView
-        android:id="@+id/playerLeftHand1"
+        android:id="@+id/piyoLeftHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/left_hand_up"
@@ -82,7 +82,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/playerRightHand1"
+        android:id="@+id/piyoRightHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/right_hand_up"
@@ -90,7 +90,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/playerBasic1"
+        android:id="@+id/piyoBody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/player"
@@ -98,7 +98,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/playerLeftFoot1"
+        android:id="@+id/piyoLeftFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/left_foot_up"
@@ -106,7 +106,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/playerRightFoot1"
+        android:id="@+id/piyoRightFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/right_foot_up"
@@ -121,7 +121,7 @@
       android:layout_weight="1.0">
 
       <ImageView
-        android:id="@+id/playerLeftHand2"
+        android:id="@+id/altPiyoLeftHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/left_hand_up"
@@ -129,7 +129,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/playerRightHand2"
+        android:id="@+id/altPiyoRightHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/right_hand_up"
@@ -137,7 +137,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/playerBasic2"
+        android:id="@+id/altPiyoBody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/player"
@@ -145,7 +145,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/playerLeftFoot2"
+        android:id="@+id/altPiyoLeftFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/left_foot_up"
@@ -153,7 +153,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/playerRightFoot2"
+        android:id="@+id/altPiyoRightFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/right_foot_up"
@@ -168,7 +168,7 @@
       android:layout_weight="1.0">
 
       <ImageView
-        android:id="@+id/partnerLeftHand1"
+        android:id="@+id/coccoLeftHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/left_hand_up"
@@ -176,7 +176,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/partnerRightHand1"
+        android:id="@+id/coccoRightHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/right_hand_up"
@@ -184,7 +184,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/partnerBasic1"
+        android:id="@+id/coccoBody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/partner_screen"
@@ -192,7 +192,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/partnerLeftFoot1"
+        android:id="@+id/coccoLeftFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/left_foot_up"
@@ -200,7 +200,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/partnerRightFoot1"
+        android:id="@+id/coccoRightFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/right_foot_up"
@@ -224,7 +224,7 @@
         android:src="@drawable/help" />
 
       <ImageView
-        android:id="@+id/partnerLeftHand2"
+        android:id="@+id/altCoccoLeftHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/left_hand_up"
@@ -232,7 +232,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/partnerRightHand2"
+        android:id="@+id/altCoccoRightHand"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/right_hand_up"
@@ -240,7 +240,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/partnerBasic2"
+        android:id="@+id/altCoccoBody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/partner_screen"
@@ -248,7 +248,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/partnerLeftFoot2"
+        android:id="@+id/altCoccoLeftFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/left_foot_up"
@@ -256,7 +256,7 @@
         android:visibility="visible" />
 
       <ImageView
-        android:id="@+id/partnerRightFoot2"
+        android:id="@+id/altCoccoRightFoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/right_foot_up"

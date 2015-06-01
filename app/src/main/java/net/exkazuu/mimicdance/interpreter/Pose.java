@@ -1,6 +1,4 @@
-package net.exkazuu.mimicdance.command;
-
-import java.util.List;
+package net.exkazuu.mimicdance.interpreter;
 
 public class Pose {
     private final boolean[] bodyPart2up;
@@ -9,7 +7,7 @@ public class Pose {
         bodyPart2up = new boolean[4];
     }
 
-    public boolean validate(List<ActionType> actions) {
+    public boolean validate(Iterable<ActionType> actions) {
         for (ActionType actionType : actions) {
             if (actionType == ActionType.Jump) {
                 for (boolean up : bodyPart2up) {
@@ -24,12 +22,11 @@ public class Pose {
         return true;
     }
 
-    public void change(List<ActionType> actions) {
+    public void change(Iterable<ActionType> actions) {
         for (ActionType actionType : actions) {
-            if (actionType == ActionType.Jump) {
-                continue;
+            if (actionType != ActionType.Jump) {
+                bodyPart2up[actionType.toBodyPart().ordinal()] = actionType.isUp();
             }
-            bodyPart2up[actionType.toBodyPart().ordinal()] = actionType.isUp();
         }
     }
 

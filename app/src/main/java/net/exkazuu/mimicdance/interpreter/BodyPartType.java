@@ -1,4 +1,4 @@
-package net.exkazuu.mimicdance.command;
+package net.exkazuu.mimicdance.interpreter;
 
 public enum BodyPartType {
     LeftHand, RightHand, LeftFoot, RightFoot, Body

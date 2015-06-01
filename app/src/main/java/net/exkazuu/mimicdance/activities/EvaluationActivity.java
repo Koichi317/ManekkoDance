@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,16 +16,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.exkazuu.mimicdance.AnswerCheck;
 import net.exkazuu.mimicdance.CharacterImageViewSet;
 import net.exkazuu.mimicdance.Lessons;
 import net.exkazuu.mimicdance.R;
 import net.exkazuu.mimicdance.Timer;
-import net.exkazuu.mimicdance.command.StringCommandExecutor;
-import net.exkazuu.mimicdance.command.StringCommandParser;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.exkazuu.mimicdance.interpreter.Interpreter;
+import net.exkazuu.mimicdance.program.CodeParser;
+import net.exkazuu.mimicdance.program.UnrolledProgram;
 
 public class EvaluationActivity extends Activity {
 
@@ -34,8 +30,8 @@ public class EvaluationActivity extends Activity {
     private String message;
     private String textData;
 
-    private CharacterImageViewSet piyoLeftImages;
-    private CharacterImageViewSet piyoRightImages;
+    private CharacterImageViewSet piyoImages;
+    private CharacterImageViewSet altPiyoImages;
     private CharacterImageViewSet coccoLeftImages;
     private CharacterImageViewSet coccoRightImages;
 
@@ -46,7 +42,7 @@ public class EvaluationActivity extends Activity {
     protected void onPause() {
         super.onPause();
         if (commandExecutor != null) {
-            commandExecutor.died = true;
+            commandExecutor.paused = true;
         }
     }
 
@@ -86,27 +82,19 @@ public class EvaluationActivity extends Activity {
             }
         });
 
-        piyoLeftImages = CharacterImageViewSet.createPiyoLeft(this);
-        piyoRightImages = CharacterImageViewSet.createPiyoRight(this);
+        piyoImages = CharacterImageViewSet.createPiyoLeft(this);
+        altPiyoImages = CharacterImageViewSet.createPiyoRight(this);
         coccoLeftImages = CharacterImageViewSet.createCoccoLeft(this);
         coccoRightImages = CharacterImageViewSet.createCoccoRight(this);
-/*
-        if (message.equals("1") || message.equals("2") || message.equals("3")
-				|| message.equals("4")) {
-			alt_piyo.setVisibility(View.GONE);
-			alt_cocco.setVisibility(View.GONE);
-		}
-*/
-
     }
 
     public final class CommandExecutor implements Runnable {
         private final Handler handler;
-        private boolean died;
+        private boolean paused;
 
         private CommandExecutor(Handler handler) {
             this.handler = handler;
-            this.died = false;
+            this.paused = false;
         }
 
         public void run() {
@@ -116,52 +104,27 @@ public class EvaluationActivity extends Activity {
             String playerCommandsText = playerEditText.getText().toString();
             String partnerCommandsText = partnerEditText.getText().toString();
 
-            List<String> leftPlayerCommands = new ArrayList<String>();
-            List<Integer> leftPlayerNumbers = new ArrayList<Integer>();
-            StringCommandParser.parse(playerCommandsText, leftPlayerCommands,
-                leftPlayerNumbers, true);
+            final UnrolledProgram piyoProgram = CodeParser.parse(playerCommandsText, true);
+            final UnrolledProgram altPiyoProgram = CodeParser.parse(playerCommandsText, false);
+            final UnrolledProgram coccoProgram = CodeParser.parse(partnerCommandsText, true);
+            final UnrolledProgram altCoccoProgram = CodeParser.parse(partnerCommandsText, false);
 
-            List<String> rightPlayerCommands = new ArrayList<String>();
-            List<Integer> rightPlayerNumbers = new ArrayList<Integer>();
-            StringCommandParser.parse(playerCommandsText, rightPlayerCommands,
-                rightPlayerNumbers, false);
+            Interpreter piyoExecutor = new Interpreter(
+                piyoImages, piyoProgram, playerEditText, getApplicationContext(), true);
 
-            List<Integer> leftPartnerNumbers = new ArrayList<Integer>();
-            List<String> leftPartnerCommands = new ArrayList<String>();
-            StringCommandParser.parse(partnerCommandsText, leftPartnerCommands,
-                leftPartnerNumbers, true);
+            Interpreter altPiyoExecutor = new Interpreter(
+                altPiyoImages, altPiyoProgram, playerEditText, getApplicationContext(), false);
 
-            List<Integer> rightPartnerNumbers = new ArrayList<Integer>();
-            List<String> rightPartnerCommands = new ArrayList<String>();
-            StringCommandParser.parse(partnerCommandsText,
-                rightPartnerCommands, rightPartnerNumbers, false);
+            Interpreter coccoExecutor = new Interpreter(
+                coccoLeftImages, coccoProgram, true);
 
-            StringCommandExecutor leftPlayerExecutor = new StringCommandExecutor(
-                piyoLeftImages, leftPlayerCommands, playerEditText,
-                leftPlayerNumbers, getApplicationContext(), true);
-
-            StringCommandExecutor rightPlayerExecutor = new StringCommandExecutor(
-                piyoRightImages, rightPlayerCommands, playerEditText,
-                rightPlayerNumbers, getApplicationContext(), false);
-
-            StringCommandExecutor leftPartnerExecutor = new StringCommandExecutor(
-                coccoLeftImages, leftPartnerCommands, true);
-
-            StringCommandExecutor rightPartnerExecutor = new StringCommandExecutor(
-                coccoRightImages, rightPartnerCommands, false);
-
-            final AnswerCheck answer = new AnswerCheck(leftPlayerCommands, leftPartnerCommands);
-            answer.compare();
-            final AnswerCheck answer2 = new AnswerCheck(rightPlayerCommands, rightPartnerCommands);
-            answer2.compare();
-            Log.v("tag", answer.show());
+            Interpreter altCoccoExecutor = new Interpreter(
+                coccoRightImages, altCoccoProgram, false);
 
             Intent intent = getIntent();
             message = intent.getStringExtra("message");
 
             // 解析&実行(白と黄)
-            int maxSize = Math.max(leftPlayerCommands.size(),
-                leftPartnerCommands.size());
             if (message.equals("5") || message.equals("6")) {
                 handler.post(new Runnable() {
                     @Override
@@ -170,15 +133,11 @@ public class EvaluationActivity extends Activity {
                         which_birds.setText("黄色いひよこの場合");
                     }
                 });
-
             }
-            for (int i = 0; !died && i < maxSize; i++) {
-                if (i < leftPlayerCommands.size()) {
-                    handler.post(leftPlayerExecutor);
-                }
-                if (i < leftPartnerCommands.size()) {
-                    handler.post(leftPartnerExecutor);
-                }
+            int maxSize = Math.max(piyoProgram.size(), coccoProgram.size());
+            for (int i = 0; !paused && i < maxSize; i++) {
+                handler.post(piyoExecutor);
+                handler.post(coccoExecutor);
 
                 try { /* 1秒待機 */
                     Thread.sleep(500);
@@ -186,18 +145,14 @@ public class EvaluationActivity extends Activity {
                     e.printStackTrace();
                 }
 
-                if (i < leftPlayerCommands.size()) {
-                    handler.post(leftPlayerExecutor);
-                }
-                if (i < leftPartnerCommands.size()) {
-                    handler.post(leftPartnerExecutor);
-                }
+                handler.post(piyoExecutor);
+                handler.post(coccoExecutor);
                 try { /* 1秒待機 */
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (leftPlayerExecutor.existsError()) {
+                if (piyoExecutor.existsError()) {
                     break;
                 }
             }
@@ -229,13 +184,10 @@ public class EvaluationActivity extends Activity {
                 }
 
                 //解析と実行(茶色と橙)
-                for (int i = 0; !died && i < maxSize; i++) {
-                    if (i < leftPlayerCommands.size()) {
-                        handler.post(rightPlayerExecutor);
-                    }
-                    if (i < leftPartnerCommands.size()) {
-                        handler.post(rightPartnerExecutor);
-                    }
+                maxSize = Math.max(piyoProgram.size(), coccoProgram.size());
+                for (int i = 0; !paused && i < maxSize; i++) {
+                    handler.post(altPiyoExecutor);
+                    handler.post(altCoccoExecutor);
 
                     try { /* 1秒待機 */
                         Thread.sleep(500);
@@ -243,18 +195,14 @@ public class EvaluationActivity extends Activity {
                         e.printStackTrace();
                     }
 
-                    if (i < leftPlayerCommands.size()) {
-                        handler.post(rightPlayerExecutor);
-                    }
-                    if (i < leftPartnerCommands.size()) {
-                        handler.post(rightPartnerExecutor);
-                    }
+                    handler.post(altPiyoExecutor);
+                    handler.post(altCoccoExecutor);
                     try { /* 1秒待機 */
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    if (rightPlayerExecutor.existsError()) {
+                    if (altPiyoExecutor.existsError()) {
                         break;
                     }
                 }
@@ -271,9 +219,7 @@ public class EvaluationActivity extends Activity {
                     ImageView true_ans = (ImageView) layout.findViewById(R.id.ans_true);
                     ImageView false_ans = (ImageView) layout.findViewById(R.id.ans_false);
 
-                    if (answer.judge && answer2.judge) {
-//                        builder.setIcon(R.drawable.answer_ture);
-
+                    if (piyoProgram.semanticallyEquals(coccoProgram) && altPiyoProgram.semanticallyEquals(altCoccoProgram)) {
                         false_ans.setVisibility(View.GONE);
                         if (Integer.parseInt(message) == 10) {
                             builder.setNegativeButton("タイトルへ戻る",
@@ -283,8 +229,7 @@ public class EvaluationActivity extends Activity {
                                         DialogInterface dialog,
                                         int which) {
                                         Intent intent = new Intent(
-                                            getApplication(),
-                                            net.exkazuu.mimicdance.activities.TitleActivity.class);
+                                            getApplication(), TitleActivity.class);
                                         startActivity(intent);
                                     }
                                 });
@@ -294,7 +239,6 @@ public class EvaluationActivity extends Activity {
                                     public void onClick(
                                         DialogInterface dialog,
                                         int which) {
-                                        //(changeMainScreen();
                                         EvaluationActivity.this.finish();
                                     }
                                 });
@@ -306,26 +250,19 @@ public class EvaluationActivity extends Activity {
                                     public void onClick(
                                         DialogInterface dialog,
                                         int which) {
-                                        int nextLessonNumber = Integer
-                                            .parseInt(message) + 1;
+                                        int nextLessonNumber = Integer.parseInt(message) + 1;
                                         if (nextLessonNumber <= 6) {
                                             Intent intent = new Intent(
-                                                getApplication(),
-                                                net.exkazuu.mimicdance.activities.PartnerActivity.class);
-                                            message = String
-                                                .valueOf(nextLessonNumber);
-                                            intent.putExtra("message",
-                                                message);
-                                            String str = Lessons
-                                                .getAnswer(nextLessonNumber);
+                                                getApplication(), CoccoActivity.class);
+                                            message = String.valueOf(nextLessonNumber);
+                                            intent.putExtra("message", message);
+                                            String str = Lessons.getAnswer(nextLessonNumber);
                                             lesson = str;
-                                            intent.putExtra("lesson",
-                                                lesson);
+                                            intent.putExtra("lesson", lesson);
                                             startActivity(intent);
                                         } else {
                                             Intent intent = new Intent(
-                                                getApplication(),
-                                                LessonListActivity.class);
+                                                getApplication(), LessonListActivity.class);
                                             startActivity(intent);
                                         }
                                         finish();
@@ -347,14 +284,12 @@ public class EvaluationActivity extends Activity {
                                     public void onClick(
                                         DialogInterface dialog,
                                         int which) {
-                                        //changeMainScreen();
                                         EvaluationActivity.this.finish();
                                     }
                                 });
                         }
 
                     } else {
-//                        builder.setIcon(R.drawable.answer_false);
                         true_ans.setVisibility(View.GONE);
                         builder.setNegativeButton("Lessonを選択し直す",
                             new DialogInterface.OnClickListener() {
@@ -362,8 +297,7 @@ public class EvaluationActivity extends Activity {
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
                                     Intent intent = new Intent(
-                                        getApplication(),
-                                        LessonListActivity.class);
+                                        getApplication(), LessonListActivity.class);
                                     startActivity(intent);
                                 }
                             });
@@ -372,16 +306,13 @@ public class EvaluationActivity extends Activity {
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
-                                    //changeMainScreen();
                                     EvaluationActivity.this.finish();
                                 }
                             });
                     }
-
                     builder.show();
                 }
             });
-
         }
 
     }
@@ -416,7 +347,7 @@ public class EvaluationActivity extends Activity {
 
     public void changePartnerScreen(View view) {
         Intent intent = new Intent(this,
-            net.exkazuu.mimicdance.activities.PartnerActivity.class);
+            CoccoActivity.class);
         TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
         TextView partnerEditText = (TextView) findViewById(R.id.editTextActionScreen2);
         intent.putExtra("text_data", playerEditText.getText().toString());

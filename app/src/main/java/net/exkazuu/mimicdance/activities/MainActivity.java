@@ -24,15 +24,13 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-import net.exkazuu.mimicdance.DetectableSoftKeyLayout;
 import net.exkazuu.mimicdance.CharacterImageViewSet;
+import net.exkazuu.mimicdance.DetectableSoftKeyLayout;
 import net.exkazuu.mimicdance.Lessons;
 import net.exkazuu.mimicdance.R;
-import net.exkazuu.mimicdance.command.StringCommandExecutor;
-import net.exkazuu.mimicdance.command.StringCommandParser;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.exkazuu.mimicdance.interpreter.Interpreter;
+import net.exkazuu.mimicdance.program.CodeParser;
+import net.exkazuu.mimicdance.program.UnrolledProgram;
 
 public class MainActivity extends Activity {
 
@@ -47,8 +45,8 @@ public class MainActivity extends Activity {
     private DetectableSoftKeyLayout DSKLayout;
     private HorizontalScrollView iconList;
 
-    private CharacterImageViewSet leftImages;
-    private CharacterImageViewSet rightImages;
+    private CharacterImageViewSet piyoViewSet;
+    private CharacterImageViewSet altPiyoViewSet;
 
     private Thread thread;
     private CommandExecutor commandExecutor;
@@ -70,8 +68,8 @@ public class MainActivity extends Activity {
         setTitle("編集画面");
         setContentView(R.layout.main);
 
-        leftImages = CharacterImageViewSet.createPiyoLeft(this);
-        rightImages = CharacterImageViewSet.createPiyoRight(this);
+        piyoViewSet = CharacterImageViewSet.createPiyoLeft(this);
+        altPiyoViewSet = CharacterImageViewSet.createPiyoRight(this);
 
         // 右側のテキストたち
         for (int i = 0; i < 12; i++) {
@@ -313,31 +311,19 @@ public class MainActivity extends Activity {
             textView.setText(text_data);
             // (imgTextView.getTextFromImage(iconContainer)); // 1行ずつ配列に収納
 
-            List<String> leftCommands = new ArrayList<String>();
-            List<Integer> leftNumbers = new ArrayList<Integer>();
-            StringCommandParser.parse(commandsText, leftCommands, leftNumbers,
-                true);
+            UnrolledProgram piyoProgram = CodeParser.parse(commandsText, true);
+            UnrolledProgram altPiyoProgram = CodeParser.parse(commandsText, false);
 
-            List<String> rightCommands = new ArrayList<String>();
-            List<Integer> rightNumbers = new ArrayList<Integer>();
-            StringCommandParser.parse(commandsText, rightCommands,
-                rightNumbers, false);
-
-            executeCommands(leftImages, rightImages, leftCommands,
-                rightCommands, leftNumbers, rightNumbers, textView);
+            executeCommands(piyoViewSet, altPiyoViewSet, piyoProgram, altPiyoProgram, textView);
         }
 
-        private void executeCommands(CharacterImageViewSet leftImages,
-                                     CharacterImageViewSet rightImages, List<String> leftCommands,
-                                     List<String> rightCommands, List<Integer> leftNumbers,
-                                     List<Integer> rightNumbers, TextView textView) {
-            StringCommandExecutor leftRunnable = new StringCommandExecutor(
-                leftImages, leftCommands, textView, leftNumbers,
-                getApplicationContext(), true);
-            StringCommandExecutor rightRunnable = new StringCommandExecutor(
-                rightImages, rightCommands, textView, rightNumbers,
-                getApplicationContext(), false);
-            for (int i = 0; !died && i < leftCommands.size(); i++) { // 解析&実行
+        private void executeCommands(CharacterImageViewSet piyoViewSet, CharacterImageViewSet altPiyoViewSet,
+                                     UnrolledProgram piyoProgram, UnrolledProgram altPiyoProgram, TextView textView) {
+            Interpreter leftRunnable = new Interpreter(
+                piyoViewSet, piyoProgram, textView, getApplicationContext(), true);
+            Interpreter rightRunnable = new Interpreter(
+                altPiyoViewSet, altPiyoProgram, textView, getApplicationContext(), false);
+            for (int i = 0; !died && i < piyoProgram.size(); i++) { // 解析&実行
                 handler.post(leftRunnable); // 光らせる
                 handler.post(rightRunnable); // 光らせる
 
@@ -390,8 +376,8 @@ public class MainActivity extends Activity {
     private TabHost host;
 
     public void initializeImage() {
-        leftImages = CharacterImageViewSet.createPiyoLeft(this);
-        rightImages = CharacterImageViewSet.createPiyoRight(this);
+        piyoViewSet = CharacterImageViewSet.createPiyoLeft(this);
+        altPiyoViewSet = CharacterImageViewSet.createPiyoRight(this);
     }
 
     /**
@@ -445,7 +431,7 @@ public class MainActivity extends Activity {
     public void changePartnerScreen(View view) { // お手本画面へ遷移
         host.setCurrentTab(TEXT_VIEW);
         Intent intent = new Intent(this,
-            net.exkazuu.mimicdance.activities.PartnerActivity.class);
+            CoccoActivity.class);
         intent.putExtra("lesson", lesson);
         intent.putExtra("message", message);
         this.startActivity(intent);

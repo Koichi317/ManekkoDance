@@ -1,38 +1,28 @@
-package net.exkazuu.mimicdance.command;
+package net.exkazuu.mimicdance.program;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringCommandParser {
+public class CodeParser {
 
-    private StringCommandParser() {
+    private CodeParser() {
     }
 
-    public static void parse(String commandsText, List<String> expandedCommands,
-                             List<Integer> expandedLineNumbers, boolean isLeft) {
-        String[] lines = commandsText.split("\n"); // 1行毎に配列に格納
-        List<String> originalLines = Arrays.asList(lines); // List型配列に変換
-
-        // 行番号を付ける(1行目：0番目、2行目:1番目、・・・)
-        List<Integer> originalLineNumbers = new ArrayList<>();
-        for (int i = 0; i < lines.length; i++)
-            originalLineNumbers.add(i);
-
-        expandCommands(originalLines, originalLineNumbers, expandedCommands, expandedLineNumbers, isLeft);
+    public static UnrolledProgram parse(String commandsText, boolean forPiyo) {
+        List<String> lines = Arrays.asList(commandsText.split("\n")); // List型配列に変換
+        return expandCommands(lines, forPiyo);
     }
 
-    private static void expandCommands(List<String> originalLines, List<Integer> originalLineNumbers,
-                                       List<String> expandedLines, List<Integer> expandedLineNumbers, boolean isLeft) {
+    private static UnrolledProgram expandCommands(List<String> lines, boolean forPiyo) {
+        Block rootBlock = new Block();
         Stack<ParseState> parseStateStack = new Stack<>();
-        Block block = new Block();
-        parseStateStack.push(new ParseState(StateType.Block, block));
+        parseStateStack.push(new ParseState(StateType.Block, rootBlock));
 
-        for (int i = 0; i < originalLines.size(); i++) {
-            String line = originalLines.get(i);
+        for (int lineIndex = 0; lineIndex < lines.size(); lineIndex++) {
+            String line = lines.get(lineIndex);
             ParseState lastState = parseStateStack.peek();
             if (line.contains("もしも")) {
                 IfStatement ifStatement = new IfStatement(readCondition(line));
@@ -57,11 +47,12 @@ public class StringCommandParser {
                     parseStateStack.pop();
                 }
             } else {
-                lastState.addStatement(new Command(line, originalLineNumbers.get(i)));
+                lastState.addStatement(new Action(line, lineIndex));
             }
         }
-        block.createExpandedCommands(expandedLines, isLeft);
-        block.createExpandedLineNumbers(expandedLineNumbers, isLeft);
+        UnrolledProgram program = new UnrolledProgram();
+        rootBlock.unrollProgram(program, forPiyo);
+        return program;
     }
 
     private static int readCount(String loopCount) {

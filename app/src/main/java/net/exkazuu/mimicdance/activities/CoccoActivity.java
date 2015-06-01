@@ -4,41 +4,29 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.exkazuu.mimicdance.CharacterImageViewSet;
 import net.exkazuu.mimicdance.R;
 import net.exkazuu.mimicdance.Timer;
-import net.exkazuu.mimicdance.command.StringCommandExecutor;
-import net.exkazuu.mimicdance.command.StringCommandParser;
+import net.exkazuu.mimicdance.interpreter.Interpreter;
+import net.exkazuu.mimicdance.program.CodeParser;
+import net.exkazuu.mimicdance.program.UnrolledProgram;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class PartnerActivity extends Activity {
+public class CoccoActivity extends Activity {
 
     private String textData;
-    private CharacterImageViewSet leftImages;
-    private CharacterImageViewSet rightImages;
+    private CharacterImageViewSet coccoViewSet;
+    private CharacterImageViewSet altCoccoViewSet;
     private Thread thread;
-    private CommandExecutor commandExecutor;
     private String problemNumber;
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (commandExecutor != null) {
-            commandExecutor.died = true;
-        }
-    }
-
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +37,7 @@ public class PartnerActivity extends Activity {
         TextView editText1 = (TextView) findViewById(R.id.editText1);
         TextView editText2 = (TextView) findViewById(R.id.editText2);
         ImageView messageImageView1 = (ImageView) findViewById(R.id.imageView2);
-        FrameLayout alt_cocco = (FrameLayout) findViewById(R.id.alt_cocco);
-        FrameLayout cocco = (FrameLayout) findViewById(R.id.cocco);
-
-        LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
+        FrameLayout altCocco = (FrameLayout) findViewById(R.id.alt_cocco);
 
         Intent intent = getIntent();
         String data = intent.getStringExtra("lesson");
@@ -62,23 +47,23 @@ public class PartnerActivity extends Activity {
         editText2.setText(problemNumber);
         if (problemNumber.equals("1")) {
             messageImageView1.setImageResource(R.drawable.lesson_message1);
-            alt_cocco.setVisibility(View.GONE);
+            altCocco.setVisibility(View.GONE);
         } else if (problemNumber.equals("2")) {
             messageImageView1.setImageResource(R.drawable.lesson_message2);
-            alt_cocco.setVisibility(View.GONE);
+            altCocco.setVisibility(View.GONE);
         } else if (problemNumber.equals("3")) {
             messageImageView1.setImageResource(R.drawable.lesson_message3);
-            alt_cocco.setVisibility(View.GONE);
+            altCocco.setVisibility(View.GONE);
         } else if (problemNumber.equals("4")) {
             messageImageView1.setImageResource(R.drawable.lesson_message4);
-            alt_cocco.setVisibility(View.GONE);
+            altCocco.setVisibility(View.GONE);
         } else if (problemNumber.equals("5")) {
             messageImageView1.setImageResource(R.drawable.lesson_message5);
         } else if (problemNumber.equals("6")) {
             messageImageView1.setImageResource(R.drawable.lesson_message6);
         } else if (problemNumber.equals("7")) {
             messageImageView1.setImageResource(R.drawable.lesson_message7);
-            alt_cocco.setVisibility(View.GONE);
+            altCocco.setVisibility(View.GONE);
         }/* else if (message.equals("8")) {
             messageImageView1.setImageResource(R.drawable.lesson_message8);
 		} else if (message.equals("9")) {
@@ -89,13 +74,13 @@ public class PartnerActivity extends Activity {
 			messageImageView1.setImageResource(R.drawable.lesson_message11);
 		}*/
 
-        Button btn5 = (Button) this.findViewById(R.id.button5);
+        Button btn5 = (Button) this.findViewById(R.id.btnShowCocco);
 
-        final PartnerActivity activity = this;
+        final CoccoActivity activity = this;
         btn5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                leftImages = CharacterImageViewSet.createCoccoLeft(activity);
-                rightImages = CharacterImageViewSet.createCoccoRight(activity);
+                coccoViewSet = CharacterImageViewSet.createCoccoLeft(activity);
+                altCoccoViewSet = CharacterImageViewSet.createCoccoRight(activity);
                 final Handler handler = new Handler();
                 if (thread == null || !thread.isAlive()) {
                     thread = new Thread(new CommandExecutor(handler));
@@ -104,63 +89,32 @@ public class PartnerActivity extends Activity {
             }
         });
 
-        leftImages = CharacterImageViewSet.createCoccoLeft(this);
-        rightImages = CharacterImageViewSet.createCoccoRight(this);
+        coccoViewSet = CharacterImageViewSet.createCoccoLeft(this);
+        altCoccoViewSet = CharacterImageViewSet.createCoccoRight(this);
     }
 
     private final class CommandExecutor implements Runnable {
         private final Handler handler;
-        private boolean died;
 
         private CommandExecutor(Handler handler) {
             this.handler = handler;
-            this.died = false;
         }
 
+        @Override
         public void run() {
             String commandsText = ((TextView) findViewById(R.id.editText1))
                 .getText().toString();
-            List<String> leftCommands = new ArrayList<String>();
-            List<Integer> leftNumbers = new ArrayList<Integer>();
-            StringCommandParser.parse(commandsText, leftCommands, leftNumbers,
-                true);
+            UnrolledProgram coccoProgram = CodeParser.parse(commandsText, true);
+            UnrolledProgram altCoccoProgram = CodeParser.parse(commandsText, false);
+            Runnable coccoExecutor = new Interpreter(coccoViewSet, coccoProgram, true);
+            Runnable altCoccoExecutor = new Interpreter(altCoccoViewSet, altCoccoProgram, false);
 
-            List<String> rightCommands = new ArrayList<String>();
-            List<Integer> rightNumbers = new ArrayList<Integer>();
-            StringCommandParser.parse(commandsText, rightCommands,
-                rightNumbers, false);
-
-            executeCommands(leftImages, rightImages, leftCommands,
-                rightCommands);
-        }
-
-        private void executeCommands(CharacterImageViewSet leftImages,
-                                     CharacterImageViewSet rightImages, List<String> leftCommands,
-                                     List<String> rightCommands) {
-            Runnable leftRunnable = new StringCommandExecutor(leftImages,
-                leftCommands, true);
-            Runnable rightRunnable = new StringCommandExecutor(rightImages,
-                rightCommands, false);
-
-            for (int i = 0; !this.died && i < leftCommands.size(); i++) { /* 解析&実行 */
-                //昼夜を表現する
-                /*
-                final boolean afternoon = i <= 1;
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
-                        if (problemNumber.equals("7")) {
-                            if (afternoon) layout.setBackgroundResource(R.drawable.yoru);
-                            else layout.setBackgroundResource(R.drawable.asa);
-                        }
-                    }
-                });
-                */
-
+            for (int i = 0; i < coccoProgram.size(); i++) { /* 解析&実行 */
                 // 1コマ目を表示する（アニメーションは2コマから構成）
-                handler.post(leftRunnable); /* 光らせる */
-                handler.post(rightRunnable); /* 光らせる */
+                handler.post(coccoExecutor); /* 光らせる */
+                handler.post(altCoccoExecutor); /* 光らせる */
+
+                Log.v("cocco", "first: " + i);
 
                 try { /* 1秒待機 */
                     Thread.sleep(300);
@@ -169,8 +123,10 @@ public class PartnerActivity extends Activity {
                 }
 
                 // 2コマ目を表示する（アニメーションは2コマから構成）
-                handler.post(leftRunnable);
-                handler.post(rightRunnable);
+                handler.post(coccoExecutor);
+                handler.post(altCoccoExecutor);
+
+                Log.v("cocco", "second: " + i);
 
                 try { /* 1秒待機 */
                     Thread.sleep(300);
@@ -205,8 +161,7 @@ public class PartnerActivity extends Activity {
     }
 
     public void changeMainScreen(View view) {
-        Intent intent = new Intent(getApplication(),
-            MainActivity.class);
+        Intent intent = new Intent(getApplication(), MainActivity.class);
         TextView editText1 = (TextView) findViewById(R.id.editText1);
         TextView editText2 = (TextView) findViewById(R.id.editText2);
         intent.putExtra("lesson", editText1.getText().toString());
@@ -217,15 +172,12 @@ public class PartnerActivity extends Activity {
             this.startActivity(intent);
         } else {
             // お手本確認に戻ってからコード入力画面に復帰する時
-            PartnerActivity.this.finish();
+            CoccoActivity.this.finish();
         }
-//		this.startActivity(intent);
     }
 
     public void changeTitleScreen() {
-        Intent intent = new Intent(getApplication(),
-            net.exkazuu.mimicdance.activities.TitleActivity.class);
+        Intent intent = new Intent(getApplication(), TitleActivity.class);
         this.startActivity(intent);
     }
-
 }

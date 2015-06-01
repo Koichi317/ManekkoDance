@@ -55,7 +55,7 @@ public class LessonListActivity extends ListActivity {
 		 * .getDefaultSharedPreferences(getApplication());
 		 */
         Intent intent = new Intent(this,
-            net.exkazuu.mimicdance.activities.PartnerActivity.class);
+            CoccoActivity.class);
 
         String answer = Lessons.getAnswer(position + 1);
         intent.putExtra("lesson", answer); // お手本の答え

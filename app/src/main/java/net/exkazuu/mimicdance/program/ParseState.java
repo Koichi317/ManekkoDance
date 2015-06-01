@@ -1,8 +1,8 @@
-package net.exkazuu.mimicdance.command;
+package net.exkazuu.mimicdance.program;
 
 class ParseState {
     public StateType type;
-    public Statement statement;
+    private final Statement statement;
 
     public ParseState(StateType type, Statement statement) {
         this.type = type;

@@ -1,4 +1,4 @@
-package net.exkazuu.mimicdance.command;
+package net.exkazuu.mimicdance.program;
 
 enum StateType {
     Block, Loop, If, Else,
