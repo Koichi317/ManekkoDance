@@ -1,6 +1,6 @@
 package net.exkazuu.mimicdance.program;
 
-class Action implements Statement {
+public class Action extends Statement {
     private final String line;
     private final int lineIndex;
 
@@ -10,7 +10,7 @@ class Action implements Statement {
     }
 
     @Override
-    public void unrollProgram(UnrolledProgram program, boolean forStandard) {
+    public void unroll(UnrolledProgram program, boolean isNormal) {
         program.lines.add(line);
         program.lineIndexes.add(lineIndex);
     }

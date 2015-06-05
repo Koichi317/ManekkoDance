@@ -1,6 +1,5 @@
 package net.exkazuu.mimicdance.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -11,18 +10,17 @@ import android.widget.ViewFlipper;
 
 import net.exkazuu.mimicdance.R;
 
-public class TutorialActivity extends Activity {
-    private ViewFlipper viewflipper;
+public class TutorialActivity extends BaseActivity {
     private float lastTouchX;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
-        setContentView(R.layout.tutorial);
+        setContentView(R.layout.tutorialActivity);
 
-        viewflipper = (ViewFlipper) this.findViewById(R.id.flipper);
+        final ViewFlipper viewFlipper = (ViewFlipper) this.findViewById(R.id.flipper);
 
-        this.viewflipper.setOnTouchListener(new OnTouchListener() {
+        viewFlipper.setOnTouchListener(new OnTouchListener() {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -33,10 +31,10 @@ public class TutorialActivity extends Activity {
                     case MotionEvent.ACTION_UP: // B
                         float currentX = event.getX();
                         if (lastTouchX < currentX) {
-                            viewflipper.showPrevious();
+                            viewFlipper.showPrevious();
                         }
                         if (lastTouchX > currentX) {
-                            viewflipper.showNext();
+                            viewFlipper.showNext();
                         }
                         break;
                 }
@@ -45,8 +43,8 @@ public class TutorialActivity extends Activity {
         });
     }
 
-    public void changeTitleScreen(View view) {
-        Intent intent = new Intent(this, net.exkazuu.mimicdance.activities.TitleActivity.class);
-        this.startActivity(intent);
+    public void startTitleActivity(View view) {
+        Intent intent = new Intent(this, TitleActivity.class);
+        startActivity(intent);
     }
 }

@@ -13,26 +13,25 @@
       android:label="@string/app_name">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
-
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
     <activity
       android:name=".activities.LessonListActivity"
-      android:label="@string/title_activity_lesson_list"></activity>
+      android:label="@string/title_lesson_list_activity"></activity>
     <activity
-      android:name=".activities.MainActivity"
-      android:label="@string/title_activity_main"
+      android:name=".activities.CodingActivity"
+      android:label="@string/title_coding_activity"
       android:windowSoftInputMode="adjustResize"></activity>
     <activity
       android:name=".activities.CoccoActivity"
-      android:label="@string/title_activity_partner"></activity>
+      android:label="@string/title_cocco_activity"></activity>
     <activity
       android:name=".activities.EvaluationActivity"
-      android:label="@string/title_activity_action"></activity>
+      android:label="@string/title_evaluation_activity"></activity>
     <activity
       android:name=".activities.TutorialActivity"
-      android:label="@string/title_tutorial"></activity>
+      android:label="@string/title_tutorial_activity"></activity>
     <activity
       android:name=".activities.HelpActivity"
       android:label="@string/help"></activity>

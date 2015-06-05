@@ -46,14 +46,6 @@
     android:text="@string/hantei" />
 
   <TextView
-    android:id="@+id/editTextActionScreen2"
-    android:layout_width="255dp"
-    android:layout_height="30dp"
-    android:hint="@string/hint_secret"
-    android:textSize="18sp"
-    android:visibility="invisible" />
-
-  <TextView
     android:id="@+id/yellow_or_orange"
     android:layout_width="255dp"
     android:layout_height="30dp"
@@ -220,7 +212,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
-        android:onClick="changeHelpScreen"
+        android:onClick="startHelpActivity"
         android:src="@drawable/help" />
 
       <ImageView
@@ -276,7 +268,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_weight="1"
-      android:onClick="changePartnerScreen"
+      android:onClick="startCoccoActivity"
       android:text="@string/look_answer_button2" />
 
     <Button
@@ -284,7 +276,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_weight="1"
-      android:onClick="changeMainScreen"
+      android:onClick="startCodingActivity"
       android:text="@string/player_screen" />
   </LinearLayout>
 

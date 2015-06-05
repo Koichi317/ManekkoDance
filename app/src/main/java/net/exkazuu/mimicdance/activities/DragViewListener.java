@@ -2,33 +2,31 @@ package net.exkazuu.mimicdance.activities;
 
 //import android.util.Log;
 
+import android.content.Intent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import net.exkazuu.mimicdance.R;
 
 public class DragViewListener implements OnTouchListener {
-    private ImageView dragView;
-    private ImageView[][] cells;
-    private String[][] program;
-    private TextView text;
-    private int flag[][];
+    private final ImageView dragView;
+    private final ImageView[][] cells;
+    private final String[][] program;
+    private final Intent intent;
     private int resb[][];
     private ImageView[][] canwrite;
-    private String lessonNumber;
-    private int oldx;
-    private int oldy;
+    private int lessonNumber;
+    private int oldX;
+    private int oldY;
 
     public DragViewListener(ImageView dragView, ImageView[][] cells,
-                            String[][] program, TextView text, int[][] flag, int[][] resb, ImageView[][] canwrite, String lessonNumber) {
+                            String[][] program, Intent intent, int[][] resb, ImageView[][] canwrite, int lessonNumber) {
         this.dragView = dragView;
         this.cells = cells;
         this.program = program;
-        this.text = text;
-        this.flag = flag;
+        this.intent = intent;
         this.resb = resb;
         this.canwrite = canwrite;
         this.lessonNumber = lessonNumber;
@@ -38,16 +36,11 @@ public class DragViewListener implements OnTouchListener {
         int x = (int) event.getRawX();
         int y = (int) event.getRawY();
 
-        int left = dragView.getLeft() + (x - oldx);
-        int top = dragView.getTop() + (y - oldy);
+        int left = dragView.getLeft() + (x - oldX);
+        int top = dragView.getTop() + (y - oldY);
 
         int x_index = left / cells[0][0].getWidth();
         int y_index = top / cells[0][0].getHeight();
-        int test_x = cells[0][0].getWidth();
-        int test_y = cells[0][0].getHeight();
-
-        int xx = x / cells[0][0].getWidth();
-        int yy = y / cells[0][0].getHeight();
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:
@@ -59,7 +52,7 @@ public class DragViewListener implements OnTouchListener {
                 if (0 <= x_index && x_index <= 2 && 0 <= y_index && y_index <= 11) {
                     if (view.getId() == R.id.imageView1) {
                         program[x_index][y_index] = "右腕を上げる";
-                    } else if (view.getId() == R.id.imageView2) {
+                    } else if (view.getId() == R.id.messageImageView) {
                         program[x_index][y_index] = "右腕を下げる";
                     } else if (view.getId() == R.id.imageView3) {
                         program[x_index][y_index] = "左腕を上げる";
@@ -140,13 +133,13 @@ public class DragViewListener implements OnTouchListener {
                     }
                 }
 
-                if (lessonNumber.equals("4")) {
+                if (lessonNumber == 4) {
                     for (int i = 0; i < 3; i++) {
                         for (int j = 8; j < 12; j++) {
                             program[i][j] = "";
                         }
                     }
-                } else if (lessonNumber.equals("2")) {
+                } else if (lessonNumber == 2) {
                 } else {
                     for (int i = 0; i < 3; i++) {
                         for (int j = 10; j < 12; j++) {
@@ -223,22 +216,18 @@ public class DragViewListener implements OnTouchListener {
                     }
                 }
 
-                text.setText(program[0][0] + program[1][0] + program[2][0] + "\n"
-                    + program[0][1] + program[1][1] + program[2][1] + "\n"
-                    + program[0][2] + program[1][2] + program[2][2] + "\n"
-                    + program[0][3] + program[1][3] + program[2][3] + "\n"
-                    + program[0][4] + program[1][4] + program[2][4] + "\n"
-                    + program[0][5] + program[1][5] + program[2][5] + "\n"
-                    + program[0][6] + program[1][6] + program[2][6] + "\n"
-                    + program[0][7] + program[1][7] + program[2][7] + "\n"
-                    + program[0][8] + program[1][8] + program[2][8] + "\n"
-                    + program[0][9] + program[1][9] + program[2][9] + "\n"
-                    + program[0][10] + program[1][10] + program[2][10] + "\n"
-                    + program[0][11] + program[1][11] + program[2][11] + "\n");
+                StringBuilder builder = new StringBuilder();
+                for (int column = 0; column < 3; column++) {
+                    for (int row = 0; row < 12; row++) {
+                        builder.append(program[column][row]);
+                    }
+                    builder.append("\n");
+                }
+                intent.putExtra("piyoCode", builder.toString());
         }
 
-        oldx = x;
-        oldy = y;
+        oldX = x;
+        oldY = y;
         return true;
 
     }

@@ -1,21 +1,19 @@
 package net.exkazuu.mimicdance.program;
 
-import java.util.ArrayList;
-import java.util.List;
-
-class LoopStatement implements Statement {
-    final List<Statement> statements = new ArrayList<>();
+public class LoopStatement extends Statement {
+    private final Block block;
     private final int loopCount;
 
-    public LoopStatement(int loopCount) {
+    public LoopStatement(Block block, int loopCount) {
+        this.block = block;
         this.loopCount = loopCount;
     }
 
     @Override
-    public void unrollProgram(UnrolledProgram program, boolean forStandard) {
+    public void unroll(UnrolledProgram program, boolean isNormal) {
         for (int i = 0; i < loopCount; i++) {
-            for (Statement statement : statements) {
-                statement.unrollProgram(program, forStandard);
+            for (Statement statement : block) {
+                statement.unroll(program, isNormal);
             }
         }
     }

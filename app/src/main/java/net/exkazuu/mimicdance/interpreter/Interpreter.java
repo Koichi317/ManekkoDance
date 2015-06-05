@@ -17,37 +17,33 @@ public class Interpreter implements Runnable {
 
     private final UnrolledProgram program;
     private final CharacterImageViewSet charaViewSet;
-    private final CharacterType charaType;
+    private final Context context;
+    private final TextView textView;
+    private final boolean isPiyo;
     private final Pose pose;
-    private TextView textView;
-    private Context context;
-    private MediaPlayer bgm;
+
     private Set<ActionType> actions;
     private int executionCount;
-    private String bearCommand = "";
     private boolean failed;
+    private MediaPlayer playerForHandlingDanbo;
+    private String bearCommand;
 
-    /**
-     * * コンストラクタ ***
-     */
-    // お手本
-    public Interpreter(CharacterImageViewSet charaViewSet, UnrolledProgram program,
-                       boolean forStandard) {
-        this.charaViewSet = charaViewSet;
-        this.program = program;
-        this.pose = new Pose();
-        this.charaType = forStandard ? CharacterType.Cocco : CharacterType.AltCocco;
+    public static Interpreter createForPiyo(UnrolledProgram program, CharacterImageViewSet charaViewSet, TextView textView, Context context) {
+        return new Interpreter(program, charaViewSet, textView, context, true);
     }
 
-    // プレイヤー
-    public Interpreter(CharacterImageViewSet charaViewSet, UnrolledProgram program,
-                       TextView textView, Context context, boolean forStandard) {
-        this.context = context;
-        this.charaViewSet = charaViewSet;
+    public static Interpreter createForCocco(UnrolledProgram program, CharacterImageViewSet charaViewSet) {
+        return new Interpreter(program, charaViewSet, null, null, false);
+    }
+
+    private Interpreter(UnrolledProgram program, CharacterImageViewSet charaViewSet, TextView textView, Context context, boolean isPiyo) {
         this.program = program;
-        this.pose = new Pose();
+        this.charaViewSet = charaViewSet;
         this.textView = textView;
-        this.charaType = forStandard ? CharacterType.Piyo : CharacterType.AltPiyo;
+        this.context = context;
+        this.isPiyo = isPiyo;
+        this.pose = new Pose();
+        this.bearCommand = "";
     }
 
     @Override
@@ -56,17 +52,15 @@ public class Interpreter implements Runnable {
             return;
         }
         if (isMoving()) {
-            if (charaType == CharacterType.Piyo || charaType == CharacterType.AltPiyo) {
+            if (isPiyo) {
                 highlightLine();
             }
 
             actions = ActionType.parse(program.getLine(getLineIndex()));
-
             if (!failed && ActionType.validate(actions) && pose.validate(actions)) {
                 pose.change(actions);
                 charaViewSet.changeToMovingImages(actions);
-
-                if (charaType == CharacterType.Piyo) {
+                if (isPiyo) {
                     handleDanbo();
                     handleBear(actions);
                 }
@@ -113,27 +107,26 @@ public class Interpreter implements Runnable {
     }
 
     private void handleDanbo() {
-        if (bgm != null) {
-            bgm.stop();
+        if (playerForHandlingDanbo != null) {
+            playerForHandlingDanbo.stop();
         }
-
         if (pose.isLeftHandUp()) {
             if (pose.isRightHandUp()) {
-                bgm = MediaPlayer.create(context, R.raw.danbo_luru);
+                playerForHandlingDanbo = MediaPlayer.create(context, R.raw.danbo_luru);
             } else {
-                bgm = MediaPlayer.create(context, R.raw.danbo_lu);
+                playerForHandlingDanbo = MediaPlayer.create(context, R.raw.danbo_lu);
             }
         } else {
             if (pose.isRightHandUp()) {
-                bgm = MediaPlayer.create(context, R.raw.danbo_ru);
+                playerForHandlingDanbo = MediaPlayer.create(context, R.raw.danbo_ru);
             } else {
-                bgm = MediaPlayer.create(context, R.raw.danbo_c);
+                playerForHandlingDanbo = MediaPlayer.create(context, R.raw.danbo_c);
             }
         }
-        bgm.start();
+        playerForHandlingDanbo.start();
     }
 
-    public void handleBear(Collection<ActionType> actions) {
+    private void handleBear(Collection<ActionType> actions) {
         if (actions.contains(ActionType.LeftHandDown)) {
             bearCommand += "lau";
         } else if (actions.contains(ActionType.LeftHandUp)) {
@@ -159,7 +152,6 @@ public class Interpreter implements Runnable {
         } else {
             bearCommand = bearCommand.replace("jump", "");
         }
-
         new BearHandlingTask(bearCommand).execute();
     }
 }

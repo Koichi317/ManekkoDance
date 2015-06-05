@@ -1,58 +1,64 @@
 package net.exkazuu.mimicdance.program;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CodeParser {
 
+    private int lineIndex;
+
     private CodeParser() {
     }
 
-    public static UnrolledProgram parse(String commandsText, boolean forPiyo) {
+    public static Block parse(String commandsText) {
         List<String> lines = Arrays.asList(commandsText.split("\n")); // List型配列に変換
-        return expandCommands(lines, forPiyo);
+        return new CodeParser().parseBlock(lines, new String[]{});
     }
 
-    private static UnrolledProgram expandCommands(List<String> lines, boolean forPiyo) {
-        Block rootBlock = new Block();
-        Stack<ParseState> parseStateStack = new Stack<>();
-        parseStateStack.push(new ParseState(StateType.Block, rootBlock));
-
-        for (int lineIndex = 0; lineIndex < lines.size(); lineIndex++) {
-            String line = lines.get(lineIndex);
-            ParseState lastState = parseStateStack.peek();
-            if (line.contains("もしも")) {
-                IfStatement ifStatement = new IfStatement(readCondition(line));
-                lastState.addStatement(ifStatement);
-                parseStateStack.push(new ParseState(StateType.If, ifStatement));
-            } else if (line.contains("もしくは")) {
-                if (lastState.type == StateType.If) {
-                    lastState.type = StateType.Else;
-                }
-            } else if (line.contains("くりかえし")) {
-                LoopStatement loopStatement = new LoopStatement(readCount(line));
-                lastState.addStatement(loopStatement);
-                parseStateStack.push(new ParseState(StateType.Loop,
-                    loopStatement));
-            } else if (line.contains("もしおわり")) {
-                if (lastState.type == StateType.If
-                    || lastState.type == StateType.Else) {
-                    parseStateStack.pop();
-                }
-            } else if (line.contains("ここまで")) {
-                if (lastState.type == StateType.Loop) {
-                    parseStateStack.pop();
-                }
-            } else {
-                lastState.addStatement(new Action(line, lineIndex));
+    private Block parseBlock(List<String> lines, String[] endLineTokens) {
+        ArrayList<Statement> statements = new ArrayList<>();
+        while (lineIndex < lines.size()) {
+            String line = lines.get(lineIndex++);
+            if (contains(line, endLineTokens)) {
+                break;
             }
+            statements.add(parseStatement(lines));
         }
-        UnrolledProgram program = new UnrolledProgram();
-        rootBlock.unrollProgram(program, forPiyo);
-        return program;
+        return new Block(statements);
+    }
+
+    private Statement parseStatement(List<String> lines) {
+        String line = lines.get(lineIndex);
+        if (line.contains("くりかえし")) {
+            return parseLoop(lines);
+        } else if (line.contains("もしも")) {
+            return parseIf(lines);
+        }
+        return new Action(line, lineIndex);
+    }
+
+    private IfStatement parseIf(List<String> lines) {
+        String firstLine = lines.get(lineIndex++);
+        assert firstLine.contains("もしも");
+        Block trueBlock = parseBlock(lines, new String[]{"もしおわり", "ここまで"});
+        Block falseBlock;
+        if (lines.get(lineIndex++).contains("もしおわり")) {
+            falseBlock = parseBlock(lines, new String[]{"ここまで"});
+        } else {
+            falseBlock = new Block();
+        }
+        return new IfStatement(trueBlock, falseBlock, readCondition(firstLine));
+
+    }
+
+    private LoopStatement parseLoop(List<String> lines) {
+        String firstLine = lines.get(lineIndex++);
+        assert firstLine.contains("くりかえし");
+        Block block = parseBlock(lines, new String[]{"ここまで"});
+        return new LoopStatement(block, readCount(firstLine));
     }
 
     private static int readCount(String loopCount) {
@@ -67,5 +73,14 @@ public class CodeParser {
 
     private static boolean readCondition(String conditionString) {
         return !conditionString.contains("茶");
+    }
+
+    private static boolean contains(String line, String[] endLineTokens) {
+        for (String endLineToken : endLineTokens) {
+            if (line.contains(endLineToken)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

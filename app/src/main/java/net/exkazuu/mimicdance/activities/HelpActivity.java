@@ -9,9 +9,10 @@ import android.widget.ImageView;
 import net.exkazuu.mimicdance.R;
 
 public class HelpActivity extends Activity {
-
+    public static final int MinPageNumber = 1;
+    public static final int MaxPageNumber = 7;
     private int pageNumber;
-    private final String page = " / 7";
+    private final String pageSuffix = " / MaxPageNumber";
 
     int[] helpImageResources = {R.drawable.tutorial1, R.drawable.tutorial2,
         R.drawable.tutorial3, R.drawable.tutorial4, R.drawable.tutorial5,
@@ -19,37 +20,35 @@ public class HelpActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.help);
+        setContentView(R.layout.helpActivity);
 
-        pageNumber = 1;
-        ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
-        helpImage.setImageResource(R.drawable.tutorial1);
-        EditText pageText = (EditText) findViewById(R.id.page);
-        pageText.setText("1 / 7");
+        pageNumber = MinPageNumber;
+        updatePageNumber();
     }
 
     public void next(View view) {
-        if (pageNumber == 7)
-            pageNumber = 0;
+        if (pageNumber == MaxPageNumber)
+            pageNumber = MinPageNumber - 1;
         pageNumber++;
-        setHelpImage();
+        updatePageNumber();
     }
 
     public void prev(View view) {
-        if (pageNumber == 1)
-            pageNumber = 7;
+        if (pageNumber == MinPageNumber)
+            pageNumber = MaxPageNumber + 1;
         pageNumber--;
-        setHelpImage();
+        updatePageNumber();
     }
 
-    public void changeScreen(View view) {
+    public void close(View view) {
         finish();
     }
 
-    public void setHelpImage() {
-        ImageView helpImage = (ImageView) findViewById(R.id.helpImage);
+    public void updatePageNumber() {
         EditText pageText = (EditText) findViewById(R.id.page);
-        pageText.setText(String.valueOf(pageNumber) + page);
-        helpImage.setImageResource(helpImageResources[pageNumber - 1]);
+        pageText.setText(pageNumber + pageSuffix);
+
+        ImageView helpView = (ImageView) findViewById(R.id.helpImage);
+        helpView.setImageResource(helpImageResources[pageNumber - 1]);
     }
 }

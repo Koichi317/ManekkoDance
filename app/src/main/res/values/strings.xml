@@ -2,11 +2,11 @@
 
   <string name="app_name">まねっこダンス</string>
   <string name="menu_settings">Settings</string>
-  <string name="title_activity_main">MainActivity</string>
-  <string name="title_activity_partner">PartnerActivity</string>
-  <string name="title_activity_action">ActionActivity</string>
-  <string name="title_activity_lesson_list">LessonList</string>
-  <string name="title_tutorial">Tutorial</string>
+  <string name="title_coding_activity">コーディング</string>
+  <string name="title_cocco_activity">お手本確認</string>
+  <string name="title_evaluation_activity">答え合わせ</string>
+  <string name="title_lesson_list_activity">レッスン選択</string>
+  <string name="title_tutorial_activity">チュートリアル</string>
   <string name="button_action">実行</string>
   <string name="Enter">改行</string>
   <string name="hint_text">ここに入力</string>
@@ -23,7 +23,7 @@
   <string name="jump">ジャンプ</string>
   <string name="partner_screen">お手本</string>
   <string name="player">編集</string>
-  <string name="action">判定画面</string>
+  <string name="action">答え合わせ</string>
   <string name="return_action">戻る</string>
   <string name="Title_how_to_play">遊びかた</string>
   <string name="Title_start_button">はじめる</string>

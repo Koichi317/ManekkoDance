@@ -22,7 +22,32 @@ public class CharacterImageViewSet {
         this.charaType = charaType;
 
         BodyPartType[] bodyPartTypes = BodyPartType.values();
-        bodyParts = new ImageView[bodyPartTypes.length];
+        this.bodyParts = new ImageView[bodyPartTypes.length];
+
+        ActionType[] actions = ActionType.values();
+        CharacterType[] characters = CharacterType.values();
+        this.firstImageIds = new int[actions.length][characters.length];
+        this.secondImageIds = new int[actions.length][characters.length];
+
+        initializeImageViews(charaType, activity, bodyPartTypes);
+        initializeImageIds(activity, actions, characters);
+    }
+
+    private void initializeImageIds(Activity activity, ActionType[] actions, CharacterType[] characters) {
+        for (int i = 0; i < actions.length; i++) {
+            ActionType action = actions[i];
+            for (int j = 0; j < characters.length; j++) {
+                String prefix = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, characters[j].name()) + "_";
+                String actionName = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, action.name());
+                String firstName = prefix + actionName.replace("down", "up") + "2";
+                String secondName = prefix + actionName.replace("up", "up3").replace("down", "up1").replace("jump", "basic");
+                firstImageIds[i][j] = activity.getResources().getIdentifier(firstName, "drawable", activity.getPackageName());
+                secondImageIds[i][j] = activity.getResources().getIdentifier(secondName, "drawable", activity.getPackageName());
+            }
+        }
+    }
+
+    private void initializeImageViews(CharacterType charaType, Activity activity, BodyPartType[] bodyPartTypes) {
         for (int i = 0; i < bodyPartTypes.length; i++) {
             String name = charaType.name().toLowerCase() + bodyPartTypes[i].name();
             int id = activity.getResources().getIdentifier(name, "id", activity.getPackageName());
@@ -32,23 +57,6 @@ public class CharacterImageViewSet {
                 int drawableId = activity.getResources().getIdentifier(drawableName, "drawable", activity.getPackageName());
                 bodyParts[i].setImageResource(drawableId);
                 bodyParts[i].setVisibility(View.VISIBLE);
-            }
-        }
-
-        ActionType[] actions = ActionType.values();
-        CharacterType[] characters = CharacterType.values();
-        firstImageIds = new int[actions.length][characters.length];
-        secondImageIds = new int[actions.length][characters.length];
-        for (int i = 0; i < actions.length; i++) {
-            ActionType action = actions[i];
-            for (int j = 0; j < characters.length; j++) {
-                CharacterType chara = characters[j];
-                String prefix = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, chara.name()) + "_";
-                String firstName = prefix + CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, action.name()).replace("down", "up") + "2";
-                String secondName = prefix + CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, action.name())
-                    .replace("up", "up3").replace("down", "up1").replace("jump", "basic");
-                firstImageIds[i][j] = activity.getResources().getIdentifier(firstName, "drawable", activity.getPackageName());
-                secondImageIds[i][j] = activity.getResources().getIdentifier(secondName, "drawable", activity.getPackageName());
             }
         }
     }

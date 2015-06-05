@@ -12,7 +12,7 @@
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
     android:layout_marginBottom="48dp"
-    android:onClick="startLesson"
+    android:onClick="startLessonListActivity"
     android:text="@string/Title_start_button"
     android:textSize="24sp"
     android:visibility="gone" />
@@ -24,7 +24,7 @@
     android:layout_above="@id/help_button"
     android:layout_alignLeft="@id/help_button"
     android:layout_marginBottom="22dp"
-    android:onClick="viewHelp"
+    android:onClick="startHelpActivity"
     android:text="@string/Title_how_to_play"
     android:textSize="24sp"
     android:visibility="gone" />

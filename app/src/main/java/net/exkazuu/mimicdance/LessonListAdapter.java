@@ -9,12 +9,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class MySpecialAdapter extends ArrayAdapter<String> {
+public class LessonListAdapter extends ArrayAdapter<String> {
 
-    public MySpecialAdapter(Context context, int textViewResourceId,
-                            List<String> objects) {
+    public LessonListAdapter(Context context, int textViewResourceId, List<String> objects) {
         super(context, textViewResourceId, objects);
-        // TODO Auto-generated constructor stub
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -24,8 +22,8 @@ public class MySpecialAdapter extends ArrayAdapter<String> {
         } else {
             view.setBackgroundColor(Color.rgb(255, 204, 204));
         }
-        TextView v = (TextView) view;
-        v.setTextSize(18);
+        TextView textView = (TextView) view;
+        textView.setTextSize(18);
         return view;
     }
 }
