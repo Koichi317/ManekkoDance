@@ -20,8 +20,8 @@ public class CodeParser {
 
     private Block parseBlock(List<String> lines, String[] endLineTokens) {
         ArrayList<Statement> statements = new ArrayList<>();
-        while (lineIndex < lines.size()) {
-            String line = lines.get(lineIndex++);
+        for (; lineIndex < lines.size(); lineIndex++) {
+            String line = lines.get(lineIndex);
             if (contains(line, endLineTokens)) {
                 break;
             }

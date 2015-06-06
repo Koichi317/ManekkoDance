@@ -1,5 +1,7 @@
 package net.exkazuu.mimicdance.program;
 
+import com.google.common.base.Joiner;
+
 import net.exkazuu.mimicdance.interpreter.ActionType;
 
 import java.util.ArrayList;
@@ -9,6 +11,10 @@ import java.util.Set;
 public class UnrolledProgram {
     final List<String> lines = new ArrayList<>();
     final List<Integer> lineIndexes = new ArrayList<>();
+
+    public String getCode() {
+        return Joiner.on('\n').join(lines);
+    }
 
     public String getLine(int lineIndex) {
         return lines.get(lineIndex);
