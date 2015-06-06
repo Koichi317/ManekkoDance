@@ -24,7 +24,7 @@ public class CodingActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.codingActivity);
+        setContentView(R.layout.coding);
 
         // 右側のテキストたち
         for (int i = 0; i < 12; i++) {

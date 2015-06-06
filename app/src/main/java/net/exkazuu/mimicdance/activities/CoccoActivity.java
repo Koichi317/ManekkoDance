@@ -51,7 +51,7 @@ public class CoccoActivity extends BaseActivity {
     }
 
     private void initializeScreen() {
-        setContentView(R.layout.coccoActivity);
+        setContentView(R.layout.cocco);
 
         ImageView messageImageView = (ImageView) findViewById(R.id.messageImageView);
         int drawableId = getResources().getIdentifier("lesson_message" + lessonNumber, "drawable", getPackageName());

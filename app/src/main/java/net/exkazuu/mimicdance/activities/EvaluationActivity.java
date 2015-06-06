@@ -79,7 +79,7 @@ public class EvaluationActivity extends BaseActivity {
     }
 
     private void initializeScreen() {
-        setContentView(R.layout.evaluationActivity);
+        setContentView(R.layout.evaluation);
         FrameLayout altPiyoFrame = (FrameLayout) findViewById(R.id.alt_piyo);
         FrameLayout altCoccoFrame = (FrameLayout) findViewById(R.id.alt_cocco);
         altPiyoFrame.setVisibility(View.GONE);

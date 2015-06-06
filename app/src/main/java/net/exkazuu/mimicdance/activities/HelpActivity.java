@@ -20,7 +20,7 @@ public class HelpActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.helpActivity);
+        setContentView(R.layout.help);
 
         pageNumber = MinPageNumber;
         updatePageNumber();

@@ -13,7 +13,7 @@ public class TitleActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
-        setContentView(R.layout.titleActivity);
+        setContentView(R.layout.title);
     }
 
     @Override
