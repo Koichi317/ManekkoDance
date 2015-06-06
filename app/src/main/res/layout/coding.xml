@@ -40,7 +40,7 @@
             android:src="@drawable/icon_right_hand_up" />
 
           <ImageView
-            android:id="@+id/messageImageView"
+            android:id="@+id/imageView2"
             android:layout_width="61dip"
             android:layout_height="61dip"
             android:layout_alignParentRight="true"

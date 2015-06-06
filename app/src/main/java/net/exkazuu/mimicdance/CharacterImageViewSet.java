@@ -49,7 +49,7 @@ public class CharacterImageViewSet {
 
     private void initializeImageViews(CharacterType charaType, Activity activity, BodyPartType[] bodyPartTypes) {
         for (int i = 0; i < bodyPartTypes.length; i++) {
-            String name = charaType.name().toLowerCase() + bodyPartTypes[i].name();
+            String name = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, charaType.name()) + bodyPartTypes[i].name();
             int id = activity.getResources().getIdentifier(name, "id", activity.getPackageName());
             bodyParts[i] = (ImageView) activity.findViewById(id);
             if (i < bodyPartTypes.length - 1) {
