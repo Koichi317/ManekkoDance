@@ -22,10 +22,30 @@ public class CodeParserTest {
 
     @Test
     public void parseLoopProgram() {
-        String code = "くりかえし2\n左腕を上げる右腕を上げる\n右腕を下げる\nここまで";
+        String code = "ジャンプする\nくりかえし2\n左腕を上げる右腕を上げる\n右腕を下げる\nここまで";
         String unrolledCode =
-            "左腕を上げる右腕を上げる\n右腕を下げる\n左腕を上げる右腕を上げる\n右腕を下げる";
+            "ジャンプする\n左腕を上げる右腕を上げる\n右腕を下げる\n左腕を上げる右腕を上げる\n右腕を下げる";
         Block block = CodeParser.parse(code);
         assertThat(block.unroll(true).getCode(), is(unrolledCode));
+    }
+
+    @Test
+    public void parseIfProgram() {
+        String code = "右腕を上げる\nもしも黄色\n右腕を下げる\nもしくは\n左腕を上げる\nもしおわり";
+        String unrolledNormalCode = "右腕を上げる\n右腕を下げる";
+        String unrolledAltCode = "右腕を上げる\n左腕を上げる";
+        Block block = CodeParser.parse(code);
+        assertThat(block.unroll(true).getCode(), is(unrolledNormalCode));
+        assertThat(block.unroll(false).getCode(), is(unrolledAltCode));
+    }
+
+    @Test
+    public void parseLoopIfProgram() {
+        String code = "くりかえし2\nもしも茶色\n左腕を上げる\nもしくは\n右腕を上げる\n右腕を下げる\nもしおわり\nここまで";
+        String unrolledNormalCode = "右腕を上げる\n右腕を下げる\n右腕を上げる\n右腕を下げる";
+        String unrolledAltCode = "左腕を上げる\n\n左腕を上げる\n";
+        Block block = CodeParser.parse(code);
+        assertThat(block.unroll(true).getCode(), is(unrolledNormalCode));
+        assertThat(block.unroll(false).getCode(), is(unrolledAltCode));
     }
 }

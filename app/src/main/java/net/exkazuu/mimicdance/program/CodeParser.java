@@ -43,10 +43,10 @@ public class CodeParser {
     private IfStatement parseIf(List<String> lines) {
         String firstLine = lines.get(lineIndex++);
         assert firstLine.contains("もしも");
-        Block trueBlock = parseBlock(lines, new String[]{"もしおわり", "ここまで"});
+        Block trueBlock = parseBlock(lines, new String[]{"もしくは", "もしおわり"});
         Block falseBlock;
-        if (lines.get(lineIndex++).contains("もしおわり")) {
-            falseBlock = parseBlock(lines, new String[]{"ここまで"});
+        if (lines.get(lineIndex++).contains("もしくは")) {
+            falseBlock = parseBlock(lines, new String[]{"もしおわり"});
         } else {
             falseBlock = new Block();
         }

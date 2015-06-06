@@ -3,18 +3,18 @@ package net.exkazuu.mimicdance.program;
 public class IfStatement extends Statement {
     private final Block trueBlock;
     private final Block falseBlock;
-    private final boolean standard;
+    private final boolean isNormal;
 
-    public IfStatement(Block trueBlock, Block falseBlock, boolean standard) {
+    public IfStatement(Block trueBlock, Block falseBlock, boolean isNormal) {
         this.trueBlock = trueBlock;
         this.falseBlock = falseBlock;
-        this.standard = standard;
+        this.isNormal = isNormal;
     }
 
     @Override
     public void unroll(UnrolledProgram program, boolean isNormal) {
         Block statements, others;
-        if (this.standard == isNormal) {
+        if (this.isNormal == isNormal) {
             statements = trueBlock;
             others = falseBlock;
         } else {
@@ -38,10 +38,10 @@ public class IfStatement extends Statement {
         }
     }
 
-    private int getOtherSize(Block others, boolean standard) {
+    private int getOtherSize(Block others, boolean isNormal) {
         UnrolledProgram program = new UnrolledProgram();
         for (Statement statement : others) {
-            statement.unroll(program, standard);
+            statement.unroll(program, isNormal);
         }
         return program.lines.size();
     }
