@@ -52,7 +52,7 @@
             android:layout_width="61dip"
             android:layout_height="61dip"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/messageImageView"
+            android:layout_below="@id/imageView2"
             android:src="@drawable/icon_left_hand_up" />
 
           <ImageView
