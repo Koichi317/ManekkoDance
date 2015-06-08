@@ -231,6 +231,8 @@ public class DragViewListener implements OnTouchListener {
                     builder.append("\n");
                 }
                 intent.putExtra("piyoCode", builder.toString());
+                // 元の位置に戻す
+                dragView.requestLayout();
                 break;
         }
 
