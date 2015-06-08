@@ -20,6 +20,7 @@ public class CodingActivity extends BaseActivity {
 
     private int lessonNumber;
     private String[][] program = new String[3][12];
+    private ImageView[][] dragView = new ImageView[2][12];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,6 @@ public class CodingActivity extends BaseActivity {
         // アイコンたち
         //ImageView dragView1 = (ImageView) findViewById(R.id.imageView1);
         int[][] res = new int[2][12];
-        ImageView[][] dragView = new ImageView[2][12];
         DragViewListener[][] listener = new DragViewListener[2][12];
         //アイコンたち(右腕を上げる系)
         for (int i = 0; i < 11; i++) {
@@ -93,67 +93,75 @@ public class CodingActivity extends BaseActivity {
         }
 
         /********** Lesson data　の 取得 **************/
+        test(canwrite, cells, dragView, step);
+    }
+
+    private void test(ImageView[][] canwrite, ImageView[][] cells, ImageView[] step) {
         if (lessonNumber == 2) {
-            for (int j = 10; j < 12; j++) {
-                for (int i = 0; i < 3; i++) {
-                    cells[i][j].setVisibility(View.VISIBLE);
-                    canwrite[i][j].setVisibility(View.VISIBLE);
-                }
-                step[j].setVisibility(View.VISIBLE);
-            }
+            showExtraCommandSpace(canwrite, cells, step);
         }
         if (lessonNumber == 3) {
-            for (int i = 4; i < 6; i++) {
-                dragView[0][i].setVisibility(View.VISIBLE);
-            }
-            for (int i = 0; i < 10; i++) {
-                dragView[1][i].setVisibility(View.VISIBLE);
-            }
+            showLoopCommand();
+            showNumberCommands();
         }
 
         if (lessonNumber == 4) {
-            for (int i = 4; i < 6; i++) {
-                dragView[0][i].setVisibility(View.VISIBLE);
-            }
-            for (int i = 0; i < 10; i++) {
-                dragView[1][i].setVisibility(View.VISIBLE);
-            }
-            for (int j = 8; j < 10; j++) {
-                for (int i = 0; i < 3; i++) {
-                    cells[i][j].setVisibility(View.INVISIBLE);
-                    canwrite[i][j].setVisibility(View.INVISIBLE);
-                }
-                step[j].setVisibility(View.INVISIBLE);
-            }
+            showLoopCommand();
+            showNumberCommands();
+            hideCommandSpace(canwrite, cells, step);
         }
         if (lessonNumber == 5) {
-            for (int i = 6; i < 11; i++) {
-                dragView[0][i].setVisibility(View.VISIBLE);
-            }
+            showIfCommands();
 
         }
         if (lessonNumber == 6) {
-            for (int i = 4; i < 11; i++) {
-                dragView[0][i].setVisibility(View.VISIBLE);
-            }
-            for (int i = 0; i < 10; i++) {
-                dragView[1][i].setVisibility(View.VISIBLE);
-            }
+            showLoopCommand();
+            showIfCommands();
+            showNumberCommands();
         }
         if (lessonNumber == 7) {
-            for (int j = 10; j < 12; j++) {
-                for (int i = 0; i < 3; i++) {
-                    cells[i][j].setVisibility(View.VISIBLE);
-                    canwrite[i][j].setVisibility(View.VISIBLE);
-                }
-                step[j].setVisibility(View.VISIBLE);
+            showExtraCommandSpace(canwrite, cells, step);
+            showLoopCommand();
+            showIfCommands();
+            showNumberCommands();
+        }
+    }
+
+    private void hideCommandSpace(ImageView[][] canwrite, ImageView[][] cells, ImageView[] step) {
+        for (int j = 8; j < 10; j++) {
+            for (int i = 0; i < 3; i++) {
+                cells[i][j].setVisibility(View.INVISIBLE);
+                canwrite[i][j].setVisibility(View.INVISIBLE);
             }
-            for (int i = 4; i < 11; i++) {
-                dragView[0][i].setVisibility(View.VISIBLE);
+            step[j].setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void showExtraCommandSpace(ImageView[][] canwrite, ImageView[][] cells, ImageView[] step) {
+        for (int j = 10; j < 12; j++) {
+            for (int i = 0; i < 3; i++) {
+                cells[i][j].setVisibility(View.VISIBLE);
+                canwrite[i][j].setVisibility(View.VISIBLE);
             }
-            for (int i = 0; i < 10; i++) {
-                dragView[1][i].setVisibility(View.VISIBLE);
-            }
+            step[j].setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void showIfCommands() {
+        for (int i = 6; i < 11; i++) {
+            dragView[0][i].setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void showNumberCommands() {
+        for (int i = 0; i < 10; i++) {
+            dragView[1][i].setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void showLoopCommand() {
+        for (int i = 4; i < 6; i++) {
+            dragView[0][i].setVisibility(View.VISIBLE);
         }
     }
 
