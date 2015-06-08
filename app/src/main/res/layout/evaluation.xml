@@ -13,7 +13,7 @@
     android:background="#ff81ff">
 
     <TextView
-      android:id="@+id/editTextActionScreen1"
+      android:id="@+id/txtStringCode"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:background="#ffffff"

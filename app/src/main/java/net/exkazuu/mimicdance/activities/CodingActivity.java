@@ -218,7 +218,11 @@ public class CodingActivity extends BaseActivity {
     }
 
     public void startEvaluationActivity(View view) {
-        startEvaluationActivity(lessonNumber, getIntent().getStringExtra("piyoCode"));
+        String piyoCode = getIntent().getStringExtra("piyoCode");
+        if (piyoCode == null) {
+            piyoCode = "";
+        }
+        startEvaluationActivity(lessonNumber, piyoCode);
     }
 
     public void startHelpActivity(View view) {
