@@ -159,47 +159,47 @@ public class DragViewListener implements OnTouchListener {
                 //アイコンに変更
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 12; j++) {
-                        if (program[i][j] == "右腕を上げる") {
+                        if (program[i][j].equals("右腕を上げる")) {
                             cells[i][j].setImageResource(R.drawable.icon_right_hand_up);
-                        } else if (program[i][j] == "右腕を下げる") {
+                        } else if (program[i][j].equals( "右腕を下げる" )) {
                             cells[i][j].setImageResource(R.drawable.icon_right_hand_down);
-                        } else if (program[i][j] == "左腕を上げる") {
+                        } else if (program[i][j].equals( "左腕を上げる")) {
                             cells[i][j].setImageResource(R.drawable.icon_left_hand_up);
-                        } else if (program[i][j] == "左腕を下げる") {
+                        } else if (program[i][j].equals( "左腕を下げる")) {
                             cells[i][j].setImageResource(R.drawable.icon_left_hand_down);
-                        } else if (program[i][j] == "くりかえし") {
+                        } else if (program[i][j].equals( "くりかえし")) {
                             cells[i][j].setImageResource(R.drawable.icon_loop);
-                        } else if (program[i][j] == "ここまで") {
+                        } else if (program[i][j].equals( "ここまで") ){
                             cells[i][j].setImageResource(R.drawable.icon_kokomade);
-                        } else if (program[i][j] == "黄色") {
+                        } else if (program[i][j].equals( "黄色") ){
                             cells[i][j].setImageResource(R.drawable.icon_yellow);
-                        } else if (program[i][j] == "茶色") {
+                        } else if (program[i][j].equals( "茶色")) {
                             cells[i][j].setImageResource(R.drawable.icon_orange);
-                        } else if (program[i][j] == "もしも") {
+                        } else if (program[i][j].equals( "もしも")) {
                             cells[i][j].setImageResource(R.drawable.icon_if);
-                        } else if (program[i][j] == "もしくは") {
+                        } else if (program[i][j].equals( "もしくは")) {
                             cells[i][j].setImageResource(R.drawable.icon_else);
-                        } else if (program[i][j] == "もしおわり") {
+                        } else if (program[i][j].equals( "もしおわり")) {
                             cells[i][j].setImageResource(R.drawable.icon_if_kokomade);
-                        } else if (program[i][j] == "1") {
+                        } else if (program[i][j].equals( "1")) {
                             cells[i][j].setImageResource(R.drawable.num1);
-                        } else if (program[i][j] == "2") {
+                        } else if (program[i][j].equals( "2")) {
                             cells[i][j].setImageResource(R.drawable.num2);
-                        } else if (program[i][j] == "3") {
+                        } else if (program[i][j].equals( "3")) {
                             cells[i][j].setImageResource(R.drawable.num3);
-                        } else if (program[i][j] == "4") {
+                        } else if (program[i][j].equals( "4")) {
                             cells[i][j].setImageResource(R.drawable.num4);
-                        } else if (program[i][j] == "5") {
+                        } else if (program[i][j].equals( "5")) {
                             cells[i][j].setImageResource(R.drawable.num5);
-                        } else if (program[i][j] == "6") {
+                        } else if (program[i][j].equals( "6")) {
                             cells[i][j].setImageResource(R.drawable.num6);
-                        } else if (program[i][j] == "7") {
+                        } else if (program[i][j].equals( "7")) {
                             cells[i][j].setImageResource(R.drawable.num7);
-                        } else if (program[i][j] == "8") {
+                        } else if (program[i][j].equals( "8")) {
                             cells[i][j].setImageResource(R.drawable.num8);
-                        } else if (program[i][j] == "9") {
+                        } else if (program[i][j].equals( "9")) {
                             cells[i][j].setImageResource(R.drawable.num9);
-                        } else if (program[i][j] == "0") {
+                        } else if (program[i][j].equals( "0")) {
                             cells[i][j].setImageResource(R.drawable.num0);
                         } else {
                             cells[i][j].setImageResource(R.drawable.haikei);
@@ -211,7 +211,7 @@ public class DragViewListener implements OnTouchListener {
                 for (int j = 0; j < 12; j++) {
                     int flag = 0;
                     for (int i = 0; i < 3; i++) {
-                        if (program[i][j] == "") {
+                        if (program[i][j].equals("")) {
                             if (flag == 0) {
                                 canwrite[i][j].setImageResource(R.drawable.haikei2); //点線の四角
                                 flag = 1;
