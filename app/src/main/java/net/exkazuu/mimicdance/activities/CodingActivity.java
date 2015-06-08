@@ -93,10 +93,10 @@ public class CodingActivity extends BaseActivity {
         }
 
         /********** Lesson data　の 取得 **************/
-        test(canwrite, cells, dragView, step);
+        editCodingSpace(canwrite, cells, step);
     }
 
-    private void test(ImageView[][] canwrite, ImageView[][] cells, ImageView[] step) {
+    private void editCodingSpace(ImageView[][] canwrite, ImageView[][] cells, ImageView[] step) {
         if (lessonNumber == 2) {
             showExtraCommandSpace(canwrite, cells, step);
         }

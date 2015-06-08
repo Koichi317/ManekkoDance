@@ -215,6 +215,7 @@ public class DragViewListener implements OnTouchListener {
                         }
                     }
                 }
+                
                 //次の入力場所の表示
                 for (int j = 0; j < 12; j++) {
                     int flag = 0;
