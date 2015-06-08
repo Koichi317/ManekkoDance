@@ -43,9 +43,11 @@ public class DragViewListener implements OnTouchListener {
         int y_index = top / cells[0][0].getHeight();
 
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-
-                break;
+//            case MotionEvent.ACTION_DOWN:
+                //修正案
+                //コーディング領域にあるものを選択した場合、init_indexで命令のスワップ
+                //アイコン一覧から選択した場合、init_left,topにで再表示
+//                break;
             case MotionEvent.ACTION_MOVE:
                 dragView.layout(left, top, left + dragView.getWidth(), top
                     + dragView.getHeight());
@@ -53,9 +55,10 @@ public class DragViewListener implements OnTouchListener {
             case MotionEvent.ACTION_UP:
                 if (x_index > 0) x_index--;
                 if (0 <= x_index && x_index <= 2 && 0 <= y_index && y_index <= 11) {
+                    //左のマス近辺の場合
                     if (view.getId() == R.id.imageView1) {
                         program[x_index][y_index] = "右腕を上げる";
-                    } else if (view.getId() == R.id.messageImageView) {
+                    } else if (view.getId() == R.id.imageView2) {
                         program[x_index][y_index] = "右腕を下げる";
                     } else if (view.getId() == R.id.imageView3) {
                         program[x_index][y_index] = "左腕を上げる";
@@ -98,11 +101,11 @@ public class DragViewListener implements OnTouchListener {
                     } else if (view.getId() == R.id.imageView12) {
                         program[x_index][y_index] = "";
                     } else {
-                        for (int i = 0; i < 3; i++) {
+                          for (int i = 0; i < 3; i++) {
                             for (int j = 0; j < 12; j++) {
                                 //resb[i][j] = this.getResources().getIdentifier("image" + i + "_" + j, "id", this.getPackageName());
                                 if (view.getId() == resb[i][j]) {
-                                    if (program[i][j] != "") {
+                                    if (!program[i][j].equals("")) {
                                         if (x_index == i && y_index == j) {
                                         } else {
                                             program[x_index][y_index] = program[i][j];
@@ -125,6 +128,7 @@ public class DragViewListener implements OnTouchListener {
                     }
                 }
 
+                //空白があったら詰める
                 for (int j = 0; j < 12; j++) {
                     for (int count = 0; count < 2; count++) {
                         for (int i = 0; i < 2; i++) {
@@ -136,6 +140,7 @@ public class DragViewListener implements OnTouchListener {
                     }
                 }
 
+                //レッスンによっては必要ない部分の命令を空白にする
                 if (lessonNumber == 4) {
                     for (int i = 0; i < 3; i++) {
                         for (int j = 8; j < 12; j++) {
@@ -208,13 +213,13 @@ public class DragViewListener implements OnTouchListener {
                     for (int i = 0; i < 3; i++) {
                         if (program[i][j] == "") {
                             if (flag == 0) {
-                                canwrite[i][j].setImageResource(R.drawable.haikei2);
+                                canwrite[i][j].setImageResource(R.drawable.haikei2); //点線の四角
                                 flag = 1;
                             } else {
-                                canwrite[i][j].setImageResource(R.drawable.haikei);
+                                canwrite[i][j].setImageResource(R.drawable.haikei); //空白
                             }
                         } else {
-                            canwrite[i][j].setImageResource(R.drawable.haikei);
+                            canwrite[i][j].setImageResource(R.drawable.haikei); //空白
                         }
                     }
                 }
@@ -227,6 +232,7 @@ public class DragViewListener implements OnTouchListener {
                     builder.append("\n");
                 }
                 intent.putExtra("piyoCode", builder.toString());
+                break;
         }
 
         oldX = x;

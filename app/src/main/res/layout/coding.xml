@@ -139,7 +139,7 @@
             android:layout_width="61dip"
             android:layout_height="61dip"
             android:layout_below="@id/imageView01"
-            android:layout_toLeftOf="@id/messageImageView"
+            android:layout_toLeftOf="@id/imageView2"
             android:src="@drawable/num2"
             android:visibility="invisible" />
 
