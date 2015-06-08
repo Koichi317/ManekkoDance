@@ -131,7 +131,7 @@ public class DragViewListener implements OnTouchListener {
                 for (int j = 0; j < 12; j++) {
                     for (int count = 0; count < 2; count++) {
                         for (int i = 0; i < 2; i++) {
-                            if (program[i][j] == "") {
+                            if (program[i][j].equals("")) {
                                 program[i][j] = program[i + 1][j];
                                 program[i + 1][j] = "";
                             }

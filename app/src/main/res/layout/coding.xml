@@ -1,4 +1,4 @@
-<net.exkazuu.mimicdance.DetectableSoftKeyLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/root"
   android:layout_width="match_parent"
@@ -1132,4 +1132,4 @@
       android:onClick="startEvaluationActivity"
       android:text="@string/action" />
   </LinearLayout>
-</net.exkazuu.mimicdance.DetectableSoftKeyLayout>
+</LinearLayout>
