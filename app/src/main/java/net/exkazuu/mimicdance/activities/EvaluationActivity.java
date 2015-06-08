@@ -73,9 +73,6 @@ public class EvaluationActivity extends BaseActivity {
         altPiyoProgram = piyoBlock.unroll(false);
         coccoProgram = coccoBlock.unroll(true);
         altCoccoProgram = coccoBlock.unroll(false);
-
-        TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
-        playerEditText.setText(piyoCode);
     }
 
     private void initializeScreen() {
@@ -87,6 +84,9 @@ public class EvaluationActivity extends BaseActivity {
     }
 
     private void initializeComponents() {
+        TextView playerEditText = (TextView) findViewById(R.id.txtStringCode);
+        playerEditText.setText(piyoCode);
+
         piyoViewSet = CharacterImageViewSet.createPiyoLeft(this);
         altPiyoViewSet = CharacterImageViewSet.createPiyoRight(this);
         coccoViewSet = CharacterImageViewSet.createCoccoLeft(this);
@@ -150,7 +150,7 @@ public class EvaluationActivity extends BaseActivity {
         }
 
         public void run() {
-            TextView playerEditText = (TextView) findViewById(R.id.editTextActionScreen1);
+            TextView playerEditText = (TextView) findViewById(R.id.txtStringCode);
 
             Interpreter piyoExecutor = Interpreter.createForPiyo(
                 piyoProgram, piyoViewSet, playerEditText, getApplicationContext());
