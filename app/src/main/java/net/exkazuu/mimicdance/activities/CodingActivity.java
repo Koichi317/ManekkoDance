@@ -32,7 +32,7 @@ public class CodingActivity extends BaseActivity {
         initializeNumberIcons(cellTexts, cellIcons);
 
         ImageView[] steps = initializeStepNumbers();
-        initializeMaximumStep(cellIcons, steps);
+        initializeMaximumStep(cellIcons, steps, Lessons.getMaxStep(lessonNumber));
     }
 
     private String[][] initializeCellTexts(String piyoCode) {
@@ -105,19 +105,7 @@ public class CodingActivity extends BaseActivity {
         }
     }
 
-    private void initializeMaximumStep(ImageView[][] cells, ImageView[] step) {
-        if (lessonNumber == 2) {
-            setMaximumStep(cells, step, 12);
-        } else if (lessonNumber == 4) {
-            setMaximumStep(cells, step, 8);
-        } else if (lessonNumber == 7) {
-            setMaximumStep(cells, step, 12);
-        } else {
-            setMaximumStep(cells, step, 10);
-        }
-    }
-
-    private void setMaximumStep(ImageView[][] cells, ImageView[] step, int maxStep) {
+    private void initializeMaximumStep(ImageView[][] cells, ImageView[] step, int maxStep) {
         for (int row = 0; row < maxStep; row++) {
             for (int column = 0; column < cells[0].length; column++) {
                 cells[row][column].setVisibility(View.VISIBLE);
