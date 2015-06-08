@@ -44,13 +44,12 @@ public class DragViewListener implements OnTouchListener {
 
         switch (event.getAction()) {
 //            case MotionEvent.ACTION_DOWN:
-                //修正案
-                //コーディング領域にあるものを選択した場合、init_indexで命令のスワップ
-                //アイコン一覧から選択した場合、init_left,topにで再表示
+            //修正案
+            //コーディング領域にあるものを選択した場合、init_indexで命令のスワップ
+            //アイコン一覧から選択した場合、init_left,topにで再表示
 //                break;
             case MotionEvent.ACTION_MOVE:
-                dragView.layout(left, top, left + dragView.getWidth(), top
-                    + dragView.getHeight());
+                dragView.layout(left, top, left + dragView.getWidth(), top + dragView.getHeight());
                 break;
             case MotionEvent.ACTION_UP:
                 if (x_index > 0) x_index--;
@@ -101,7 +100,7 @@ public class DragViewListener implements OnTouchListener {
                     } else if (view.getId() == R.id.imageView12) {
                         program[x_index][y_index] = "";
                     } else {
-                          for (int i = 0; i < 3; i++) {
+                        for (int i = 0; i < 3; i++) {
                             for (int j = 0; j < 12; j++) {
                                 //resb[i][j] = this.getResources().getIdentifier("image" + i + "_" + j, "id", this.getPackageName());
                                 if (view.getId() == resb[i][j]) {
@@ -161,45 +160,45 @@ public class DragViewListener implements OnTouchListener {
                     for (int j = 0; j < 12; j++) {
                         if (program[i][j].equals("右腕を上げる")) {
                             cells[i][j].setImageResource(R.drawable.icon_right_hand_up);
-                        } else if (program[i][j].equals( "右腕を下げる" )) {
+                        } else if (program[i][j].equals("右腕を下げる")) {
                             cells[i][j].setImageResource(R.drawable.icon_right_hand_down);
-                        } else if (program[i][j].equals( "左腕を上げる")) {
+                        } else if (program[i][j].equals("左腕を上げる")) {
                             cells[i][j].setImageResource(R.drawable.icon_left_hand_up);
-                        } else if (program[i][j].equals( "左腕を下げる")) {
+                        } else if (program[i][j].equals("左腕を下げる")) {
                             cells[i][j].setImageResource(R.drawable.icon_left_hand_down);
-                        } else if (program[i][j].equals( "くりかえし")) {
+                        } else if (program[i][j].equals("くりかえし")) {
                             cells[i][j].setImageResource(R.drawable.icon_loop);
-                        } else if (program[i][j].equals( "ここまで") ){
+                        } else if (program[i][j].equals("ここまで")) {
                             cells[i][j].setImageResource(R.drawable.icon_kokomade);
-                        } else if (program[i][j].equals( "黄色") ){
+                        } else if (program[i][j].equals("黄色")) {
                             cells[i][j].setImageResource(R.drawable.icon_yellow);
-                        } else if (program[i][j].equals( "茶色")) {
+                        } else if (program[i][j].equals("茶色")) {
                             cells[i][j].setImageResource(R.drawable.icon_orange);
-                        } else if (program[i][j].equals( "もしも")) {
+                        } else if (program[i][j].equals("もしも")) {
                             cells[i][j].setImageResource(R.drawable.icon_if);
-                        } else if (program[i][j].equals( "もしくは")) {
+                        } else if (program[i][j].equals("もしくは")) {
                             cells[i][j].setImageResource(R.drawable.icon_else);
-                        } else if (program[i][j].equals( "もしおわり")) {
+                        } else if (program[i][j].equals("もしおわり")) {
                             cells[i][j].setImageResource(R.drawable.icon_if_kokomade);
-                        } else if (program[i][j].equals( "1")) {
+                        } else if (program[i][j].equals("1")) {
                             cells[i][j].setImageResource(R.drawable.num1);
-                        } else if (program[i][j].equals( "2")) {
+                        } else if (program[i][j].equals("2")) {
                             cells[i][j].setImageResource(R.drawable.num2);
-                        } else if (program[i][j].equals( "3")) {
+                        } else if (program[i][j].equals("3")) {
                             cells[i][j].setImageResource(R.drawable.num3);
-                        } else if (program[i][j].equals( "4")) {
+                        } else if (program[i][j].equals("4")) {
                             cells[i][j].setImageResource(R.drawable.num4);
-                        } else if (program[i][j].equals( "5")) {
+                        } else if (program[i][j].equals("5")) {
                             cells[i][j].setImageResource(R.drawable.num5);
-                        } else if (program[i][j].equals( "6")) {
+                        } else if (program[i][j].equals("6")) {
                             cells[i][j].setImageResource(R.drawable.num6);
-                        } else if (program[i][j].equals( "7")) {
+                        } else if (program[i][j].equals("7")) {
                             cells[i][j].setImageResource(R.drawable.num7);
-                        } else if (program[i][j].equals( "8")) {
+                        } else if (program[i][j].equals("8")) {
                             cells[i][j].setImageResource(R.drawable.num8);
-                        } else if (program[i][j].equals( "9")) {
+                        } else if (program[i][j].equals("9")) {
                             cells[i][j].setImageResource(R.drawable.num9);
-                        } else if (program[i][j].equals( "0")) {
+                        } else if (program[i][j].equals("0")) {
                             cells[i][j].setImageResource(R.drawable.num0);
                         } else {
                             cells[i][j].setImageResource(R.drawable.haikei);

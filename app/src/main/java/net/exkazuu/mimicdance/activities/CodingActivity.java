@@ -51,12 +51,6 @@ public class CodingActivity extends BaseActivity {
         int[][] resb = new int[3][12];
         ImageView[][] cells = new ImageView[3][12];
         DragViewListener[][] backgroundlistener = new DragViewListener[3][12];
-        int[][] flag = new int[3][12];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 12; j++) {
-                flag[i][j] = 0;
-            }
-        }
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 12; j++) {
                 resb[i][j] = this.getResources().getIdentifier("image" + i + "_" + j, "id", this.getPackageName());
