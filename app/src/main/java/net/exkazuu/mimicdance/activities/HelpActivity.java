@@ -9,34 +9,31 @@ import android.widget.ImageView;
 import net.exkazuu.mimicdance.R;
 
 public class HelpActivity extends Activity {
-    public static final int MinPageNumber = 1;
-    public static final int MaxPageNumber = 7;
-    private int pageNumber;
-    private final String pageSuffix = " / MaxPageNumber";
-
-    int[] helpImageResources = {R.drawable.tutorial1, R.drawable.tutorial2,
+    private final int[] HELP_IMAGE_RESOURCES = {R.drawable.tutorial1, R.drawable.tutorial2,
         R.drawable.tutorial3, R.drawable.tutorial4, R.drawable.tutorial5,
         R.drawable.helptext1, R.drawable.helptext2};
+    private int pageNumber;
+
+    private final String PAGE_SUFFIX = " / " + HELP_IMAGE_RESOURCES.length;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help);
 
-        pageNumber = MinPageNumber;
+        pageNumber = 0;
         updatePageNumber();
     }
 
     public void next(View view) {
-        if (pageNumber == MaxPageNumber)
-            pageNumber = MinPageNumber - 1;
         pageNumber++;
+        pageNumber %= HELP_IMAGE_RESOURCES.length;
         updatePageNumber();
     }
 
     public void prev(View view) {
-        if (pageNumber == MinPageNumber)
-            pageNumber = MaxPageNumber + 1;
         pageNumber--;
+        pageNumber += HELP_IMAGE_RESOURCES.length;
+        pageNumber %= HELP_IMAGE_RESOURCES.length;
         updatePageNumber();
     }
 
@@ -46,9 +43,9 @@ public class HelpActivity extends Activity {
 
     public void updatePageNumber() {
         EditText pageText = (EditText) findViewById(R.id.page);
-        pageText.setText(pageNumber + pageSuffix);
+        pageText.setText((pageNumber + 1) + PAGE_SUFFIX);
 
         ImageView helpView = (ImageView) findViewById(R.id.helpImage);
-        helpView.setImageResource(helpImageResources[pageNumber - 1]);
+        helpView.setImageResource(HELP_IMAGE_RESOURCES[pageNumber - 1]);
     }
 }

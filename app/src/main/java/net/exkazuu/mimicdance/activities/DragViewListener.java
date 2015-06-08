@@ -22,8 +22,8 @@ public class DragViewListener implements OnTouchListener {
     private int lessonNumber;
     private int oldX;
     private int oldY;
-    private int init_left;
-    private int init_top;
+    private int initLeft;
+    private int initTop;
 
     public DragViewListener(ImageView dragView, ImageView[][] cells,
                             String[][] program, Intent intent, int[][] resb, ImageView[][] canwrite, int lessonNumber) {
@@ -34,9 +34,9 @@ public class DragViewListener implements OnTouchListener {
         this.resb = resb;
         this.canwrite = canwrite;
         this.lessonNumber = lessonNumber;
-
     }
 
+    @Override
     public boolean onTouch(View view, MotionEvent event) {
         int x = (int) event.getRawX();
         int y = (int) event.getRawY();
@@ -51,15 +51,16 @@ public class DragViewListener implements OnTouchListener {
             case MotionEvent.ACTION_DOWN:
                 //修正案
                 //コーディング領域にあるものを選択した場合、init_indexで命令のスワップ
-                //アイコン一覧から選択した場合、init_left,topにで再表示
-                init_left = dragView.getLeft();
-                init_top = dragView.getTop();
+                //アイコン一覧から選択した場合、initLeft,topにで再表示
+                initLeft = dragView.getLeft();
+                initTop = dragView.getTop();
                 break;
             case MotionEvent.ACTION_MOVE:
                 dragView.layout(left, top, left + dragView.getWidth(), top + dragView.getHeight());
                 break;
             case MotionEvent.ACTION_UP:
                 if (x_index > 0) x_index--;
+                boolean deployed = true;
                 if (0 <= x_index && x_index <= 2 && 0 <= y_index && y_index <= 11) {
                     //左のマス近辺の場合
                     if (view.getId() == R.id.imageView1) {
@@ -132,6 +133,8 @@ public class DragViewListener implements OnTouchListener {
                             }
                         }
                     }
+                } else {
+                    deployed = false;
                 }
 
                 //空白があったら詰める
@@ -238,10 +241,31 @@ public class DragViewListener implements OnTouchListener {
                 }
                 intent.putExtra("piyoCode", builder.toString());
 
-                Animation animation = new TranslateAnimation(0, init_left - dragView.getLeft(), 0, init_top - dragView.getTop());
-                animation.setDuration(1000);
+                // 元の位置に戻るアニメーション
+                if (deployed) {
+                    // 元の位置に戻す
+                    dragView.requestLayout();
+                    break;
+                }
+                Animation animation = new TranslateAnimation(0, initLeft - dragView.getLeft(), 0, initTop - dragView.getTop());
+                animation.setDuration(500);
                 dragView.startAnimation(animation);
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                    }
 
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        dragView.setAnimation(null);
+                        // 元の位置に戻す
+                        dragView.requestLayout();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+                });
                 break;
         }
 
