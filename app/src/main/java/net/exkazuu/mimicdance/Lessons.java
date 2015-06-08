@@ -13,10 +13,6 @@ public class Lessons {
     private static int[] limitations = {10, 12, 10, 8, 10, 10, 10}; // hard
 
     public static String getCoccoCode(int lessonNumber) {
-        if (!(1 <= lessonNumber && lessonNumber <= coccoCodes.length)) {
-            throw new IndexOutOfBoundsException(
-                "lessonNumber (" + lessonNumber + ") should be in 1-" + coccoCodes.length);
-        }
         return coccoCodes[lessonNumber - 1];
     }
 
@@ -26,5 +22,13 @@ public class Lessons {
 
     public static int getLessonCount() {
         return coccoCodes.length;
+    }
+
+    public static boolean hasLoop(int lessonNumber) {
+        return coccoCodes[lessonNumber - 1].contains("くりかえし");
+    }
+
+    public static boolean hasIf(int lessonNumber) {
+        return coccoCodes[lessonNumber - 1].contains("もしも");
     }
 }

@@ -1,8 +1,3 @@
-// Todoリスト
-/* キーボードを出した時の画像潰れ解消法　http://d.hatena.ne.jp/Superdry/20110715/1310754502 */
-/* フラグメントによるTabの実装 */
-/* 絵文字の実装 */
-
 package net.exkazuu.mimicdance.activities;
 
 import android.content.Intent;
@@ -14,154 +9,114 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import net.exkazuu.mimicdance.Lessons;
 import net.exkazuu.mimicdance.R;
 
 public class CodingActivity extends BaseActivity {
 
+    public static final int MAX_COLUMN = 3;
+    public static final int MAX_ROW = 12;
     private int lessonNumber;
-    private String[][] program = new String[3][12];
-    private ImageView[][] dragView = new ImageView[2][12];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.coding);
 
-        // 右側のテキストたち
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 3; j++) {
-                program[j][i] = "";
-            }
-        }
-
-        //記述可能部分
-        ImageView[][] canwrite = new ImageView[3][12];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 12; j++) {
-                int id = this.getResources().getIdentifier("canwrite" + i + "_" + j, "id", this.getPackageName());
-                canwrite[i][j] = (ImageView) findViewById(id);
-            }
-        }
-        for (int j = 0; j < 12; j++) {
-            canwrite[0][j].setImageResource(R.drawable.haikei2);
-        }
-
-        // 背景たち
         Intent intent = getIntent();
         lessonNumber = intent.getIntExtra("lessonNumber", 1);
-        int[][] resb = new int[3][12];
-        ImageView[][] cells = new ImageView[3][12];
-        DragViewListener[][] backgroundlistener = new DragViewListener[3][12];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 12; j++) {
-                resb[i][j] = this.getResources().getIdentifier("image" + i + "_" + j, "id", this.getPackageName());
-                cells[i][j] = (ImageView) findViewById(resb[i][j]);
-                backgroundlistener[i][j] = new DragViewListener(cells[i][j], cells,
-                    program, intent, resb, canwrite, lessonNumber);
-                cells[i][j].setOnTouchListener(backgroundlistener[i][j]);
-            }
-        }
 
-        // ドラッグ対象Viewとイベント処理クラスを紐付ける
-        // アイコンたち
-        //ImageView dragView1 = (ImageView) findViewById(R.id.imageView1);
-        int[][] res = new int[2][12];
-        DragViewListener[][] listener = new DragViewListener[2][12];
-        //アイコンたち(右腕を上げる系)
-        for (int i = 0; i < 11; i++) {
-            res[0][i] = this.getResources().getIdentifier("imageView" + (i + 1), "id", this.getPackageName());
-            dragView[0][i] = (ImageView) findViewById(res[0][i]);
-            listener[0][i] = new DragViewListener(dragView[0][i], cells,
-                program, intent, resb, canwrite, lessonNumber);
-            dragView[0][i].setOnTouchListener(listener[0][i]);
-        }
-        //アイコンたち(数字達)
-        for (int i = 0; i < 10; i++) {
-            res[1][i] = this.getResources().getIdentifier("imageView" + 0 + i, "id", this.getPackageName());
-            dragView[1][i] = (ImageView) findViewById(res[1][i]);
-            listener[1][i] = new DragViewListener(dragView[1][i], cells,
-                program, intent, resb, canwrite, lessonNumber);
-            dragView[1][i].setOnTouchListener(listener[1][i]);
-        }
+        String[][] cellTexts = initializeCellTexts();
+        ImageView[][] cellIcons = initializeCellIcons(cellTexts);
+        initializeProgramIcons(cellTexts, cellIcons);
+        initializeNumberIcons(cellTexts, cellIcons);
 
-        //行番号たち
-        ImageView[] step = new ImageView[12];
-        int[] resS = new int[12];
-        for (int i = 0; i < 12; i++) {
-            resS[i] = this.getResources().getIdentifier("step" + (i + 1), "id", this.getPackageName());
-            step[i] = (ImageView) findViewById(resS[i]);
-        }
-
-        /********** Lesson data　の 取得 **************/
-        editCodingSpace(canwrite, cells, step);
+        ImageView[] steps = initializeStepNumbers();
+        initializeMaximumStep(cellIcons, steps);
     }
 
-    private void editCodingSpace(ImageView[][] canwrite, ImageView[][] cells, ImageView[] step) {
+    private String[][] initializeCellTexts() {
+        String[][] cellTexts = new String[MAX_ROW][MAX_COLUMN];
+        for (int row = 0; row < cellTexts.length; row++) {
+            for (int column = 0; column < cellTexts[0].length; column++) {
+                cellTexts[row][column] = "";
+            }
+        }
+        return cellTexts;
+    }
+
+    private ImageView[][] initializeCellIcons(String[][] cellTexts) {
+        ImageView[][] cellIcons = new ImageView[cellTexts.length][cellTexts[0].length];
+        for (int row = 0; row < cellIcons.length; row++) {
+            for (int column = 0; column < cellIcons[0].length; column++) {
+                int id = getResources().getIdentifier("cell_" + row + "_" + column, "id", getPackageName());
+                cellIcons[row][column] = (ImageView) findViewById(id);
+                DragViewListener listener = new DragViewListener(this, cellIcons, cellTexts);
+                cellIcons[row][column].setOnTouchListener(listener);
+            }
+        }
+        return cellIcons;
+    }
+
+    private ImageView[] initializeStepNumbers() {
+        ImageView[] stepIconView = new ImageView[MAX_ROW];
+        for (int i = 0; i < stepIconView.length; i++) {
+            int id = getResources().getIdentifier("step" + (i + 1), "id", getPackageName());
+            stepIconView[i] = (ImageView) findViewById(id);
+        }
+        return stepIconView;
+    }
+
+    private void initializeProgramIcons(String[][] cellTexts, ImageView[][] cellIcons) {
+        for (int i = 1; i < 12; i++) {
+            if (!Lessons.hasLoop(lessonNumber) && 5 <= i && i <= 6) {
+                continue;
+            }
+            if (!Lessons.hasIf(lessonNumber) && 7 <= i && i <= 11) {
+                continue;
+            }
+            int id = getResources().getIdentifier("programIconView" + i, "id", getPackageName());
+            ImageView imageView = (ImageView) findViewById(id);
+            DragViewListener listener = new DragViewListener(this, cellIcons, cellTexts);
+            imageView.setOnTouchListener(listener);
+        }
+    }
+
+    private void initializeNumberIcons(String[][] cellTexts, ImageView[][] cellIcons) {
+        if (Lessons.hasLoop(lessonNumber)) {
+            for (int i = 0; i < 10; i++) {
+                int id = getResources().getIdentifier("numberIconView" + i, "id", getPackageName());
+                ImageView imageView = (ImageView) findViewById(id);
+                DragViewListener listener = new DragViewListener(this, cellIcons, cellTexts);
+                imageView.setOnTouchListener(listener);
+            }
+        }
+    }
+
+    private void initializeMaximumStep(ImageView[][] cells, ImageView[] step) {
         if (lessonNumber == 2) {
-            showExtraCommandSpace(canwrite, cells, step);
-        }
-        if (lessonNumber == 3) {
-            showLoopCommand();
-            showNumberCommands();
-        }
-
-        if (lessonNumber == 4) {
-            showLoopCommand();
-            showNumberCommands();
-            hideCommandSpace(canwrite, cells, step);
-        }
-        if (lessonNumber == 5) {
-            showIfCommands();
-
-        }
-        if (lessonNumber == 6) {
-            showLoopCommand();
-            showIfCommands();
-            showNumberCommands();
-        }
-        if (lessonNumber == 7) {
-            showExtraCommandSpace(canwrite, cells, step);
-            showLoopCommand();
-            showIfCommands();
-            showNumberCommands();
+            setMaximumStep(cells, step, 12);
+        } else if (lessonNumber == 4) {
+            setMaximumStep(cells, step, 8);
+        } else if (lessonNumber == 7) {
+            setMaximumStep(cells, step, 12);
+        } else {
+            setMaximumStep(cells, step, 10);
         }
     }
 
-    private void hideCommandSpace(ImageView[][] canwrite, ImageView[][] cells, ImageView[] step) {
-        for (int j = 8; j < 10; j++) {
-            for (int i = 0; i < 3; i++) {
-                cells[i][j].setVisibility(View.INVISIBLE);
-                canwrite[i][j].setVisibility(View.INVISIBLE);
+    private void setMaximumStep(ImageView[][] cells, ImageView[] step, int maxStep) {
+        for (int row = 0; row < maxStep; row++) {
+            for (int column = 0; column < cells[0].length; column++) {
+                cells[row][column].setVisibility(View.VISIBLE);
             }
-            step[j].setVisibility(View.INVISIBLE);
+            step[row].setVisibility(View.VISIBLE);
         }
-    }
-
-    private void showExtraCommandSpace(ImageView[][] canwrite, ImageView[][] cells, ImageView[] step) {
-        for (int j = 10; j < 12; j++) {
-            for (int i = 0; i < 3; i++) {
-                cells[i][j].setVisibility(View.VISIBLE);
-                canwrite[i][j].setVisibility(View.VISIBLE);
+        for (int row = maxStep; row < cells.length; row++) {
+            for (int column = 0; column < cells[0].length; column++) {
+                cells[row][column].setVisibility(View.INVISIBLE);
             }
-            step[j].setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void showIfCommands() {
-        for (int i = 6; i < 11; i++) {
-            dragView[0][i].setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void showNumberCommands() {
-        for (int i = 0; i < 10; i++) {
-            dragView[1][i].setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void showLoopCommand() {
-        for (int i = 4; i < 6; i++) {
-            dragView[0][i].setVisibility(View.VISIBLE);
+            step[row].setVisibility(View.INVISIBLE);
         }
     }
 
@@ -216,7 +171,7 @@ public class CodingActivity extends BaseActivity {
     }
 
     public void startCoccoActivity(View view) {
-        startCoccoActivity(lessonNumber);
+        finish();
     }
 
     public void startEvaluationActivity(View view) {

@@ -139,7 +139,7 @@ public class EvaluationActivity extends BaseActivity {
     }
 
     public void startCodingActivity(View view) {
-        startCodingActivity(lessonNumber, piyoCode);
+        finish();
     }
 
     public final class CommandExecutor implements Runnable {

@@ -1,8 +1,6 @@
 package net.exkazuu.mimicdance.activities;
 
-//import android.util.Log;
-
-import android.content.Intent;
+import android.app.Activity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -11,29 +9,21 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import net.exkazuu.mimicdance.R;
+import net.exkazuu.mimicdance.interpreter.IconType;
 
 public class DragViewListener implements OnTouchListener {
-    private final ImageView dragView;
-    private final ImageView[][] cells;
-    private final String[][] program;
-    private final Intent intent;
-    private int resb[][];
-    private ImageView[][] canwrite;
-    private int lessonNumber;
+    private final Activity activity;
+    private final ImageView[][] cellIcons;
+    private final String[][] cellTexts;
     private int oldX;
     private int oldY;
     private int initLeft;
     private int initTop;
 
-    public DragViewListener(ImageView dragView, ImageView[][] cells,
-                            String[][] program, Intent intent, int[][] resb, ImageView[][] canwrite, int lessonNumber) {
-        this.dragView = dragView;
-        this.cells = cells;
-        this.program = program;
-        this.intent = intent;
-        this.resb = resb;
-        this.canwrite = canwrite;
-        this.lessonNumber = lessonNumber;
+    public DragViewListener(Activity activity, ImageView[][] cellIcons, String[][] cellTexts) {
+        this.activity = activity;
+        this.cellIcons = cellIcons;
+        this.cellTexts = cellTexts;
     }
 
     @Override
@@ -41,238 +31,164 @@ public class DragViewListener implements OnTouchListener {
         int x = (int) event.getRawX();
         int y = (int) event.getRawY();
 
-        int left = dragView.getLeft() + (x - oldX);
-        int top = dragView.getTop() + (y - oldY);
-
-        int x_index = left / cells[0][0].getWidth();
-        int y_index = top / cells[0][0].getHeight();
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                //修正案
-                //コーディング領域にあるものを選択した場合、init_indexで命令のスワップ
-                //アイコン一覧から選択した場合、initLeft,topにで再表示
-                initLeft = dragView.getLeft();
-                initTop = dragView.getTop();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                dragView.layout(left, top, left + dragView.getWidth(), top + dragView.getHeight());
-                break;
-            case MotionEvent.ACTION_UP:
-                if (x_index > 0) x_index--;
-                boolean deployed = true;
-                if (0 <= x_index && x_index <= 2 && 0 <= y_index && y_index <= 11) {
-                    //左のマス近辺の場合
-                    if (view.getId() == R.id.imageView1) {
-                        program[x_index][y_index] = "右腕を上げる";
-                    } else if (view.getId() == R.id.imageView2) {
-                        program[x_index][y_index] = "右腕を下げる";
-                    } else if (view.getId() == R.id.imageView3) {
-                        program[x_index][y_index] = "左腕を上げる";
-                    } else if (view.getId() == R.id.imageView4) {
-                        program[x_index][y_index] = "左腕を下げる";
-                    } else if (view.getId() == R.id.imageView5) {
-                        program[x_index][y_index] = "くりかえし";
-                    } else if (view.getId() == R.id.imageView6) {
-                        program[x_index][y_index] = "ここまで";
-                    } else if (view.getId() == R.id.imageView7) {
-                        program[x_index][y_index] = "黄色";
-                    } else if (view.getId() == R.id.imageView8) {
-                        program[x_index][y_index] = "茶色";
-                    } else if (view.getId() == R.id.imageView9) {
-                        program[x_index][y_index] = "もしも";
-                    } else if (view.getId() == R.id.imageView10) {
-                        program[x_index][y_index] = "もしくは";
-                    } else if (view.getId() == R.id.imageView11) {
-                        program[x_index][y_index] = "もしおわり";
-                    } else if (view.getId() == R.id.imageView01) {
-                        program[x_index][y_index] = "1";
-                    } else if (view.getId() == R.id.imageView02) {
-                        program[x_index][y_index] = "2";
-                    } else if (view.getId() == R.id.imageView03) {
-                        program[x_index][y_index] = "3";
-                    } else if (view.getId() == R.id.imageView04) {
-                        program[x_index][y_index] = "4";
-                    } else if (view.getId() == R.id.imageView05) {
-                        program[x_index][y_index] = "5";
-                    } else if (view.getId() == R.id.imageView06) {
-                        program[x_index][y_index] = "6";
-                    } else if (view.getId() == R.id.imageView07) {
-                        program[x_index][y_index] = "7";
-                    } else if (view.getId() == R.id.imageView08) {
-                        program[x_index][y_index] = "8";
-                    } else if (view.getId() == R.id.imageView09) {
-                        program[x_index][y_index] = "9";
-                    } else if (view.getId() == R.id.imageView00) {
-                        program[x_index][y_index] = "0";
-                    } else if (view.getId() == R.id.imageView12) {
-                        program[x_index][y_index] = "";
-                    } else {
-                        for (int i = 0; i < 3; i++) {
-                            for (int j = 0; j < 12; j++) {
-                                //resb[i][j] = this.getResources().getIdentifier("image" + i + "_" + j, "id", this.getPackageName());
-                                if (view.getId() == resb[i][j]) {
-                                    if (!program[i][j].equals("")) {
-                                        if (x_index == i && y_index == j) {
-                                        } else {
-                                            program[x_index][y_index] = program[i][j];
-                                            program[i][j] = "";
-                                            break;
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-                } else if (3 <= x_index && x_index <= 4 && 10 <= y_index && y_index <= 11) {
-                    for (int i = 0; i < 3; i++) {
-                        for (int j = 0; j < 12; j++) {
-                            if (view.getId() == resb[i][j]) {
-                                program[i][j] = "";
-                            }
-                        }
-                    }
-                } else {
-                    deployed = false;
-                }
-
-                //空白があったら詰める
-                for (int j = 0; j < 12; j++) {
-                    for (int count = 0; count < 2; count++) {
-                        for (int i = 0; i < 2; i++) {
-                            if (program[i][j].equals("")) {
-                                program[i][j] = program[i + 1][j];
-                                program[i + 1][j] = "";
-                            }
-                        }
-                    }
-                }
-
-                //レッスンによっては必要ない部分の命令を空白にする
-                if (lessonNumber == 4) {
-                    for (int i = 0; i < 3; i++) {
-                        for (int j = 8; j < 12; j++) {
-                            program[i][j] = "";
-                        }
-                    }
-                } else if (lessonNumber == 2) {
-                } else {
-                    for (int i = 0; i < 3; i++) {
-                        for (int j = 10; j < 12; j++) {
-                            program[i][j] = "";
-                        }
-                    }
-                }
-
-                //アイコンに変更
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 12; j++) {
-                        if (program[i][j].equals("右腕を上げる")) {
-                            cells[i][j].setImageResource(R.drawable.icon_right_hand_up);
-                        } else if (program[i][j].equals("右腕を下げる")) {
-                            cells[i][j].setImageResource(R.drawable.icon_right_hand_down);
-                        } else if (program[i][j].equals("左腕を上げる")) {
-                            cells[i][j].setImageResource(R.drawable.icon_left_hand_up);
-                        } else if (program[i][j].equals("左腕を下げる")) {
-                            cells[i][j].setImageResource(R.drawable.icon_left_hand_down);
-                        } else if (program[i][j].equals("くりかえし")) {
-                            cells[i][j].setImageResource(R.drawable.icon_loop);
-                        } else if (program[i][j].equals("ここまで")) {
-                            cells[i][j].setImageResource(R.drawable.icon_kokomade);
-                        } else if (program[i][j].equals("黄色")) {
-                            cells[i][j].setImageResource(R.drawable.icon_yellow);
-                        } else if (program[i][j].equals("茶色")) {
-                            cells[i][j].setImageResource(R.drawable.icon_orange);
-                        } else if (program[i][j].equals("もしも")) {
-                            cells[i][j].setImageResource(R.drawable.icon_if);
-                        } else if (program[i][j].equals("もしくは")) {
-                            cells[i][j].setImageResource(R.drawable.icon_else);
-                        } else if (program[i][j].equals("もしおわり")) {
-                            cells[i][j].setImageResource(R.drawable.icon_if_kokomade);
-                        } else if (program[i][j].equals("1")) {
-                            cells[i][j].setImageResource(R.drawable.num1);
-                        } else if (program[i][j].equals("2")) {
-                            cells[i][j].setImageResource(R.drawable.num2);
-                        } else if (program[i][j].equals("3")) {
-                            cells[i][j].setImageResource(R.drawable.num3);
-                        } else if (program[i][j].equals("4")) {
-                            cells[i][j].setImageResource(R.drawable.num4);
-                        } else if (program[i][j].equals("5")) {
-                            cells[i][j].setImageResource(R.drawable.num5);
-                        } else if (program[i][j].equals("6")) {
-                            cells[i][j].setImageResource(R.drawable.num6);
-                        } else if (program[i][j].equals("7")) {
-                            cells[i][j].setImageResource(R.drawable.num7);
-                        } else if (program[i][j].equals("8")) {
-                            cells[i][j].setImageResource(R.drawable.num8);
-                        } else if (program[i][j].equals("9")) {
-                            cells[i][j].setImageResource(R.drawable.num9);
-                        } else if (program[i][j].equals("0")) {
-                            cells[i][j].setImageResource(R.drawable.num0);
-                        } else {
-                            cells[i][j].setImageResource(R.drawable.haikei);
-                        }
-                    }
-                }
-                
-                //次の入力場所の表示
-                for (int j = 0; j < 12; j++) {
-                    int flag = 0;
-                    for (int i = 0; i < 3; i++) {
-                        if (program[i][j].equals("")) {
-                            if (flag == 0) {
-                                canwrite[i][j].setImageResource(R.drawable.haikei2); //点線の四角
-                                flag = 1;
-                            } else {
-                                canwrite[i][j].setImageResource(R.drawable.haikei); //空白
-                            }
-                        } else {
-                            canwrite[i][j].setImageResource(R.drawable.haikei); //空白
-                        }
-                    }
-                }
-
-                StringBuilder builder = new StringBuilder();
-                for (int column = 0; column < 3; column++) {
-                    for (int row = 0; row < 12; row++) {
-                        builder.append(program[column][row]);
-                    }
-                    builder.append("\n");
-                }
-                intent.putExtra("piyoCode", builder.toString());
-
-                // 元の位置に戻るアニメーション
-                if (deployed) {
-                    // 元の位置に戻す
-                    dragView.requestLayout();
-                    break;
-                }
-                Animation animation = new TranslateAnimation(0, initLeft - dragView.getLeft(), 0, initTop - dragView.getTop());
-                animation.setDuration(500);
-                dragView.startAnimation(animation);
-                animation.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        dragView.setAnimation(null);
-                        // 元の位置に戻す
-                        dragView.requestLayout();
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-                    }
-                });
-                break;
-        }
+        int left = view.getLeft() + (x - oldX);
+        int top = view.getTop() + (y - oldY);
 
         oldX = x;
         oldY = y;
-        return true;
 
+        Location to = new Location(
+            top / cellIcons[0][0].getHeight(),
+            Math.max(left / cellIcons[0][0].getWidth() - 1, 0));
+        Location from = getCellLocation(view);
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                initLeft = view.getLeft();
+                initTop = view.getTop();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (from == null || hasIcon(from.row, from.column)) {
+                    view.layout(left, top, left + view.getWidth(), top + view.getHeight());
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                boolean moved = true;
+                if (to.isWritableArea()) {
+                    putProgramText(view, from, to);
+                } else if (to.isDustboxArea()) {
+                    removeProgramText(from);
+                } else {
+                    moved = false;
+                }
+
+                pushProgramTextsToLeft();
+                setProgramIcons();
+                setPiyoCode();
+                showAnimation(view, moved);
+                break;
+        }
+        return true;
+    }
+
+    private void putProgramText(View view, Location from, Location to) {
+        if (cellIcons[to.row][to.column].getVisibility() == View.INVISIBLE) {
+            return;
+        }
+        IconType iconType = IconType.getById(view.getId());
+        if (iconType != null) {
+            cellTexts[to.row][to.column] = iconType.text;
+        } else if (from != null) {
+            String tmp = cellTexts[from.row][from.column];
+            cellTexts[from.row][from.column] = cellTexts[to.row][to.column];
+            cellTexts[to.row][to.column] = tmp;
+        }
+    }
+
+    private void removeProgramText(Location from) {
+        if (from != null) {
+            cellTexts[from.row][from.column] = "";
+        }
+    }
+
+    private void pushProgramTextsToLeft() {
+        for (int row = 0; row < cellTexts.length; row++) {
+            for (int column = 1; column < cellTexts[0].length; column++) {
+                if (!hasIcon(row, column - 1)) {
+                    cellTexts[row][column - 1] = cellTexts[row][column];
+                    cellTexts[row][column] = "";
+                }
+            }
+        }
+    }
+
+    private void setProgramIcons() {
+        for (int row = 0; row < cellTexts.length; row++) {
+            for (int column = 0; column < cellTexts[0].length; column++) {
+                IconType iconType = IconType.getByText(cellTexts[row][column]);
+                if (iconType != null) {
+                    cellIcons[row][column].setImageResource(iconType.drawable);
+                } else if (column == 0 || hasIcon(row, column - 1)) {
+                    cellIcons[row][column].setImageResource(R.drawable.icon_writable);
+                } else {
+                    cellIcons[row][column].setImageResource(R.drawable.icon_none);
+                }
+            }
+        }
+    }
+
+    private void setPiyoCode() {
+        StringBuilder builder = new StringBuilder();
+        for (int row = 0; row < cellTexts.length; row++) {
+            for (int column = 0; column < cellTexts[0].length; column++) {
+                builder.append(cellTexts[row][column]);
+            }
+            builder.append("\n");
+        }
+        activity.getIntent().putExtra("piyoCode", builder.toString());
+    }
+
+    public Location getCellLocation(View view) {
+        int id = view.getId();
+        for (int row = 0; row < cellTexts.length; row++) {
+            for (int column = 0; column < cellTexts[0].length; column++) {
+                int cellId = activity.getResources().getIdentifier("cell_" + row + "_" + column, "id", activity.getPackageName());
+                if (id == cellId) {
+                    return new Location(row, column);
+                }
+            }
+        }
+        return null;
+    }
+
+    private boolean hasIcon(int row, int column) {
+        return !cellTexts[row][column].equals("");
+    }
+
+    private void showAnimation(final View view, boolean moved) {
+        if (moved) {
+            // 元の位置に戻す
+            view.requestLayout();
+            return;
+        }
+        Animation animation = new TranslateAnimation(
+            0, initLeft - view.getLeft(), 0, initTop - view.getTop());
+        animation.setDuration(500);
+        view.startAnimation(animation);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // ちらつき防止
+                view.setAnimation(null);
+                // 元の位置に戻す
+                view.requestLayout();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+    }
+
+    private static class Location {
+        public final int row;
+        public final int column;
+
+        public Location(int row, int column) {
+            this.row = row;
+            this.column = column;
+        }
+
+        public boolean isWritableArea() {
+            return 0 <= row && row <= 11 && 0 <= column && column <= 2;
+        }
+
+        public boolean isDustboxArea() {
+            return 10 <= row && row <= 11 && 3 <= column && column <= 4;
+        }
     }
 }
