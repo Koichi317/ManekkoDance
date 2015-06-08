@@ -27,6 +27,7 @@ proguard/
 
 # Android Studio
 .idea/libraries/
+.idea/dictionaries/
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/.name
