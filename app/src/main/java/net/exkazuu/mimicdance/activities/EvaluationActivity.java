@@ -61,6 +61,9 @@ public class EvaluationActivity extends BaseActivity {
         initializeComponents();
     }
 
+    /**
+     * Intentから送られてきたプログラムをロードしてフィールドに格納する
+     */
     private void loadData() {
         Intent intent = getIntent();
         lessonNumber = intent.getIntExtra("lessonNumber", 1);
