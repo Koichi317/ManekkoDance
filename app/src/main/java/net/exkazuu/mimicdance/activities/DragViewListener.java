@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import net.exkazuu.mimicdance.R;
@@ -20,6 +22,8 @@ public class DragViewListener implements OnTouchListener {
     private int lessonNumber;
     private int oldX;
     private int oldY;
+    private int init_left;
+    private int init_top;
 
     public DragViewListener(ImageView dragView, ImageView[][] cells,
                             String[][] program, Intent intent, int[][] resb, ImageView[][] canwrite, int lessonNumber) {
@@ -30,6 +34,7 @@ public class DragViewListener implements OnTouchListener {
         this.resb = resb;
         this.canwrite = canwrite;
         this.lessonNumber = lessonNumber;
+
     }
 
     public boolean onTouch(View view, MotionEvent event) {
@@ -43,11 +48,13 @@ public class DragViewListener implements OnTouchListener {
         int y_index = top / cells[0][0].getHeight();
 
         switch (event.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-            //修正案
-            //コーディング領域にあるものを選択した場合、init_indexで命令のスワップ
-            //アイコン一覧から選択した場合、init_left,topにで再表示
-//                break;
+            case MotionEvent.ACTION_DOWN:
+                //修正案
+                //コーディング領域にあるものを選択した場合、init_indexで命令のスワップ
+                //アイコン一覧から選択した場合、init_left,topにで再表示
+                init_left = dragView.getLeft();
+                init_top = dragView.getTop();
+                break;
             case MotionEvent.ACTION_MOVE:
                 dragView.layout(left, top, left + dragView.getWidth(), top + dragView.getHeight());
                 break;
@@ -205,7 +212,6 @@ public class DragViewListener implements OnTouchListener {
                         }
                     }
                 }
-
                 //次の入力場所の表示
                 for (int j = 0; j < 12; j++) {
                     int flag = 0;
@@ -231,6 +237,11 @@ public class DragViewListener implements OnTouchListener {
                     builder.append("\n");
                 }
                 intent.putExtra("piyoCode", builder.toString());
+
+                Animation animation = new TranslateAnimation(0, init_left - dragView.getLeft(), 0, init_top - dragView.getTop());
+                animation.setDuration(1000);
+                dragView.startAnimation(animation);
+
                 break;
         }
 
