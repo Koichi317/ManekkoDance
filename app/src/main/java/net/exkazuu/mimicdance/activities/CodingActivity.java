@@ -26,7 +26,7 @@ public class CodingActivity extends BaseActivity {
         Intent intent = getIntent();
         lessonNumber = intent.getIntExtra("lessonNumber", 1);
 
-        String[][] cellTexts = initializeCellTexts();
+        String[][] cellTexts = initializeCellTexts(intent.getStringExtra("piyoCode"));
         ImageView[][] cellIcons = initializeCellIcons(cellTexts);
         initializeProgramIcons(cellTexts, cellIcons);
         initializeNumberIcons(cellTexts, cellIcons);
@@ -35,11 +35,21 @@ public class CodingActivity extends BaseActivity {
         initializeMaximumStep(cellIcons, steps);
     }
 
-    private String[][] initializeCellTexts() {
+    private String[][] initializeCellTexts(String piyoCode) {
         String[][] cellTexts = new String[MAX_ROW][MAX_COLUMN];
         for (int row = 0; row < cellTexts.length; row++) {
             for (int column = 0; column < cellTexts[0].length; column++) {
                 cellTexts[row][column] = "";
+            }
+        }
+
+        String[] lines = piyoCode.split("\n");
+        int maxRow = Math.min(lines.length, cellTexts.length);
+        for (int row = 0; row < maxRow; row++) {
+            String[] texts = lines[row].split(" ");
+            int maxColumn = Math.min(texts.length, cellTexts[0].length);
+            for (int column = 0; column < maxColumn; column++) {
+                cellTexts[row][column] = texts[row];
             }
         }
         return cellTexts;
@@ -47,14 +57,16 @@ public class CodingActivity extends BaseActivity {
 
     private ImageView[][] initializeCellIcons(String[][] cellTexts) {
         ImageView[][] cellIcons = new ImageView[cellTexts.length][cellTexts[0].length];
+        DragViewListener lastListener = null;
         for (int row = 0; row < cellIcons.length; row++) {
             for (int column = 0; column < cellIcons[0].length; column++) {
                 int id = getResources().getIdentifier("cell_" + row + "_" + column, "id", getPackageName());
                 cellIcons[row][column] = (ImageView) findViewById(id);
-                DragViewListener listener = new DragViewListener(this, cellIcons, cellTexts);
-                cellIcons[row][column].setOnTouchListener(listener);
+                lastListener = new DragViewListener(this, cellIcons, cellTexts);
+                cellIcons[row][column].setOnTouchListener(lastListener);
             }
         }
+        lastListener.setProgramIcons();
         return cellIcons;
     }
 
@@ -176,9 +188,6 @@ public class CodingActivity extends BaseActivity {
 
     public void startEvaluationActivity(View view) {
         String piyoCode = getIntent().getStringExtra("piyoCode");
-        if (piyoCode == null) {
-            piyoCode = "";
-        }
         startEvaluationActivity(lessonNumber, piyoCode);
     }
 

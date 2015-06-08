@@ -8,6 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
+import com.google.common.base.Joiner;
+
 import net.exkazuu.mimicdance.R;
 import net.exkazuu.mimicdance.interpreter.IconType;
 
@@ -102,7 +104,7 @@ public class DragViewListener implements OnTouchListener {
         }
     }
 
-    private void setProgramIcons() {
+    public void setProgramIcons() {
         for (int row = 0; row < cellTexts.length; row++) {
             for (int column = 0; column < cellTexts[0].length; column++) {
                 IconType iconType = IconType.getByText(cellTexts[row][column]);
@@ -120,12 +122,10 @@ public class DragViewListener implements OnTouchListener {
     private void setPiyoCode() {
         StringBuilder builder = new StringBuilder();
         for (int row = 0; row < cellTexts.length; row++) {
-            for (int column = 0; column < cellTexts[0].length; column++) {
-                builder.append(cellTexts[row][column]);
-            }
-            builder.append("\n");
+            builder.append(Joiner.on(' ').join(cellTexts[row]).trim());
+            builder.append('\n');
         }
-        activity.getIntent().putExtra("piyoCode", builder.toString());
+        activity.getIntent().putExtra("piyoCode", builder.toString().trim());
     }
 
     public Location getCellLocation(View view) {

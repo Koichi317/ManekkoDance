@@ -128,7 +128,7 @@ public class CoccoActivity extends BaseActivity {
     public void startCodingActivity(View view) {
         if (piyoCode == null) {
             // 最初にコード入力画面に遷移するとき
-            startCodingActivity(lessonNumber, piyoCode);
+            startCodingActivity(lessonNumber, "");
         } else {
             // お手本確認に戻ってからコード入力画面に復帰する時
             finish();
