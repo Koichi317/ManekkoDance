@@ -39,7 +39,7 @@ public class LessonListActivity extends ListActivity {
 
         Intent intent = new Intent(this, CoccoActivity.class);
         intent.putExtra("lessonNumber", position + 1);
-        intent.removeExtra("piyoCode");
+        intent.putExtra("piyoCode", "");
         startActivity(intent);
     }
 }

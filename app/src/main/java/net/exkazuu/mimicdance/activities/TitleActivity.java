@@ -37,11 +37,11 @@ public class TitleActivity extends BaseActivity {
     }
 
     public void startHelpActivity(View view) {
-        startHelpActivity();
+        startHelpActivity(false);
     }
 
     public void startLessonListActivity(View view) {
-        startLessonListActivity();
+        startLessonListActivity(true);
     }
 
     public void freePlay(View view) {

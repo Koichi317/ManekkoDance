@@ -78,6 +78,30 @@ public class CoccoActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        menu.add("編集画面").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                startCodingActivity(null);
+                return false;
+            }
+        });
+
+        menu.add("タイトル画面へ戻る").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                startTitleActivity(true);
+                return false;
+            }
+        });
+        return true;
+    }
+
+    public void startCodingActivity(View view) {
+        startCodingActivity(lessonNumber, piyoCode, true);
+    }
+
     private final class CommandExecutor implements Runnable {
         private static final int SLEEP_TIME = 300;
         private final Handler handler;
@@ -102,52 +126,6 @@ public class CoccoActivity extends BaseActivity {
                     }
                 }
             }
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-
-        menu.add("編集画面").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                startCodingActivity(null);
-                return false;
-            }
-        });
-
-        menu.add("タイトル画面へ戻る").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                startTitleActivity();
-                return false;
-            }
-        });
-        return true;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CODE_FOR_CODING && data != null) {
-            piyoCode = data.getStringExtra("piyoCode");
-        }
-    }
-
-    public void startCodingActivity(View view) {
-        if (piyoCode == null || getCallingActivity().equals(CodingActivity.class.getSimpleName())) {
-            // レッスン選択をして
-            Intent intent = new Intent(this, CodingActivity.class);
-            intent.putExtra("lessonNumber", lessonNumber);
-            intent.putExtra("piyoCode", "");
-            startActivityForResult(intent, REQUEST_CODE_FOR_CODING);
-        } else {
-            finish();
-        }
-        if (piyoCode == null) {
-            // 最初にコード入力画面に遷移するとき
-        } else {
-            // お手本確認に戻ってからコード入力画面に復帰する時
         }
     }
 }

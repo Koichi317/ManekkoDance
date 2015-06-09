@@ -123,35 +123,23 @@ public class EvaluationActivity extends BaseActivity {
 
         menu.add("タイトルへ戻る").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                startTitleActivity();
+                startTitleActivity(true);
                 return false;
             }
         });
         return true;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CODE_FOR_COCCO) {
-            finish();
-        }
-    }
-
     public void startCoccoActivity(View view) {
-        Intent intent = new Intent(this, CoccoActivity.class);
-        intent.putExtra("lessonNumber", lessonNumber);
-        intent.putExtra("piyoCode", piyoCode);
-        startActivityForResult(intent, REQUEST_CODE_FOR_COCCO);
+        startCoccoActivity(lessonNumber, piyoCode, true);
     }
 
     public void startHelpActivity(View view) {
-        startHelpActivity();
+        startHelpActivity(false);
     }
 
     public void startCodingActivity(View view) {
-        finish();
+        startCodingActivity(lessonNumber, piyoCode, true);
     }
 
     public final class CommandExecutor implements Runnable {
@@ -175,7 +163,7 @@ public class EvaluationActivity extends BaseActivity {
             Interpreter altCoccoExecutor = Interpreter.createForCocco(altCoccoProgram, altCoccoViewSet);
 
             // 解析&実行(白と黄)
-            if (lessonNumber == 5 || lessonNumber == 6) {
+            if (Lessons.hasIf(lessonNumber)) {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -187,7 +175,7 @@ public class EvaluationActivity extends BaseActivity {
             int maxSize = Math.max(piyoProgram.size(), coccoProgram.size());
             dance(piyoExecutor, coccoExecutor, maxSize);
 
-            if (lessonNumber == 5 || lessonNumber == 6) {
+            if (Lessons.hasIf(lessonNumber)) {
                 //表示するキャラクターを変更
                 handler.post(new Runnable() {
                     @Override
@@ -236,16 +224,7 @@ public class EvaluationActivity extends BaseActivity {
                                     public void onClick(
                                         DialogInterface dialog,
                                         int which) {
-                                        startTitleActivity();
-                                    }
-                                });
-
-                            builder.setPositiveButton("もう一度Challenge",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(
-                                        DialogInterface dialog,
-                                        int which) {
-                                        finish();
+                                        startTitleActivity(true);
                                     }
                                 });
                         } else {
@@ -253,12 +232,9 @@ public class EvaluationActivity extends BaseActivity {
                             builder.setNegativeButton("次のLessonに進む",
                                 new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(
-                                        DialogInterface dialog,
-                                        int which) {
+                                    public void onClick(DialogInterface dialog, int which) {
                                         startCoccoActivity(
-                                            Math.min(lessonNumber + 1, Lessons.getLessonCount()), null);
-                                        finish();
+                                            Math.min(lessonNumber + 1, Lessons.getLessonCount()), "", true);
                                     }
                                 });
 
@@ -268,32 +244,21 @@ public class EvaluationActivity extends BaseActivity {
                                     }
                                 }
                             );
-
-                            builder.setPositiveButton("もう一度Challenge",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(
-                                        DialogInterface dialog,
-                                        int which) {
-                                        finish();
-                                    }
-                                });
                         }
-
                     } else {
                         true_ans.setVisibility(View.GONE);
+                        builder.setPositiveButton("もういちどチャレンジ",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startCodingActivity(lessonNumber, piyoCode, true);
+                                }
+                            });
                         builder.setNegativeButton("Lessonを選択し直す",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    startLessonListActivity();
-                                }
-                            });
-
-                        builder.setPositiveButton("もう一度Challenge",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
-                                    finish();
+                                    startLessonListActivity(true);
                                 }
                             });
                     }

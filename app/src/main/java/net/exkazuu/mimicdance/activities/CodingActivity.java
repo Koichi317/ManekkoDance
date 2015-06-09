@@ -47,7 +47,7 @@ public class CodingActivity extends BaseActivity {
             String[] texts = lines[row].split(" ");
             int maxColumn = Math.min(texts.length, cellTexts[0].length);
             for (int column = 0; column < maxColumn; column++) {
-                cellTexts[row][column] = texts[row];
+                cellTexts[row][column] = texts[column];
             }
         }
         return cellTexts;
@@ -128,14 +128,13 @@ public class CodingActivity extends BaseActivity {
         super.onCreateOptionsMenu(menu);
         menu.add("ヘルプ").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                startHelpActivity();
+                startHelpActivity(false);
                 return false;
             }
         });
         menu.add("タイトル画面へ戻る").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                startTitleActivity();
-                finish();
+                startTitleActivity(true);
                 return false;
             }
         });
@@ -144,22 +143,20 @@ public class CodingActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        setResult(RESULT_OK, getIntent());
-        // Must invoke the super method at the last
-        super.onBackPressed();
+        startCoccoActivity(null);
     }
 
     public void startCoccoActivity(View view) {
-        setResult(RESULT_OK, getIntent());
-        finish();
+        String piyoCode = getIntent().getStringExtra("piyoCode");
+        startCoccoActivity(lessonNumber, piyoCode, true);
     }
 
     public void startEvaluationActivity(View view) {
         String piyoCode = getIntent().getStringExtra("piyoCode");
-        startEvaluationActivityForResult(lessonNumber, piyoCode);
+        startEvaluationActivity(lessonNumber, piyoCode, true);
     }
 
     public void startHelpActivity(View view) {
-        startHelpActivity();
+        startHelpActivity(false);
     }
 }
