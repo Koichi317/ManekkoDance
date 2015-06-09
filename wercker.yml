@@ -25,3 +25,9 @@ build:
           pwd
           ls -la ./app/build/outputs/
           cp -r ./app/build/outputs/* ${WERCKER_REPORT_ARTIFACTS_DIR}
+deploy:
+  steps:
+    - script:
+        name: upload to deploygate
+        code: |
+          curl -F "file=./app/build/outputs/apk/$APK_FILE_NAME" -F "token=632fdf1885ed773380d2f4b54f6691d81955ef27" https://deploygate.com/api/users/exKAZUu/apps

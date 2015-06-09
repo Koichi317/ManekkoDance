@@ -130,8 +130,20 @@ public class EvaluationActivity extends BaseActivity {
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_FOR_COCCO) {
+            finish();
+        }
+    }
+
     public void startCoccoActivity(View view) {
-        startCoccoActivity(lessonNumber);
+        Intent intent = new Intent(this, CoccoActivity.class);
+        intent.putExtra("lessonNumber", lessonNumber);
+        intent.putExtra("piyoCode", piyoCode);
+        startActivityForResult(intent, REQUEST_CODE_FOR_COCCO);
     }
 
     public void startHelpActivity(View view) {
@@ -245,8 +257,8 @@ public class EvaluationActivity extends BaseActivity {
                                         DialogInterface dialog,
                                         int which) {
                                         startCoccoActivity(
-                                            Math.min(lessonNumber + 1, Lessons.getLessonCount()));
-                                        finish();   // TODO: is this necessary?
+                                            Math.min(lessonNumber + 1, Lessons.getLessonCount()), null);
+                                        finish();
                                     }
                                 });
 

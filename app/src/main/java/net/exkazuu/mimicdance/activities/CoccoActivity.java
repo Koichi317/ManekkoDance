@@ -125,13 +125,29 @@ public class CoccoActivity extends BaseActivity {
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_FOR_CODING && data != null) {
+            piyoCode = data.getStringExtra("piyoCode");
+        }
+    }
+
     public void startCodingActivity(View view) {
+        if (piyoCode == null || getCallingActivity().equals(CodingActivity.class.getSimpleName())) {
+            // レッスン選択をして
+            Intent intent = new Intent(this, CodingActivity.class);
+            intent.putExtra("lessonNumber", lessonNumber);
+            intent.putExtra("piyoCode", "");
+            startActivityForResult(intent, REQUEST_CODE_FOR_CODING);
+        } else {
+            finish();
+        }
         if (piyoCode == null) {
             // 最初にコード入力画面に遷移するとき
-            startCodingActivity(lessonNumber, "");
         } else {
             // お手本確認に戻ってからコード入力画面に復帰する時
-            finish();
         }
     }
 }

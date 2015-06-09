@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import net.exkazuu.mimicdance.Lessons;
@@ -144,39 +142,20 @@ public class CodingActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        cleanupView(findViewById(R.id.root));
-        System.gc();
-    }
-
-    private static void cleanupView(View view) {
-        if (view instanceof ImageButton) {
-            ImageButton ib = (ImageButton) view;
-            ib.setImageDrawable(null);
-        } else if (view instanceof ImageView) {
-            ImageView iv = (ImageView) view;
-            iv.setImageDrawable(null);
-            // } else if(view instanceof(XXX)) {
-            // 他にもDrawableを使用する対象があればここで中身をnullに
-        }
-        view.setBackgroundDrawable(null);
-        if (view instanceof ViewGroup) {
-            ViewGroup vg = (ViewGroup) view;
-            int size = vg.getChildCount();
-            for (int i = 0; i < size; i++) {
-                cleanupView(vg.getChildAt(i));
-            }
-        }
+    public void onBackPressed() {
+        setResult(RESULT_OK, getIntent());
+        // Must invoke the super method at the last
+        super.onBackPressed();
     }
 
     public void startCoccoActivity(View view) {
+        setResult(RESULT_OK, getIntent());
         finish();
     }
 
     public void startEvaluationActivity(View view) {
         String piyoCode = getIntent().getStringExtra("piyoCode");
-        startEvaluationActivity(lessonNumber, piyoCode);
+        startEvaluationActivityForResult(lessonNumber, piyoCode);
     }
 
     public void startHelpActivity(View view) {

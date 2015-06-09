@@ -4,26 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 
 public abstract class BaseActivity extends Activity {
-    /**
-     * 実装画面に遷移します。
-     *
-     * @param lessonNumber
-     * @param piyoCode
-     */
-    protected void startCodingActivity(int lessonNumber, String piyoCode) {
-        Intent intent = new Intent(this, CodingActivity.class);
-        intent.putExtra("lessonNumber", lessonNumber);
-        intent.putExtra("piyoCode", piyoCode);
-        startActivity(intent);
-    }
+
+    public static final int REQUEST_CODE_FOR_CODING = 5000;
+    public static final int REQUEST_CODE_FOR_COCCO = 5001;
 
     /**
-     * 判定画面に遷移します。
+     * 実行結果を取得できる形で判定画面に遷移します。
      *
      * @param lessonNumber
      * @param piyoCode
      */
-    protected void startEvaluationActivity(int lessonNumber, String piyoCode) {
+    protected void startEvaluationActivityForResult(int lessonNumber, String piyoCode) {
         Intent intent = new Intent(this, EvaluationActivity.class);
         intent.putExtra("lessonNumber", lessonNumber);
         intent.putExtra("piyoCode", piyoCode);
@@ -35,9 +26,10 @@ public abstract class BaseActivity extends Activity {
      *
      * @param lessonNumber
      */
-    protected void startCoccoActivity(int lessonNumber) {
+    protected void startCoccoActivity(int lessonNumber, String piyoCode) {
         Intent intent = new Intent(this, CoccoActivity.class);
         intent.putExtra("lessonNumber", lessonNumber);
+        intent.putExtra("piyoCode", piyoCode);
         startActivity(intent);
     }
 
