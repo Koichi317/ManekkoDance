@@ -179,8 +179,8 @@ public class EvaluationActivity extends BaseActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        TextView which_birds = (TextView) findViewById(R.id.yellow_or_orange);
-                        which_birds.setText("黄色いひよこの場合");
+                        TextView whichBirds = (TextView) findViewById(R.id.yellow_or_orange);
+                        whichBirds.setText("黄色いひよこの場合");
                     }
                 });
             }
@@ -285,7 +285,7 @@ public class EvaluationActivity extends BaseActivity {
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    startTitleActivity();
+                                    startLessonListActivity();
                                 }
                             });
 
