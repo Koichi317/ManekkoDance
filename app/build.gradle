@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.robolectric'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 21
     buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "net.exkazuu.mimicdance"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
