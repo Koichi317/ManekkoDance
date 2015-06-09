@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -109,27 +107,6 @@ public class EvaluationActivity extends BaseActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        super.onCreateOptionsMenu(menu);
-
-        menu.add("画面へ戻る").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                finish();
-                return false;
-            }
-        });
-
-        menu.add("タイトルへ戻る").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                startTitleActivity(true);
-                return false;
-            }
-        });
-        return true;
-    }
-
     public void startCoccoActivity(View view) {
         startCoccoActivity(lessonNumber, piyoCode, true);
     }
@@ -168,7 +145,7 @@ public class EvaluationActivity extends BaseActivity {
                     @Override
                     public void run() {
                         TextView whichBirds = (TextView) findViewById(R.id.yellow_or_orange);
-                        whichBirds.setText("黄色いひよこの場合");
+                        whichBirds.setText("きいろのひよこのばあい");
                     }
                 });
             }
@@ -181,7 +158,7 @@ public class EvaluationActivity extends BaseActivity {
                     @Override
                     public void run() {
                         TextView which_birds = (TextView) findViewById(R.id.yellow_or_orange);
-                        which_birds.setText("オレンジのひよこの場合");
+                        which_birds.setText("オレンジのひよこのばあい");
 
                         FrameLayout altPiyoFrame = (FrameLayout) findViewById(R.id.alt_piyo);
                         FrameLayout altCoccoFrame = (FrameLayout) findViewById(R.id.alt_cocco);
@@ -210,7 +187,7 @@ public class EvaluationActivity extends BaseActivity {
                     View layout = inflater.inflate(R.layout.dialog, (ViewGroup) findViewById(R.id.alertdialog_layout));
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(EvaluationActivity.this);
-                    builder.setTitle("あなたの答えは…？");
+                    builder.setTitle("あなたのこたえは…？");
                     builder.setView(layout);
                     ImageView true_ans = (ImageView) layout.findViewById(R.id.ans_true);
                     ImageView false_ans = (ImageView) layout.findViewById(R.id.ans_false);
@@ -218,7 +195,7 @@ public class EvaluationActivity extends BaseActivity {
                     if (piyoProgram.semanticallyEquals(coccoProgram) && altPiyoProgram.semanticallyEquals(altCoccoProgram)) {
                         false_ans.setVisibility(View.GONE);
                         if (lessonNumber == MaxStage) {
-                            builder.setNegativeButton("タイトルへ戻る",
+                            builder.setNegativeButton("タイトルへもどる",
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(
@@ -229,7 +206,7 @@ public class EvaluationActivity extends BaseActivity {
                                 });
                         } else {
                             Timer.stopTimer();
-                            builder.setNegativeButton("次のLessonに進む",
+                            builder.setNegativeButton("つぎのレッスンにすすむ",
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -237,7 +214,6 @@ public class EvaluationActivity extends BaseActivity {
                                             Math.min(lessonNumber + 1, Lessons.getLessonCount()), "", true);
                                     }
                                 });
-
                             builder.setNeutralButton(Timer.getResultTime(),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -254,7 +230,7 @@ public class EvaluationActivity extends BaseActivity {
                                     startCodingActivity(lessonNumber, piyoCode, true);
                                 }
                             });
-                        builder.setNegativeButton("Lessonを選択し直す",
+                        builder.setNegativeButton("べつのレッスンをえらぶ",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
