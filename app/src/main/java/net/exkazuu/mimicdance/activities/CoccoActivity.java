@@ -109,14 +109,14 @@ public class CoccoActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
-        menu.add("編集画面").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        menu.add("やりなおす").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 startCodingActivity(null);
                 return false;
             }
         });
 
-        menu.add("タイトル画面へ戻る").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        menu.add("タイトルへもどる").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 startTitleActivity();
                 return false;

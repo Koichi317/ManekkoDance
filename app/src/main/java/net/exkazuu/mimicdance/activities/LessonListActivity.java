@@ -23,7 +23,7 @@ public class LessonListActivity extends ListActivity {
         List<String> lessonList = new ArrayList<>();
         int lessonCount = Lessons.getLessonCount();
         for (int i = 1; i <= lessonCount; i++) {
-            lessonList.add("Lesson" + i);
+            lessonList.add("レッスン" + i);
         }
         LessonListAdapter listAdapter = new LessonListAdapter(
             this, android.R.layout.simple_list_item_1, lessonList);
