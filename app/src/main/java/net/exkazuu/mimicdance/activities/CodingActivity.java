@@ -89,6 +89,7 @@ public class CodingActivity extends BaseActivity {
             ImageView imageView = (ImageView) findViewById(id);
             DragViewListener listener = new DragViewListener(this, cellIcons, cellTexts);
             imageView.setOnTouchListener(listener);
+            imageView.setVisibility(View.VISIBLE);
         }
     }
 
