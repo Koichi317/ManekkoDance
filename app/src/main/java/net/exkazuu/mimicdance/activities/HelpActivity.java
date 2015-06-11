@@ -46,6 +46,6 @@ public class HelpActivity extends Activity {
         pageText.setText((pageNumber + 1) + PAGE_SUFFIX);
 
         ImageView helpView = (ImageView) findViewById(R.id.helpImage);
-        helpView.setImageResource(HELP_IMAGE_RESOURCES[pageNumber - 1]);
+        helpView.setImageResource(HELP_IMAGE_RESOURCES[pageNumber]);
     }
 }
