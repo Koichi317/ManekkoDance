@@ -191,6 +191,7 @@ public class EvaluationActivity extends BaseActivity {
                     builder.setView(layout);
                     ImageView true_ans = (ImageView) layout.findViewById(R.id.ans_true);
                     ImageView false_ans = (ImageView) layout.findViewById(R.id.ans_false);
+                    TextView congratulate = (TextView) layout.findViewById(R.id.congratulate);
 
                     if (piyoProgram.semanticallyEquals(coccoProgram) && altPiyoProgram.semanticallyEquals(altCoccoProgram)) {
                         false_ans.setVisibility(View.GONE);
@@ -223,6 +224,7 @@ public class EvaluationActivity extends BaseActivity {
                         }
                     } else {
                         true_ans.setVisibility(View.GONE);
+                        congratulate.setVisibility(View.GONE);
                         builder.setPositiveButton("もういちどチャレンジ",
                             new DialogInterface.OnClickListener() {
                                 @Override
