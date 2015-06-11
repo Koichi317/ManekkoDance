@@ -24,7 +24,7 @@ import net.exkazuu.mimicdance.program.UnrolledProgram;
 
 public class EvaluationActivity extends BaseActivity {
 
-    public static final int MaxStage = 10;
+    public static final int MaxStage = 6;
     private int lessonNumber;
     private String piyoCode;
 
