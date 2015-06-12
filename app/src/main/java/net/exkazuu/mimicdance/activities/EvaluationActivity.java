@@ -142,8 +142,7 @@ public class EvaluationActivity extends BaseActivity {
                     }
                 });
             }
-            int maxSize = Math.max(piyoProgram.size(), coccoProgram.size());
-            dance(piyoExecutor, coccoExecutor, maxSize);
+            dance(piyoExecutor, coccoExecutor);
 
             if (Lessons.hasIf(lessonNumber)) {
                 //表示するキャラクターを変更
@@ -156,7 +155,7 @@ public class EvaluationActivity extends BaseActivity {
                         FrameLayout altPiyoFrame = (FrameLayout) findViewById(R.id.alt_piyo);
                         FrameLayout altCoccoFrame = (FrameLayout) findViewById(R.id.alt_cocco);
                         FrameLayout piyoFrame = (FrameLayout) findViewById(R.id.piyo);
-                        FrameLayout coccoFrame = (FrameLayout) findViewById(R.id.altPiyo);
+                        FrameLayout coccoFrame = (FrameLayout) findViewById(R.id.cocco);
 
                         altPiyoFrame.setVisibility(View.VISIBLE);
                         altCoccoFrame.setVisibility(View.VISIBLE);
@@ -171,18 +170,23 @@ public class EvaluationActivity extends BaseActivity {
                 }
 
                 //解析と実行(茶色と橙)
-                dance(altPiyoExecutor, altCoccoExecutor, maxSize);
+                dance(altPiyoExecutor, altCoccoExecutor);
             }
 
-            if (piyoProgram.semanticallyEquals(coccoProgram) && altPiyoProgram.semanticallyEquals(altCoccoProgram)) {
+            int diffCount = piyoProgram.countDifferences(coccoProgram);
+            if (Lessons.hasIf(lessonNumber)) {
+                diffCount += altPiyoProgram.countDifferences(altCoccoProgram);
+            }
+            if (diffCount == 0) {
                 startCorrectAnswerActivity(lessonNumber, true);
             } else {
-                startWrongAnswerActivity(lessonNumber, piyoCode, true);
+                boolean almostCorrect = diffCount <= (coccoProgram.size() + altCoccoProgram.size()) / 3;
+                startWrongAnswerActivity(lessonNumber, piyoCode, diffCount, almostCorrect, true);
             }
         }
 
-        private void dance(Interpreter piyoExecutor, Interpreter coccoExecutor, int maxSize) {
-            for (int i = 0; !paused && i < maxSize; i++) {
+        private void dance(Interpreter piyoExecutor, Interpreter coccoExecutor) {
+            while (!paused && !piyoExecutor.finished() && !coccoExecutor.finished()) {
                 for (int j = 0; j < 2; j++) {
                     handler.post(piyoExecutor);
                     handler.post(coccoExecutor);

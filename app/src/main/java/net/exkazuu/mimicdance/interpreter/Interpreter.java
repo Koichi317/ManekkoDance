@@ -15,6 +15,7 @@ import java.util.Set;
 
 public class Interpreter implements Runnable {
 
+    public static final int WAITING_COUNT = 2;
     private final UnrolledProgram program;
     private final CharacterImageViewSet charaViewSet;
     private final Context context;
@@ -48,15 +49,18 @@ public class Interpreter implements Runnable {
 
     @Override
     public void run() {
-        if (getLineIndex() >= program.size()) {
+        if (executionCount < WAITING_COUNT) {
+            charaViewSet.changeToInitialImages();
+        }
+        else if (finished()) {
             return;
         }
-        if (isMoving()) {
+        else if (isMoving()) {
             if (isPiyo) {
                 highlightLine();
             }
 
-            actions = ActionType.parse(program.getLine(getLineIndex()));
+            actions = program.getActionSet(getLineIndex());
             if (!failed && ActionType.validate(actions) && pose.validate(actions)) {
                 pose.change(actions);
                 charaViewSet.changeToMovingImages(actions);
@@ -79,12 +83,16 @@ public class Interpreter implements Runnable {
         executionCount++;
     }
 
+    public boolean finished() {
+        return getLineIndex() >= program.size();
+    }
+
     public boolean existsError() {
         return failed;
     }
 
     private int getLineIndex() {
-        return executionCount / 2;
+        return (executionCount - WAITING_COUNT) / 2;
     }
 
     private boolean isMoving() {

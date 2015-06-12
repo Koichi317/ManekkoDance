@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.google.common.base.CaseFormat;
+import com.google.common.collect.Lists;
 
 import net.exkazuu.mimicdance.interpreter.ActionType;
 import net.exkazuu.mimicdance.interpreter.BodyPartType;
@@ -77,6 +78,11 @@ public class CharacterImageViewSet {
         return new CharacterImageViewSet(CharacterType.AltCocco, activity);
     }
 
+    public void changeToInitialImages() {
+        changeToMovedImages(Lists.newArrayList(ActionType.LeftFootDown, ActionType.Jump.LeftHandDown,
+            ActionType.RightFootDown, ActionType.RightHandDown));
+    }
+
     public void changeToMovingImages(Collection<ActionType> actions) {
         for (ActionType action : actions) {
             bodyParts[action.toBodyPart().ordinal()]
@@ -118,22 +124,6 @@ public class CharacterImageViewSet {
         } else {
             getBody().setImageResource(R.drawable.alt_korobu_3);
         }
-    }
-
-    public ImageView getLeftHand() {
-        return bodyParts[0];
-    }
-
-    public ImageView getRightHand() {
-        return bodyParts[1];
-    }
-
-    public ImageView getLeftFoot() {
-        return bodyParts[2];
-    }
-
-    public ImageView getRightFoot() {
-        return bodyParts[3];
     }
 
     public ImageView getBody() {

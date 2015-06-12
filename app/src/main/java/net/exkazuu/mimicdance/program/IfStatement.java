@@ -1,5 +1,9 @@
 package net.exkazuu.mimicdance.program;
 
+import net.exkazuu.mimicdance.interpreter.ActionType;
+
+import java.util.HashSet;
+
 public class IfStatement extends Statement {
     private final Block trueBlock;
     private final Block falseBlock;
@@ -21,19 +25,19 @@ public class IfStatement extends Statement {
             statements = falseBlock;
             others = trueBlock;
         }
-        int initialSize = program.lines.size();
+        int initialSize = program.actionSets.size();
         for (Statement statement : statements) {
             statement.unroll(program, isNormal);
         }
 
         int lastLineIndex = 0;
-        if (program.lines.size() > 0) {
+        if (program.actionSets.size() > 0) {
             lastLineIndex = program.lineIndexes.get(program.lineIndexes.size() - 1);
         }
 
         int otherSize = getOtherSize(others, isNormal);
-        for (int i = program.lines.size() - initialSize; i < otherSize; i++) {
-            program.lines.add("");
+        for (int i = program.actionSets.size() - initialSize; i < otherSize; i++) {
+            program.actionSets.add(new HashSet<ActionType>());
             program.lineIndexes.add(lastLineIndex);
         }
     }
@@ -43,6 +47,6 @@ public class IfStatement extends Statement {
         for (Statement statement : others) {
             statement.unroll(program, isNormal);
         }
-        return program.lines.size();
+        return program.actionSets.size();
     }
 }

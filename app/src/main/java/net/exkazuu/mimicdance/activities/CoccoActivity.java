@@ -115,8 +115,7 @@ public class CoccoActivity extends BaseActivity {
         public void run() {
             Interpreter coccoExecutor = Interpreter.createForCocco(coccoProgram, coccoViewSet);
             Interpreter altCoccoExecutor = Interpreter.createForCocco(altCoccoProgram, altCoccoViewSet);
-            int maxSize = Math.max(coccoProgram.size(), altCoccoProgram.size());
-            for (int i = 0; i < maxSize; i++) {
+            while (!coccoExecutor.finished() && !altCoccoExecutor.finished()) {
                 // アニメーションは2コマから構成
                 for (int j = 0; j < 2; j++) {
                     handler.post(coccoExecutor);
@@ -127,6 +126,8 @@ public class CoccoActivity extends BaseActivity {
                     }
                 }
             }
+            handler.post(coccoExecutor);
+            handler.post(altCoccoExecutor);
         }
     }
 }

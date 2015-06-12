@@ -9,37 +9,35 @@ import java.util.List;
 import java.util.Set;
 
 public class UnrolledProgram {
-    final List<String> lines = new ArrayList<>();
+    final List<Set<ActionType>> actionSets = new ArrayList<>();
     final List<Integer> lineIndexes = new ArrayList<>();
 
     public String getCode() {
-        return Joiner.on('\n').join(lines);
+        return Joiner.on('\n').join(actionSets);
     }
 
-    public String getLine(int lineIndex) {
-        return lines.get(lineIndex);
+    public Set<ActionType> getActionSet(int lineIndex) {
+        return actionSets.get(lineIndex);
     }
 
     public int getOriginalLineIndex(int lineIndex) {
         return lineIndexes.get(lineIndex);
     }
 
-    public boolean semanticallyEquals(UnrolledProgram otherProgram) {
-        int size = lines.size();
-        if (size != otherProgram.lines.size()) {
-            return false;
-        }
+    public int countDifferences(UnrolledProgram otherProgram) {
+        int size = Math.min(actionSets.size(), otherProgram.actionSets.size());
+        int diffCount = 0;
         for (int i = 0; i < size; i++) {
-            Set<ActionType> actions = ActionType.parse(lines.get(i));
-            Set<ActionType> otherActions = ActionType.parse(otherProgram.lines.get(i));
+            Set<ActionType> actions = actionSets.get(i);
+            Set<ActionType> otherActions = otherProgram.actionSets.get(i);
             if (!actions.equals(otherActions)) {
-                return false;
+                diffCount++;
             }
         }
-        return true;
+        return diffCount + Math.max(actionSets.size(), otherProgram.actionSets.size()) - size;
     }
 
     public int size() {
-        return lines.size();
+        return actionSets.size();
     }
 }
