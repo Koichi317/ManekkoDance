@@ -137,8 +137,9 @@ public class EvaluationActivity extends BaseActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        TextView whichBirds = (TextView) findViewById(R.id.yellow_or_orange);
-                        whichBirds.setText("きいろのひよこのばあい");
+                        TextView yellowOrOrange = (TextView) findViewById(R.id.yellow_or_orange);
+                        yellowOrOrange.setText("きいろのひよこのばあい");
+                        yellowOrOrange.setTextColor(0xFF807700);
                     }
                 });
             }
@@ -149,8 +150,9 @@ public class EvaluationActivity extends BaseActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        TextView which_birds = (TextView) findViewById(R.id.yellow_or_orange);
-                        which_birds.setText("オレンジのひよこのばあい");
+                        TextView yellowOrOrange = (TextView) findViewById(R.id.yellow_or_orange);
+                        yellowOrOrange.setText("オレンジのひよこのばあい");
+                        yellowOrOrange.setTextColor(0xFFFF3300);
 
                         FrameLayout altPiyoFrame = (FrameLayout) findViewById(R.id.alt_piyo);
                         FrameLayout altCoccoFrame = (FrameLayout) findViewById(R.id.alt_cocco);
@@ -174,19 +176,21 @@ public class EvaluationActivity extends BaseActivity {
             }
 
             int diffCount = piyoProgram.countDifferences(coccoProgram);
+            int size = coccoProgram.size();
             if (Lessons.hasIf(lessonNumber)) {
                 diffCount += altPiyoProgram.countDifferences(altCoccoProgram);
+                size += altCoccoProgram.size();
             }
             if (diffCount == 0) {
                 startCorrectAnswerActivity(lessonNumber, true);
             } else {
-                boolean almostCorrect = diffCount <= (coccoProgram.size() + altCoccoProgram.size()) / 3;
+                boolean almostCorrect = diffCount <= size / 3;
                 startWrongAnswerActivity(lessonNumber, piyoCode, diffCount, almostCorrect, true);
             }
         }
 
         private void dance(Interpreter piyoExecutor, Interpreter coccoExecutor) {
-            while (!paused && !piyoExecutor.finished() && !coccoExecutor.finished()) {
+            while (!paused && !(piyoExecutor.finished() && coccoExecutor.finished())) {
                 for (int j = 0; j < 2; j++) {
                     handler.post(piyoExecutor);
                     handler.post(coccoExecutor);
