@@ -7,13 +7,24 @@ import net.exkazuu.mimicdance.interpreter.ActionType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class UnrolledProgram {
     final List<Set<ActionType>> actionSets = new ArrayList<>();
     final List<Integer> lineIndexes = new ArrayList<>();
 
     public String getCode() {
-        return Joiner.on('\n').join(actionSets);
+        StringBuilder code = new StringBuilder();
+        String delimiter = "";
+
+        for (Set<ActionType> actionSet : actionSets) {
+            code.append(delimiter);
+            code.append(Joiner.on("").join(new TreeSet<>(actionSet)));
+            delimiter = "\n";
+        }
+
+        return code.toString();
     }
 
     public Set<ActionType> getActionSet(int lineIndex) {
