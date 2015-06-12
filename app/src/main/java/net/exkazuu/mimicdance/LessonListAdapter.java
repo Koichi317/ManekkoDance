@@ -2,8 +2,10 @@ package net.exkazuu.mimicdance;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -23,7 +25,9 @@ public class LessonListAdapter extends ArrayAdapter<String> {
             view.setBackgroundColor(Color.rgb(255, 204, 204));
         }
         TextView textView = (TextView) view;
-        textView.setTextSize(18);
+        textView.setTextSize(36);
+
+        textView.setHeight(195);
         return view;
     }
 }

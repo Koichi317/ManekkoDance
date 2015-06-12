@@ -14,19 +14,7 @@ public class TitleActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
         setContentView(R.layout.title);
-    }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                showButtons();
-                break;
-        }
-        return false;
-    }
-
-    public void showButtons() {
         Button helpButton = (Button) findViewById(R.id.help_button);
         helpButton.setVisibility(View.VISIBLE);
         Button startButton = (Button) findViewById(R.id.start_button);
@@ -34,7 +22,9 @@ public class TitleActivity extends BaseActivity {
         Button freeButton = (Button) findViewById(R.id.free_button);
         //freeButton.setVisibility(View.VISIBLE);
         freeButton.setVisibility(View.GONE);
+
     }
+
 
     public void startHelpActivity(View view) {
         startHelpActivity(false);
