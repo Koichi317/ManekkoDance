@@ -37,5 +37,11 @@
     <activity
       android:name=".activities.HelpActivity"
       android:label="@string/help"></activity>
+    <activity
+      android:name=".activities.CorrectAnswerActivity"
+      android:label="@string/correct_answer"></activity>
+    <activity
+      android:name=".activities.WrongAnswerActivity"
+      android:label="@string/wrong_answer"></activity>
   </application>
 </manifest>

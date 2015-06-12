@@ -39,6 +39,9 @@
   <string name="touch_to_start">touch to start</string>
   <string name="help">ヘルプ</string>
   <string name="back_space">1字戻る</string>
+  <string name="correct_answer">正解画面</string>
+  <string name="wrong_answer">間違い画面</string>
+
 
   <string-array name="move">
     <item>基本動作</item>

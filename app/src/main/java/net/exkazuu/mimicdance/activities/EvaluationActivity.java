@@ -181,68 +181,73 @@ public class EvaluationActivity extends BaseActivity {
                 dance(altPiyoExecutor, altCoccoExecutor, maxSize);
             }
 
-            handler.post(new Runnable() {
-                public void run() {
-                    LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                    View layout = inflater.inflate(R.layout.dialog, (ViewGroup) findViewById(R.id.alertdialog_layout));
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(EvaluationActivity.this);
-                    builder.setTitle("あなたのこたえは…？");
-                    builder.setView(layout);
-                    ImageView true_ans = (ImageView) layout.findViewById(R.id.ans_true);
-                    ImageView false_ans = (ImageView) layout.findViewById(R.id.ans_false);
-                    TextView congratulate = (TextView) layout.findViewById(R.id.congratulate);
-
-                    if (piyoProgram.semanticallyEquals(coccoProgram) && altPiyoProgram.semanticallyEquals(altCoccoProgram)) {
-                        false_ans.setVisibility(View.GONE);
-                        if (lessonNumber == MaxStage) {
-                            builder.setNegativeButton("タイトルへもどる",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(
-                                        DialogInterface dialog,
-                                        int which) {
-                                        startTitleActivity(true);
-                                    }
-                                });
-                        } else {
-                            Timer.stopTimer();
-                            builder.setNegativeButton("つぎのレッスンにすすむ",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        startCoccoActivity(
-                                            Math.min(lessonNumber + 1, Lessons.getLessonCount()), "", true);
-                                    }
-                                });
-                            builder.setNeutralButton(Timer.getResultTime(),
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
-                                }
-                            );
-                        }
-                    } else {
-                        true_ans.setVisibility(View.GONE);
-                        congratulate.setVisibility(View.GONE);
-                        builder.setPositiveButton("もういちどチャレンジ",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    startCodingActivity(lessonNumber, piyoCode, true);
-                                }
-                            });
-                        builder.setNegativeButton("べつのレッスンをえらぶ",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    startLessonListActivity(true);
-                                }
-                            });
-                    }
-                    builder.show();
-                }
-            });
+            if (piyoProgram.semanticallyEquals(coccoProgram) && altPiyoProgram.semanticallyEquals(altCoccoProgram)) {
+                startCorrectAnswerActivity(lessonNumber,true);
+            } else {
+                startWrongAnswerActivity(lessonNumber, piyoCode, true);
+            }
+//            handler.post(new Runnable() {
+//                public void run() {
+//                    LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+//                    View layout = inflater.inflate(R.layout.dialog, (ViewGroup) findViewById(R.id.alertdialog_layout));
+//
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(EvaluationActivity.this);
+//                    builder.setTitle("あなたのこたえは…？");
+//                    builder.setView(layout);
+//                    ImageView true_ans = (ImageView) layout.findViewById(R.id.ans_true);
+//                    ImageView false_ans = (ImageView) layout.findViewById(R.id.ans_false);
+//                    TextView congratulate = (TextView) layout.findViewById(R.id.congratulate);
+//
+//                    if (piyoProgram.semanticallyEquals(coccoProgram) && altPiyoProgram.semanticallyEquals(altCoccoProgram)) {
+//                        false_ans.setVisibility(View.GONE);
+//                        if (lessonNumber == MaxStage) {
+//                            builder.setNegativeButton("タイトルへもどる",
+//                                new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(
+//                                        DialogInterface dialog,
+//                                        int which) {
+//                                        startTitleActivity(true);
+//                                    }
+//                                });
+//                        } else {
+//                            Timer.stopTimer();
+//                            builder.setNegativeButton("つぎのレッスンにすすむ",
+//                                new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        startCoccoActivity(
+//                                            Math.min(lessonNumber + 1, Lessons.getLessonCount()), "", true);
+//                                    }
+//                                });
+//                            builder.setNeutralButton(Timer.getResultTime(),
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                    }
+//                                }
+//                            );
+//                        }
+//                    } else {
+//                        true_ans.setVisibility(View.GONE);
+//                        congratulate.setVisibility(View.GONE);
+//                        builder.setPositiveButton("もういちどチャレンジ",
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    startCodingActivity(lessonNumber, piyoCode, true);
+//                                }
+//                            });
+//                        builder.setNegativeButton("べつのレッスンをえらぶ",
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    startLessonListActivity(true);
+//                                }
+//                            });
+//                    }
+//                    builder.show();
+//                }
+//            });
         }
 
         private void dance(Interpreter piyoExecutor, Interpreter coccoExecutor, int maxSize) {
@@ -262,5 +267,25 @@ public class EvaluationActivity extends BaseActivity {
                 }
             }
         }
+    }
+
+
+    protected void startCorrectAnswerActivity(int lessonNumber, boolean clear) {
+        Intent intent = new Intent(this, CorrectAnswerActivity.class);
+        intent.putExtra("lessonno",lessonNumber);
+        if (clear) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
+        startActivity(intent);
+    }
+
+    protected void startWrongAnswerActivity(int lessonNumber, String piyocode, boolean clear) {
+        Intent intent = new Intent(this, WrongAnswerActivity.class);
+        intent.putExtra("lessonno",lessonNumber);
+        intent.putExtra("piyocode",piyocode);
+        if (clear) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
+        startActivity(intent);
     }
 }
