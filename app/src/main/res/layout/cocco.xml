@@ -30,7 +30,7 @@
     android:layout_weight="2.0">
 
     <FrameLayout
-      android:id="@+id/cocco"
+      android:id="@+id/altPiyo"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:layout_gravity="bottom|left"

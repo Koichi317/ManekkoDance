@@ -95,10 +95,12 @@ public class DragViewListener implements OnTouchListener {
 
     private void pushProgramTextsToLeft() {
         for (int row = 0; row < cellTexts.length; row++) {
-            for (int column = 1; column < cellTexts[0].length; column++) {
-                if (!hasIcon(row, column - 1)) {
-                    cellTexts[row][column - 1] = cellTexts[row][column];
-                    cellTexts[row][column] = "";
+            for (int maxColumn = cellTexts[0].length; maxColumn >= 2; maxColumn--) {
+                for (int column = 1; column < maxColumn; column++) {
+                    if (!hasIcon(row, column - 1)) {
+                        cellTexts[row][column - 1] = cellTexts[row][column];
+                        cellTexts[row][column] = "";
+                    }
                 }
             }
         }

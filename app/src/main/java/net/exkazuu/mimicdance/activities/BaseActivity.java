@@ -94,4 +94,36 @@ public abstract class BaseActivity extends Activity {
         }
         startActivity(intent);
     }
+
+    /**
+     * 正解画面に遷移します。
+     *
+     * @param lessonNumber
+     * @param clear
+     */
+    protected void startCorrectAnswerActivity(int lessonNumber, boolean clear) {
+        Intent intent = new Intent(this, CorrectAnswerActivity.class);
+        intent.putExtra("lessonNumber", lessonNumber);
+        if (clear) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
+        startActivity(intent);
+    }
+
+    /**
+     * 不正確画面に遷移します。
+     *
+     * @param lessonNumber
+     * @param piyoCode
+     * @param clear
+     */
+    protected void startWrongAnswerActivity(int lessonNumber, String piyoCode, boolean clear) {
+        Intent intent = new Intent(this, WrongAnswerActivity.class);
+        intent.putExtra("lessonNumber", lessonNumber);
+        intent.putExtra("piyoCode", piyoCode);
+        if (clear) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
+        startActivity(intent);
+    }
 }

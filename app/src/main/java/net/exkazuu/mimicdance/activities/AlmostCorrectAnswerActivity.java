@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import net.exkazuu.mimicdance.R;
 
-public class WrongAnswerActivity extends BaseActivity {
+public class AlmostCorrectAnswerActivity extends BaseActivity {
     AnimationDrawable altPiyoAnimation = null;
     AnimationDrawable piyoAnimation = null;
 
@@ -48,23 +48,25 @@ public class WrongAnswerActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        altPiyoAnimation.stop();
         piyoAnimation.stop();
+        altPiyoAnimation.stop();
         finish();
     }
 
     void showAltPiyoAnimation(Context con, View v) {
         altPiyoAnimation = new AnimationDrawable();
 
-        // 画像の読み込み
-        Drawable frame1 = con.getResources().getDrawable(R.drawable.alt_korobu_1);
-        Drawable frame2 = con.getResources().getDrawable(R.drawable.alt_korobu_2);
-        Drawable frame3 = con.getResources().getDrawable(R.drawable.alt_korobu_3);
+        // 画像の読み込み //
+        Drawable frame1 = con.getResources().getDrawable(R.drawable.alt_korobu_3);
+        Drawable frame2 = con.getResources().getDrawable(R.drawable.alt_korobu_1);
+        Drawable frame3 = con.getResources().getDrawable(R.drawable.alt_piyo_stand);
+        Drawable frame4 = con.getResources().getDrawable(R.drawable.alt_piyo_raising_hand);
 
         // 画像をアニメーションのコマとして追加していく
-        altPiyoAnimation.addFrame(frame1, 1000);
+        altPiyoAnimation.addFrame(frame1, 1500);
         altPiyoAnimation.addFrame(frame2, 700);
         altPiyoAnimation.addFrame(frame3, 700);
+        altPiyoAnimation.addFrame(frame4, 700);
 
         altPiyoAnimation.setOneShot(true);
 
@@ -78,15 +80,17 @@ public class WrongAnswerActivity extends BaseActivity {
     void showPiyoAnimation(Context con, View v) {
         piyoAnimation = new AnimationDrawable();
 
-        // 画像の読み込み
-        Drawable frame1 = con.getResources().getDrawable(R.drawable.korobu_1);
-        Drawable frame2 = con.getResources().getDrawable(R.drawable.korobu_2);
-        Drawable frame3 = con.getResources().getDrawable(R.drawable.korobu_3);
+        // 画像の読み込み //
+        Drawable frame1 = con.getResources().getDrawable(R.drawable.korobu_3);
+        Drawable frame2 = con.getResources().getDrawable(R.drawable.korobu_1);
+        Drawable frame3 = con.getResources().getDrawable(R.drawable.piyo_stand);
+        Drawable frame4 = con.getResources().getDrawable(R.drawable.piyo_raising_hand);
 
         // 画像をアニメーションのコマとして追加していく
-        piyoAnimation.addFrame(frame1, 1000);
+        piyoAnimation.addFrame(frame1, 1500);
         piyoAnimation.addFrame(frame2, 700);
         piyoAnimation.addFrame(frame3, 700);
+        piyoAnimation.addFrame(frame4, 700);
 
         piyoAnimation.setOneShot(true);
 
