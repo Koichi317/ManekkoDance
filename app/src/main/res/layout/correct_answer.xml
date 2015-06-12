@@ -17,22 +17,6 @@
     android:textSize="50sp"
     android:textStyle="bold" />
 
-  <TextView
-    android:id="@+id/time"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:text="0分0秒"
-    android:gravity="center_horizontal" />
-
-  <TextView
-    android:id="@+id/drag_count"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:text="0回"
-    android:gravity="center_horizontal" />
-
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"

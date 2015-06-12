@@ -33,7 +33,8 @@ public class CoccoActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Timer.startTimer();
+        Timer.start();
+        DragViewListener.reset();
 
         loadData();
         initializeScreen();

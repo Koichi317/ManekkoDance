@@ -1,10 +1,8 @@
 package net.exkazuu.mimicdance;
 
-import android.app.Application;
-
 import com.deploygate.sdk.DeployGate;
 
-public class App extends Application {
+public class App extends com.activeandroid.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();

@@ -8,9 +8,17 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.activeandroid.query.Select;
+import com.activeandroid.util.Log;
 
 import net.exkazuu.mimicdance.Lessons;
 import net.exkazuu.mimicdance.R;
+import net.exkazuu.mimicdance.Timer;
+import net.exkazuu.mimicdance.models.LessonClear;
+
+import java.util.List;
 
 public class CorrectAnswerActivity extends BaseActivity {
     AnimationDrawable coccoAnimation = null;
@@ -20,6 +28,7 @@ public class CorrectAnswerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
         setContentView(R.layout.correct_answer);
+
         final int lessonNumber = getIntent().getIntExtra("lessonNumber", 1);
         ImageView jumpCocco = (ImageView) findViewById(R.id.cocco);
         ImageView jumpPiyo = (ImageView) findViewById(R.id.piyo);
@@ -41,6 +50,12 @@ public class CorrectAnswerActivity extends BaseActivity {
                 startCoccoActivity(Math.min(lessonNumber + 1, Lessons.getLessonCount()), "", true);
             }
         });
+
+        LessonClear lessonClear = new LessonClear();
+        lessonClear.lessonNumber = lessonNumber;
+        lessonClear.milliseconds = Timer.stop();
+        lessonClear.moveCount = DragViewListener.getMoveCount();
+        lessonClear.save();
     }
 
     @Override

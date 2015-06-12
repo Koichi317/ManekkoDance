@@ -21,6 +21,7 @@ public class DragViewListener implements OnTouchListener {
     private int oldY;
     private int initLeft;
     private int initTop;
+    private static int moveCount;
 
     public DragViewListener(Activity activity, ImageView[][] cellIcons, String[][] cellTexts) {
         this.activity = activity;
@@ -174,6 +175,14 @@ public class DragViewListener implements OnTouchListener {
             public void onAnimationRepeat(Animation animation) {
             }
         });
+    }
+
+    public static int getMoveCount() {
+        return moveCount;
+    }
+
+    public static void reset() {
+        moveCount = 0;
     }
 
     private static class Location {
