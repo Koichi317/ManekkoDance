@@ -182,7 +182,7 @@ public class EvaluationActivity extends BaseActivity {
                 size += altCoccoProgram.size();
             }
             if (diffCount == 0) {
-                startCorrectAnswerActivity(lessonNumber, true);
+                startCorrectAnswerActivity(lessonNumber, piyoCode,true);
             } else {
                 boolean almostCorrect = diffCount <= size / 3;
                 startWrongAnswerActivity(lessonNumber, piyoCode, diffCount, almostCorrect, true);

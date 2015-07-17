@@ -101,9 +101,10 @@ public abstract class BaseActivity extends Activity {
      * @param lessonNumber
      * @param clear
      */
-    protected void startCorrectAnswerActivity(int lessonNumber, boolean clear) {
+    protected void startCorrectAnswerActivity(int lessonNumber, String piyoCode, boolean clear) {
         Intent intent = new Intent(this, CorrectAnswerActivity.class);
         intent.putExtra("lessonNumber", lessonNumber);
+        intent.putExtra("piyoCode", piyoCode);
         if (clear) {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }

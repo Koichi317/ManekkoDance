@@ -65,6 +65,7 @@ public class Interpreter implements Runnable {
                 pose.change(actions);
                 charaViewSet.changeToMovingImages(actions);
                 if (isPiyo) {
+                    //イヤホンの接続が感知されているときのみhandleDanboを実行すればいい
                     handleDanbo();
                     handleBear(actions);
                 }
