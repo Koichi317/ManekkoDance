@@ -1,6 +1,9 @@
 package net.exkazuu.mimicdance.interpreter;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.text.Html;
 import android.util.Log;
@@ -8,6 +11,7 @@ import android.widget.TextView;
 
 import net.exkazuu.mimicdance.CharacterImageViewSet;
 import net.exkazuu.mimicdance.R;
+import net.exkazuu.mimicdance.activities.PlugStateChangeReceiver;
 import net.exkazuu.mimicdance.program.UnrolledProgram;
 
 import java.util.Collection;
@@ -28,6 +32,10 @@ public class Interpreter implements Runnable {
     private boolean failed;
     private MediaPlayer playerForHandlingDanbo;
     private String bearCommand;
+
+    private static IntentFilter plugIntentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+    private static BroadcastReceiver plugStateChangeReceiver = null;
+
 
     public static Interpreter createForPiyo(UnrolledProgram program, CharacterImageViewSet charaViewSet, TextView textView, Context context) {
         return new Interpreter(program, charaViewSet, textView, context, true);
@@ -51,11 +59,9 @@ public class Interpreter implements Runnable {
     public void run() {
         if (executionCount < WAITING_COUNT) {
             charaViewSet.changeToInitialImages();
-        }
-        else if (finished()) {
+        } else if (finished()) {
             return;
-        }
-        else if (isMoving()) {
+        } else if (isMoving()) {
             if (isPiyo) {
                 highlightLine();
             }
@@ -65,7 +71,6 @@ public class Interpreter implements Runnable {
                 pose.change(actions);
                 charaViewSet.changeToMovingImages(actions);
                 if (isPiyo) {
-                    //イヤホンの接続が感知されているときのみhandleDanboを実行すればいい
                     handleDanbo();
                     handleBear(actions);
                 }
@@ -82,6 +87,10 @@ public class Interpreter implements Runnable {
             }
         }
         executionCount++;
+    }
+
+    public void finish() {
+        stopDanbo();
     }
 
     public boolean finished() {
@@ -116,9 +125,10 @@ public class Interpreter implements Runnable {
     }
 
     private void handleDanbo() {
-        if (playerForHandlingDanbo != null) {
-            playerForHandlingDanbo.stop();
+        if (!PlugStateChangeReceiver.isPlagged()) {
+            return;
         }
+        stopDanbo();
         if (pose.isLeftHandUp()) {
             if (pose.isRightHandUp()) {
                 playerForHandlingDanbo = MediaPlayer.create(context, R.raw.danbo_luru);
@@ -133,6 +143,12 @@ public class Interpreter implements Runnable {
             }
         }
         playerForHandlingDanbo.start();
+    }
+
+    private void stopDanbo() {
+        if (playerForHandlingDanbo != null) {
+            playerForHandlingDanbo.stop();
+        }
     }
 
     private void handleBear(Collection<ActionType> actions) {
@@ -163,5 +179,7 @@ public class Interpreter implements Runnable {
         }
         new BearHandlingTask(bearCommand).execute();
     }
+
+
 }
 

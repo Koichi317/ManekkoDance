@@ -132,4 +132,17 @@ public abstract class BaseActivity extends Activity {
         }
         startActivity(intent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PlugStateChangeReceiver.register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        PlugStateChangeReceiver.unregister(this);
+    }
+
 }
