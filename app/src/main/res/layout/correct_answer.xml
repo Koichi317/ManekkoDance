@@ -30,14 +30,22 @@
       android:layout_height="150dp"
       android:layout_marginLeft="110dp"
       android:layout_marginRight="30dp"
+<<<<<<< HEAD
       android:layout_marginTop="220dp" />
+=======
+      android:layout_marginTop="250dp" />
+>>>>>>> 160c6ade08859e605e5391aed5fa7db0fc5a187e
 
     <ImageView
       android:id="@+id/piyo"
       android:layout_width="150dp"
       android:layout_height="150dp"
       android:layout_marginLeft="50dp"
+<<<<<<< HEAD
       android:layout_marginTop="220dp" />
+=======
+      android:layout_marginTop="250dp" />
+>>>>>>> 160c6ade08859e605e5391aed5fa7db0fc5a187e
   </LinearLayout>
 
   <Button

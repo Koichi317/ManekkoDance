@@ -137,24 +137,24 @@ public class Interpreter implements Runnable {
 
     private void handleBear(Collection<ActionType> actions) {
         if (actions.contains(ActionType.LeftHandDown)) {
-            bearCommand += "lau";
-        } else if (actions.contains(ActionType.LeftHandUp)) {
             bearCommand = bearCommand.replace("lau", "");
+        } else if (actions.contains(ActionType.LeftHandUp)) {
+            bearCommand += "lau";
         }
         if (actions.contains(ActionType.RightHandDown)) {
-            bearCommand += "rau";
-        } else if (actions.contains(ActionType.RightHandUp)) {
             bearCommand = bearCommand.replace("rau", "");
+        } else if (actions.contains(ActionType.RightHandUp)) {
+            bearCommand += "rau";
         }
         if (actions.contains(ActionType.LeftFootDown)) {
-            bearCommand += "llu";
-        } else if (actions.contains(ActionType.LeftFootUp)) {
             bearCommand = bearCommand.replace("llu", "");
+        } else if (actions.contains(ActionType.LeftFootUp)) {
+            bearCommand += "llu";
         }
         if (actions.contains(ActionType.RightFootDown)) {
-            bearCommand += "rlu";
-        } else if (actions.contains(ActionType.RightFootUp)) {
             bearCommand = bearCommand.replace("rlu", "");
+        } else if (actions.contains(ActionType.RightFootUp)) {
+            bearCommand += "rlu";
         }
         if (actions.contains(ActionType.Jump)) {
             bearCommand += "jump";
