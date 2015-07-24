@@ -28,7 +28,7 @@ public class PlugStateChangeReceiver extends BroadcastReceiver {
         activity.unregisterReceiver(getInstance());
     }
 
-    public static boolean isPlagged() {
+    public static boolean isPlugged() {
         return isPlugged;
     }
 

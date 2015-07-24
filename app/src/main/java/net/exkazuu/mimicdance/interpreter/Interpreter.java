@@ -125,7 +125,7 @@ public class Interpreter implements Runnable {
     }
 
     private void handleDanbo() {
-        if (!PlugStateChangeReceiver.isPlagged()) {
+        if (!PlugStateChangeReceiver.isPlugged()) {
             return;
         }
         stopDanbo();
