@@ -55,5 +55,5 @@ dependencies {
     compile 'com.deploygate:sdk:3.+'
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
     testCompile 'junit:junit:4.+'
-    testCompile 'org.robolectric:robolectric:3.+'
+    testCompile 'org.robolectric:robolectric:3.0'
 }
