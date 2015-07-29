@@ -1,12 +1,8 @@
 package net.exkazuu.mimicdance.activities;
 
-import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -21,13 +17,6 @@ import java.util.List;
 
 public class TitleActivity extends BaseActivity {
 
-//    private static IntentFilter plugIntentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-//    private static BroadcastReceiver plugStateChangeReceiver = null;
-//
-//    boolean isPlugged = false;
-//    AlertDialog.Builder alert;
-
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
@@ -37,48 +26,9 @@ public class TitleActivity extends BaseActivity {
         helpButton.setVisibility(View.VISIBLE);
         Button startButton = (Button) findViewById(R.id.start_button);
         startButton.setVisibility(View.VISIBLE);
-        Button freeButton = (Button) findViewById(R.id.free_button);
-        //freeButton.setVisibility(View.VISIBLE);
-        freeButton.setVisibility(View.GONE);
 
         copyDatabaseToClipboard();
-
-
-//        plugStateChangeReceiver = new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//                // plug状態を取得
-//                if (intent.getIntExtra("state", 0) > 0) {
-//                    isPlugged = true;
-//                } else isPlugged = false;
-//
-//                // plug状態でメッセージを変更。
-//                if (isPlugged) {
-//                    // ヘッドセットが挿された
-////                    alert.setTitle("Headset inserted.");
-////                    alert.show();
-//                } else {
-//                    // ヘッドセットが抜かれた
-////                    alert.setTitle("Headset はずす.");
-////                    alert.show();
-//                }
-//            }
-//        };
-
-
     }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        registerReceiver(plugStateChangeReceiver, plugIntentFilter);
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        unregisterReceiver(plugStateChangeReceiver);
-//    }
 
     private void copyDatabaseToClipboard() {
         StringBuilder builder = new StringBuilder();
@@ -93,20 +43,54 @@ public class TitleActivity extends BaseActivity {
         clipboard.setPrimaryClip(clip);
     }
 
-
     public void startHelpActivity(View view) {
         startHelpActivity(false);
     }
 
     public void startLessonListActivity(View view) {
-//        alert = new AlertDialog.Builder(this);
-//        if (isPlugged) alert.setTitle("刺さってる");
-//        else alert.setTitle("刺さってない");
-//        alert.show();
-
         startLessonListActivity(true);
     }
 
     public void freePlay(View view) {
     }
+
+//    private PwmMotorController controller = new PwmMotorController(50000, 50, 1.5, 1.5);
+//
+//    @Override
+//    protected void onPause() {
+//        controller.release();
+//        super.onPause();
+//    }
+//
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//            case MotionEvent.ACTION_MOVE:
+//                WindowManager wm = getWindowManager();
+//                Display disp = wm.getDefaultDisplay();
+//                Point size = new Point();
+//                disp.getSize(size);
+//                double leftPulseMilliseconds = 0.5 + ((double) event.getX() / size.x) * 2;
+//                double rightPulseMilliseconds = 0.5 + ((double) event.getY() / size.y) * 2;
+//                controller.setLeftPulseMilliseconds(leftPulseMilliseconds);
+//                controller.setRightPulseMilliseconds(rightPulseMilliseconds);
+//                short[] buffer = controller.generatePwmData();
+//                int count = 0;
+//                for (short v : buffer) {
+//                    if (v == Short.MAX_VALUE) {
+//                        count++;
+//                    }
+//                }
+//                ((TextView) findViewById(R.id.txtPulseLength)).setText("Left: " + leftPulseMilliseconds);
+//                ((TextView) findViewById(R.id.txtFrequency)).setText("Right: " + rightPulseMilliseconds);
+//                ((TextView) findViewById(R.id.txtCheck)).setText("Check: " + count);
+//                controller.play();
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                controller.stop();
+//                break;
+//        }
+//        return super.onTouchEvent(event);
+//    }
 }

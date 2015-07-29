@@ -1,17 +1,13 @@
 package net.exkazuu.mimicdance.interpreter;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.media.MediaPlayer;
 import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
 
 import net.exkazuu.mimicdance.CharacterImageViewSet;
-import net.exkazuu.mimicdance.R;
 import net.exkazuu.mimicdance.activities.PlugStateChangeReceiver;
+import net.exkazuu.mimicdance.controller.PwmMotorController;
 import net.exkazuu.mimicdance.program.UnrolledProgram;
 
 import java.util.Collection;
@@ -22,7 +18,6 @@ public class Interpreter implements Runnable {
     public static final int WAITING_COUNT = 2;
     private final UnrolledProgram program;
     private final CharacterImageViewSet charaViewSet;
-    private final Context context;
     private final TextView textView;
     private final boolean isPiyo;
     private final Pose pose;
@@ -30,12 +25,8 @@ public class Interpreter implements Runnable {
     private Set<ActionType> actions;
     private int executionCount;
     private boolean failed;
-    private MediaPlayer playerForHandlingDanbo;
+    private PwmMotorController danboController;
     private String bearCommand;
-
-    private static IntentFilter plugIntentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-    private static BroadcastReceiver plugStateChangeReceiver = null;
-
 
     public static Interpreter createForPiyo(UnrolledProgram program, CharacterImageViewSet charaViewSet, TextView textView, Context context) {
         return new Interpreter(program, charaViewSet, textView, context, true);
@@ -49,7 +40,6 @@ public class Interpreter implements Runnable {
         this.program = program;
         this.charaViewSet = charaViewSet;
         this.textView = textView;
-        this.context = context;
         this.isPiyo = isPiyo;
         this.pose = new Pose();
         this.bearCommand = "";
@@ -90,7 +80,9 @@ public class Interpreter implements Runnable {
     }
 
     public void finish() {
-        stopDanbo();
+        if (danboController != null) {
+            danboController.release();
+        }
     }
 
     public boolean finished() {
@@ -128,27 +120,13 @@ public class Interpreter implements Runnable {
         if (!PlugStateChangeReceiver.isPlugged()) {
             return;
         }
-        stopDanbo();
-        if (pose.isLeftHandUp()) {
-            if (pose.isRightHandUp()) {
-                playerForHandlingDanbo = MediaPlayer.create(context, R.raw.danbo_luru);
-            } else {
-                playerForHandlingDanbo = MediaPlayer.create(context, R.raw.danbo_lu);
-            }
-        } else {
-            if (pose.isRightHandUp()) {
-                playerForHandlingDanbo = MediaPlayer.create(context, R.raw.danbo_ru);
-            } else {
-                playerForHandlingDanbo = MediaPlayer.create(context, R.raw.danbo_c);
-            }
+        if (danboController == null) {
+            danboController = new PwmMotorController(50000, 50);
+            danboController.play();
         }
-        playerForHandlingDanbo.start();
-    }
-
-    private void stopDanbo() {
-        if (playerForHandlingDanbo != null) {
-            playerForHandlingDanbo.stop();
-        }
+        double left = pose.isLeftHandUp() ? 2.5 : 0.5;
+        double right = pose.isRightHandUp() ? 2.5 : 0.5;
+        danboController.setPulseMilliseconds(left, right);
     }
 
     private void handleBear(Collection<ActionType> actions) {
@@ -179,7 +157,4 @@ public class Interpreter implements Runnable {
         }
         new BearHandlingTask(bearCommand).execute();
     }
-
-
 }
-
