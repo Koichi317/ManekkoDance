@@ -42,36 +42,39 @@
     android:visibility="gone" />
 
   <TextView
+    android:id="@+id/txtPulseLength"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceSmall"
-    android:text="Small Text"
-    android:id="@+id/txtPulseLength"
     android:layout_above="@id/free_button"
     android:layout_alignLeft="@id/free_button"
     android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true" />
+    android:layout_alignParentStart="true"
+    android:text="Small Text"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:visibility="gone" />
 
   <TextView
+    android:id="@+id/txtFrequency"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceSmall"
-    android:text="Small Text"
-    android:id="@+id/txtFrequency"
     android:layout_above="@id/txtPulseLength"
     android:layout_alignLeft="@id/txtPulseLength"
     android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true" />
+    android:layout_alignParentStart="true"
+    android:text="Small Text"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:visibility="gone" />
 
   <TextView
+    android:id="@+id/txtCheck"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceSmall"
-    android:text="Small Text"
-    android:id="@+id/txtCheck"
     android:layout_above="@id/txtFrequency"
     android:layout_alignLeft="@id/txtFrequency"
     android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true" />
+    android:layout_alignParentStart="true"
+    android:text="Small Text"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:visibility="gone" />
 
 </RelativeLayout>
