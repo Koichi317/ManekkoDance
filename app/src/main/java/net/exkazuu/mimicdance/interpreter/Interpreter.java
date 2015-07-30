@@ -80,14 +80,16 @@ public class Interpreter implements Runnable {
     }
 
     public void finish() {
-        pose.reset();
-        handleDanbo();
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-        }
-        if (danboController != null) {
-            danboController.release();
+        if (isPiyo) {
+            pose.reset();
+            handleDanbo();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+            if (danboController != null) {
+                danboController.release();
+            }
         }
     }
 

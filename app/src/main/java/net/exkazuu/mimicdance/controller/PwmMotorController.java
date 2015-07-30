@@ -3,6 +3,7 @@ package net.exkazuu.mimicdance.controller;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.util.Log;
 
 public class PwmMotorController {
     private static final int channelConfig = AudioFormat.CHANNEL_OUT_STEREO;
@@ -101,6 +102,7 @@ public class PwmMotorController {
         originalLeftPulseLength = (int) (sampleRate * leftPulseMilliseconds / 1000);
         originalRightPulseLength = (int) (sampleRate * rightPulseMilliseconds / 1000);
         reset();
+        Log.d("sound", "left: " + leftPulseMilliseconds + ", right: " + rightPulseMilliseconds);
     }
 
     public void setLeftPulseMilliseconds(double pulseMilliseconds) {
