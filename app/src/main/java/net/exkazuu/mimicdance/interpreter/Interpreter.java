@@ -124,8 +124,8 @@ public class Interpreter implements Runnable {
             danboController = new PwmMotorController(50000, 50);
             danboController.play();
         }
-        double left = pose.isLeftHandUp() ? 2.5 : 0.5;
-        double right = pose.isRightHandUp() ? 2.5 : 0.5;
+        double left = pose.isLeftHandUp() ? 0.5 : 1.5;
+        double right = pose.isRightHandUp() ? 2.5 : 1.5;
         danboController.setPulseMilliseconds(left, right);
     }
 

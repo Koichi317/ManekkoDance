@@ -17,6 +17,7 @@ import java.util.List;
 
 public class TitleActivity extends BaseActivity {
 
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
@@ -28,7 +29,9 @@ public class TitleActivity extends BaseActivity {
         startButton.setVisibility(View.VISIBLE);
 
         copyDatabaseToClipboard();
+
     }
+
 
     private void copyDatabaseToClipboard() {
         StringBuilder builder = new StringBuilder();
@@ -42,6 +45,7 @@ public class TitleActivity extends BaseActivity {
         ClipData clip = ClipData.newPlainText("simple text", builder.toString());
         clipboard.setPrimaryClip(clip);
     }
+
 
     public void startHelpActivity(View view) {
         startHelpActivity(false);
