@@ -205,6 +205,7 @@ public class EvaluationActivity extends BaseActivity {
                     break;
                 }
             }
+            coccoExecutor.finish();
             piyoExecutor.finish();
         }
     }

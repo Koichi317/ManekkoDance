@@ -80,6 +80,12 @@ public class Interpreter implements Runnable {
     }
 
     public void finish() {
+        pose.reset();
+        handleDanbo();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+        }
         if (danboController != null) {
             danboController.release();
         }
