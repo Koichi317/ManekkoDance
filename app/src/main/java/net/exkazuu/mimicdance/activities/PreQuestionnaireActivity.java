@@ -4,40 +4,36 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.RadioGroup;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 
 import net.exkazuu.mimicdance.R;
-
 import net.exkazuu.mimicdance.models.PreQuestionnaireResult;
 
-/**
- * Created by t-yokoi on 2015/07/31.
- */
 public class PreQuestionnaireActivity extends BaseActivity {
-
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
         setContentView(R.layout.pre_questionnaire);
-
     }
 
-    public void save() {
+    public void save(View view) {
         PreQuestionnaireResult result = new PreQuestionnaireResult();
-        EditText id = (EditText) findViewById(R.id.id);
-        result.id = id.getText().toString();
-        EditText age = (EditText) findViewById(R.id.age);
-        // TODO
-        SeekBar interest = (SeekBar) findViewById(R.id.interest);
+        result.examineeId = ((EditText) findViewById(R.id.examineeId)).getText().toString();
+        result.sex = ((RadioButton) findViewById(R.id.radioMale)).isChecked() ? "男" : "女";
+        try {
+            result.age = Integer.parseInt(((EditText) findViewById(R.id.age)).getText().toString());
+        } catch (Exception e) {
+        }
 
-        SeekBar fun = (SeekBar) findViewById(R.id.fun);
-        SeekBar feasibility = (SeekBar) findViewById(R.id.feasibility);
-        SeekBar useful = (SeekBar) findViewById(R.id.usefulness);
-        RadioGroup sex = (RadioGroup) findViewById(R.id.sex);
-        RadioGroup knowledgeOfProgramming = (RadioGroup) findViewById(R.id.knowledge_of_programming);
-        RadioGroup knowledgeOfMimicDance = (RadioGroup) findViewById(R.id.knowledge_of_mimicdance);
+        result.knowledgeOfProgramming = ((RadioButton) findViewById(R.id.radioYesProgramming)).isChecked();
+        result.knowledgeOfMimicDance = ((RadioButton) findViewById(R.id.radioYesMimicDance)).isChecked();
+
+        result.desireToLearn = ((SeekBar) findViewById(R.id.desireToLearn)).getProgress();
+        result.fun = ((SeekBar) findViewById(R.id.fun)).getProgress();
+        result.feasibility = ((SeekBar) findViewById(R.id.feasibility)).getProgress();
+        result.usefulness = ((SeekBar) findViewById(R.id.usefulness)).getProgress();
 
         result.save();
         startTitleActivity(true);

@@ -4,19 +4,30 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-/**
- * Created by t-yokoi on 2015/08/01.
- */
-@Table(name = "PostQuestionnaireResult")
-public class PostQuestionnaireResult extends Model{
-    @Column(name = "Id")
-    public String id;
+import java.util.Date;
 
-    @Column(name = "Opinion")
-    public String opinion;
+@Table(name = "PostQuestionnaireResult")
+public class PostQuestionnaireResult extends Model {
+    @Column(name = "Created_at")
+    public Date created_at = new Date(System.currentTimeMillis());
+
+    @Column(name = "ExamineeId")
+    public String examineeId;
 
     @Column(name = "Gladness")
     public int gladness;
+
+    @Column(name = "Vexation")
+    public int vexation;
+
+    @Column(name = "DesireToPlay")
+    public int desireToPlay;
+
+    @Column(name = "AdditionalPlayTime")
+    public int additionalPlayTime;
+
+    @Column(name = "DesireToLearn")
+    public int desireToLearn;
 
     @Column(name = "Fun")
     public int fun;
@@ -27,15 +38,6 @@ public class PostQuestionnaireResult extends Model{
     @Column(name = "Usefulness")
     public int usefulness;
 
-    @Column(name = "Vexation")
-    public int vexation;
-
-    @Column(name = "DesireToPlay")
-    public int desireToPlay;
-
-    @Column(name = "DesireToStudy")
-    public int desireToStudy;
-
-    @Column(name = "Time")
-    public String time;
+    @Column(name = "Opinion")
+    public String opinion;
 }

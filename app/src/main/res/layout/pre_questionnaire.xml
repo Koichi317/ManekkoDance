@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -13,7 +16,7 @@
     android:textSize="24sp" />
 
   <EditText
-    android:id="@+id/id"
+    android:id="@+id/examineeId"
     android:layout_width="50dp"
     android:layout_height="40dp"
     android:inputType="number" />
@@ -54,11 +57,27 @@
         android:text="女" />
     </RadioGroup>
 
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="100dp"
+      android:layout_weight="1"
+      android:text="年齢　→"
+      android:textSize="16dp" />
+
     <EditText
       android:id="@+id/age"
       android:layout_width="50dp"
       android:layout_height="40dp"
       android:inputType="number" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="10dp"
+      android:layout_weight="1"
+      android:text="歳"
+      android:textSize="16dp" />
 
   </LinearLayout>
 
@@ -78,7 +97,7 @@
     android:orientation="horizontal">
 
     <RadioButton
-      android:id="@+id/radio_yes_programming"
+      android:id="@+id/radioYesProgramming"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginRight="50dp"
@@ -109,7 +128,7 @@
     android:orientation="horizontal">
 
     <RadioButton
-      android:id="@+id/radio_yes_mimicdance"
+      android:id="@+id/radioYesMimicDance"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginRight="50dp"
@@ -148,7 +167,7 @@
       android:textSize="16dp" />
 
     <SeekBar
-      android:id="@+id/interest"
+      android:id="@+id/desireToLearn"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
@@ -321,3 +340,4 @@
       android:text="保存" />
   </LinearLayout>
 </LinearLayout>
+</ScrollView>

@@ -7,10 +7,13 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 import net.exkazuu.mimicdance.R;
 import net.exkazuu.mimicdance.models.LessonClear;
+import net.exkazuu.mimicdance.models.PostQuestionnaireResult;
+import net.exkazuu.mimicdance.models.PreQuestionnaireResult;
 
 import java.util.HashMap;
 import java.util.List;
@@ -59,22 +62,64 @@ public class TitleActivity extends BaseActivity {
     }
 
     public void uploadData() {
+        List<LessonClear> lessonClears = new Select().from(LessonClear.class).orderBy("Created_at").execute();
+        List<PreQuestionnaireResult> preQuestionnaireResults = new Select().from(PreQuestionnaireResult.class).orderBy("Created_at").execute();
+        List<PostQuestionnaireResult> postQuestionnaireResults = new Select().from(PostQuestionnaireResult.class).orderBy("Created_at").execute();
+        Log.d("upload", "lessonClears: " + lessonClears.size());
+        Log.d("upload", "preQuestionnaireResults: " + preQuestionnaireResults.size());
+        Log.d("upload", "postQuestionnaireResults: " + postQuestionnaireResults.size());
+        if (preQuestionnaireResults.size() == 0 || postQuestionnaireResults.size() == 0) {
+            return;
+        }
         try {
             Meteor meteor = new Meteor(this, "ws://mimic-dance-server.herokuapp.com/websocket");
-            List<LessonClear> lessonClears = new Select().from(LessonClear.class).orderBy("Created_at").execute();
-            String androidId = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-            for (LessonClear lessonClear : lessonClears) {
+            for (LessonClear item : lessonClears) {
                 Map<String, Object> values = new HashMap<>();
+                values.put("created_at", item.created_at);
+                values.put("examineeId", item.examineeId);
+                values.put("lessonNumber", item.lessonNumber);
+                values.put("seconds", item.milliseconds / 1000);
+                values.put("moveCount", item.moveCount);
+                meteor.insert("PlayLogs", values);
+            }
+
+            String androidId = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+            for (PreQuestionnaireResult item : preQuestionnaireResults) {
+                Map<String, Object> values = new HashMap<>();
+                values.put("created_at", item.created_at);
+                values.put("examineeId", item.examineeId);
                 values.put("androidId", androidId);
                 values.put("type", "豪華版");
-                values.put("created_at", lessonClear.created_at);
-                values.put("lessonNumber", lessonClear.lessonNumber);
-                values.put("seconds", lessonClear.milliseconds / 1000);
-                values.put("moveCount", lessonClear.moveCount);
-                meteor.insert("play-log", values);
+                values.put("sex", item.sex);
+                values.put("age", item.age);
+                values.put("knowledgeOfProgramming", item.knowledgeOfProgramming);
+                values.put("knowledgeOfMimicDance", item.knowledgeOfMimicDance);
+                values.put("desireToLearn", item.desireToLearn);
+                values.put("fun", item.fun);
+                values.put("feasibility", item.feasibility);
+                values.put("usefulness", item.usefulness);
+                meteor.insert("PreQuestionnaireResults", values);
             }
-            //new Delete().from(LessonClear.class).execute();
-            Log.d("upload", "count: " + lessonClears.size());
+
+            for (PostQuestionnaireResult item : postQuestionnaireResults) {
+                Map<String, Object> values = new HashMap<>();
+                values.put("created_at", item.created_at);
+                values.put("examineeId", item.examineeId);
+                values.put("gladness", item.gladness);
+                values.put("vexation", item.vexation);
+                values.put("desireToPlay", item.desireToPlay);
+                values.put("additionalPlayTime", item.additionalPlayTime);
+                values.put("desireToLearn", item.desireToLearn);
+                values.put("fun", item.fun);
+                values.put("feasibility", item.feasibility);
+                values.put("usefulness", item.usefulness);
+                values.put("opinion", item.opinion);
+                meteor.insert("PostQuestionnaireResults", values);
+            }
+            Log.d("upload", "uploaded");
+            new Delete().from(LessonClear.class).execute();
+            new Delete().from(PreQuestionnaireResult.class).execute();
+            new Delete().from(PostQuestionnaireResult.class).execute();
         } catch (Exception e) {
         }
     }

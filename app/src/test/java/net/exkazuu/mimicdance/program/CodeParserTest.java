@@ -50,6 +50,16 @@ public class CodeParserTest {
     }
 
     @Test
+    public void parseIncompleteIfProgram() {
+        String code = "もしもしろ\n";
+        String unrolledNormalCode = "";
+        String unrolledAltCode = "";
+        Block block = CodeParser.parse(code);
+        assertThat(block.unroll(true).getCode(), is(unrolledNormalCode));
+        assertThat(block.unroll(false).getCode(), is(unrolledAltCode));
+    }
+
+    @Test
     public void parseLoopIfProgram() {
         String code = "くりかえし2\nもしもきいろ\n左腕を上げる\nもしくは\n右腕を上げる\n右腕を下げる\nもしおわり\nここまで";
         String unrolledNormalCode = "右腕を上げる\n右腕を下げる\n右腕を上げる\n右腕を下げる";
