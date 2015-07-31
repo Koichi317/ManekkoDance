@@ -26,12 +26,21 @@ public class PreQuestionnaireActivity extends BaseActivity {
         EditText examineeId = (EditText) findViewById(R.id.examineeId);
         result.examineeId = examineeId.getText().toString();
         EditText age = (EditText) findViewById(R.id.age);
-        SeekBar interest = (SeekBar) findViewById(R.id.interest);
+        try {
+            result.age = Integer.parseInt(age.getText().toString());
+        } catch(Exception e) {
+        }
 
+        SeekBar interest = (SeekBar) findViewById(R.id.interest);
+        result.interest = interest.getProgress();
         SeekBar fun = (SeekBar) findViewById(R.id.fun);
+        result.fun = fun.getProgress();
         SeekBar feasibility = (SeekBar) findViewById(R.id.feasibility);
-        SeekBar useful = (SeekBar) findViewById(R.id.usefulness);
+        result.feasibility = feasibility.getProgress();
+        SeekBar usefulness = (SeekBar) findViewById(R.id.usefulness);
+        result.usefulness = usefulness.getProgress();
         RadioGroup sex = (RadioGroup) findViewById(R.id.sex);
+
         RadioGroup knowledgeOfProgramming = (RadioGroup) findViewById(R.id.knowledge_of_programming);
         RadioGroup knowledgeOfMimicDance = (RadioGroup) findViewById(R.id.knowledge_of_mimicdance);
 

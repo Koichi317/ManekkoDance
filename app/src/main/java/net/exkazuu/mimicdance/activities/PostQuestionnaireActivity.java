@@ -23,8 +23,8 @@ public class PostQuestionnaireActivity extends BaseActivity {
 
     public void save() {
         PostQuestionnaireResult result = new PostQuestionnaireResult();
-        EditText id = (EditText) findViewById(R.id.id);
-        result.id = id.getText().toString();
+        EditText id = (EditText) findViewById(R.id.examineeId);
+        result.examineeId = id.getText().toString();
         EditText opinion = (EditText) findViewById(R.id.opinion);
         SeekBar gladness = (SeekBar) findViewById(R.id.gladness);
         SeekBar vexation = (SeekBar) findViewById(R.id.vexation);

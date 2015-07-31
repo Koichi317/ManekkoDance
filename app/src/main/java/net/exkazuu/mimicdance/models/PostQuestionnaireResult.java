@@ -9,8 +9,8 @@ import com.activeandroid.annotation.Table;
  */
 @Table(name = "PostQuestionnaireResult")
 public class PostQuestionnaireResult extends Model{
-    @Column(name = "Id")
-    public String id;
+    @Column(name = "ExamineeId")
+    public String examineeId;
 
     @Column(name = "Opinion")
     public String opinion;
