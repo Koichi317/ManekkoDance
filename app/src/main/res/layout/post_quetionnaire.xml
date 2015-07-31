@@ -133,7 +133,7 @@
         android:textSize="16dp" />
 
       <SeekBar
-        android:id="@+id/desire_to_play"
+        android:id="@+id/desireToPlay"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -168,48 +168,48 @@
       android:orientation="vertical">
 
       <RadioGroup
-        android:id="@+id/time"
+        android:id="@+id/additionalPlayTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RadioButton
-          android:id="@+id/radioMale"
+          android:id="@+id/radioTime0"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginRight="30dp"
           android:text="0分以上～15分未満" />
 
         <RadioButton
-          android:id="@+id/radioFemale"
+          android:id="@+id/radioTime15"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginRight="30dp"
           android:text="15分以上～30分未満" />
 
         <RadioButton
-          android:id="@+id/radio_button1_3"
+          android:id="@+id/radioTime30"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginRight="30dp"
           android:text="30分以上～45分未満" />
 
         <RadioButton
-          android:id="@+id/radio_button1_4"
+          android:id="@+id/radioTime45"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginRight="30dp"
           android:text="45分以上～60分未満" />
 
         <RadioButton
-          android:id="@+id/radio_button1_5"
+          android:id="@+id/radioTime60"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginRight="30dp"
           android:text="60分以上～120分" />
 
         <RadioButton
-          android:id="@+id/radio_button1_6"
+          android:id="@+id/radioTime120"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginRight="30dp"
@@ -242,7 +242,7 @@
         android:textSize="16dp" />
 
       <SeekBar
-        android:id="@+id/desire_to_study"
+        android:id="@+id/desireToLearn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

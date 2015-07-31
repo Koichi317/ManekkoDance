@@ -12,11 +12,20 @@ public class PostQuestionnaireResult extends Model{
     @Column(name = "ExamineeId")
     public String examineeId;
 
-    @Column(name = "Opinion")
-    public String opinion;
-
     @Column(name = "Gladness")
     public int gladness;
+
+    @Column(name = "Vexation")
+    public int vexation;
+
+    @Column(name = "DesireToPlay")
+    public int desireToPlay;
+
+    @Column(name = "AdditionalPlayTime")
+    public int additionalPlayTime;
+
+    @Column(name = "DesireToLearn")
+    public int desireToLearn;
 
     @Column(name = "Fun")
     public int fun;
@@ -27,15 +36,6 @@ public class PostQuestionnaireResult extends Model{
     @Column(name = "Usefulness")
     public int usefulness;
 
-    @Column(name = "Vexation")
-    public int vexation;
-
-    @Column(name = "DesireToPlay")
-    public int desireToPlay;
-
-    @Column(name = "DesireToStudy")
-    public int desireToStudy;
-
-    @Column(name = "Time")
-    public String time;
+    @Column(name = "Opinion")
+    public String opinion;
 }

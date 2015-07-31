@@ -78,7 +78,7 @@
     android:orientation="horizontal">
 
     <RadioButton
-      android:id="@+id/radio_yes_programming"
+      android:id="@+id/radioYesProgramming"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginRight="50dp"
@@ -109,7 +109,7 @@
     android:orientation="horizontal">
 
     <RadioButton
-      android:id="@+id/radio_yes_mimicdance"
+      android:id="@+id/radioYesMimicDance"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginRight="50dp"
@@ -148,7 +148,7 @@
       android:textSize="16dp" />
 
     <SeekBar
-      android:id="@+id/interest"
+      android:id="@+id/desireToLearn"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
