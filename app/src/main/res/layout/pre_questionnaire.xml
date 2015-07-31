@@ -34,7 +34,7 @@
     android:orientation="horizontal">
 
     <RadioGroup
-      android:id="@+id/radio_group1"
+      android:id="@+id/sex"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal">
@@ -71,7 +71,7 @@
     android:textSize="24sp" />
 
   <RadioGroup
-    android:id="@+id/radio_group2"
+    android:id="@+id/know_programming"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
@@ -102,7 +102,7 @@
 
 
   <RadioGroup
-    android:id="@+id/radio_group3"
+    android:id="@+id/know_mimic"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
@@ -267,7 +267,6 @@
     android:orientation="horizontal">
 
     <TextView
-      android:id="@+id/useful"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
@@ -277,6 +276,7 @@
       android:textSize="16dp" />
 
     <SeekBar
+      android:id="@+id/useful"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
