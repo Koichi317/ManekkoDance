@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 import net.exkazuu.mimicdance.R;
@@ -116,9 +117,9 @@ public class TitleActivity extends BaseActivity {
                 meteor.insert("PostQuestionnaireResults", values);
             }
             Log.d("upload", "uploaded");
-            //new Delete().from(LessonClear.class).execute();
-            //new Delete().from(PreQuestionnaireResult.class).execute();
-            //new Delete().from(PostQuestionnaireResult.class).execute();
+            new Delete().from(LessonClear.class).execute();
+            new Delete().from(PreQuestionnaireResult.class).execute();
+            new Delete().from(PostQuestionnaireResult.class).execute();
         } catch (Exception e) {
         }
     }
