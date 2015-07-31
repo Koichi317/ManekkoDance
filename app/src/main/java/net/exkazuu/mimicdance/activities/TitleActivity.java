@@ -30,6 +30,10 @@ public class TitleActivity extends BaseActivity {
         startButton.setVisibility(View.VISIBLE);
         Button freeButton = (Button) findViewById(R.id.free_button);
         freeButton.setVisibility(View.GONE);
+        Button preButton = (Button) findViewById(R.id.pre_ques_button);
+        preButton.setVisibility(View.VISIBLE);
+        Button postButton = (Button) findViewById(R.id.post_ques_button);
+        postButton.setVisibility(View.VISIBLE);
 
         copyDatabaseToClipboard();
     }
@@ -55,6 +59,15 @@ public class TitleActivity extends BaseActivity {
     public void startLessonListActivity(View view) {
         startLessonListActivity(true);
     }
+
+    public void startPreQuestionnaireActivity(View view) {
+        startPreQuestionnaireActivity(false);
+    }
+
+    public void startPostQuestionnaireActivity(View view) {
+        startPostQuestionnaireActivity(false);
+    }
+
 
     public void freePlay(View view) {
         controller.play();
