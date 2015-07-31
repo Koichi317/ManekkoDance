@@ -5,14 +5,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 
-import net.exkazuu.mimicdance.Lessons;
 import net.exkazuu.mimicdance.R;
-import net.exkazuu.mimicdance.Timer;
-import net.exkazuu.mimicdance.models.LessonClear;
 
 /**
  * Created by t-yokoi on 2015/07/31.
@@ -28,12 +24,12 @@ public class PreQuestionnaireActivity extends BaseActivity {
         EditText id = (EditText) findViewById(R.id.id);
         EditText age = (EditText) findViewById(R.id.age);
         SeekBar interest = (SeekBar) findViewById(R.id.interest);
-        SeekBar enjoyable = (SeekBar) findViewById(R.id.enjoyable);
-        SeekBar dekisou = (SeekBar) findViewById(R.id.dekisou);
-        SeekBar useful = (SeekBar) findViewById(R.id.useful);
+        SeekBar fun = (SeekBar) findViewById(R.id.fun);
+        SeekBar feasibility = (SeekBar) findViewById(R.id.feasibility);
+        SeekBar useful = (SeekBar) findViewById(R.id.usefulness);
         RadioGroup sex = (RadioGroup) findViewById(R.id.sex);
-        RadioGroup knowProg = (RadioGroup) findViewById(R.id.know_programming);
-        RadioGroup knowMimic = (RadioGroup) findViewById(R.id.know_mimic);
+        RadioGroup knowledgeOfProgramming = (RadioGroup) findViewById(R.id.know_programming);
+        RadioGroup knowledgeOfMimicDance = (RadioGroup) findViewById(R.id.know_mimic);
 
 
         Button sendButton = (Button) findViewById(R.id.send_button);

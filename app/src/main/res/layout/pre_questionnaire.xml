@@ -191,7 +191,7 @@
       android:textSize="16dp" />
 
     <SeekBar
-      android:id="@+id/enjoyable"
+      android:id="@+id/fun"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginLeft="10dp"
@@ -233,7 +233,7 @@
       android:textSize="16dp" />
 
     <SeekBar
-      android:id="@+id/dekisou"
+      android:id="@+id/feasibility"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
@@ -276,7 +276,7 @@
       android:textSize="16dp" />
 
     <SeekBar
-      android:id="@+id/useful"
+      android:id="@+id/usefulness"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
