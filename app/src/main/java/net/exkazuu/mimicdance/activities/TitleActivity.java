@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -27,7 +28,11 @@ public class TitleActivity extends BaseActivity {
         Button startButton = (Button) findViewById(R.id.start_button);
         startButton.setVisibility(View.VISIBLE);
         Button freeButton = (Button) findViewById(R.id.free_button);
-        freeButton.setVisibility(View.VISIBLE);
+        freeButton.setVisibility(View.GONE);
+        Button preButton = (Button) findViewById(R.id.pre_ques_button);
+        preButton.setVisibility(View.VISIBLE);
+        Button postButton = (Button) findViewById(R.id.post_ques_button);
+        postButton.setVisibility(View.VISIBLE);
 
         copyDatabaseToClipboard();
     }
@@ -35,8 +40,9 @@ public class TitleActivity extends BaseActivity {
     private void copyDatabaseToClipboard() {
         StringBuilder builder = new StringBuilder();
         List<LessonClear> lessonClears = new Select().from(LessonClear.class).orderBy("Created_at").execute();
+        String number = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         for (LessonClear clear : lessonClears) {
-            builder.append(clear.created_at + ", " + clear.lessonNumber + ", " + clear.milliseconds / 1000 + ", " + clear.moveCount);
+            builder.append(number + ", " + clear.created_at + ", " + clear.lessonNumber + ", " + clear.milliseconds / 1000 + ", " + clear.moveCount);
             builder.append('\n');
         }
 
@@ -52,6 +58,15 @@ public class TitleActivity extends BaseActivity {
     public void startLessonListActivity(View view) {
         startLessonListActivity(true);
     }
+
+    public void startPreQuestionnaireActivity(View view) {
+        startPreQuestionnaireActivity(false);
+    }
+
+    public void startPostQuestionnaireActivity(View view) {
+        startPostQuestionnaireActivity(false);
+    }
+
 
     public void freePlay(View view) {
     }
