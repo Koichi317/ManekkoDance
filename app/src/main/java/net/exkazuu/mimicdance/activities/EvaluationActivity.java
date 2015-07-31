@@ -184,7 +184,7 @@ public class EvaluationActivity extends BaseActivity {
             if (diffCount == 0) {
                 startCorrectAnswerActivity(lessonNumber, piyoCode, true);
             } else {
-                boolean almostCorrect = false; //TODO: diffCount <= size / 3;
+                boolean almostCorrect = diffCount <= size / 3;
                 startWrongAnswerActivity(lessonNumber, piyoCode, diffCount, almostCorrect, true);
             }
         }
