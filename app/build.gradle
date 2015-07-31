@@ -27,7 +27,6 @@ android {
     packagingOptions {
         exclude 'META-INF/ASL2.0'
         exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE'
     }
     testOptions.unitTests.all {
@@ -57,7 +56,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.google.gdata:core:1.47.1'
     compile 'com.google.guava:guava:18.+'
     compile 'com.deploygate:sdk:3.+'
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
