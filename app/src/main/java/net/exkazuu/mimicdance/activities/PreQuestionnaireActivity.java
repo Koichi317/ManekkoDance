@@ -39,9 +39,6 @@ public class PreQuestionnaireActivity extends BaseActivity {
         RadioGroup knowledgeOfProgramming = (RadioGroup) findViewById(R.id.knowledge_of_programming);
         RadioGroup knowledgeOfMimicDance = (RadioGroup) findViewById(R.id.knowledge_of_mimicdance);
 
-
-
-
         result.save();
         startTitleActivity(true);
     }

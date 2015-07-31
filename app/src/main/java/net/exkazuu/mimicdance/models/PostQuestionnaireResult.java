@@ -1,5 +1,6 @@
 package net.exkazuu.mimicdance.models;
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
@@ -7,7 +8,7 @@ import com.activeandroid.annotation.Table;
  * Created by t-yokoi on 2015/08/01.
  */
 @Table(name = "PostQuestionnaireResult")
-public class PostQuestionnaireResult {
+public class PostQuestionnaireResult extends Model{
     @Column(name = "Id")
     public String id;
 
