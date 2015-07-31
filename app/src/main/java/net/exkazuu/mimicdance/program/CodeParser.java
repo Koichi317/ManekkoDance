@@ -72,7 +72,7 @@ public class CodeParser {
     }
 
     private static boolean readCondition(String conditionString) {
-        return !conditionString.contains("茶");
+        return !conditionString.contains("きいろ");
     }
 
     private static boolean contains(String line, String[] endLineTokens) {
