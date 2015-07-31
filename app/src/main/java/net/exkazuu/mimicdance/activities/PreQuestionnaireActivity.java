@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.RadioGroup;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 
 import net.exkazuu.mimicdance.R;
@@ -23,26 +23,20 @@ public class PreQuestionnaireActivity extends BaseActivity {
 
     public void save() {
         PreQuestionnaireResult result = new PreQuestionnaireResult();
-        EditText examineeId = (EditText) findViewById(R.id.examineeId);
-        result.examineeId = examineeId.getText().toString();
-        EditText age = (EditText) findViewById(R.id.age);
+        result.examineeId = ((EditText) findViewById(R.id.examineeId)).getText().toString();
+        result.sex = ((RadioButton) findViewById(R.id.radioMale)).isChecked() ? "男" : "女";
         try {
-            result.age = Integer.parseInt(age.getText().toString());
-        } catch(Exception e) {
+            result.age = Integer.parseInt(((EditText) findViewById(R.id.age)).getText().toString());
+        } catch (Exception e) {
         }
 
-        SeekBar interest = (SeekBar) findViewById(R.id.interest);
-        result.interest = interest.getProgress();
-        SeekBar fun = (SeekBar) findViewById(R.id.fun);
-        result.fun = fun.getProgress();
-        SeekBar feasibility = (SeekBar) findViewById(R.id.feasibility);
-        result.feasibility = feasibility.getProgress();
-        SeekBar usefulness = (SeekBar) findViewById(R.id.usefulness);
-        result.usefulness = usefulness.getProgress();
-        RadioGroup sex = (RadioGroup) findViewById(R.id.sex);
+        result.knowledgeOfProgramming = ((RadioButton) findViewById(R.id.radioYesProgramming)).isChecked();
+        result.knowledgeOfMimicDance = ((RadioButton) findViewById(R.id.radioYesMimicDance)).isChecked();
 
-        RadioGroup knowledgeOfProgramming = (RadioGroup) findViewById(R.id.knowledge_of_programming);
-        RadioGroup knowledgeOfMimicDance = (RadioGroup) findViewById(R.id.knowledge_of_mimicdance);
+        result.desireToLearn = ((SeekBar) findViewById(R.id.desireToLearn)).getProgress();
+        result.fun = ((SeekBar) findViewById(R.id.fun)).getProgress();
+        result.feasibility = ((SeekBar) findViewById(R.id.feasibility)).getProgress();
+        result.usefulness = ((SeekBar) findViewById(R.id.usefulness)).getProgress();
 
         result.save();
         startTitleActivity(true);

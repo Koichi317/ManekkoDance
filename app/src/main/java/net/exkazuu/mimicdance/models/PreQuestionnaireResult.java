@@ -9,11 +9,20 @@ public class PreQuestionnaireResult extends Model {
     @Column(name = "ExamineeId")
     public String examineeId;
 
+    @Column(name = "Sex")
+    public String sex;
+
     @Column(name = "Age")
     public int age;
 
-    @Column(name = "Interest")
-    public int interest;
+    @Column(name = "KnowledgeOfProgramming")
+    public boolean knowledgeOfProgramming;
+
+    @Column(name = "KnowledgeOfMimicDance")
+    public boolean knowledgeOfMimicDance;
+
+    @Column(name = "DesireToLearn")
+    public int desireToLearn;
 
     @Column(name = "Fun")
     public int fun;
@@ -23,14 +32,5 @@ public class PreQuestionnaireResult extends Model {
 
     @Column(name = "Usefulness")
     public int usefulness;
-
-    @Column(name = "Sex")
-    public String sex;
-
-    @Column(name = "KnowledgeOfProgramming")
-    public String knowledgeOfProgramming;
-
-    @Column(name = "KnowledgeOfMimicDance")
-    public String knowledgeOfMimicDance;
 }
 
