@@ -64,6 +64,7 @@ public class CorrectAnswerActivity extends BaseActivity {
         lessonClear.milliseconds = Timer.stop();
         lessonClear.moveCount = DragViewListener.getMoveCount();
         lessonClear.save();
+        DragViewListener.reset();
     }
 
     @Override

@@ -28,7 +28,7 @@ public class TitleActivity extends BaseActivity {
         Button startButton = (Button) findViewById(R.id.start_button);
         startButton.setVisibility(View.VISIBLE);
         Button freeButton = (Button) findViewById(R.id.free_button);
-        freeButton.setVisibility(View.VISIBLE);
+        freeButton.setVisibility(View.GONE);
 
         copyDatabaseToClipboard();
     }
