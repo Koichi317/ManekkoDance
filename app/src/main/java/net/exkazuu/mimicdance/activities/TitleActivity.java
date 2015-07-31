@@ -11,7 +11,6 @@ import android.widget.Button;
 import com.activeandroid.query.Select;
 
 import net.exkazuu.mimicdance.R;
-import net.exkazuu.mimicdance.controller.PwmMotorController;
 import net.exkazuu.mimicdance.models.LessonClear;
 
 import java.util.List;
@@ -55,20 +54,9 @@ public class TitleActivity extends BaseActivity {
     }
 
     public void freePlay(View view) {
-        controller.play();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-        }
-        controller.setPulseMilliseconds(2.5, 0.5);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-        }
-        controller.release();
     }
 
-    private PwmMotorController controller = new PwmMotorController(50000, 50, 1.5, 1.5);
+//    private PwmMotorController controller = new PwmMotorController(50000, 50, 1.5, 1.5);
 //
 //    @Override
 //    protected void onPause() {
