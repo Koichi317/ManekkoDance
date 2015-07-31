@@ -174,14 +174,14 @@
         android:orientation="vertical">
 
         <RadioButton
-          android:id="@+id/radio_button1_1"
+          android:id="@+id/radioMale"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginRight="30dp"
           android:text="0分以上～15分未満" />
 
         <RadioButton
-          android:id="@+id/radio_button1_2"
+          android:id="@+id/radioFemale"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginRight="30dp"

@@ -3,12 +3,13 @@ package net.exkazuu.mimicdance.activities;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 
 import net.exkazuu.mimicdance.R;
+
+import net.exkazuu.mimicdance.models.PreQuestionnaireResult;
 
 /**
  * Created by t-yokoi on 2015/07/31.
@@ -21,32 +22,32 @@ public class PreQuestionnaireActivity extends BaseActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
         setContentView(R.layout.pre_questionnaire);
 
+    }
+
+    public void save() {
+        PreQuestionnaireResult result = new PreQuestionnaireResult();
         EditText id = (EditText) findViewById(R.id.id);
+        result.id = id.getText().toString();
         EditText age = (EditText) findViewById(R.id.age);
+        // TODO
         SeekBar interest = (SeekBar) findViewById(R.id.interest);
+
         SeekBar fun = (SeekBar) findViewById(R.id.fun);
         SeekBar feasibility = (SeekBar) findViewById(R.id.feasibility);
         SeekBar useful = (SeekBar) findViewById(R.id.usefulness);
         RadioGroup sex = (RadioGroup) findViewById(R.id.sex);
-        RadioGroup knowledgeOfProgramming = (RadioGroup) findViewById(R.id.know_programming);
-        RadioGroup knowledgeOfMimicDance = (RadioGroup) findViewById(R.id.know_mimic);
+        RadioGroup knowledgeOfProgramming = (RadioGroup) findViewById(R.id.knowledge_of_programming);
+        RadioGroup knowledgeOfMimicDance = (RadioGroup) findViewById(R.id.knowledge_of_mimicdance);
 
 
-        Button sendButton = (Button) findViewById(R.id.send_button);
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPreQuestionnaireValue();
-            }
-        });
-    }
 
-    public void getPreQuestionnaireValue() {
 
+        result.save();
+        startTitleActivity(true);
     }
 
     public void startTitleActivity(View view) {
-        startTitleActivity(false);
+        startTitleActivity(true);
     }
 
 }

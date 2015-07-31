@@ -12,11 +12,12 @@ import net.exkazuu.mimicdance.R;
 /**
  * Created by t-yokoi on 2015/07/31.
  */
-public class PostQuestionnaireActivity extends BaseActivity{
+public class PostQuestionnaireActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
         setContentView(R.layout.post_quetionnaire);
+
 
         EditText id = (EditText) findViewById(R.id.id);
         EditText opinion = (EditText) findViewById(R.id.opinion);
@@ -29,13 +30,9 @@ public class PostQuestionnaireActivity extends BaseActivity{
         SeekBar usefulness = (SeekBar) findViewById(R.id.usefulness);
         RadioGroup time = (RadioGroup) findViewById(R.id.time);
 
-
-
-
     }
 
     public void startTitleActivity(View view) {
-        startTitleActivity(false);
+        startTitleActivity(true);
     }
-
 }
