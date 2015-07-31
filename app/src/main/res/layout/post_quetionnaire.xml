@@ -47,6 +47,7 @@
         android:textSize="16dp" />
 
       <SeekBar
+        android:id="@+id/gladness"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -89,6 +90,7 @@
         android:textSize="16dp" />
 
       <SeekBar
+        android:id="@+id/vexation"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -131,6 +133,7 @@
         android:textSize="16dp" />
 
       <SeekBar
+        android:id="@+id/desire_to_play"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -165,7 +168,7 @@
       android:orientation="vertical">
 
       <RadioGroup
-        android:id="@+id/radio_group1"
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -239,6 +242,7 @@
         android:textSize="16dp" />
 
       <SeekBar
+        android:id="@+id/desire_to_study"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -281,6 +285,7 @@
         android:textSize="16dp" />
 
       <SeekBar
+        android:id="@+id/fun"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -323,6 +328,7 @@
         android:textSize="16dp" />
 
       <SeekBar
+        android:id="@+id/feasibility"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -365,6 +371,7 @@
         android:textSize="16dp" />
 
       <SeekBar
+        android:id="@+id/usefulness"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -392,7 +399,7 @@
       android:textSize="24sp" />
 
     <EditText
-      android:id="@+id/editText"
+      android:id="@+id/opinion"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:hint="ここへ記入してください。" />

@@ -8,6 +8,7 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 
 import net.exkazuu.mimicdance.R;
+
 import net.exkazuu.mimicdance.models.PreQuestionnaireResult;
 
 /**
@@ -30,19 +31,14 @@ public class PreQuestionnaireActivity extends BaseActivity {
         EditText age = (EditText) findViewById(R.id.age);
         // TODO
         SeekBar interest = (SeekBar) findViewById(R.id.interest);
-        // TODO
-        SeekBar enjoyable = (SeekBar) findViewById(R.id.fun);
-        // TODO
-        SeekBar dekisou = (SeekBar) findViewById(R.id.feasibility);
-        // TODO
+
+        SeekBar fun = (SeekBar) findViewById(R.id.fun);
+        SeekBar feasibility = (SeekBar) findViewById(R.id.feasibility);
         SeekBar useful = (SeekBar) findViewById(R.id.usefulness);
-        // TODO
         RadioGroup sex = (RadioGroup) findViewById(R.id.sex);
-        // TODO
-        RadioGroup knowProg = (RadioGroup) findViewById(R.id.knowledge_of_programming);
-        // TODO
-        RadioGroup knowMimic = (RadioGroup) findViewById(R.id.knowledge_of_mimicdance);
-        // TODO
+        RadioGroup knowledgeOfProgramming = (RadioGroup) findViewById(R.id.knowledge_of_programming);
+        RadioGroup knowledgeOfMimicDance = (RadioGroup) findViewById(R.id.knowledge_of_mimicdance);
+
         result.save();
         startTitleActivity(true);
     }
