@@ -8,7 +8,6 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 
 import net.exkazuu.mimicdance.R;
-
 import net.exkazuu.mimicdance.models.PreQuestionnaireResult;
 
 /**
@@ -16,12 +15,10 @@ import net.exkazuu.mimicdance.models.PreQuestionnaireResult;
  */
 public class PreQuestionnaireActivity extends BaseActivity {
 
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // タイトルバー非表示
         setContentView(R.layout.pre_questionnaire);
-
     }
 
     public void save() {
@@ -29,7 +26,6 @@ public class PreQuestionnaireActivity extends BaseActivity {
         EditText examineeId = (EditText) findViewById(R.id.examineeId);
         result.examineeId = examineeId.getText().toString();
         EditText age = (EditText) findViewById(R.id.age);
-        // TODO
         SeekBar interest = (SeekBar) findViewById(R.id.interest);
 
         SeekBar fun = (SeekBar) findViewById(R.id.fun);
