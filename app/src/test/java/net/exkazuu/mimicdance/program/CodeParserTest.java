@@ -8,7 +8,7 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -34,6 +34,16 @@ public class CodeParserTest {
         String code = "右腕を上げる\nもしも黄色\n右腕を下げる\nもしくは\n左腕を上げる\nもしおわり";
         String unrolledNormalCode = "右腕を上げる\n右腕を下げる";
         String unrolledAltCode = "右腕を上げる\n左腕を上げる";
+        Block block = CodeParser.parse(code);
+        assertThat(block.unroll(true).getCode(), is(unrolledNormalCode));
+        assertThat(block.unroll(false).getCode(), is(unrolledAltCode));
+    }
+
+    @Test
+    public void parseEmptyIfProgram() {
+        String code = "もしも黄色\nもしおわり";
+        String unrolledNormalCode = "";
+        String unrolledAltCode = "";
         Block block = CodeParser.parse(code);
         assertThat(block.unroll(true).getCode(), is(unrolledNormalCode));
         assertThat(block.unroll(false).getCode(), is(unrolledAltCode));
