@@ -6,8 +6,8 @@ import com.activeandroid.annotation.Table;
 
 @Table(name = "PreQuestionnaireResult")
 public class PreQuestionnaireResult extends Model {
-    @Column(name = "Id")
-    public String id;
+    @Column(name = "ExamineeId")
+    public String examineeId;
 
     @Column(name = "Age")
     public int age;

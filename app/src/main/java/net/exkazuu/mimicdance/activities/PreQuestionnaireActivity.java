@@ -25,8 +25,8 @@ public class PreQuestionnaireActivity extends BaseActivity {
 
     public void save() {
         PreQuestionnaireResult result = new PreQuestionnaireResult();
-        EditText id = (EditText) findViewById(R.id.id);
-        result.id = id.getText().toString();
+        EditText examineeId = (EditText) findViewById(R.id.examineeId);
+        result.examineeId = examineeId.getText().toString();
         EditText age = (EditText) findViewById(R.id.age);
         // TODO
         SeekBar interest = (SeekBar) findViewById(R.id.interest);
