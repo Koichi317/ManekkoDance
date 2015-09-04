@@ -254,33 +254,7 @@ public class TitleActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-
-        //既に通信しているか
-        if (outputStream != null) {
-            return;
-        }
-
-        // 接続されているUSBアクセサリの確認
-        UsbAccessory[] accessories = usbManager.getAccessoryList();
-        UsbAccessory accessory = (accessories == null ? null : accessories[0]);
-        if (accessory != null) {
-            // USBアクセサリ にアクセスする権限があるかチェック
-            if (usbManager.hasPermission(accessory)) {
-                // 接続許可されているならば、アプリを起動
-                openAccessory(accessory);
-            } else {
-                // 接続許可されていないのならば、パーミッションインテント発行
-                synchronized (usbReceiver) {
-                    if (!permissionRequestPending) {
-                        // パーミッションを依頼
-                        usbManager.requestPermission(accessory, permissionIntent);
-                        permissionRequestPending = true;
-                    }
-                }
-            }
-        } else {
-            Log.d(TAG, "accessory is null");
-        }
+        resume();
     }
 
     //他のActivityが開始される時の処理 OnPause()メソッド（Activityライフサイクル）
@@ -295,6 +269,36 @@ public class TitleActivity extends BaseActivity {
     public void onDestroy() {
         unregisterReceiver(usbReceiver);
         super.onDestroy();
+    }
+
+    private void resume() {
+        // 既に通信しているか
+        if (outputStream != null) {
+            return;
+        }
+
+        // 接続されているUSBアクセサリの確認
+        UsbAccessory[] accessories = usbManager.getAccessoryList();
+        UsbAccessory accessory = (accessories == null ? null : accessories[0]);
+        if (accessory == null) {
+            Log.d(TAG, "accessory is null");
+            return;
+        }
+
+        // USBアクセサリ にアクセスする権限があるかチェック
+        if (usbManager.hasPermission(accessory)) {
+            // 接続許可されているならば、アプリを起動
+            openAccessory(accessory);
+        } else {
+            // 接続許可されていないのならば、パーミッションインテント発行
+            synchronized (usbReceiver) {
+                if (!permissionRequestPending) {
+                    // パーミッションを依頼
+                    usbManager.requestPermission(accessory, permissionIntent);
+                    permissionRequestPending = true;
+                }
+            }
+        }
     }
 
     //USBアクセサリ開始処理
