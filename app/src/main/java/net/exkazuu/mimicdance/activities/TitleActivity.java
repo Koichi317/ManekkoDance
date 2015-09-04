@@ -183,7 +183,6 @@ public class TitleActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        UsbStateChangeReceiver.getInstance().resume();
     }
 
     // 他のActivityが開始される時の処理 OnPause()メソッド（Activityライフサイクル）

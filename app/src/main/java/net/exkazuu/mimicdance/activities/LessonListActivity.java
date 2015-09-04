@@ -46,13 +46,13 @@ public class LessonListActivity extends ListActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        PlugStateChangeReceiver.register(this);
+        PlugManager.register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        PlugStateChangeReceiver.unregister(this);
+        PlugManager.unregister(this);
     }
 
 }
