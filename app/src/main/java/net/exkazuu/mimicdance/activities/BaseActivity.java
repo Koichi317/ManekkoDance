@@ -2,6 +2,7 @@ package net.exkazuu.mimicdance.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 
 public abstract class BaseActivity extends Activity {
 
@@ -150,15 +151,27 @@ public abstract class BaseActivity extends Activity {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ArduinoManager.register(this);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         PlugManager.register(this);
-        UsbStateChangeReceiver.getInstance().register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         PlugManager.unregister(this);
+        ArduinoManager.pause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ArduinoManager.unregister(this);
     }
 }
