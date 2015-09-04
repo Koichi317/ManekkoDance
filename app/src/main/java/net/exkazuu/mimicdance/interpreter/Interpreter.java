@@ -165,4 +165,18 @@ public class Interpreter implements Runnable {
         }
         new BearHandlingTask(bearCommand).execute();
     }
+
+    private void handleMiniBear() {
+        if (!PlugStateChangeReceiver.isPlugged()) {
+            return;
+        }
+        if (danboController == null) {
+            danboController = new PwmMotorController(50000, 50);
+            danboController.play();
+        }
+        double left = pose.isLeftHandUp() ? 0.5 : 1.5;
+        double right = pose.isRightHandUp() ? 2.5 : 1.5;
+        danboController.setPulseMilliseconds(left, right);
+    }
+
 }

@@ -6,6 +6,7 @@
 
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.READ_LOGS" />
+  <uses-feature android:name="android.hardware.usb.accessory" />
 
   <application
     android:name=".App"
@@ -57,5 +58,7 @@
     <activity
       android:name=".activities.PostQuestionnaireActivity"
       android:label="@string/post_questionnaire"></activity>
+
+
   </application>
 </manifest>
