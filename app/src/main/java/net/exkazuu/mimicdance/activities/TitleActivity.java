@@ -1,6 +1,5 @@
 package net.exkazuu.mimicdance.activities;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -22,9 +21,7 @@ import java.util.Map;
 import im.delight.android.ddp.MeteorSingleton;
 
 public class TitleActivity extends BaseActivity {
-
-    private UsbStateChangeReceiver receiver;
-
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!MeteorSingleton.isCreated()) {
@@ -46,8 +43,6 @@ public class TitleActivity extends BaseActivity {
         postButton.setVisibility(View.VISIBLE);
 
         uploadData();
-
-        UsbStateChangeReceiver.getInstance().register(this);
     }
 
     public void startHelpActivity(View view) {
@@ -178,24 +173,4 @@ public class TitleActivity extends BaseActivity {
 //        }
 //        return super.onTouchEvent(event);
 //    }
-
-    // アプリ起動時の処理 OnResume()メソッド（Activityライフサイクル）
-    @Override
-    public void onResume() {
-        super.onResume();
-        UsbStateChangeReceiver.getInstance().resume();
-    }
-
-    // 他のActivityが開始される時の処理 OnPause()メソッド（Activityライフサイクル）
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    //アプリ終了時の処理 OnDestroy()メソッド（Activityライフサイクル）
-    @Override
-    public void onDestroy() {
-        UsbStateChangeReceiver.getInstance().unregister(this);
-        super.onDestroy();
-    }
 }

@@ -16,6 +16,7 @@ public class LessonListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ArduinoManager.register(this);
         makeList();
     }
 
@@ -46,13 +47,19 @@ public class LessonListActivity extends ListActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        PlugStateChangeReceiver.register(this);
+        PlugManager.register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        PlugStateChangeReceiver.unregister(this);
+        PlugManager.unregister(this);
+        ArduinoManager.pause();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ArduinoManager.unregister(this);
+    }
 }

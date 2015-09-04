@@ -1,17 +1,8 @@
 package net.exkazuu.mimicdance.activities;
 
 import android.app.Activity;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.hardware.usb.UsbAccessory;
-import android.hardware.usb.UsbManager;
-import android.os.ParcelFileDescriptor;
-import android.util.Log;
-import android.widget.ToggleButton;
-
-import java.io.FileOutputStream;
+import android.os.Bundle;
 
 public abstract class BaseActivity extends Activity {
 
@@ -160,14 +151,27 @@ public abstract class BaseActivity extends Activity {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ArduinoManager.register(this);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-        PlugStateChangeReceiver.register(this);
+        PlugManager.register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        PlugStateChangeReceiver.unregister(this);
+        PlugManager.unregister(this);
+        ArduinoManager.pause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ArduinoManager.unregister(this);
     }
 }

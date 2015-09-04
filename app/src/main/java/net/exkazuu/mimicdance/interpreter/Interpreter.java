@@ -6,8 +6,8 @@ import android.util.Log;
 import android.widget.TextView;
 
 import net.exkazuu.mimicdance.CharacterImageViewSet;
-import net.exkazuu.mimicdance.activities.PlugStateChangeReceiver;
-import net.exkazuu.mimicdance.activities.UsbStateChangeReceiver;
+import net.exkazuu.mimicdance.activities.ArduinoManager;
+import net.exkazuu.mimicdance.activities.PlugManager;
 import net.exkazuu.mimicdance.controller.PwmMotorController;
 import net.exkazuu.mimicdance.program.UnrolledProgram;
 
@@ -128,7 +128,7 @@ public class Interpreter implements Runnable {
     }
 
     private void handleDanbo() {
-        if (!PlugStateChangeReceiver.isPlugged()) {
+        if (!PlugManager.isPlugged()) {
             return;
         }
         if (danboController == null) {
@@ -170,16 +170,16 @@ public class Interpreter implements Runnable {
     }
 
     private void handleMiniBear() {
-//        if (!UsbStateChangeReceiver.isPlugged()) {
-//            return;
-//        }
+        if (!ArduinoManager.isPlugged()) {
+            return;
+        }
         if (danboController == null) {
             danboController = new PwmMotorController(50000, 50);
             danboController.play();
         }
+
         command[1] = (byte) (pose.isLeftHandUp() ? 0x1 : 0x0); //左手(port3)
         command[0] = (byte) (pose.isRightHandUp() ? 0x1 : 0x0); //右手(port2)
-        UsbStateChangeReceiver.sendCommand(command);
+        ArduinoManager.sendCommand(command);
     }
-
 }
