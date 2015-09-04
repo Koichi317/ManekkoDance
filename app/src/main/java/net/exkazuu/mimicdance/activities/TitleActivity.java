@@ -1,5 +1,6 @@
 package net.exkazuu.mimicdance.activities;
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -314,6 +315,10 @@ public class TitleActivity extends BaseActivity {
             outputStream = new FileOutputStream(fd);
 
             Log.d(TAG, "accessory opened");
+            AlertDialog.Builder alertDialogBuilder1 = new AlertDialog.Builder(this);
+            alertDialogBuilder1.setTitle("USB accessory");
+            alertDialogBuilder1.setMessage("Connected.");
+            alertDialogBuilder1.show();
         } else {
             Log.d(TAG, "accessory open fail");
         }
@@ -324,6 +329,11 @@ public class TitleActivity extends BaseActivity {
         try {
             if (fileDescriptor != null) {
                 fileDescriptor.close();
+                AlertDialog.Builder alertDialogBuilder2 = new AlertDialog.Builder(this);
+                alertDialogBuilder2.setTitle("USB accessory");
+                alertDialogBuilder2.setMessage("Disconnected.");
+                alertDialogBuilder2.show();
+
             }
         } catch (IOException e) {
         } finally {
