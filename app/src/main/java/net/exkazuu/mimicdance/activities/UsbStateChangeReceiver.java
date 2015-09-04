@@ -171,16 +171,13 @@ public class UsbStateChangeReceiver extends BroadcastReceiver {
     /**
      * 出力：Androidアプリ（USBアクセサリ）-> Arduino（USBホスト）
      *
-     * @param value
-     * @param i
+     * @param command
      */
-    public static void sendCommand(byte value, int i) {
-        // 2バイトのプロトコルデータ
-        buffer[i] = value;
+    public static void sendCommand(byte[] command) {
         if (outputStream != null) {
             try {
                 // 出力ストリームにbuffer[]配列データを書き込む(7)
-                outputStream.write(buffer);
+                outputStream.write(command);
             } catch (IOException e) {
                 Log.e(TAG, "sendCommand:write failed", e);
             }
