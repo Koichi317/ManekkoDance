@@ -65,6 +65,7 @@ public class Interpreter implements Runnable {
                 if (isPiyo) {
                     handleDanbo();
                     handleBear(actions);
+                    handleMiniBear();
                 }
             } else {
                 failed = true;
@@ -176,8 +177,8 @@ public class Interpreter implements Runnable {
             danboController = new PwmMotorController(50000, 50);
             danboController.play();
         }
-        command[1] = (byte) (pose.isLeftHandUp() ? 0x1 : 0x0); //左手
-        command[0] = (byte) (pose.isRightHandUp() ? 0x1 : 0x0); //右手
+        command[1] = (byte) (pose.isLeftHandUp() ? 0x1 : 0x0); //左手(port3)
+        command[0] = (byte) (pose.isRightHandUp() ? 0x1 : 0x0); //右手(port2)
         UsbStateChangeReceiver.sendCommand(command);
     }
 
