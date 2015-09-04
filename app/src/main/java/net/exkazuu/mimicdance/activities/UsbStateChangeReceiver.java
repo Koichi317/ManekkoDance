@@ -1,9 +1,12 @@
 package net.exkazuu.mimicdance.activities;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.usb.UsbAccessory;
 import android.hardware.usb.UsbManager;
 import android.os.ParcelFileDescriptor;
@@ -19,35 +22,56 @@ public class UsbStateChangeReceiver extends BroadcastReceiver {
     // 本アプリを認識するためのインテントアクション名
     private static final String ACTION_USB_PERMISSION
         = "net.exkazuu.mimicdance.action.USB_PERMISSION";
+    private static UsbStateChangeReceiver instance;
 
-    private PendingIntent permissionIntent;
-    private boolean permissionRequestPending;
+    private final byte[] buffer = new byte[2];
 
     private UsbManager usbManager;
-    private UsbAccessory accessory;
 
     private ParcelFileDescriptor fileDescriptor;
 
     private FileOutputStream outputStream;// 出力用ストリーム
+    private Activity activity1;
+    private UsbAccessory accessory;
+    private PendingIntent permissionIntent;
+    private boolean permissionRequestPending;
+
+    private UsbStateChangeReceiver() {
+    }
+
+    public static UsbStateChangeReceiver getInstance() {
+        if (instance == null) {
+            instance = new UsbStateChangeReceiver();
+        }
+        return instance;
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        //ACTION_USB_PERMISSIONの場合
+
+        AlertDialog.Builder startDialog = new AlertDialog.Builder(activity1);
+        startDialog.setTitle(action);
+        startDialog.setMessage("hello.");
+        startDialog.show();
+
         if (ACTION_USB_PERMISSION.equals(action)) {
+            // USBホストシールドがUSBコネクタに接続した場合
             synchronized (this) {
                 // Intent からアクセサリを取得
                 UsbAccessory accessory = intent.getParcelableExtra(UsbManager.EXTRA_ACCESSORY);
+
                 // 接続許可ダイアログで OK=true, Cancel=false のどちらを押したか
                 if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                     openAccessory(accessory);
                 } else {
-                    Log.d(TAG, "permission denied for accessory " + accessory);
+                    Log.d(TAG, "Permission denied for accessory: " + accessory);
                 }
+
                 permissionRequestPending = false;
             }
-            //USBホストシールドがUSBコネクタから外された場合
         } else if (UsbManager.ACTION_USB_ACCESSORY_DETACHED.equals(action)) {
+            // USBホストシールドがUSBコネクタから外された場合
             UsbAccessory accessory = intent.getParcelableExtra(UsbManager.EXTRA_ACCESSORY);
             // 接続中のUSBアクセサリか？
             if (accessory != null && accessory.equals(this.accessory)) {
@@ -57,9 +81,36 @@ public class UsbStateChangeReceiver extends BroadcastReceiver {
         }
     }
 
+    public void register(Activity activity) {
+        // UsbManager のインスタンスを取得
+        usbManager = (UsbManager) activity.getSystemService(Context.USB_SERVICE);
 
-    private void resume() {
-        // 既に通信しているか
+        // パーミッション・インテントの作成（自分自身のアプリから発行）
+        permissionIntent = PendingIntent.getBroadcast(activity, 0, new Intent(ACTION_USB_PERMISSION), 0);
+
+        // ブロードキャストレシーバで受信するインテントを登録
+        IntentFilter filter = new IntentFilter();
+        //USBアクセサリが接続／切断されたときのインテント・フィルター
+        filter.addAction(ACTION_USB_PERMISSION);
+        //USBアクセサリが切断された（取り外された）ときのインテント・フィルター
+        filter.addAction(UsbManager.ACTION_USB_ACCESSORY_DETACHED);
+        activity.registerReceiver(this, filter);
+
+        activity1 = activity;
+    }
+
+    public void unregister(Activity activity) {
+        closeAccessory();
+        activity.unregisterReceiver(this);
+    }
+
+    public void resume() {
+        // 未初期化の場合は何もしない
+        if (usbManager == null) {
+            return;
+        }
+
+        // 既に通信が開始していたら何もしない
         if (outputStream != null) {
             return;
         }
@@ -88,16 +139,21 @@ public class UsbStateChangeReceiver extends BroadcastReceiver {
         }
     }
 
-    //USBアクセサリ開始処理
+    /**
+     * USBアクセサリへの出力ストリームを開く。
+     *
+     * @param accessory
+     */
     private void openAccessory(UsbAccessory accessory) {
+        this.accessory = accessory;
+
         // アクセサリにアクセスするためのファイルディスクリプタを取得
         fileDescriptor = usbManager.openAccessory(accessory);
 
         if (fileDescriptor != null) {
-            this.accessory = accessory;
             FileDescriptor fd = fileDescriptor.getFileDescriptor();
 
-            // 入出力用のストリームを確保（今回は出力のみ）(5)
+            // 入出力用のストリームを確保（今回は出力のみ）
             outputStream = new FileOutputStream(fd);
 
             Log.d(TAG, "accessory opened");
@@ -106,31 +162,35 @@ public class UsbStateChangeReceiver extends BroadcastReceiver {
         }
     }
 
-    // USBアクセサリ終了処理
+    /**
+     * USBアクセサリへの出力ストリームを閉じる。
+     */
     private void closeAccessory() {
+
         try {
             if (fileDescriptor != null) {
                 fileDescriptor.close();
             }
         } catch (IOException e) {
         } finally {
-            fileDescriptor = null;
             accessory = null;
+            fileDescriptor = null;
         }
     }
 
-    private byte[] buffer = new byte[2];
-
-    // 出力：Androidアプリ（USBアクセサリ）-> Arduino（USBホスト）(6)
+    /**
+     * 出力：Androidアプリ（USBアクセサリ）-> Arduino（USBホスト）
+     *
+     * @param value
+     * @param i
+     */
     public void sendCommand(byte value, int i) {
         // 2バイトのプロトコルデータ
         buffer[i] = value;
         if (outputStream != null) {
             try {
-
-                //出力ストリームにbuffer[]配列データを書き込む(7)
+                // 出力ストリームにbuffer[]配列データを書き込む(7)
                 outputStream.write(buffer);
-
             } catch (IOException e) {
                 Log.e(TAG, "sendCommand:write failed", e);
             }
