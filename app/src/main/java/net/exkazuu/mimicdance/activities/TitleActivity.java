@@ -54,6 +54,11 @@ public class TitleActivity extends BaseActivity {
         Button postButton = (Button) findViewById(R.id.post_ques_button);
         postButton.setVisibility(View.VISIBLE);
 
+        AlertDialog.Builder startDialog = new AlertDialog.Builder(this);
+        startDialog.setTitle("Start");
+        startDialog.setMessage("hello.");
+        startDialog.show();
+
         uploadData();
 
         initializeUsbManager();
