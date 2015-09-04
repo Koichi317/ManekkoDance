@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import net.exkazuu.mimicdance.CharacterImageViewSet;
 import net.exkazuu.mimicdance.activities.PlugStateChangeReceiver;
+import net.exkazuu.mimicdance.activities.UsbStateChangeReceiver;
 import net.exkazuu.mimicdance.controller.PwmMotorController;
 import net.exkazuu.mimicdance.program.UnrolledProgram;
 
@@ -27,6 +28,7 @@ public class Interpreter implements Runnable {
     private boolean failed;
     private PwmMotorController danboController;
     private String bearCommand;
+    private final byte[] command = new byte[2]; //右手、左手の2つ
 
     public static Interpreter createForPiyo(UnrolledProgram program, CharacterImageViewSet charaViewSet, TextView textView, Context context) {
         return new Interpreter(program, charaViewSet, textView, context, true);
@@ -167,16 +169,16 @@ public class Interpreter implements Runnable {
     }
 
     private void handleMiniBear() {
-        if (!PlugStateChangeReceiver.isPlugged()) {
-            return;
-        }
+//        if (!UsbStateChangeReceiver.isPlugged()) {
+//            return;
+//        }
         if (danboController == null) {
             danboController = new PwmMotorController(50000, 50);
             danboController.play();
         }
-        double left = pose.isLeftHandUp() ? 0.5 : 1.5;
-        double right = pose.isRightHandUp() ? 2.5 : 1.5;
-        danboController.setPulseMilliseconds(left, right);
+        command[1] = (byte) (pose.isLeftHandUp() ? 0x1 : 0x0); //左手
+        command[0] = (byte) (pose.isRightHandUp() ? 0x1 : 0x0); //右手
+        UsbStateChangeReceiver.sendCommand(command);
     }
 
 }

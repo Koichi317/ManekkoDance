@@ -24,13 +24,11 @@ public class UsbStateChangeReceiver extends BroadcastReceiver {
         = "net.exkazuu.mimicdance.action.USB_PERMISSION";
     private static UsbStateChangeReceiver instance;
 
-    private final byte[] buffer = new byte[2];
-
     private UsbManager usbManager;
 
     private ParcelFileDescriptor fileDescriptor;
 
-    private FileOutputStream outputStream;// 出力用ストリーム
+    private static FileOutputStream outputStream;// 出力用ストリーム
     private Activity activity1;
     private UsbAccessory accessory;
     private PendingIntent permissionIntent;
@@ -181,16 +179,13 @@ public class UsbStateChangeReceiver extends BroadcastReceiver {
     /**
      * 出力：Androidアプリ（USBアクセサリ）-> Arduino（USBホスト）
      *
-     * @param value
-     * @param i
+     * @param command
      */
-    public void sendCommand(byte value, int i) {
-        // 2バイトのプロトコルデータ
-        buffer[i] = value;
+    public static void sendCommand(byte[] command) {
         if (outputStream != null) {
             try {
                 // 出力ストリームにbuffer[]配列データを書き込む(7)
-                outputStream.write(buffer);
+                outputStream.write(command);
             } catch (IOException e) {
                 Log.e(TAG, "sendCommand:write failed", e);
             }
