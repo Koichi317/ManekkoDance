@@ -48,11 +48,17 @@ public class ArduinoManager {
 
         activity.registerReceiver(receiver, filter);
         context = activity.getApplicationContext();
+
+        Toast toast = Toast.makeText(context, "registered", Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     public static void unregister(Activity activity) {
-        closeAccessory();
+//        closeAccessory();
         activity.unregisterReceiver(receiver);
+        Toast toast = Toast.makeText(context, "unregistered", Toast.LENGTH_SHORT);
+        toast.show();
+
     }
 
     public static void resume() {
@@ -70,6 +76,9 @@ public class ArduinoManager {
         UsbAccessory[] accessories = usbManager.getAccessoryList();
         UsbAccessory accessory = (accessories == null ? null : accessories[0]);
         if (accessory == null) {
+            Toast toast = Toast.makeText(context, "accessory was not found.", Toast.LENGTH_SHORT);
+            toast.show();
+
             return;
         }
 

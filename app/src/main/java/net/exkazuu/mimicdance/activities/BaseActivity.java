@@ -160,6 +160,7 @@ public abstract class BaseActivity extends Activity {
     protected void onResume() {
         super.onResume();
         PlugManager.register(this);
+        ArduinoManager.resume();
     }
 
     @Override

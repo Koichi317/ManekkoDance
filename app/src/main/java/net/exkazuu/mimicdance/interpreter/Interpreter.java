@@ -173,10 +173,6 @@ public class Interpreter implements Runnable {
         if (!ArduinoManager.isPlugged()) {
             return;
         }
-        if (danboController == null) {
-            danboController = new PwmMotorController(50000, 50);
-            danboController.play();
-        }
 
         command[1] = (byte) (pose.isLeftHandUp() ? 0x1 : 0x0); //左手(port3)
         command[0] = (byte) (pose.isRightHandUp() ? 0x1 : 0x0); //右手(port2)
