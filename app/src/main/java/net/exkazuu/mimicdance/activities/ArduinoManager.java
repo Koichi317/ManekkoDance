@@ -54,7 +54,7 @@ public class ArduinoManager {
     }
 
     public static void unregister(Activity activity) {
-//        closeAccessory();
+        closeAccessory();
         activity.unregisterReceiver(receiver);
         Toast toast = Toast.makeText(context, "unregistered", Toast.LENGTH_SHORT);
         toast.show();
@@ -71,6 +71,9 @@ public class ArduinoManager {
         if (outputStream != null) {
             return;
         }
+        Toast toast0 = Toast.makeText(context, "onResume0 ", Toast.LENGTH_SHORT);
+        toast0.show();
+
 
         // 接続されているUSBアクセサリの確認
         UsbAccessory[] accessories = usbManager.getAccessoryList();

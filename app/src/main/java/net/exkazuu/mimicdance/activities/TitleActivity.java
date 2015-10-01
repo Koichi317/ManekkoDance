@@ -42,7 +42,17 @@ public class TitleActivity extends BaseActivity {
         Button postButton = (Button) findViewById(R.id.post_ques_button);
         postButton.setVisibility(View.VISIBLE);
 
+        Button kumaBottun = (Button) findViewById(R.id.kuma_test);
+        kumaBottun.setVisibility(View.VISIBLE);
+
         uploadData();
+    }
+
+    public void debugKuma(View view) {
+        byte command[] = new byte[2];
+        command[0] = 0;
+        command[1] = 1;
+        ArduinoManager.sendCommand(command);
     }
 
     public void startHelpActivity(View view) {
