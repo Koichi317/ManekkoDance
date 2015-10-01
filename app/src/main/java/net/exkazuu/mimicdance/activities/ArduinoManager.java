@@ -142,9 +142,13 @@ public class ArduinoManager {
             if (fileDescriptor != null) {
                 fileDescriptor.close();
             }
+            if (outputStream != null) {
+                outputStream.close();
+            }
         } catch (IOException e) {
         } finally {
             fileDescriptor = null;
+            outputStream = null;
             pluggedAccessory = null;
         }
         Toast toast = Toast.makeText(context, "USB accessory is closed.", Toast.LENGTH_SHORT);
