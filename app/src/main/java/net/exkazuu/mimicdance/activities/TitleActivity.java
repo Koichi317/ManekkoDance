@@ -21,6 +21,8 @@ import java.util.Map;
 import im.delight.android.ddp.MeteorSingleton;
 
 public class TitleActivity extends BaseActivity {
+    int debug = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +52,13 @@ public class TitleActivity extends BaseActivity {
 
     public void debugKuma(View view) {
         byte command[] = new byte[2];
-        command[0] = 0;
-        command[1] = 1;
+        if (debug == 0) {
+            command[1] = 1;
+            debug = 1;
+        } else {
+            command[1] = 0;
+            debug = 0;
+        }
         ArduinoManager.sendCommand(command);
     }
 

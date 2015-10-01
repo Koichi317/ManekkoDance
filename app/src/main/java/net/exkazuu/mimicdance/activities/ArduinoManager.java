@@ -49,15 +49,15 @@ public class ArduinoManager {
         activity.registerReceiver(receiver, filter);
         context = activity.getApplicationContext();
 
-        Toast toast = Toast.makeText(context, "registered", Toast.LENGTH_SHORT);
-        toast.show();
+//        Toast toast = Toast.makeText(context, "registered", Toast.LENGTH_SHORT);
+//        toast.show();
     }
 
     public static void unregister(Activity activity) {
         closeAccessory();
         activity.unregisterReceiver(receiver);
-        Toast toast = Toast.makeText(context, "unregistered", Toast.LENGTH_SHORT);
-        toast.show();
+//        Toast toast = Toast.makeText(context, "unregistered", Toast.LENGTH_SHORT);
+//        toast.show();
 
     }
 
@@ -130,8 +130,8 @@ public class ArduinoManager {
         outputStream = new FileOutputStream(fd);
 
         pluggedAccessory = accessory;
-        Toast toast = Toast.makeText(context, "USB accessory is opened.", Toast.LENGTH_SHORT);
-        toast.show();
+//        Toast toast = Toast.makeText(context, "USB accessory is opened.", Toast.LENGTH_SHORT);
+//        toast.show();
     }
 
     /**
@@ -151,8 +151,8 @@ public class ArduinoManager {
             outputStream = null;
             pluggedAccessory = null;
         }
-        Toast toast = Toast.makeText(context, "USB accessory is closed.", Toast.LENGTH_SHORT);
-        toast.show();
+//        Toast toast = Toast.makeText(context, "USB accessory is closed.", Toast.LENGTH_SHORT);
+//        toast.show();
     }
 
     /**
