@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="net.exkazuu.mimicdance">
+
+  <uses-feature android:name="android.hardware.usb.accessory" />
+
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.READ_LOGS" />
+
+  <application
+    android:name=".App"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:theme="@style/AppTheme">
+    <activity
+      android:name=".activities.TitleActivity"
+      android:label="@string/app_name">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
+      </intent-filter>
+
+      <meta-data
+        android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
+        android:resource="@xml/accessory_filter" />
+    </activity>
+    <activity
+      android:name=".activities.LessonListActivity"
+      android:label="@string/title_lesson_list_activity"></activity>
+    <activity
+      android:name=".activities.CodingActivity"
+      android:label="@string/title_coding_activity"
+      android:windowSoftInputMode="adjustResize"></activity>
+    <activity
+      android:name=".activities.CoccoActivity"
+      android:label="@string/title_cocco_activity"></activity>
+    <activity
+      android:name=".activities.EvaluationActivity"
+      android:label="@string/title_evaluation_activity"></activity>
+    <activity
+      android:name=".activities.TutorialActivity"
+      android:label="@string/title_tutorial_activity"></activity>
+    <activity
+      android:name=".activities.HelpActivity"
+      android:label="@string/help"></activity>
+    <activity
+      android:name=".activities.CorrectAnswerActivity"
+      android:label="@string/correct_answer"></activity>
+    <activity
+      android:name=".activities.WrongAnswerActivity"
+      android:label="@string/wrong_answer"></activity>
+    <activity
+      android:name=".activities.PreQuestionnaireActivity"
+      android:label="@string/pre_questionnaire"></activity>
+    <activity
+      android:name=".activities.PostQuestionnaireActivity"
+      android:label="@string/post_questionnaire"></activity>
+
+
+  </application>
+</manifest>

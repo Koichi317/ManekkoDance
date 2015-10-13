@@ -1,0 +1,73 @@
+<resources>
+
+  <string name="app_name">まねっこダンス</string>
+  <string name="menu_settings">Settings</string>
+  <string name="title_coding_activity">コーディング</string>
+  <string name="title_cocco_activity">お手本確認</string>
+  <string name="title_evaluation_activity">こたえあわせ</string>
+  <string name="title_lesson_list_activity">レッスン選択</string>
+  <string name="title_tutorial_activity">チュートリアル</string>
+  <string name="button_action">実行</string>
+  <string name="Enter">改行</string>
+  <string name="hint_text">ここに入力</string>
+  <string name="loop">繰り返し</string>
+  <string name="koko">ここまで</string>
+  <string name="left_hand_up">左腕↑</string>
+  <string name="left_hand_down">左腕↓</string>
+  <string name="right_hand_up">右腕↑</string>
+  <string name="right_hand_down">右腕↓</string>
+  <string name="right_foot_up">右足↑</string>
+  <string name="right_foot_down">右足↓</string>
+  <string name="left_foot_up">左足↑</string>
+  <string name="left_foot_down">左足↓</string>
+  <string name="jump">ジャンプ</string>
+  <string name="partner_screen">お手本</string>
+  <string name="player">編集</string>
+  <string name="action">こたえあわせ</string>
+  <string name="return_action">戻る</string>
+  <string name="Title_how_to_play">あそびかた</string>
+  <string name="Title_start_button">はじめる</string>
+  <string name="Title_free_play">自由に踊る</string>
+  <string name="look_answer_button">①おてほんを見る</string>
+  <string name="text_look">まずは、お手本をチェック！</string>
+  <string name="player_source_code">playerSourceCordArea</string>
+  <string name="partner_source_cord">お手本のソースコードエリア</string>
+  <string name="lesson_information">レッスン情報</string>
+  <string name="image_area">image</string>
+  <string name="hint_secret">開発者情報</string>
+  <string name="hint_player_source_cord">プレイヤーのソースコードが書かれるエリア</string>
+  <string name="touch_to_start">touch to start</string>
+  <string name="help">ヘルプ</string>
+  <string name="back_space">1字戻る</string>
+  <string name="correct_answer">正解画面</string>
+  <string name="wrong_answer">間違い画面</string>
+
+
+  <string-array name="move">
+    <item>基本動作</item>
+    <item>応用動作</item>
+    <item>ジャンプ</item>
+    <item>繰り返し</item>
+  </string-array>
+  <string-array name="help">
+    <item>命令一覧</item>
+    <item>間違った動作例</item>
+    <item>操作方法</item>
+    <item>チュートリアル</item>
+  </string-array>
+
+  <string name="challenge">②やってみよう！！</string>
+  <string name="hantei">こたえあわせ！</string>
+  <string name="player_screen">やりなおす！</string>
+  <string name="look_answer_button2">もう１かいおてほんをみる</string>
+  <string name="arrow_right">つぎへ</string>
+  <string name="arrow_left">まえへ</string>
+  <string name="close">とじる</string>
+  <string name="cong">おめでとう！よくできました！！</string>
+  <string name="send">データ送信</string>
+  <string name="pre_questionnaire">事前アンケート</string>
+  <string name="post_questionnaire">事後アンケート</string>
+
+
+
+</resources>

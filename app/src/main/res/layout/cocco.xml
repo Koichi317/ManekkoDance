@@ -1,0 +1,149 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/partnerRoot"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#ddffff"
+  android:orientation="vertical">
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="3.0">
+
+    <ImageView
+      android:id="@+id/messageImageView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:contentDescription="@string/image_area" />
+  </FrameLayout>
+
+  <Button
+    android:id="@+id/btnShowCocco"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/look_answer_button" />
+
+  <LinearLayout
+    android:id="@+id/linear"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="2.0">
+
+    <FrameLayout
+      android:id="@+id/altPiyo"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="bottom|left"
+      android:layout_weight="1.0"
+      android:padding="50dp">
+
+      <ImageView
+        android:id="@+id/coccoLeftHand"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_area"
+        android:fitsSystemWindows="true"
+        android:src="@drawable/cocco_left_hand_up1"
+        android:visibility="visible" />
+
+      <ImageView
+        android:id="@+id/coccoRightHand"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_area"
+        android:src="@drawable/cocco_right_hand_up1"
+        android:visibility="visible" />
+
+      <ImageView
+        android:id="@+id/coccoBody"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_area"
+        android:src="@drawable/cocco_basic"
+        android:visibility="visible" />
+
+      <ImageView
+        android:id="@+id/coccoLeftFoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_area"
+        android:src="@drawable/cocco_left_foot_up1"
+        android:visibility="visible" />
+
+      <ImageView
+        android:id="@+id/coccoRightFoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_area"
+        android:src="@drawable/cocco_right_foot_up1"
+        android:visibility="visible" />
+
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/alt_cocco"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="bottom|right"
+      android:layout_weight="1.0"
+      android:padding="50dp">
+
+      <ImageView
+        android:id="@+id/altCoccoLeftHand"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_area"
+        android:fitsSystemWindows="true"
+        android:src="@drawable/alt_cocco_left_hand_up1"
+        android:visibility="visible" />
+
+      <ImageView
+        android:id="@+id/altCoccoRightHand"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_area"
+        android:src="@drawable/alt_cocco_right_hand_up1"
+        android:visibility="visible" />
+
+      <ImageView
+        android:id="@+id/altCoccoBody"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_area"
+        android:src="@drawable/alt_cocco_basic"
+        android:visibility="visible" />
+
+      <ImageView
+        android:id="@+id/altCoccoLeftFoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_area"
+        android:src="@drawable/alt_cocco_left_foot_up1"
+        android:visibility="visible" />
+
+      <ImageView
+        android:id="@+id/altCoccoRightFoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_area"
+        android:src="@drawable/alt_cocco_right_foot_up1"
+        android:visibility="visible" />
+    </FrameLayout>
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#81ffff"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/button2"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_weight="1.0"
+      android:onClick="startCodingActivity"
+      android:text="@string/challenge" />
+  </LinearLayout>
+
+</LinearLayout>

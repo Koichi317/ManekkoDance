@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="20dp"
+    android:layout_marginTop="20dp"
+    android:gravity="center"
+    android:text="ざんねん！！"
+    android:textColor="#0000FF"
+    android:textSize="50sp"
+    android:textStyle="bold"
+    android:id="@+id/wrong_title" />
+
+  <TextView
+    android:id="@+id/differenceCount"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center"
+    android:text="10コのまちがいがあるよ"
+    android:textColor="#0000FF"
+    android:textSize="24sp" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:background="#808080"
+    android:orientation="horizontal"
+    android:id="@+id/wrong_background">
+
+    <ImageView
+      android:id="@+id/altPiyo"
+      android:layout_width="150dp"
+      android:layout_height="150dp"
+      android:layout_marginLeft="110dp"
+      android:layout_marginRight="30dp"
+      android:layout_marginTop="250dp" />
+
+    <ImageView
+      android:id="@+id/piyo"
+      android:layout_width="150dp"
+      android:layout_height="150dp"
+      android:layout_marginLeft="50dp"
+      android:layout_marginTop="250dp" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="30dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/wrong_lesson_list"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="レッスンリストへ" />
+
+    <Button
+      android:id="@+id/try_again"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="もう１かい！！" />
+  </LinearLayout>
+</LinearLayout>
